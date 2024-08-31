@@ -1,0 +1,10 @@
+{
+  "name": "monorepo-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start-frontapp": "npm start --prefix frontapp",
+    "start-auth-service": "npm run start --prefix auth-service",
+    "start": "npm run start-frontapp & npm run start-auth-service"
+  }
+}

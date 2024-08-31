@@ -1,0 +1,11 @@
+# Ignorer les dossiers node_modules dans toutes les sous-applications
+**/node_modules
+
+# Ignorer les fichiers de logs
+**/logs
+*.log
+npm-debug.log*
+
+# Ignorer les fichiers de build
+**/dist
+**/build
