@@ -1,14 +1,26 @@
-import Grid from "@mui/material/Grid2";
 import React from "react";
+import {Button} from "@mui/material";
 
 interface ButtonRoundedProps {
     label: string;
 }
 
-export const ButtonRounded = ({label}: ButtonRoundedProps) => {
+export const ButtonRounded = ({ label }: ButtonRoundedProps) => {
     return (
-        <Grid bgcolor="black" color="white" padding={1} pl={2} pr={2} borderRadius={15}>
+        <Button
+            variant="contained"
+            sx={{
+                bgcolor: 'black',
+                color: 'white',
+                padding: '5px 23px',
+                borderRadius: '20px',
+                textTransform: 'none',
+                '&:hover': {
+                    bgcolor: 'darkgray',
+                },
+            }}
+        >
             {label}
-        </Grid>
-    )
-}
+        </Button>
+    );
+};

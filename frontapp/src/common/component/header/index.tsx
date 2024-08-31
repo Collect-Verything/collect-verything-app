@@ -13,14 +13,14 @@ export const Header = () => {
                 </Link>
             </Grid>
             <Grid container spacing={10}>
-                <Grid>Solution</Grid>
-                <Grid>Tarification</Grid>
-                <Grid>Ressource</Grid>
+                {["Solution", "Tarification", "Ressource"].map((label) => (
+                    <Link style={{textDecoration: 'none', color: 'black'}} to="placeholder">{label}</Link>
+                ))}
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">
                 <Grid>Se connecter</Grid>
                 <Grid>
-                    <Button sx={{ textTransform: 'none' }}>
+                    <Button sx={{textTransform: 'none'}}>
                         <ButtonRounded label="Démarer un essai"/>
                     </Button>
                 </Grid>
