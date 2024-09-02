@@ -19,7 +19,7 @@ export const HomePage = () => {
                 pl={5}
                 pt={1}
                 pb={1}
-                mt={10}
+                mt={12}
                 justifyContent='center'
                 sx={{
                     backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-1.png)`,
@@ -52,7 +52,7 @@ export const HomePage = () => {
                 pl={5}
                 pt={1}
                 pb={1}
-                mt={10}
+                mt={20}
                 width='90%'
                 justifyContent='center'
             >
@@ -77,7 +77,7 @@ export const HomePage = () => {
                 pl={5}
                 pt={1}
                 pb={1}
-                mt={10}
+                mt={25}
                 justifyContent='center'
                 sx={{
                     backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-3.png)`,
@@ -126,10 +126,11 @@ export const HomePage = () => {
 
             <Grid
                 container
-                mt={10}
+                mt={25}
                 alignItems="center"
+                justifyContent="center"
             >
-                <Grid textAlign="center" justifyContent="center" alignItems="center" width="50%" marginLeft="10%">
+                <Grid maxWidth='35%' textAlign="center" justifyContent="center" alignItems="center" width="50%" >
                     <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                         « Je voulais pouvoir être libre de faire des modifications sur le site, comme changer des images ou modifier l’apparence du site. ShopNow m’apporte cette autonomie. »
                     </Typography>
@@ -148,7 +149,7 @@ export const HomePage = () => {
                         Clara Morgan - Cliente
                     </Typography>
                 </Grid>
-                <Grid sx={{textAlign: 'right'}}>
+                <Grid sx={{textAlign: 'center'}}>
                     <img
                         src={`${process.env.PUBLIC_URL}/assets/illustrations/home-4.png`}
                         alt="Client testimonial"
