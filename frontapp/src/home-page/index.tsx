@@ -130,7 +130,7 @@ export const HomePage = () => {
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid maxWidth='35%' textAlign="center" justifyContent="center" alignItems="center" width="50%" >
+                <Grid maxWidth='35%' textAlign="center" justifyContent="center" alignItems="center" width="50%">
                     <Typography variant="h5" sx={{fontWeight: 'bold'}}>
                         « Je voulais pouvoir être libre de faire des modifications sur le site, comme changer des images ou modifier l’apparence du site. ShopNow m’apporte cette autonomie. »
                     </Typography>
@@ -158,6 +158,32 @@ export const HomePage = () => {
                             maxWidth: '500px',
                         }}
                     />
+                </Grid>
+
+                <Grid
+                    alignItems="center"
+                    textAlign="center"
+                    mt={25}
+                    pt={10}
+                    pb={10}
+                    width="100%"
+                    sx={{
+                        backgroundColor: `#E7E6F6`,
+                    }}
+                >
+                    <Typography variant="h5" fontWeight={600}>
+                        Développez votre activité ici
+                    </Typography>
+
+                    <Typography variant="subtitle2" pt={7}>
+                        Que vous souhaitiez vendre des produits localement ou à l’international,
+                    </Typography>
+                    <Typography variant="subtitle2" pb={7}>
+                        nous avons tous les outils qu’il vous faut.
+                    </Typography>
+
+                    <ButtonRounded label="Démarer maintenant"/>
+
                 </Grid>
 
             </Grid>
