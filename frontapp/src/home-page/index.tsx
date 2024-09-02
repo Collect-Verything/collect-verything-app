@@ -132,7 +132,7 @@ export const HomePage = () => {
             >
                 <Grid maxWidth='35%' textAlign="center" justifyContent="center" alignItems="center" width="50%">
                     <Typography variant="h5" sx={{fontWeight: 'bold'}}>
-                        « Je voulais pouvoir être libre de faire des modifications sur le site, comme changer des images ou modifier l’apparence du site. ShopNow m’apporte cette autonomie. »
+                        « Je voulais pouvoir être libre de faire des modifications sur le site, comme changer des images ou modifier l’apparence du site. Collect & Verything m’apporte cette autonomie »
                     </Typography>
                     <Typography
                         mt={5}
