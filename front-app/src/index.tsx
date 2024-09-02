@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: (
             <div>
                 <h1>Hello TEST World</h1>
-                <Link to="/front-app/public">Go Home</Link>
+                <Link to="/">Go Home</Link>
             </div>
         ),
     },

@@ -9,7 +9,7 @@ export const Header = () => {
     return (
         <Grid container justifyContent="space-between" alignItems="center">
             <Grid pl={3}>
-                <Link to="/front-app/public">
+                <Link to="/">
                     <img width={80} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon"/>
                 </Link>
             </Grid>
