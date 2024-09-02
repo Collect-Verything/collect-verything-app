@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, Link, RouterProvider} from "react-router-dom";
-import {HomePage} from "./home-page";
+import {HomePage} from "./main-pages/home";
 import {MainLayout} from "./common/component/main-layout";
+import {SolutionPage} from "./main-pages/solution";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <HomePage/>,
+            },
+            {
+                path: "Solution",
+                element: <SolutionPage/>,
             }
         ]
     },
