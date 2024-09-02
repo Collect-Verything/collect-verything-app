@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 import {Button} from "@mui/material";
 import {ButtonRounded} from "../buttons";
+import {websitePageItems, WebsitePageItemsProps} from "./list";
 
 export const Header = () => {
     return (
@@ -13,8 +14,8 @@ export const Header = () => {
                 </Link>
             </Grid>
             <Grid container spacing={10}>
-                {["Solution", "Tarification", "Ressource"].map((label) => (
-                    <Link style={{textDecoration: 'none', color: 'black'}} to="placeholder">{label}</Link>
+                {websitePageItems.map((item:WebsitePageItemsProps) => (
+                    <Link style={{textDecoration: 'none', color: 'black'}} to={item.link}>{item.label}</Link>
                 ))}
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">
