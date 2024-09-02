@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Collect-Verything/">
-    <img src="frontapp/public/assets/logo/main-logo.png" alt="Logo" width="80" height="80">
+    <img src="front-app/public/assets/logo/main-logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Collect & Verything</h3>

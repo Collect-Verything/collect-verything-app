@@ -1,6 +1,7 @@
 ## Build image and run container:
 
-### Front application
+### (old)Front application 
+(checker historique commit pour l'ancienne config)
 
 ```
 cd front-app
@@ -17,7 +18,8 @@ docker run --name auth-service -d -p 82:3001 auth-service
 ```
 
 
-## Run both app
+## (new)Run both app
+
 
 Delete old containers if already create and run this commande in root folder :
 ```

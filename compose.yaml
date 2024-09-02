@@ -1,22 +1,21 @@
 version: "3"
 services:
   frontend:
-    container_name: front-app
     build:
-      context: ./front-app
+      context: .
       dockerfile: Dockerfile
-    image: front-app
     ports:
       - "3000:3000"
     volumes:
-      - ./front-app:/app
+      - ./front-app:/front-app
+    command: npm run --prefix /front-app start
+
   backend:
-    container_name: backend
     build:
-      context: ./auth-service
+      context: .
       dockerfile: Dockerfile
-    image: auth-service
     ports:
       - "3001:3001"
     volumes:
-      - ./auth-service:/app
+      - ./auth-service:/auth-service
+    command: npm run --prefix /auth-service start:dev
