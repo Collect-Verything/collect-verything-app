@@ -41,6 +41,31 @@ export const HomePage = () => {
                     <img width={500} src={`${process.env.PUBLIC_URL}/assets/illustrations/home-1.png`} alt="Illustration"/>
                 </Grid>
             </Grid>
+
+            <Grid
+                container
+                spacing={5}
+                alignItems="center"
+                pr={5}
+                pl={5}
+                pt={1}
+                pb={1}
+                mt={10}
+                width='90%'
+                justifyContent='center'
+            >
+                <Grid>
+                    <img width={500} src={`${process.env.PUBLIC_URL}/assets/illustrations/home-2.png`} alt="Illustration"/>
+                </Grid>
+                <Grid width="35%" textAlign="center">
+                    <Typography fontWeight={600} variant="h4">
+                        Un point de vente flexible et click and collect pour propulser votre magasin
+                    </Typography>
+                    <Typography variant="subtitle2" mt={4} mb={4}>
+                        Un système point de vente click and collectpermettant aux clients d’effectuer leurs achats de façon flexible, en ligne ou en magasin. </Typography>
+                    <ButtonRounded label="Découvrir"/>
+                </Grid>
+            </Grid>
         </Grid>
     )
 }
