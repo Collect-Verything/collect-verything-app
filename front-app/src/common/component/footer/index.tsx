@@ -8,7 +8,7 @@ import {socialMediaItems, SocialMediaProps} from "../../assets/social-media-link
 export const Footer = () => (
     <Grid justifyContent="space-between" alignItems="center" textAlign="center" spacing={2} mt={10}>
         <Grid pl={3}>
-            <Link to="/">
+            <Link to="/front-app/public">
                 <img width={100} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon"/>
             </Link>
         </Grid>
