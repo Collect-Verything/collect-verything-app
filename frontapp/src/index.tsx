@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, Link, RouterProvider} from "react-router-dom";
+import {HomePage} from "./home-page";
+import {MainLayout} from "./common/component/main-layout";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: (
-            <div>
-                <h1>Hello Home World</h1>
-                <Link to="test">Go Test</Link>
-            </div>
-        ),
+        element: <MainLayout/>,
+        children: [
+            {
+                path: "",
+                element: <HomePage/>,
+            }
+        ]
     },
     {
         path: "test",
