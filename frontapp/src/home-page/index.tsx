@@ -123,6 +123,43 @@ export const HomePage = () => {
                 </Grid>
 
             </Grid>
+
+            <Grid
+                container
+                mt={10}
+                alignItems="center"
+            >
+                <Grid textAlign="center" justifyContent="center" alignItems="center" width="50%" marginLeft="10%">
+                    <Typography variant="h5" sx={{fontWeight: 'bold'}}>
+                        « Je voulais pouvoir être libre de faire des modifications sur le site, comme changer des images ou modifier l’apparence du site. ShopNow m’apporte cette autonomie. »
+                    </Typography>
+                    <Typography
+                        mt={5}
+                        sx={{
+                            fontStyle: 'italic',
+                            backgroundColor: "#E7E6F6",
+                            display: 'inline-block',
+                            paddingRight: '12px',
+                            paddingLeft: '15px',
+                            paddingTop: '2px',
+                            paddingBottom: '2px',
+                        }}
+                    >
+                        Clara Morgan - Cliente
+                    </Typography>
+                </Grid>
+                <Grid sx={{textAlign: 'right'}}>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/illustrations/home-4.png`}
+                        alt="Client testimonial"
+                        style={{
+                            width: '100%',
+                            maxWidth: '500px',
+                        }}
+                    />
+                </Grid>
+
+            </Grid>
         </Grid>
     )
 }
