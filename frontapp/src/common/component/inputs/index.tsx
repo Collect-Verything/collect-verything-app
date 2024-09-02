@@ -6,9 +6,10 @@ import {Typography} from "@mui/material";
 
 interface InputsRoundedWithChildProps {
     children: React.ReactNode;
+    width: string
 }
 
-export const InputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) => {
+export const InputsRoundedWithChild = ({children,width}: InputsRoundedWithChildProps) => {
     return (
         <Grid container alignItems="center">
             <Grid>
@@ -19,7 +20,7 @@ export const InputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) 
                         padding: '10px 15px',
                         borderRadius: '50px',
                         border: '1px solid #ccc',
-                        width: '159%',
+                        width: width,
                         fontSize: '1rem',
                     }}
                 />
@@ -31,7 +32,7 @@ export const InputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) 
     )
 }
 
-export const SwitchInputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) => {
+export const SwitchInputsRoundedWithChild = () => {
     const [isSwitched, setIsSwitched] = useState(true);
     return (
         <Grid container alignItems="center">
@@ -39,10 +40,10 @@ export const SwitchInputsRoundedWithChild = ({children}: InputsRoundedWithChildP
                 <input onClick={() => setIsSwitched(!isSwitched)} type="checkbox" className="checkbox"/>
                 <span className="slider round">
          {isSwitched ?
-             <Typography textAlign="right" pt={1.8} pr={2} fontSize="0.8rem" variant="subtitle2">
+             <Typography textAlign="right" pt={1.7} pr={2} fontSize="0.8rem" variant="subtitle2">
                  Annuel (économisez 25 %)
              </Typography>
-             : <Typography textAlign="left" pt={1.8} pl={5}  fontSize="0.8rem" variant="subtitle2">
+             : <Typography textAlign="left" pt={1.7} pl={5}  fontSize="0.8rem" variant="subtitle2">
                  Mensuel (20€/mois)
              </Typography>}
                 </span>

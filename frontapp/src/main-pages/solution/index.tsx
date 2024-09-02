@@ -22,7 +22,7 @@ export const SolutionPage = () => {
                 Essayez Shopify à moindre coût et sans risque pendant 3 mois.
             </Typography>
 
-            <InputsRoundedWithChild >
+            <InputsRoundedWithChild width="162%" >
                 <ButtonRounded label="Démarrer un essai" />
             </InputsRoundedWithChild>
 
@@ -30,9 +30,7 @@ export const SolutionPage = () => {
                 En saisissant votre e-mail, vous acceptez de recevoir des e-mails de marketing de la part de Shopify.
             </Typography>
 
-            <SwitchInputsRoundedWithChild >
-                <ButtonRounded label="Démarrer un essai" />
-            </SwitchInputsRoundedWithChild>
+            <SwitchInputsRoundedWithChild/>
         </Grid>
     );
 };

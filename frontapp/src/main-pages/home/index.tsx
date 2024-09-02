@@ -35,7 +35,7 @@ export const HomePage = () => {
                     <Typography variant="subtitle2" mt={2} mb={2}>
                         Créez votre entreprise avec Click & Machin pour vendre en ligne, hors ligne et partout où se trouvent vos clients.
                     </Typography>
-                    <InputsRoundedWithChild>
+                    <InputsRoundedWithChild width="159%">
                         <ButtonRounded label="Démarer un essai"/>
                     </InputsRoundedWithChild>
                 </Grid>
