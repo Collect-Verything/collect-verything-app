@@ -1,5 +1,8 @@
 import Grid from "@mui/material/Grid2";
-import React from "react";
+import React, {useState} from "react";
+import "./style.css";
+import {Typography} from "@mui/material";
+
 
 interface InputsRoundedWithChildProps {
     children: React.ReactNode;
@@ -26,4 +29,24 @@ export const InputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) 
             </Grid>
         </Grid>
     )
+}
+
+export const SwitchInputsRoundedWithChild = ({children}: InputsRoundedWithChildProps) => {
+    const [isSwitched, setIsSwitched] = useState(true);
+    return (
+        <Grid container alignItems="center">
+            <label className="switch">
+                <input onClick={() => setIsSwitched(!isSwitched)} type="checkbox" className="checkbox"/>
+                <span className="slider round">
+         {isSwitched ?
+             <Typography textAlign="right" pt={1.5} pr={1} variant="subtitle2">
+                 Annuel (économisez 25 %)
+             </Typography>
+             : <Typography textAlign="left" pt={1.5} pl={5} variant="subtitle2">
+                 Mensuel (20€/mois)
+             </Typography>}
+                </span>
+            </label>
+        </Grid>
+    );
 }
