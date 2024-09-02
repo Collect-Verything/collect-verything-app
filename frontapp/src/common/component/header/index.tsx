@@ -9,7 +9,7 @@ export const Header = () => {
         <Grid container justifyContent="space-between" alignItems="center">
             <Grid pl={3}>
                 <Link to="/">
-                    <img width={60} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon"/>
+                    <img width={80} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon"/>
                 </Link>
             </Grid>
             <Grid container spacing={10}>
