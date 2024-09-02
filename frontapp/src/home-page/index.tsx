@@ -17,13 +17,12 @@ export const HomePage = () => {
                 pt={1}
                 pb={1}
                 mt={10}
-                bgcolor='rgba(204, 203, 237, 0.8)'
-                width='90%'
                 justifyContent='center'
-                border='1px solid rgba(204, 203, 237, 0.5)'
-                boxShadow='0 0 15px rgba(0, 0, 0, 0.2)'
                 sx={{
-                    backdropFilter: 'blur(10px)',
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-1.png)`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
                 }}
             >
                 <Grid width="35%" textAlign="left">
