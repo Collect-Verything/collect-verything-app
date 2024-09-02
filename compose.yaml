@@ -1,0 +1,22 @@
+version: "3"
+services:
+  frontend:
+    container_name: front-app
+    build:
+      context: ./front-app
+      dockerfile: Dockerfile
+    image: front-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front-app:/app
+  backend:
+    container_name: backend
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    image: auth-service
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./auth-service:/app
