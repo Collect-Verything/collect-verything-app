@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Publish Docker images
 
 on:
   push:
@@ -19,12 +19,22 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and tag Docker image
+      - name: Build and tag Docker images
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest .
-          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:${{ github.sha }}
+          # Build and tag auth-service image
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest -f auth-service/Dockerfile .
+          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
 
-      - name: Push Docker image to Docker Hub
+          # Build and tag front-app image
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest -f front-app/Dockerfile .
+          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
+
+      - name: Push Docker images to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:${{ github.sha }}
+          # Push auth-service image
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
+
+          # Push front-app image
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
