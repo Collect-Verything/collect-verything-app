@@ -46,7 +46,7 @@ jobs:
           context: .
           file: ./front-app/Dockerfile
           push: true
-          tags: jesaispas
-          labels: jesaispas
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
 
