@@ -1,34 +1,3 @@
-#name: Publish Docker image
-#
-#on:
-#  push:
-#    branches:
-#      - main
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Log in to Docker Hub
-#        uses: docker/login-action@v2
-#        with:
-#          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-#      - name: Build and tag Docker image
-#        run: |
-#          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest .
-#          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:${{ github.sha }}
-#
-#      - name: Push Docker image to Docker Hub
-#        run: |
-#          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:latest
-#          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/collect-app:${{ github.sha }}
-
 name: Publish Docker images
 
 on:
@@ -52,12 +21,12 @@ jobs:
 
       - name: Build and tag Docker images
         run: |
-          # Build and tag auth-service image
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest -f Dockerfile .
+          # Build and tag auth-service image from multi-stage Dockerfile with platform specified
+          docker build --platform linux/amd64 --target auth-service -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest .
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
 
-          # Build and tag front-app image
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest -f Dockerfile .
+          # Build and tag front-app image from multi-stage Dockerfile with platform specified
+          docker build --platform linux/amd64 --target front-app -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest .
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
 
       - name: Push Docker images to Docker Hub
@@ -69,4 +38,3 @@ jobs:
           # Push front-app image
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
-
