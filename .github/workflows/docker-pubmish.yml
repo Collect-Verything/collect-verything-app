@@ -19,22 +19,20 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build and tag Docker images
+      - name: Build and tag auth-service Docker image
         run: |
-          # Build and tag auth-service image from multi-stage Dockerfile with platform specified
-          docker build --platform linux/amd64 --target auth-service -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest .
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest ./auth-service
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
 
-          # Build and tag front-app image from multi-stage Dockerfile with platform specified
-          docker build --platform linux/amd64 --target front-app -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest .
+      - name: Build and tag front-app Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest ./front-app
           docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
 
       - name: Push Docker images to Docker Hub
         run: |
-          # Push auth-service image
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
 
-          # Push front-app image
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
