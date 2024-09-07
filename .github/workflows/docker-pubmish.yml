@@ -1,40 +1,50 @@
-name: Publish Docker images
+# Ce workflow utilise des actions qui ne sont pas certifiées par GitHub.
+# Elles sont fournies par un tiers et régies par
+# des conditions d’utilisation du service, une politique de confidentialité et un support distincts.
+# documentation en ligne.
+
+# GitHub recommande d’épingler les actions à un SHA de commit.
+# Pour obtenir une version plus récente, vous devez mettre à jour le SHA.
+# Vous pouvez également référencer une balise ou une branche, mais l’action peut changer sans avertissement.
+
+name: Publish Docker image
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
-  build:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
-
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and tag auth-service Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest -f ./auth-service/Dockerfile ./auth-service
-#          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: cansefr/front-app
 
-      - name: Build and tag front-app Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest -f ./front-app/Dockerfile ./front-app
-#          docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./front-app/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Push Docker images to Docker Hub
-        run: |
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:latest
-
-#          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/auth-service:${{ github.sha }}
-
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest
-
-#          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:${{ github.sha }}
