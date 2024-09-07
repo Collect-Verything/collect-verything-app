@@ -27,3 +27,22 @@ docker compose up
 ```
 
 Check your local host on 3000 & 3001 
+
+
+# Error amd
+
+lancer les container avec les flag suivant 
+```
+docker container run --platform linux/amd64 cansefr/front-app
+docker container run --platform linux/amd64 cansefr/auth-service
+```
+
+
+# Pull & Run from Docker Hub
+
+```
+docker image pull cansefr/front-app
+docker image pull cansefr/auth-service
+docker run cansefr/front-app
+docker run cansefr/auth-service
+```
