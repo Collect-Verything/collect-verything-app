@@ -23,7 +23,7 @@ docker run --name auth-service -d -p 82:3001 auth-service
 
 Delete old containers if already create and run this commande in root folder :
 ```
-docker-compose-up
+docker compose up
 ```
 
 Check your local host on 3000 & 3001 
