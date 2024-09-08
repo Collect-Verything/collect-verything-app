@@ -10,4 +10,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["cd front-app","npm", "start"]
+CMD ["cd","front-app"]
+CMD ["npm", "start"]
