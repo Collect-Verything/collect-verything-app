@@ -8,7 +8,7 @@ services:
       - "3000:3000"
     volumes:
       - ./front-app:/front-app
-    command: npm start
+    command: npm start-frontapp
     environment:
       NODE_ENV: development
 
@@ -20,6 +20,6 @@ services:
       - "3001:3001"
     volumes:
       - ./auth-service:/auth-service
-    command: npm run start:dev
+    command: npm run start-auth-service
     environment:
       NODE_ENV: development
