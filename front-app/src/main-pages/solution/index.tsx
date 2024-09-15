@@ -4,6 +4,7 @@ import {InputsRoundedWithChild, SwitchInputsRoundedWithChild} from "../../common
 import {ButtonRounded} from "../../common/component/buttons";
 import React from "react";
 import {SolutionUnitProduct} from "../../common/component/solution";
+import {PRODUCT_FORMULA} from "../../common/component/solution/const";
 
 export const SolutionPage = () => {
     return (
@@ -35,8 +36,8 @@ export const SolutionPage = () => {
 
             <Grid container spacing={6} pt={5}>
                 {
-                    [1, 2, 3].map(() => (
-                        <SolutionUnitProduct/>
+                    [PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula) => (
+                        <SolutionUnitProduct formula={formula}/>
                     ))
                 }
             </Grid>

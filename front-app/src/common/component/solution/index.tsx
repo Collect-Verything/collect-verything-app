@@ -1,8 +1,13 @@
 import Grid from "@mui/material/Grid2";
 import {Box, Typography} from "@mui/material";
 import React from "react";
+import {PRODUCT_FORMULA} from "./const";
 
-export const SolutionUnitProduct = () => {
+interface SolutionUnitProductProps {
+    formula: string;
+}
+
+export const SolutionUnitProduct = ({formula}:SolutionUnitProductProps) => {
     return (
         <Box sx={{
             width: "280px",
@@ -34,7 +39,7 @@ export const SolutionUnitProduct = () => {
             <Grid container spacing={2} padding={2} pt={5} pb={5}>
                 <Grid>
                     <Typography variant="subtitle2">
-                        Taux de carte à partir de
+                        Taux de carte à partir de :
                     </Typography>
                     <Typography variant="subtitle2">
                         • 1,8 % + 0,25 € EUR en ligne
@@ -43,10 +48,10 @@ export const SolutionUnitProduct = () => {
 
                 <Grid>
                     <Typography variant="subtitle2" mt={2}>
-                        Principales fonctionnalités
+                        Principales fonctionnalités :
                     </Typography>
                     <Typography variant="subtitle2">
-                        • Le processus optimisé.
+                        • Le processus optimisé
                     </Typography>
                     <Typography variant="subtitle2">
                         • Analyses de données standard
@@ -85,28 +90,27 @@ export const SolutionUnitProduct = () => {
                     </Typography>
                 </Box>
                 <Grid mt={9}>
-                    <Typography variant="subtitle2" color="grey">
-                        • Le processus optimisé.
+                    <Typography variant="subtitle2" color="black">
+                        • Le processus optimisé
                     </Typography>
-                    <Typography variant="subtitle2" color="grey">
+                    <Typography variant="subtitle2" color="black">
                         • Analyses de données standard
                     </Typography>
-                    <Typography variant="subtitle2" color="grey">
+                    <Typography variant="subtitle2"  color={formula === PRODUCT_FORMULA.PREMIUM || formula === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"}>
                         • 10 emplacements des stocks
                     </Typography>
-                    <Typography variant="subtitle2" color="grey">
+                    <Typography variant="subtitle2"  color={formula === PRODUCT_FORMULA.PREMIUM || formula === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"}>
                         • Vente globale localisée
                     </Typography>
-                    <Typography variant="subtitle2" color="grey">
+                    <Typography variant="subtitle2"  color={formula === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>
                         • Stockage serveur 2go
                     </Typography>
-                    <Typography variant="subtitle2" color="grey">
+                    <Typography variant="subtitle2" color={formula === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>
                         • Assistance par chat à tout moment
                     </Typography>
                 </Grid>
             </Grid>
 
-            {/* Bulle "Standard" à la fin pour qu'elle apparaisse par-dessus */}
             <Box sx={{
                 position: 'absolute',
                 top: '-14px',
@@ -121,7 +125,7 @@ export const SolutionUnitProduct = () => {
                 zIndex: 2,
             }}>
                 <Typography variant="body2" sx={{fontWeight: 'bold'}}>
-                    Standard
+                    {formula}
                 </Typography>
             </Box>
         </Box>
