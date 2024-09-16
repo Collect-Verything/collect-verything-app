@@ -6,7 +6,7 @@
 ```
 cd front-app
 docker build . -t front-app
-docker run --name front-app -d -p 81:3000 front-app
+docker run --name front-app -d -p 3000:3000 front-app
 ```
 
 ### Authentication service 
@@ -14,7 +14,7 @@ docker run --name front-app -d -p 81:3000 front-app
 ```
 cd auth-service
 docker build . -t auth-service
-docker run --name auth-service -d -p 82:3001 auth-service
+docker run --name auth-service -d -p 3001:3001 auth-service
 ```
 
 
@@ -23,6 +23,7 @@ docker run --name auth-service -d -p 82:3001 auth-service
 
 Delete old containers if already create and run this commande in root folder :
 ```
+// cd in choosing app
 docker compose up
 ```
 
@@ -43,6 +44,11 @@ docker container run --platform linux/amd64 cansefr/auth-service
 ```
 docker image pull cansefr/front-app
 docker image pull cansefr/auth-service
-docker run cansefr/front-app
-docker run cansefr/auth-service
+
+// For linux and arm64 alert
+docker pull --platform linux/amd64 cansefr/front-app
+docker pull --platform linux/amd64 cansefr/auth-service
+
+docker run -p 3000:3000 cansefr/front-app
+docker run -p 3001:3001 cansefr/auth-service
 ```
