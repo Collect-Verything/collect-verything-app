@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+./github
+./documentation
+./node_modules
+.gitignore
+LICENSE
+README.md
+*.css
+*.html
+*.yaml
+*.json
+*/reportWebVitals.ts
