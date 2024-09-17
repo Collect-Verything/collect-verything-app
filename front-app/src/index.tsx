@@ -7,6 +7,7 @@ import {HomePage} from "./main-pages/home";
 import {MainLayout} from "./common/component/main-layout";
 import {SolutionPage} from "./main-pages/solution";
 import {Tarification} from "./main-pages/tarification";
+import {LoginPage} from "./main-pages/login";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "Tarification",
                 element: <Tarification/>,
+            },
+            {
+                path: "Login",
+                element: <LoginPage/>,
             }
         ]
     },
