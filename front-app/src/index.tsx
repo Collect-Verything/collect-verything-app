@@ -26,10 +26,6 @@ const router = createBrowserRouter([
                 path: "Tarification",
                 element: <Tarification/>,
             },
-            {
-                path: "Login",
-                element: <LoginPage/>,
-            }
         ]
     },
     {
@@ -40,6 +36,10 @@ const router = createBrowserRouter([
                 <Link to="/">Go Home</Link>
             </div>
         ),
+    },
+    {
+        path: "Login",
+        element: <LoginPage/>,
     },
 ]);
 
