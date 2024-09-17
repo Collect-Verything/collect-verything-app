@@ -8,6 +8,7 @@ import {MainLayout} from "./common/component/main-layout";
 import {SolutionPage} from "./main-pages/solution";
 import {Tarification} from "./main-pages/tarification";
 import {LoginPage} from "./main-pages/login";
+import {RegisterPage} from "./main-pages/register";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
     {
         path: "Login",
         element: <LoginPage/>,
+    },
+    {
+        path: "Register",
+        element: <RegisterPage/>,
     },
 ]);
 
