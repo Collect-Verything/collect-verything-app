@@ -9,6 +9,8 @@ import {SolutionPage} from "./main-pages/solution";
 import {Tarification} from "./main-pages/tarification";
 import {LoginPage} from "./main-pages/login";
 import {RegisterPage} from "./main-pages/register";
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
 const router = createBrowserRouter([
     {
@@ -50,7 +52,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
-).render(<RouterProvider router={router}/>);
+).render(
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+        <RouterProvider router={router}/>
+    </LocalizationProvider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
