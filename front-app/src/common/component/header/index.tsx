@@ -14,12 +14,16 @@ export const Header = () => {
                 </Link>
             </Grid>
             <Grid container spacing={10}>
-                {websitePageItems.map((item:WebsitePageItemsProps) => (
+                {websitePageItems.map((item: WebsitePageItemsProps) => (
                     <Link style={{textDecoration: 'none', color: 'black'}} to={item.link}>{item.label}</Link>
                 ))}
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">
-                <Grid>Se connecter</Grid>
+                <Grid>
+                    <Link style={{textDecoration: 'none', color: 'black'}} to='login'>
+                        Se connecter
+                    </Link>
+                </Grid>
                 <Grid>
                     <Button sx={{textTransform: 'none'}}>
                         <ButtonRounded label="Démarer un essai"/>
