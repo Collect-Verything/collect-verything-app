@@ -17,14 +17,7 @@ export const LoginPage = () => {
                 </Link>
             </Grid>
 
-
-            <Grid pt={5} pb={5} container flexDirection="column" justifyContent="center" alignItems="center" marginTop={15}
-                  sx={{
-                      backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-1.png)`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                  }}>
+            <Grid pt={5} pb={5} container flexDirection="column" justifyContent="center" alignItems="center" marginTop={15}>
                 <Grid>
                     <Typography pb={3} variant="h3" color="blacl">Hello !</Typography>
                 </Grid>
