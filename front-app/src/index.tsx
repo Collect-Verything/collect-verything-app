@@ -13,47 +13,47 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      {
-        path: "",
-        element: <HomePage />,
-      },
-      {
-        path: "Solution",
-        element: <SolutionPage />,
-      },
-      {
-        path: "Tarification",
-        element: <Tarification />,
-      },
-    ],
-  },
-  {
-    path: "test",
-    element: (
-      <div>
-        <h1>Hello TEST World</h1>
-        <Link to="/">Go Home</Link>
-      </div>
-    ),
-  },
-  {
-    path: "Login",
-    element: <LoginPage />,
-  },
-  {
-    path: "Register",
-    element: <RegisterPage />,
-  },
+    {
+        path: "/",
+        element: <MainLayout />,
+        children: [
+            {
+                path: "",
+                element: <HomePage />,
+            },
+            {
+                path: "Solution",
+                element: <SolutionPage />,
+            },
+            {
+                path: "Tarification",
+                element: <Tarification />,
+            },
+        ],
+    },
+    {
+        path: "test",
+        element: (
+            <div>
+                <h1>Hello TEST World</h1>
+                <Link to="/">Go Home</Link>
+            </div>
+        ),
+    },
+    {
+        path: "Login",
+        element: <LoginPage />,
+    },
+    {
+        path: "Register",
+        element: <RegisterPage />,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <RouterProvider router={router} />
-  </LocalizationProvider>,
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+    </LocalizationProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

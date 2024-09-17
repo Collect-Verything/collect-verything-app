@@ -1,5 +1,5 @@
 export enum PRODUCT_FORMULA {
-  STANDARD = "Standard",
-  MEDIUM = "Medium",
-  PREMIUM = "Premium",
+    STANDARD = "Standard",
+    MEDIUM = "Medium",
+    PREMIUM = "Premium",
 }
