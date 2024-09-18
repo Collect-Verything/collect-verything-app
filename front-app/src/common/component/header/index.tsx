@@ -14,8 +14,8 @@ export const Header = () => {
                 </Link>
             </Grid>
             <Grid container spacing={10}>
-                {websitePageItems.map((item: WebsitePageItemsProps) => (
-                    <Link style={{ textDecoration: "none", color: "black" }} to={item.link}>
+                {websitePageItems.map((item: WebsitePageItemsProps, index) => (
+                    <Link key={index} style={{ textDecoration: "none", color: "black" }} to={item.link}>
                         {item.label}
                     </Link>
                 ))}

@@ -35,8 +35,8 @@ export const SolutionPage = () => {
             <SwitchInputsRoundedWithChild />
 
             <Grid container spacing={6} pt={5}>
-                {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula) => (
-                    <SolutionUnitProduct formula={formula} />
+                {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula, index) => (
+                    <SolutionUnitProduct key={index} formula={formula} />
                 ))}
             </Grid>
         </Grid>

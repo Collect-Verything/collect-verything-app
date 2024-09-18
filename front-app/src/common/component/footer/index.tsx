@@ -14,8 +14,8 @@ export const Footer = () => (
         </Grid>
 
         <Grid container spacing={1} ml={2} mt={4} mb={5} justifyContent="center">
-            {socialMediaItems.map((media: SocialMediaProps) => (
-                <Grid>
+            {socialMediaItems.map((media: SocialMediaProps, index) => (
+                <Grid key={index}>
                     <Link style={{ textDecoration: "none", color: "black" }} to={media.link}>
                         {media.icon}
                     </Link>
