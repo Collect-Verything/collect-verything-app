@@ -4,7 +4,7 @@ export interface WebsitePageItemsProps {
 }
 
 export const websitePageItems: WebsitePageItemsProps[] = [
-    {link: "solution", label: "Solution"},
-    {link: "tarification", label: "Tarification"},
-    {link: "ressource", label: "Ressource"},
+    { link: "solution", label: "Solution" },
+    { link: "tarification", label: "Tarification" },
+    { link: "ressource", label: "Ressource" },
 ];

@@ -1,35 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter, Link, RouterProvider} from "react-router-dom";
-import {HomePage} from "./main-pages/home";
-import {MainLayout} from "./common/component/main-layout";
-import {SolutionPage} from "./main-pages/solution";
-import {Tarification} from "./main-pages/tarification";
-import {LoginPage} from "./main-pages/login";
-import {RegisterPage} from "./main-pages/register";
-import {LocalizationProvider} from '@mui/x-date-pickers';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import { HomePage } from "./main-pages/home";
+import { MainLayout } from "./common/component/main-layout";
+import { SolutionPage } from "./main-pages/solution";
+import { Tarification } from "./main-pages/tarification";
+import { LoginPage } from "./main-pages/login";
+import { RegisterPage } from "./main-pages/register";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <MainLayout/>,
+        element: <MainLayout />,
         children: [
             {
                 path: "",
-                element: <HomePage/>,
+                element: <HomePage />,
             },
             {
                 path: "Solution",
-                element: <SolutionPage/>,
+                element: <SolutionPage />,
             },
             {
                 path: "Tarification",
-                element: <Tarification/>,
+                element: <Tarification />,
             },
-        ]
+        ],
     },
     {
         path: "test",
@@ -42,21 +42,18 @@ const router = createBrowserRouter([
     },
     {
         path: "Login",
-        element: <LoginPage/>,
+        element: <LoginPage />,
     },
     {
         path: "Register",
-        element: <RegisterPage/>,
+        element: <RegisterPage />,
     },
 ]);
 
-ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-        <RouterProvider router={router}/>
-    </LocalizationProvider>
+        <RouterProvider router={router} />
+    </LocalizationProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

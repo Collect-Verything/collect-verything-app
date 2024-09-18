@@ -6,5 +6,12 @@
     "start-frontapp": "npm start --prefix front-app",
     "start-auth-service": "npm run start --prefix auth-service",
     "start": "npm run start-frontapp & npm run start-auth-service"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-react": "^7.36.1",
+    "globals": "^15.9.0",
+    "typescript-eslint": "^8.6.0"
   }
 }
