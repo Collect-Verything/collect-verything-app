@@ -11,6 +11,7 @@ import { LoginPage } from "./main-pages/login";
 import { RegisterPage } from "./main-pages/register";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Basket } from "./main-pages/basket";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "Tarification",
                 element: <Tarification />,
+            },
+            {
+                path: "Basket",
+                element: <Basket />,
             },
         ],
     },
