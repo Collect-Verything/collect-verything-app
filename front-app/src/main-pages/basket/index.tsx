@@ -1,25 +1,70 @@
 import React, { useEffect, useState } from "react";
-import { poductsDetails } from "../../common/assets/products/poducts-details";
-import { Typography } from "@mui/material";
+import { productsDetails, ProductsDetailsType } from "../../common/assets/products/products-details";
+import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { ListBasketType } from "../tarification";
+import { PAID_FREQUENCY } from "../../common/component/inputs";
+
+interface BasketDetailsType {
+    product: ProductsDetailsType;
+    frequency: PAID_FREQUENCY;
+}
 
 export const Basket = () => {
-    const [productBasket, setProductBasket] = useState<any>();
+    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
+    const [listProducts, setListProducts] = useState<BasketDetailsType[]>([]);
+
+    const loadBasketFromStorage = () => {
+        const storedBasket = localStorage.getItem("basket");
+        if (storedBasket) {
+            const basketItems = JSON.parse(storedBasket);
+            setListBasket(basketItems);
+            const updatedListProducts = basketItems.map((item: ListBasketType) => ({
+                product: productsDetails.find((prod) => prod.id === item.productId)!,
+                frequency: item.paidFrequency,
+            }));
+            setListProducts(updatedListProducts);
+        }
+    };
+
+    const handleClearAll = () => {
+        setListBasket([]);
+        setListProducts([]);
+        localStorage.removeItem("basket");
+    };
+
+    const handleDeleteProduct = (index: number) => {
+        const updatedBasket = listBasket.filter((_, i) => i !== index);
+        setListBasket(updatedBasket);
+        setListProducts(
+            updatedBasket.map((item) => ({
+                product: productsDetails.find((prod) => prod.id === item.productId)!,
+                frequency: item.paidFrequency,
+            })),
+        );
+        localStorage.setItem("basket", JSON.stringify(updatedBasket));
+    };
 
     useEffect(() => {
-        const userStorage = localStorage.getItem("basket");
-        console.log(userStorage);
-        if (userStorage) {
-            const userDetails = userStorage.split("-");
-            const articleNumber = Number(userDetails[0]);
-            console.log(poductsDetails[articleNumber - 1]);
-            setProductBasket(poductsDetails[articleNumber - 1]);
-        }
-    }, [productBasket]);
+        loadBasketFromStorage();
+    }, []);
 
     return (
         <Grid>
-            {productBasket ? <Typography>{productBasket.class}</Typography> : "Votre panier est vide pour le moment"}
+            {listProducts.length > 0 ? (
+                <Grid>
+                    {listProducts.map((product, index) => (
+                        <Grid key={index}>
+                            <Typography>{product.product.class}</Typography>
+                            <Typography>{product.frequency}</Typography>
+                            <Button onClick={() => handleDeleteProduct(index)}>Delete unit</Button>
+                        </Grid>
+                    ))}
+                    <Button onClick={handleClearAll}>Clear all</Button>
+                </Grid>
+            ) : (
+                <Typography>Votre panier est vide pour le moment</Typography>
+            )}
         </Grid>
     );
 };

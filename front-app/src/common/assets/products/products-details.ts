@@ -1,6 +1,15 @@
 import { PRODUCT_FORMULA } from "../../component/solution/const";
 
-export const poductsDetails = [
+export interface ProductsDetailsType {
+    id: number,
+    class: PRODUCT_FORMULA,
+    title: string,
+    description:string,
+    details: string[],
+    price_mounth: number,
+}
+
+export const productsDetails: ProductsDetailsType[] = [
     {
         id: 1,
         class: PRODUCT_FORMULA.STANDARD,

@@ -3,26 +3,34 @@ import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { PAID_FREQUENCY, SwitchRoundedWithPrice } from "../../common/component/inputs";
 import { ButtonRounded } from "../../common/component/buttons";
-import { poductsDetails } from "../../common/assets/products/poducts-details";
 import { Link } from "react-router-dom";
+import { productsDetails } from "../../common/assets/products/products-details";
+
+export interface ListBasketType {
+    productId: number;
+    paidFrequency: PAID_FREQUENCY;
+}
 
 export const Tarification = () => {
     const [selected, setSelected] = useState<number>(2);
-    const [solutions, setSolutions] = useState(poductsDetails);
+    const [solutions, setSolutions] = useState(productsDetails);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
-    const [basketStorage, setBasketStorage] = useState<boolean>();
+    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
+    const [basketTrigger, setBasketTrigger] = useState<boolean>(false);
 
-    const handleSetStorage = (key: string, selected: number, paidFrequency: PAID_FREQUENCY) => {
-        setBasketStorage(true);
-        localStorage.setItem("basket", `${selected}-${paidFrequency}`);
+    const handleSetStorage = (productId: number, paidFrequency: PAID_FREQUENCY) => {
+        const updatedBasket = [...listBasket, { productId, paidFrequency }];
+        setListBasket(updatedBasket);
+        localStorage.setItem("basket", JSON.stringify(updatedBasket));
+        setBasketTrigger(true);
     };
 
     useEffect(() => {
-        const userStorage = localStorage.getItem("basket");
-        if (userStorage) {
-            setBasketStorage(true);
-        } else {
-            setBasketStorage(false);
+        const storedBasket = localStorage.getItem("basket");
+        if (storedBasket) {
+            const basketItems = JSON.parse(storedBasket);
+            setListBasket(basketItems);
+            setBasketTrigger(true);
         }
     }, []);
 
@@ -98,11 +106,11 @@ export const Tarification = () => {
                         {detail}
                     </Typography>
                 ))}
-                <Grid onClick={() => handleSetStorage("basket", selected, paidFrequency)}>
+                <Grid onClick={() => handleSetStorage(selected, paidFrequency)}>
                     <ButtonRounded mt={3} mb={4} label={"Ajouter au panier"} />
                 </Grid>
 
-                {basketStorage && (
+                {basketTrigger && (
                     <Link to="/basket">
                         <ButtonRounded mb={4} label={"Consulter votre panier"} bgColor="white" txtColor="black" />
                     </Link>
