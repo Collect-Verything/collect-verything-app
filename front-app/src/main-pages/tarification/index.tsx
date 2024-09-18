@@ -1,12 +1,15 @@
 import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
-import { SwitchInputsRoundedWithChild } from "../../common/component/inputs";
+import { PAID_FREQUENCY, SwitchRoundedWithPrice } from "../../common/component/inputs";
 import { ButtonRounded } from "../../common/component/buttons";
 import { Link } from "react-router-dom";
+import { poductsDetails } from "../../common/assets/products/poducts-details";
 
 export const Tarification = () => {
     const [selected, setSelected] = useState<number>(2);
+    const [solutions, setSolutions] = useState(poductsDetails);
+    const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
 
     return (
         <Grid container mt={10} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
@@ -63,26 +66,24 @@ export const Tarification = () => {
                 justifyContent="center"
             >
                 <Typography variant="h4" mt={3} mb={2}>
-                    Conçu pour l’extensibilité
+                    {solutions[selected - 1].title}
                 </Typography>
-                <Typography variant="subtitle2" mb={3}>
-                    Évoluez rapidement avec notre boutique en ligne personnalisable, ou construisez la vôtre avec la
-                    technologie qui vous plaît pour une liberté créative totale. Mieux encore, intégrez vos systèmes
-                    tiers via les API de notre écosystème d’applications.
-                </Typography>
+                <Typography variant="subtitle2">{solutions[selected - 1].description}</Typography>
 
-                <SwitchInputsRoundedWithChild />
+                <SwitchRoundedWithPrice
+                    price={solutions[selected - 1].price_mounth}
+                    paidFrequency={paidFrequency}
+                    setPaidFrequency={setPaidFrequency}
+                    mb={3}
+                    mt={3}
+                />
 
-                <Typography variant="subtitle2" mt={3}>
-                    1,8 % + 0,25 € EUR en ligne
-                </Typography>
-                <Typography variant="subtitle2">Le processus optimisé</Typography>
-                <Typography variant="subtitle2">Analyses de données standard</Typography>
-                <Typography variant="subtitle2">10 emplacements des stocks</Typography>
-                <Typography variant="subtitle2">Assistance par chat à tout moment</Typography>
-                <Typography variant="subtitle2">Vente globale localisée</Typography>
-                <Typography variant="subtitle2">Stockage serveur 2go</Typography>
-                <Link to={`/basket/${selected}`}>
+                {solutions[selected - 1].details.map((detail, index) => (
+                    <Typography key={index} variant="subtitle2">
+                        {detail}
+                    </Typography>
+                ))}
+                <Link to={`/basket/${selected}/${paidFrequency}`}>
                     <ButtonRounded mt={3} mb={4} label={"Ajouter au panier"} />
                 </Link>
             </Grid>
