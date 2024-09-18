@@ -1,16 +1,16 @@
 import Grid from "@mui/material/Grid2";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./style.css";
-import {Typography} from "@mui/material";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import { Typography } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 
 interface InputsRoundedWithChildProps {
     children: React.ReactNode;
     width: string;
 }
 
-export const InputsRoundedWithChild = ({children, width}: InputsRoundedWithChildProps) => {
+export const InputsRoundedWithChild = ({ children, width }: InputsRoundedWithChildProps) => {
     return (
         <Grid container alignItems="center">
             <Grid>
@@ -34,9 +34,9 @@ export const InputsRoundedWithChild = ({children, width}: InputsRoundedWithChild
 export const SwitchInputsRoundedWithChild = () => {
     const [isSwitched, setIsSwitched] = useState(true);
     return (
-        <Grid container alignItems="center">
+        <Grid container alignItems="center" justifyContent="center">
             <label className="switch">
-                <input onClick={() => setIsSwitched(!isSwitched)} type="checkbox" className="checkbox"/>
+                <input onClick={() => setIsSwitched(!isSwitched)} type="checkbox" className="checkbox" />
                 <span className="slider round">
                     {isSwitched ? (
                         <Typography textAlign="right" pt={1.7} pr={2} fontSize="0.8rem" variant="subtitle2">
@@ -48,14 +48,14 @@ export const SwitchInputsRoundedWithChild = () => {
                         </Typography>
                     )}
                 </span>
-                <span style={{position: "relative"}}>
+                <span style={{ position: "relative" }}>
                     {isSwitched ? (
                         <Typography textAlign="left" mt={-1} pl={8}>
-                            <AccessTimeIcon/>
+                            <AccessTimeIcon />
                         </Typography>
                     ) : (
                         <Typography textAlign="right" mt={-1} pr={8}>
-                            <AccessTimeFilledIcon/>
+                            <AccessTimeFilledIcon />
                         </Typography>
                     )}
                 </span>
