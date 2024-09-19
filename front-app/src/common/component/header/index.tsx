@@ -21,7 +21,7 @@ export const Header = () => {
                     </Link>
                 ))}
                 <Link style={{ textDecoration: "none", color: "black" }} to={"/basket"}>
-                    <ShoppingCartIcon />
+                    <ShoppingCartIcon color="secondary" />
                 </Link>
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">

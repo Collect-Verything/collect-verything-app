@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { mounthToAnnual } from "../../utils/pricing";
+import { PRIMARY_COLOR } from "../../styles/theme";
 
 interface InputsRoundedWithChildProps {
     children: React.ReactNode;
@@ -34,11 +35,12 @@ export const InputsRoundedWithChild = ({ children, width }: InputsRoundedWithChi
 
 export const SwitchInputsRoundedWithChild = () => {
     const [isSwitched, setIsSwitched] = useState(true);
+
     return (
         <Grid container alignItems="center" justifyContent="center">
             <label className="switch">
                 <input onClick={() => setIsSwitched(!isSwitched)} type="checkbox" className="checkbox" />
-                <span className="slider round">
+                <span className="slider round" style={{ backgroundColor: PRIMARY_COLOR }}>
                     {isSwitched ? (
                         <Typography textAlign="right" pt={1.7} pr={2} fontSize="0.8rem" variant="subtitle2">
                             Annuel (économisez 25 %)
@@ -100,7 +102,7 @@ export const SwitchRoundedWithPrice = ({
         <Grid container alignItems="center" justifyContent="center" mb={mb} mt={mt}>
             <label className="switch">
                 <input onClick={handleSwitch} type="checkbox" className="checkbox" />
-                <span className="slider round">
+                <span className="slider round" style={{ backgroundColor: PRIMARY_COLOR }}>
                     {isSwitched ? (
                         <Typography textAlign="right" pt={1.7} pr={3} fontSize="0.8rem" variant="subtitle2">
                             {paidFrequency} {mounthToAnnual(price)}€ (éco 24 %)

@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper"; // function createData(
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../../common/component/buttons";
+import { ERROR_COLOR, PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 
 interface BasketDetailsType {
     product: ProductsDetailsType;
@@ -55,7 +56,6 @@ export const Basket = () => {
         localStorage.setItem("basket", JSON.stringify(updatedBasket));
     };
 
-    // Calculer le prix total à chaque changement de listProducts
     useEffect(() => {
         const newTotal = listProducts.reduce((acc, prod) => {
             const productPrice =
@@ -76,7 +76,7 @@ export const Basket = () => {
             {listProducts.length > 0 ? (
                 <Grid>
                     <Grid container justifyContent="center" spacing={2}>
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                        <Grid border={`2px solid ${PRIMARY_COLOR}`} borderRadius="14px" padding={2}>
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                                     <TableBody>
@@ -100,7 +100,7 @@ export const Basket = () => {
                                                 </TableCell>
                                                 <TableCell align="center">
                                                     <Button onClick={() => handleDeleteProduct(index)}>
-                                                        <DeleteOutlineIcon color="error" />
+                                                        <DeleteOutlineIcon sx={{ color: `${PRIMARY_DARKER_COLOR}` }} />
                                                     </Button>
                                                 </TableCell>
                                             </TableRow>
@@ -109,11 +109,11 @@ export const Basket = () => {
                                 </Table>
                             </TableContainer>
                             <Grid textAlign="center" mt={2}>
-                                <ButtonRounded bgColor="#D32F2F" label="Clear all" handleFx={handleClearAll} />
+                                <ButtonRounded bgColor={ERROR_COLOR} label="Clear all" handleFx={handleClearAll} />
                             </Grid>
                         </Grid>
 
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                        <Grid border={"2px solid primary"} borderRadius="14px" padding={2}>
                             <Grid container>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Produits :
@@ -130,19 +130,23 @@ export const Basket = () => {
 
                             <Grid container>
                                 <Typography variant="subtitle2" fontWeight={600}>
-                                    Tva :{" "}
+                                    Tva :
                                 </Typography>
                                 <Typography variant="subtitle2">&nbsp;{sanitizePrice(getTva(totalPrice))}</Typography>
                             </Grid>
 
                             <Grid container mt={2}>
                                 <Typography variant="subtitle1" fontWeight={600}>
-                                    Total Ttc :{" "}
+                                    Total Ttc :
                                 </Typography>
                                 <Typography variant="subtitle1">&nbsp;{sanitizePrice(totalPrice)}</Typography>
                             </Grid>
                             <Grid textAlign="center" mt={2}>
-                                <ButtonRounded bgColor="#CCCBED" label="Valider le panier" handleFx={handleClearAll} />
+                                <ButtonRounded
+                                    bgColor={PRIMARY_DARKER_COLOR}
+                                    label="Valider le panier"
+                                    handleFx={handleClearAll}
+                                />
                             </Grid>
                         </Grid>
                     </Grid>

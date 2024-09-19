@@ -12,6 +12,8 @@ import { RegisterPage } from "./main-pages/register";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Basket } from "./main-pages/basket";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./common/styles/theme";
 
 const router = createBrowserRouter([
     {
@@ -57,7 +59,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </LocalizationProvider>,
 );
 
