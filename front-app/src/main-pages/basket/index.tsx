@@ -4,8 +4,15 @@ import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { ListBasketType } from "../tarification";
 import { PAID_FREQUENCY } from "../../common/component/inputs";
-import CloseIcon from "@mui/icons-material/Close";
-import { mounthToAnnual } from "../../common/utils/pricing";
+import { getHt, getTva, mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper"; // function createData(
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { ButtonRounded } from "../../common/component/buttons";
 
 interface BasketDetailsType {
     product: ProductsDetailsType;
@@ -60,55 +67,92 @@ export const Basket = () => {
         setTotalPrice(newTotal);
     }, [listProducts]);
 
-    // Charger le panier depuis le localStorage une fois au chargement du composant
     useEffect(() => {
         loadBasketFromStorage();
     }, []);
 
     return (
-        <Grid>
+        <Grid mt={"10%"}>
             {listProducts.length > 0 ? (
                 <Grid>
                     <Grid container justifyContent="center" spacing={2}>
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px">
-                            {listProducts.map((product, index) => (
-                                <Grid container key={index} spacing={2} alignItems="center">
-                                    <img
-                                        width={60}
-                                        src={`${process.env.PUBLIC_URL}/assets/products/${product.product.picture_url}`}
-                                        alt="Favicon"
-                                    />
-
-                                    <Typography>{product.product.class}</Typography>
-                                    <Typography>{product.frequency}</Typography>
-                                    <Typography>
-                                        {product.frequency === PAID_FREQUENCY.MONTH
-                                            ? product.product.price_mounth
-                                            : mounthToAnnual(product.product.price_mounth)}{" "}
-                                        €
-                                    </Typography>
-
-                                    <Button onClick={() => handleDeleteProduct(index)}>
-                                        <CloseIcon />
-                                    </Button>
-                                </Grid>
-                            ))}
-                            <Button onClick={handleClearAll}>Clear All</Button>
+                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                            <TableContainer component={Paper}>
+                                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                    <TableBody>
+                                        {listProducts.map((row, index) => (
+                                            <TableRow
+                                                key={index}
+                                                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                            >
+                                                <TableCell component="th" scope="row">
+                                                    <img
+                                                        width={60}
+                                                        src={`${process.env.PUBLIC_URL}/assets/products/${row.product.picture_url}`}
+                                                        alt="Favicon"
+                                                    />
+                                                </TableCell>
+                                                <TableCell align="center">{row.product.title}</TableCell>
+                                                <TableCell align="center">{row.product.class}</TableCell>
+                                                <TableCell align="center">{row.frequency}</TableCell>
+                                                <TableCell align="center">
+                                                    {sanitizePrice(mounthToAnnual(row.product.price_mounth))}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <Button onClick={() => handleDeleteProduct(index)}>
+                                                        <DeleteOutlineIcon color="error" />
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <Grid textAlign="center" mt={2}>
+                                <ButtonRounded bgColor="#D32F2F" label="Clear all" handleFx={handleClearAll} />
+                            </Grid>
                         </Grid>
 
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px">
-                            <Typography>Total Ttc : {totalPrice}</Typography>
-                            {/*Creer methode pour avoir ht*/}
-                            <Typography> Ht : {totalPrice - totalPrice * 0.2}</Typography>
-                            {/*Creer methode pour avoir Tva*/}
-                            <Typography> Tva : {totalPrice * 0.2}</Typography>
+                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                            <Grid container>
+                                <Typography variant="subtitle2" fontWeight={600}>
+                                    Produits :
+                                </Typography>
+                                <Typography variant="subtitle2">&nbsp;{listProducts.length}</Typography>
+                            </Grid>
 
-                            <Button>Paiement</Button>
+                            <Grid container mt={2}>
+                                <Typography variant="subtitle2" fontWeight={600}>
+                                    Ht&nbsp; :
+                                </Typography>
+                                <Typography variant="subtitle2">&nbsp;{sanitizePrice(getHt(totalPrice))}</Typography>
+                            </Grid>
+
+                            <Grid container>
+                                <Typography variant="subtitle2" fontWeight={600}>
+                                    Tva :{" "}
+                                </Typography>
+                                <Typography variant="subtitle2">&nbsp;{sanitizePrice(getTva(totalPrice))}</Typography>
+                            </Grid>
+
+                            <Grid container mt={2}>
+                                <Typography variant="subtitle1" fontWeight={600}>
+                                    Total Ttc :{" "}
+                                </Typography>
+                                <Typography variant="subtitle1">&nbsp;{sanitizePrice(totalPrice)}</Typography>
+                            </Grid>
+                            <Grid textAlign="center" mt={2}>
+                                <ButtonRounded bgColor="#CCCBED" label="Valider le panier" handleFx={handleClearAll} />
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             ) : (
-                <Typography>Votre panier est vide pour le moment</Typography>
+                <Grid textAlign="center" mt={"15%"} mb={20}>
+                    <Typography variant="h3" fontWeight={600}>
+                        Votre panier est vide pour le moment
+                    </Typography>
+                </Grid>
             )}
         </Grid>
     );
