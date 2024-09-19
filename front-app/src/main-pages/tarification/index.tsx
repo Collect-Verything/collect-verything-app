@@ -1,15 +1,38 @@
 import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PAID_FREQUENCY, SwitchRoundedWithPrice } from "../../common/component/inputs";
 import { ButtonRounded } from "../../common/component/buttons";
 import { Link } from "react-router-dom";
-import { poductsDetails } from "../../common/assets/products/poducts-details";
+import { productsDetails } from "../../common/assets/products/products-details";
+
+export interface ListBasketType {
+    productId: number;
+    paidFrequency: PAID_FREQUENCY;
+}
 
 export const Tarification = () => {
     const [selected, setSelected] = useState<number>(2);
-    const [solutions, setSolutions] = useState(poductsDetails);
+    const [solutions, setSolutions] = useState(productsDetails);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
+    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
+    const [basketTrigger, setBasketTrigger] = useState<boolean>(false);
+
+    const handleSetStorage = (productId: number, paidFrequency: PAID_FREQUENCY) => {
+        const updatedBasket = [...listBasket, { productId, paidFrequency }];
+        setListBasket(updatedBasket);
+        localStorage.setItem("basket", JSON.stringify(updatedBasket));
+        setBasketTrigger(true);
+    };
+
+    useEffect(() => {
+        const storedBasket = localStorage.getItem("basket");
+        if (storedBasket) {
+            const basketItems = JSON.parse(storedBasket);
+            setListBasket(basketItems);
+            setBasketTrigger(true);
+        }
+    }, []);
 
     return (
         <Grid container mt={10} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
@@ -83,9 +106,15 @@ export const Tarification = () => {
                         {detail}
                     </Typography>
                 ))}
-                <Link to={`/basket/${selected}/${paidFrequency}`}>
+                <Grid onClick={() => handleSetStorage(selected, paidFrequency)}>
                     <ButtonRounded mt={3} mb={4} label={"Ajouter au panier"} />
-                </Link>
+                </Grid>
+
+                {basketTrigger && (
+                    <Link to="/basket">
+                        <ButtonRounded mb={4} label={"Consulter votre panier"} bgColor="white" txtColor="black" />
+                    </Link>
+                )}
             </Grid>
         </Grid>
     );

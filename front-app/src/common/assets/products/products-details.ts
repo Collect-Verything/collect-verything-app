@@ -1,6 +1,16 @@
 import { PRODUCT_FORMULA } from "../../component/solution/const";
 
-export const poductsDetails = [
+export interface ProductsDetailsType {
+    id: number,
+    class: PRODUCT_FORMULA,
+    title: string,
+    description:string,
+    details: string[],
+    price_mounth: number,
+    picture_url: string,
+}
+
+export const productsDetails: ProductsDetailsType[] = [
     {
         id: 1,
         class: PRODUCT_FORMULA.STANDARD,
@@ -18,6 +28,7 @@ export const poductsDetails = [
             "• Analyses de données standard",
         ],
         price_mounth: 12,
+        picture_url: "standar-badge.png"
     },
     {
         id: 2,
@@ -38,6 +49,7 @@ export const poductsDetails = [
             "• Vente globale localisée",
         ],
         price_mounth: 16,
+        picture_url: "medium-badge.png"
     },
     {
         id: 3,
@@ -60,5 +72,6 @@ export const poductsDetails = [
             "• Assistance par chat à tout moment",
         ],
         price_mounth: 20,
+        picture_url: "premium-badge.png"
     },
 ];
