@@ -17,10 +17,10 @@ export const SolutionPage = () => {
             spacing={2}
             sx={{ width: "70%", margin: "0 auto" }}
         >
-            <Typography mt={10} variant="h4" fontWeight={800}>
+            <Typography mt="10vh" variant="h4" fontWeight={800}>
                 Démarrez gratuitement, puis profitez d’un tarif de 1 €/mois pendant 3 mois
             </Typography>
-            <Typography mt={2} mb={2} variant="subtitle2">
+            <Typography mt="3vh" mb="3vh" variant="subtitle2">
                 Essayez Shopify à moindre coût et sans risque pendant 3 mois.
             </Typography>
 
@@ -28,13 +28,13 @@ export const SolutionPage = () => {
                 <ButtonRounded label="Démarrer un essai" />
             </InputsRoundedWithChild>
 
-            <Typography mt={2} mb={2} variant="subtitle2">
+            <Typography mt="3vh" mb="3vh" variant="subtitle2">
                 En saisissant votre e-mail, vous acceptez de recevoir des e-mails de marketing de la part de Shopify.
             </Typography>
 
             <SwitchInputsRoundedWithChild />
 
-            <Grid container spacing={6} pt={5}>
+            <Grid container spacing={6} mt="5vh" pt={5}>
                 {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula, index) => (
                     <SolutionUnitProduct key={index} formula={formula} />
                 ))}
