@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Basket } from "./shop/basket";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./common/styles/theme";
+import { ResourcePage } from "./shop/ressource";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: "Tarification",
                 element: <Tarification />,
+            },
+            {
+                path: "Ressource",
+                element: <ResourcePage />,
             },
             {
                 path: "Basket",
