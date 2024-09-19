@@ -4,6 +4,7 @@ import { ButtonRounded } from "../../common/component/buttons";
 import React from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { BackgroundBlurPng } from "../../common/styles/bg-blur";
 
 export const LoginPage = () => {
     return (
@@ -16,7 +17,7 @@ export const LoginPage = () => {
                     <ButtonRounded label="Register" />
                 </Link>
             </Grid>
-
+            <BackgroundBlurPng url="assets/blur/bg-blur-0.png" blur="1.5rem" />
             <Grid
                 pt={5}
                 pb={5}
@@ -27,7 +28,7 @@ export const LoginPage = () => {
                 marginTop={15}
             >
                 <Grid>
-                    <Typography pb={3} variant="h3" color="blacl">
+                    <Typography pb={3} variant="h3" color="black">
                         Hello !
                     </Typography>
                 </Grid>
