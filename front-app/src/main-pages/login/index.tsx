@@ -17,7 +17,7 @@ export const LoginPage = () => {
                     <ButtonRounded label="Register" />
                 </Link>
             </Grid>
-            <BackgroundBlurPng url="assets/blur/bg-blur-0.png" blur="1.5rem" />
+            <BackgroundBlurPng url="assets/blur/bg-blur-2.png" blur="0" />
             <Grid
                 pt={5}
                 pb={5}

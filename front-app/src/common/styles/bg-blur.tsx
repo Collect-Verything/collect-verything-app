@@ -2,9 +2,10 @@ import Grid from "@mui/material/Grid2";
 import React from "react";
 interface BackgroundBlurPngProps {
     url: string;
-    blur: string;
+    blur?: string;
+    rotate?: string;
 }
-export const BackgroundBlurPng = ({ url,blur }: BackgroundBlurPngProps) => {
+export const BackgroundBlurPng = ({ url,blur="1.5",rotate= "0" }: BackgroundBlurPngProps) => {
     return(
         <Grid
             sx={{
@@ -16,8 +17,9 @@ export const BackgroundBlurPng = ({ url,blur }: BackgroundBlurPngProps) => {
                 position: "absolute",
                 top: 0,
                 left: 0,
-                filter: `blur(${blur})`,
+                filter: `blur(${blur}rem)`,
                 zIndex: -1,
+                transform: `rotate(${rotate}deg)`
             }}
         ></Grid>
     )

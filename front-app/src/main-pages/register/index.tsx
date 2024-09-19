@@ -23,7 +23,7 @@ export const RegisterPage = () => {
 
     return (
         <Grid>
-            <BackgroundBlurPng url="assets/blur/bg-blur-0.png" blur="1.5rem" />
+            <BackgroundBlurPng url="assets/blur/bg-blur-2.png" rotate="180"  blur="0" />
 
             <Grid container justifyContent="space-between" padding={1}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
