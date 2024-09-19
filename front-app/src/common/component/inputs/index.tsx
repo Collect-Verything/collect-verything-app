@@ -102,7 +102,7 @@ export const SwitchRoundedWithPrice = ({
         <Grid container alignItems="center" justifyContent="center" mb={mb} mt={mt}>
             <label className="switch">
                 <input onClick={handleSwitch} type="checkbox" className="checkbox" />
-                <span className="slider round">
+                <span className="slider round" style={{ backgroundColor: PRIMARY_COLOR }}>
                     {isSwitched ? (
                         <Typography textAlign="right" pt={1.7} pr={3} fontSize="0.8rem" variant="subtitle2">
                             {paidFrequency} {mounthToAnnual(price)}€ (éco 24 %)
