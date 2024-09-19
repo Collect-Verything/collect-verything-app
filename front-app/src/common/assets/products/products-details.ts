@@ -7,6 +7,7 @@ export interface ProductsDetailsType {
     description:string,
     details: string[],
     price_mounth: number,
+    picture_url: string,
 }
 
 export const productsDetails: ProductsDetailsType[] = [
@@ -27,6 +28,7 @@ export const productsDetails: ProductsDetailsType[] = [
             "• Analyses de données standard",
         ],
         price_mounth: 12,
+        picture_url: "standar-badge.png"
     },
     {
         id: 2,
@@ -47,6 +49,7 @@ export const productsDetails: ProductsDetailsType[] = [
             "• Vente globale localisée",
         ],
         price_mounth: 16,
+        picture_url: "medium-badge.png"
     },
     {
         id: 3,
@@ -69,5 +72,6 @@ export const productsDetails: ProductsDetailsType[] = [
             "• Assistance par chat à tout moment",
         ],
         price_mounth: 20,
+        picture_url: "premium-badge.png"
     },
 ];
