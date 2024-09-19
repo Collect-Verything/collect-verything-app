@@ -11,6 +11,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Dayjs } from "dayjs";
 import "./style.css";
+import { BackgroundBlurPng } from "../../common/styles/bg-blur";
 
 export const RegisterPage = () => {
     const [civilityName, setCivilityName] = React.useState<string>("");
@@ -22,6 +23,8 @@ export const RegisterPage = () => {
 
     return (
         <Grid>
+            <BackgroundBlurPng url="assets/blur/bg-blur-0.png" blur="1.5rem" />
+
             <Grid container justifyContent="space-between" padding={1}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
