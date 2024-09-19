@@ -22,11 +22,9 @@ export const HomePage = () => {
                 pb={1}
                 mt={12}
                 justifyContent="center"
+                width="1300px"
                 sx={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-1.png)`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
+                    backgroundColor: PRIMARY_COLOR,
                 }}
             >
                 <Grid width="35%" textAlign="left">
@@ -92,8 +90,7 @@ export const HomePage = () => {
                 mt={25}
                 justifyContent="center"
                 sx={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/illustrations/home-bg-3.png)`,
-                    backgroundSize: "contain",
+                    background: `linear-gradient(white,${PRIMARY_COLOR}, ${PRIMARY_COLOR},white)`,
                 }}
             >
                 <Grid width="35%" textAlign="left">
