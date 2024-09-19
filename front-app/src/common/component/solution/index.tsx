@@ -2,6 +2,7 @@ import Grid from "@mui/material/Grid2";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { PRODUCT_FORMULA } from "./const";
+import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../styles/theme";
 
 interface SolutionUnitProductProps {
     formula: string;
@@ -17,7 +18,7 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                 background: "white",
                 zIndex: 1,
                 textAlign: "left",
-                border: "1px solid #E7E6F6",
+                border: `1px solid ${PRIMARY_COLOR}`,
                 boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
                 "&:before": {
                     content: '""',
@@ -28,7 +29,7 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                     bottom: 0,
                     borderRadius: "14px",
                     padding: "2px",
-                    background: "linear-gradient( #E7E6F6, silver)",
+                    background: `linear-gradient( ${PRIMARY_COLOR}, silver)`,
                     "-webkit-mask": "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     maskComposite: "exclude",
@@ -61,14 +62,14 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                         left: 0,
                         right: 0,
                         width: "100%",
-                        borderTop: "2px solid #d9d7f5",
-                        borderBottom: "2px solid #d9d7f5",
+                        borderTop: `2px solid ${PRIMARY_DARKER_COLOR}`,
+                        borderBottom: `2px solid ${PRIMARY_DARKER_COLOR}`,
                         textAlign: "center",
                         pt: 3,
                         pb: 3,
                         mt: 9,
                         top: "150px",
-                        backgroundColor: "#E7E6F6",
+                        backgroundColor: `${PRIMARY_COLOR}`,
                         transform: "translateY(50px)",
                     }}
                 >
@@ -113,7 +114,7 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                     position: "absolute",
                     top: "-14px",
                     left: "calc(50% - 75px)",
-                    background: "linear-gradient(to right, #E7E6F6, #d9d7f5)",
+                    background: `linear-gradient(to right, ${PRIMARY_COLOR}, ${PRIMARY_DARKER_COLOR})`,
                     borderRadius: "16px",
                     width: "150px",
                     height: "32px",

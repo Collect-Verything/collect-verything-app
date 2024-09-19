@@ -23,7 +23,7 @@ export const RegisterPage = () => {
 
     return (
         <Grid>
-            <BackgroundBlurPng url="assets/blur/bg-blur-2.png" rotate="180"  blur="0" />
+            <BackgroundBlurPng url="assets/blur/bg-blur-2.png" rotate="180" blur="0" />
 
             <Grid container justifyContent="space-between" padding={1}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
@@ -36,7 +36,7 @@ export const RegisterPage = () => {
 
             <Grid pb={5} container flexDirection="column" justifyContent="center" alignItems="center">
                 <Grid>
-                    <Typography pb={3} variant="h3" color="blacl">
+                    <Typography pb={3} variant="h3" color="black">
                         Welcome !
                     </Typography>
                 </Grid>

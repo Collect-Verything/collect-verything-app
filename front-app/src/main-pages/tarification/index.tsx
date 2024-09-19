@@ -5,6 +5,7 @@ import { PAID_FREQUENCY, SwitchRoundedWithPrice } from "../../common/component/i
 import { ButtonRounded } from "../../common/component/buttons";
 import { Link } from "react-router-dom";
 import { productsDetails } from "../../common/assets/products/products-details";
+import { PRIMARY_COLOR } from "../../common/styles/theme";
 
 export interface ListBasketType {
     productId: number;
@@ -42,7 +43,7 @@ export const Tarification = () => {
                     height="30px"
                     onClick={() => setSelected(1)}
                     sx={{
-                        background: selected === 1 ? "linear-gradient(to bottom, white, #E7E6F6)" : "",
+                        background: selected === 1 ? `linear-gradient(to bottom, white, ${PRIMARY_COLOR})` : "",
                         borderRadius: "30px 0px 0px 5px",
                     }}
                 >
@@ -55,7 +56,7 @@ export const Tarification = () => {
                     height="30px"
                     onClick={() => setSelected(2)}
                     sx={{
-                        background: selected === 2 ? "linear-gradient(to bottom, white, #E7E6F6)" : "",
+                        background: selected === 2 ? `linear-gradient(to bottom, white, ${PRIMARY_COLOR})` : "",
                     }}
                     borderRadius="0px 0px 0px 0px"
                 >
@@ -68,7 +69,7 @@ export const Tarification = () => {
                     height="30px"
                     onClick={() => setSelected(3)}
                     sx={{
-                        background: selected === 3 ? "linear-gradient(to bottom, white, #E7E6F6)" : "",
+                        background: selected === 3 ? `linear-gradient(to bottom, white, ${PRIMARY_COLOR})` : "",
                     }}
                     borderRadius="0px 30px 5px 0px"
                 >
@@ -80,7 +81,7 @@ export const Tarification = () => {
 
             <Grid
                 textAlign="center"
-                border="3px solid #E7E6F6"
+                style={{ border: `3px solid ${PRIMARY_COLOR}` }}
                 width="45%"
                 padding="20px 20px 20px 20px"
                 borderRadius="0px 0px 10px 10px"

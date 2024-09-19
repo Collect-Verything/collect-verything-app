@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper"; // function createData(
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../../common/component/buttons";
+import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 
 interface BasketDetailsType {
     product: ProductsDetailsType;
@@ -55,7 +56,6 @@ export const Basket = () => {
         localStorage.setItem("basket", JSON.stringify(updatedBasket));
     };
 
-    // Calculer le prix total à chaque changement de listProducts
     useEffect(() => {
         const newTotal = listProducts.reduce((acc, prod) => {
             const productPrice =
@@ -76,7 +76,7 @@ export const Basket = () => {
             {listProducts.length > 0 ? (
                 <Grid>
                     <Grid container justifyContent="center" spacing={2}>
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                        <Grid border={`2px solid ${PRIMARY_COLOR}`} borderRadius="14px" padding={2}>
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                                     <TableBody>
@@ -100,7 +100,7 @@ export const Basket = () => {
                                                 </TableCell>
                                                 <TableCell align="center">
                                                     <Button onClick={() => handleDeleteProduct(index)}>
-                                                        <DeleteOutlineIcon color="error" />
+                                                        <DeleteOutlineIcon sx={{ color: `${PRIMARY_DARKER_COLOR}` }} />
                                                     </Button>
                                                 </TableCell>
                                             </TableRow>
@@ -113,7 +113,7 @@ export const Basket = () => {
                             </Grid>
                         </Grid>
 
-                        <Grid border={"2px solid #E7E6F6"} borderRadius="14px" padding={2}>
+                        <Grid border={"2px solid primary"} borderRadius="14px" padding={2}>
                             <Grid container>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Produits :
@@ -142,7 +142,11 @@ export const Basket = () => {
                                 <Typography variant="subtitle1">&nbsp;{sanitizePrice(totalPrice)}</Typography>
                             </Grid>
                             <Grid textAlign="center" mt={2}>
-                                <ButtonRounded bgColor="#CCCBED" label="Valider le panier" handleFx={handleClearAll} />
+                                <ButtonRounded
+                                    bgColor={PRIMARY_DARKER_COLOR}
+                                    label="Valider le panier"
+                                    handleFx={handleClearAll}
+                                />
                             </Grid>
                         </Grid>
                     </Grid>

@@ -6,6 +6,7 @@ import { InputsRoundedWithChild } from "../../common/component/inputs";
 import TagIcon from "@mui/icons-material/Tag";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
+import { PRIMARY_COLOR } from "../../common/styles/theme";
 
 export const HomePage = () => {
     return (
@@ -74,7 +75,7 @@ export const HomePage = () => {
                     </Typography>
                     <Typography variant="subtitle2" mt={4} mb={4}>
                         Un système point de vente click and collectpermettant aux clients d’effectuer leurs achats de
-                        façon flexible, en ligne ou en magasin.{" "}
+                        façon flexible, en ligne ou en magasin.
                     </Typography>
                     <ButtonRounded label="Découvrir" />
                 </Grid>
@@ -143,7 +144,7 @@ export const HomePage = () => {
                         mt={5}
                         sx={{
                             fontStyle: "italic",
-                            backgroundColor: "#E7E6F6",
+                            backgroundColor: PRIMARY_COLOR,
                             display: "inline-block",
                             paddingRight: "12px",
                             paddingLeft: "15px",
@@ -173,7 +174,7 @@ export const HomePage = () => {
                     pb={10}
                     width="100%"
                     sx={{
-                        backgroundColor: `#E7E6F6`,
+                        backgroundColor: PRIMARY_COLOR,
                     }}
                 >
                     <Typography variant="h5" fontWeight={600}>
