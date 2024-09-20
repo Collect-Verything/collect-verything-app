@@ -45,10 +45,11 @@ jobs:
 
       - name: Run tests in front-end
         working-directory: ./front-app
-        run: npm jest
-
+        run: |
+          echo "a" | npm test
   build:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       -
         name: Checkout repository
