@@ -1,1 +1,1 @@
-Waiting for tactadc
+Waiting for info 
