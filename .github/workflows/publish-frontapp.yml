@@ -9,23 +9,23 @@ on:
 jobs:
 
   lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: '18'
-#
-#      - name: Install dependencies for front-end
-#        working-directory: ./front-app
-#        run: npm install
-#
-#      - name: Run linter in front-end
-#        working-directory: ./front-app
-#        run: npm run lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies for front-end
+        working-directory: ./front-app
+        run: npm install
+
+      - name: Run linter in front-end
+        working-directory: ./front-app
+        run: npm run lint
 
   test:
     runs-on: ubuntu-latest
@@ -46,26 +46,26 @@ jobs:
       - name: Run tests in front-end
         working-directory: ./front-app
         run: npm jest
-#
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      -
-#        name: Checkout repository
-#        uses: actions/checkout@v3
-#      -
-#        name: Login to Docker Hub
-#        uses: docker/login-action@v3
-#        with:
-#          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#      -
-#        name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v3
-#      -
-#        name: Build and push
-#        uses: docker/build-push-action@v6
-#        with:
-#          context: ./front-app
-#          push: true
-#          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-app
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout repository
+        uses: actions/checkout@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./front-app
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-app
