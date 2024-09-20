@@ -47,7 +47,6 @@ This project was undertaken as a personal study and research. Please note that s
 
 I'm open to any tips, tricks, or warnings you might have to share, in the interest of further enriching this project.
 
-
 As part of this project, my goal is to implement the essential functionalities of a modern online store. Here are the features I plan to implement:
 
 <!-- FEATURES -->
@@ -124,42 +123,28 @@ As part of this project, my goal is to implement the essential functionalities o
 ## Getting Started
 
 ### Prerequisites
-* npm
+
+Once the application is closed it is necessary to install the root dependencies
   ```sh
-  npm install npm@latest -g
+  npm i
+  ```
+
+It is then necessary to install the dependencies of each application/microservice, to do this you must execute the following command in root:
+```sh
+npm run install-all
   ```
   
-Chaque service, app ou micro service est independant pour le moment, il est donc necessaire d'effectuer la commande suivante dans chaque application
-```
-cd front 
-npm i
+### Data seed 
 
-cd ..
-cd auth 
-npm i 
-
-...
-```
-### Installation
-
-1. Clone the repo
+1. Ajust .env file
    ```sh
    ```
-3. Install NPM packages
-   ```sh
-   ```
-
-4. Ajust .env file
-   ```sh
-   ```
-5. Create database if needed
+2. Create database if needed
     ```sql
     ```
-6. Seed entities and tables
+3. Seed entities and tables
     ```shell
     ```
-   
-Ecrire info db quand tache effectué
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -185,7 +170,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -198,9 +183,7 @@ Canse - Link: [Github](https://github.com/CanseFr)
 
 Baptiste - Link: [Github](https://github.com/titoon57)
 
-
 Thomas - Link: [Github](https://github.com/ThomasStibling)
-
 
 Ishak - Link: [Github](https://github.com/Ishak-rav)
 

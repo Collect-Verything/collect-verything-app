@@ -5,7 +5,9 @@
   "scripts": {
     "start-frontapp": "npm start --prefix front-app",
     "start-auth-service": "npm run start --prefix auth-service",
-    "start": "npm run start-frontapp & npm run start-auth-service"
+    "start": "npm run start-frontapp & npm run start-auth-service",
+    "install-all": "cd auth-service && npm install && cd ../front-app && npm install"
+
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
