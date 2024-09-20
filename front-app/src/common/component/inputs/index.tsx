@@ -53,11 +53,11 @@ export const SwitchInputsRoundedWithChild = () => {
                 </span>
                 <span style={{ position: "relative" }}>
                     {isSwitched ? (
-                        <Typography textAlign="left" mt={-1} pl={8}>
+                        <Typography textAlign="left" mt={-2} pl={8}>
                             <AccessTimeIcon />
                         </Typography>
                     ) : (
-                        <Typography textAlign="right" mt={-1} pr={8}>
+                        <Typography textAlign="right" mt={-2} pr={8}>
                             <AccessTimeFilledIcon />
                         </Typography>
                     )}
@@ -115,11 +115,11 @@ export const SwitchRoundedWithPrice = ({
                 </span>
                 <span style={{ position: "relative" }}>
                     {isSwitched ? (
-                        <Typography textAlign="left" mt={-1} pl={8}>
+                        <Typography textAlign="left" mt={-2} pl={8}>
                             <AccessTimeIcon />
                         </Typography>
                     ) : (
-                        <Typography textAlign="right" mt={-1} pr={8}>
+                        <Typography textAlign="right" mt={-2} pr={8}>
                             <AccessTimeFilledIcon />
                         </Typography>
                     )}
