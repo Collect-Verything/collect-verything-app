@@ -128,33 +128,38 @@ As part of this project, my goal is to implement the essential functionalities o
   ```sh
   npm install npm@latest -g
   ```
+  
+Chaque service, app ou micro service est independant pour le moment, il est donc necessaire d'effectuer la commande suivante dans chaque application
+```
+cd front 
+npm i
 
+cd ..
+cd auth 
+npm i 
+
+...
+```
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/https://github.com/Collect-Verything/collect-verything-app.git
    ```
 3. Install NPM packages
    ```sh
-   npm install
    ```
 
 4. Ajust .env file
    ```sh
-    prisma generate
-   .env > DATABASE_URL="mysql://user:password@localhost:PORT/collect-verything-app"
    ```
 5. Create database if needed
     ```sql
-    create schema `auth-service`;
     ```
 6. Seed entities and tables
     ```shell
-    cd auth-service
-    npx prisma migrate dev --name "restart-from-branch"
-    npx prisma db seed
     ```
+   
+Ecrire info db quand tache effectué
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
