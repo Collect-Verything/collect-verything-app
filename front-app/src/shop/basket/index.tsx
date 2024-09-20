@@ -1,24 +1,32 @@
+import {
+    MDBBtn,
+    MDBCard,
+    MDBCardBody,
+    MDBCardImage,
+    MDBCol,
+    MDBContainer,
+    MDBIcon,
+    MDBInput,
+    MDBRow,
+    MDBTypography,
+} from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
-import { productsDetails, ProductsDetailsType } from "../../common/assets/products/products-details";
-import { Button, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import { ListBasketType } from "../tarification";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { PAID_FREQUENCY } from "../../common/component/inputs";
+import { productsDetails, ProductsDetailsType } from "../../common/assets/products/products-details";
+import { ListBasketType } from "../tarification";
 import { getHt, getTva, mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper"; // function createData(
+import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
+import { Button } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../../common/component/buttons";
-import { ERROR_COLOR, PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 
 interface BasketDetailsType {
     product: ProductsDetailsType;
     frequency: PAID_FREQUENCY;
 }
+
+const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const Basket = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
@@ -70,94 +78,218 @@ export const Basket = () => {
     useEffect(() => {
         loadBasketFromStorage();
     }, []);
-
     return (
-        <Grid mt={"10%"}>
-            {listProducts.length > 0 ? (
-                <Grid>
-                    <Grid container justifyContent="center" spacing={2}>
-                        <Grid border={`2px solid ${PRIMARY_COLOR}`} borderRadius="14px" padding={2}>
-                            <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                    <TableBody>
-                                        {listProducts.map((row, index) => (
-                                            <TableRow
-                                                key={index}
-                                                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row">
-                                                    <img
-                                                        width={60}
-                                                        src={`${process.env.PUBLIC_URL}/assets/products/${row.product.picture_url}`}
-                                                        alt="Favicon"
+        <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
+            <MDBContainer className="py-5 h-100">
+                <MDBRow className="justify-content-center align-items-center h-100">
+                    <MDBCol>
+                        <MDBCard>
+                            <MDBCardBody className="p-4">
+                                <MDBRow>
+                                    <MDBCol lg="7">
+                                        <MDBTypography tag="h5">
+                                            <MDBIcon fas icon="long-arrow-alt-left me-2" /> Panier
+                                        </MDBTypography>
+
+                                        <hr />
+
+                                        <div className="d-flex justify-content-between align-items-center mb-4">
+                                            <div>
+                                                <p className="mb-0">
+                                                    Vous possedez actuellement {listProducts.length} article(s) dans
+                                                    votre panier.
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <ButtonRounded
+                                                        bgColor={PRIMARY_DARKER_COLOR}
+                                                        label="Vider le panier"
+                                                        handleFx={handleClearAll}
                                                     />
-                                                </TableCell>
-                                                <TableCell align="center">{row.product.title}</TableCell>
-                                                <TableCell align="center">{row.product.class}</TableCell>
-                                                <TableCell align="center">{row.frequency}</TableCell>
-                                                <TableCell align="center">
-                                                    {sanitizePrice(mounthToAnnual(row.product.price_mounth))}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    <Button onClick={() => handleDeleteProduct(index)}>
-                                                        <DeleteOutlineIcon sx={{ color: `${PRIMARY_DARKER_COLOR}` }} />
-                                                    </Button>
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                            <Grid textAlign="center" mt={2}>
-                                <ButtonRounded bgColor={ERROR_COLOR} label="Clear all" handleFx={handleClearAll} />
-                            </Grid>
-                        </Grid>
+                                                </p>
+                                            </div>
+                                        </div>
 
-                        <Grid border={"2px solid primary"} borderRadius="14px" padding={2}>
-                            <Grid container>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Produits :
-                                </Typography>
-                                <Typography variant="subtitle2">&nbsp;{listProducts.length}</Typography>
-                            </Grid>
+                                        {/*   */}
+                                        <div style={{ maxHeight: "450px", overflowY: "auto" }}>
+                                            {listProducts.map((item, index) => (
+                                                <MDBCard className="mb-3" key={index}>
+                                                    <MDBCardBody>
+                                                        <div className="d-flex justify-content-between">
+                                                            <div className="d-flex flex-row align-items-center">
+                                                                <div>
+                                                                    <MDBCardImage
+                                                                        src={`${process.env.PUBLIC_URL}/assets/products/${item.product.picture_url}`}
+                                                                        fluid
+                                                                        className="rounded-3"
+                                                                        style={{ width: "200px" }}
+                                                                        alt="Shopping item"
+                                                                    />
+                                                                </div>
+                                                                <div className="ms-3">
+                                                                    <MDBTypography tag="h5">
+                                                                        {item.product.title}
+                                                                    </MDBTypography>
+                                                                    <p className="small mb-0">
+                                                                        {item.product.description}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="d-flex flex-row align-items-center">
+                                                                <div style={{ width: "100px" }}>
+                                                                    <MDBTypography tag="h5" className="fw-normal mb-0">
+                                                                        {item.frequency}
+                                                                    </MDBTypography>
+                                                                </div>
+                                                                <div style={{ width: "100px" }}>
+                                                                    <MDBTypography tag="h5" className="mb-0">
+                                                                        {item.frequency === PAID_FREQUENCY.YEAR
+                                                                            ? sanitizePrice(
+                                                                                  mounthToAnnual(
+                                                                                      item.product.price_mounth,
+                                                                                  ),
+                                                                              )
+                                                                            : sanitizePrice(item.product.price_mounth)}
+                                                                    </MDBTypography>
+                                                                </div>
+                                                                <Button onClick={() => handleDeleteProduct(index)}>
+                                                                    <DeleteOutlineIcon
+                                                                        sx={{ color: `${PRIMARY_DARKER_COLOR}` }}
+                                                                    />
+                                                                </Button>
+                                                            </div>
+                                                        </div>
+                                                    </MDBCardBody>
+                                                </MDBCard>
+                                            ))}
+                                        </div>
+                                    </MDBCol>
 
-                            <Grid container mt={2}>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Ht&nbsp; :
-                                </Typography>
-                                <Typography variant="subtitle2">&nbsp;{sanitizePrice(getHt(totalPrice))}</Typography>
-                            </Grid>
+                                    <MDBCol lg="5">
+                                        <MDBCard className="text-white rounded-3" style={{ backgroundColor }}>
+                                            <MDBCardBody>
+                                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                                    <MDBTypography tag="h5" className="mb-0">
+                                                        Paiement
+                                                    </MDBTypography>
+                                                    <MDBCardImage
+                                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                                                        fluid
+                                                        className="rounded-3"
+                                                        style={{ width: "45px" }}
+                                                        alt="Avatar"
+                                                    />
+                                                </div>
 
-                            <Grid container>
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Tva :
-                                </Typography>
-                                <Typography variant="subtitle2">&nbsp;{sanitizePrice(getTva(totalPrice))}</Typography>
-                            </Grid>
+                                                <p className="small">Card type</p>
+                                                <a href="#!" type="submit" className="text-white">
+                                                    <MDBIcon fab icon="cc-mastercard fa-2x me-2" />
+                                                </a>
+                                                <a href="#!" type="submit" className="text-white">
+                                                    <MDBIcon fab icon="cc-visa fa-2x me-2" />
+                                                </a>
+                                                <a href="#!" type="submit" className="text-white">
+                                                    <MDBIcon fab icon="cc-amex fa-2x me-2" />
+                                                </a>
+                                                <a href="#!" type="submit" className="text-white">
+                                                    <MDBIcon fab icon="cc-paypal fa-2x me-2" />
+                                                </a>
 
-                            <Grid container mt={2}>
-                                <Typography variant="subtitle1" fontWeight={600}>
-                                    Total Ttc :
-                                </Typography>
-                                <Typography variant="subtitle1">&nbsp;{sanitizePrice(totalPrice)}</Typography>
-                            </Grid>
-                            <Grid textAlign="center" mt={2}>
-                                <ButtonRounded
-                                    bgColor={PRIMARY_DARKER_COLOR}
-                                    label="Valider le panier"
-                                    handleFx={handleClearAll}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            ) : (
-                <Grid textAlign="center" mt={"15%"} mb={20}>
-                    <Typography variant="h3" fontWeight={600}>
-                        Votre panier est vide pour le moment
-                    </Typography>
-                </Grid>
-            )}
-        </Grid>
+                                                <form className="mt-4">
+                                                    <MDBInput
+                                                        className="mb-4"
+                                                        label="Cardholder's Name"
+                                                        type="text"
+                                                        size="lg"
+                                                        placeholder="Cardholder's Name"
+                                                        contrast
+                                                    />
+
+                                                    <MDBInput
+                                                        className="mb-4"
+                                                        label="Card Number"
+                                                        type="text"
+                                                        size="lg"
+                                                        minLength={19}
+                                                        maxLength={19}
+                                                        placeholder="1234 5678 9012 3457"
+                                                        contrast
+                                                    />
+
+                                                    <MDBRow className="mb-4">
+                                                        <MDBCol md="6">
+                                                            <MDBInput
+                                                                className="mb-4"
+                                                                label="Expiration"
+                                                                type="text"
+                                                                size="lg"
+                                                                minLength={7}
+                                                                maxLength={7}
+                                                                placeholder="MM/YYYY"
+                                                                contrast
+                                                            />
+                                                        </MDBCol>
+                                                        <MDBCol md="6">
+                                                            <MDBInput
+                                                                className="mb-4"
+                                                                label="Cvv"
+                                                                type="text"
+                                                                size="lg"
+                                                                minLength={3}
+                                                                maxLength={3}
+                                                                placeholder="&#9679;&#9679;&#9679;"
+                                                                contrast
+                                                            />
+                                                        </MDBCol>
+                                                    </MDBRow>
+                                                </form>
+
+                                                <hr />
+
+                                                <div className="d-flex justify-content-between">
+                                                    <p className="mb-2">Hors Taxe</p>
+                                                    <p className="mb-2">{sanitizePrice(getHt(totalPrice))}</p>
+                                                </div>
+
+                                                <div className="d-flex justify-content-between">
+                                                    <p className="mb-2">TVA</p>
+                                                    <p className="mb-2">{sanitizePrice(getTva(totalPrice))}</p>
+                                                </div>
+
+                                                <div className="d-flex justify-content-between">
+                                                    <p className="mb-2">Shipping</p>
+                                                    <p className="mb-2">0.00 €</p>
+                                                </div>
+
+                                                <MDBBtn color="dark" block size="lg">
+                                                    <div className="d-flex justify-content-between">
+                                                        <span>{sanitizePrice(totalPrice)}</span>
+                                                        <span>
+                                                            PAYER
+                                                            <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                                                        </span>
+                                                    </div>
+                                                </MDBBtn>
+                                            </MDBCardBody>
+                                        </MDBCard>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
+        </section>
     );
 };
+
+// interface CardProductProps {
+//     item: BasketDetailsType;
+// }
+//
+// const CardProduct = ({ item }: CardProductProps) => {
+//     return (
+//
+//     );
+// };

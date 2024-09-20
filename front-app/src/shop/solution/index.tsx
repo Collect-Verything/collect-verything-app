@@ -24,7 +24,7 @@ export const SolutionPage = () => {
                 Essayez Shopify à moindre coût et sans risque pendant 3 mois.
             </Typography>
 
-            <InputsRoundedWithChild width="162%">
+            <InputsRoundedWithChild width="176%">
                 <ButtonRounded label="Démarrer un essai" />
             </InputsRoundedWithChild>
 
