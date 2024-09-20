@@ -45,8 +45,8 @@ jobs:
 
       - name: Run tests in front-end
         working-directory: ./front-app
-        run: |
-          echo "a" | npm test
+        run: npm run jest
+
   build:
     runs-on: ubuntu-latest
     needs: test
