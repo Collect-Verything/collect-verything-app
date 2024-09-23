@@ -32,18 +32,40 @@
 $ npm install
 ```
 
-## Compile and run the project
+```bash
+# run service
+$ cd auth-service
+$ npm run start:dev
+```
+
+## Compile and run the project has dev (crash actually)
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ cd auth-service
+$ docker compose up
 ```
+
+# Edit .env with your user and password db access
+```.env
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything?schema=public"
+```
+# Create tables
+```bash
+$ npx prisma migrate dev --name "Setup auth db"
+```
+# Generate data from seed
+```bash
+$ npx prisma db seed
+```
+## Run Swagger
+
+```bash
+# unit tests
+localhost:3001/api
+```
+
+Login with data seed (email/password), get the token string and copy paste in the little padlock right top too the windows to have access on protected controllers
 
 ## Run tests
 
