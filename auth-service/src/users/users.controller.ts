@@ -19,7 +19,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/authentication/jwt-auth.guard';
 
 /*
  * Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre

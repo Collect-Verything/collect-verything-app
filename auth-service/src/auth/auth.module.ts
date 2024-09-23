@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import {UsersModule} from "../users/users.module";
-import {JwtStrategy} from "./jwt.strategy";
+import {JwtStrategy} from "./guards/authentication/jwt.strategy";
 
 export const jwtSecret = 'CollectVerythingSecret';
 
