@@ -32,18 +32,29 @@
 $ npm install
 ```
 
-## Compile and run the project
+## Compile and run the project has dev
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ cd auth-service
+$ docker compose up
 ```
+
+# Edit .env with your user and password db access
+
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything?schema=public"
+
+
+# Create tables
+npx prisma migrate dev --name "init roles and users"
+
+# Generate data from seed
+npx prisma db seed
+
+
+
+
+
 
 ## Run tests
 
