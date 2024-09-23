@@ -14,6 +14,7 @@ export interface ListBasketType {
 
 export const Tarification = () => {
     const [selected, setSelected] = useState<number>(2);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [solutions, setSolutions] = useState(productsDetails);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);

@@ -1,1 +1,1 @@
-Waiting for 
+Waiting for info 
