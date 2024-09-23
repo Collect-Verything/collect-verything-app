@@ -16,32 +16,21 @@ datasource db {
 model Role {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  // users     RolesOnUsers[]
+  users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-//
-// model User {
-//   id        Int            @id @default(autoincrement())
-//   firstname String
-//   lastname  String
-//   roles     RolesOnUsers[]
-//   email     String         @unique
-//   password  String
-//   birthDate DateTime
-//   gender    String
-//   phone     String
-//   createdAt DateTime       @default(now())
-//   updatedAt DateTime       @updatedAt
-// }
-//
-// model RolesOnUsers {
-//   role       Role     @relation(fields: [roleId], references: [id])
-//   roleId     Int
-//   user       User     @relation(fields: [userId], references: [id])
-//   userId     Int
-//   assignedAt DateTime @default(now())
-//   assignedBy String
-//
-//   @@id([roleId, userId])
-// }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstname String
+  lastname  String
+  roles     Role[]
+  email     String   @unique
+  password  String
+  birthDate DateTime
+  gender    String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
