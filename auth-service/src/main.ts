@@ -7,7 +7,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
       .setTitle('Collect & Verithing')
-      .setDescription('CMS shop')
+      .setDescription('CMS shop application')
       .setVersion('0.1')
       .build();
 
