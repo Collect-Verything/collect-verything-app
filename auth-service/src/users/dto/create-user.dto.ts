@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsDateString,
   IsEmail,
   IsNotEmpty,
@@ -52,4 +53,8 @@ export class CreateUserDto {
   @MinLength(12)
   @ApiProperty()
   phone: string;
+
+  @ApiProperty({ type: [Number] }) // Liste d'ID de rôles
+  @IsArray()
+  roles: number[];
 }

@@ -7,8 +7,17 @@ import {PrismaService} from "../prisma/prisma.service";
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  create(createUserDto: CreateUserDto) {
-    return this.prisma.user.create({ data: createUserDto });
+  async create(createUserDto: CreateUserDto) {
+    const { roles, ...userData } = createUserDto;
+
+    return this.prisma.user.create({
+      data: {
+        ...userData,
+        roles: {
+          connect: roles.map((roleId) => ({ id: roleId })),
+        },
+      },
+    });
   }
 
   findAll() {
@@ -16,11 +25,23 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } });
+    return this.prisma.user.findUnique({ where: { id }, include:{roles: true} });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.prisma.user.update({ where: { id }, data: updateUserDto });
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const { roles, ...userData } = updateUserDto;
+
+    return this.prisma.user.update({
+      where: { id },
+      data: {
+        ...userData,
+        roles: roles
+            ? {
+              set: roles.map((roleId) => ({ id: roleId })),
+            }
+            : undefined,
+      },
+    });
   }
 
   remove(id: number) {

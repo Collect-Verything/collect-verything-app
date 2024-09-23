@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 import {ApiProperty} from "@nestjs/swagger";
 import {Exclude} from "class-transformer";
+import {RoleEntity} from "../../roles/entities/role.entity";
 
 export class UserEntity implements User {
   constructor(partial: Partial<UserEntity>) {
@@ -35,4 +36,5 @@ export class UserEntity implements User {
 
   @ApiProperty()
   updatedAt: Date;
+
 }
