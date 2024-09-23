@@ -54,7 +54,7 @@ export class CreateUserDto {
   @ApiProperty()
   phone: string;
 
-  @ApiProperty({ type: [Number] }) // Liste d'ID de rôles
+  @ApiProperty({ type: [Number] })
   @IsArray()
   roles: number[];
 }
