@@ -6,6 +6,12 @@ import * as bcrypt from 'bcrypt';
 
 export const roundsOfHashing = 10;
 
+/*
+* Un user super admin ne peut que etre super admin
+* Un user de type USER ne peut que etre super USER
+* Un user de type Metier  peut avoir plusieur metiers
+* */
+
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
