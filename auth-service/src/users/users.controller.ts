@@ -12,8 +12,6 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {ApiCreatedResponse, ApiOkResponse, ApiTags} from "@nestjs/swagger";
-import {UserEntity} from "./entities/user.entity";
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -23,6 +21,10 @@ import {
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+/*
+ * Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre
+ * Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
+ * */
 
 @Controller('users')
 @ApiTags('users')
