@@ -1,8 +1,19 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
+const roundsOfHashing = 10;
+
+
 
 async function main() {
+
+const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
+const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
+const passwordInvoice = await bcrypt.hash('invoiceinvoice', roundsOfHashing);
+const passwordInvoiceSupport = await bcrypt.hash('invoicesupport', roundsOfHashing);
+
+
   const roleUser = await prisma.role.upsert({
     where: { name: 'USER' },
     update: {},
@@ -37,12 +48,12 @@ async function main() {
 
   const userSuperAdmin = await prisma.user.upsert({
     where: { email: "admin@admin.admin" },
-    update: {},
+    update: {password: passwordSuperAdmin,},
     create: {
       firstname: 'Julien',
       lastname: 'Cansell',
       email: "admin@admin.admin",
-      password: "adminadmin",
+      password: passwordSuperAdmin,
       birthDate: new Date('1992-06-10'),
       gender: "MR",
       phone: "0606060606",
@@ -54,12 +65,12 @@ async function main() {
 
   const userSimple = await prisma.user.upsert({
     where: { email: "user@user.user" },
-    update: {},
+    update: {password: passwordSimple,},
     create: {
       firstname: 'Brice',
       lastname: 'Bite',
       email: "user@user.user",
-      password: "useruser",
+      password: passwordSimple,
       birthDate: new Date('1992-06-10'),
       gender: "MR",
       phone: "0606060606",
@@ -71,12 +82,12 @@ async function main() {
 
   const userInvoice = await prisma.user.upsert({
     where: { email: "invoice@invoice.invoice" },
-    update: {},
+    update: {password: passwordInvoice,},
     create: {
       firstname: 'Thomas',
       lastname: 'Titoon',
       email: "invoice@invoice.invoice",
-      password: "invoiceinvoice",
+      password: passwordInvoice,
       birthDate: new Date('1992-06-10'),
       gender: "MR",
       phone: "0606060606",
@@ -88,12 +99,12 @@ async function main() {
 
   const userInvoiceSupport = await prisma.user.upsert({
     where: { email: "invoicesupport@invoicesupport.invoicesupport" },
-    update: {},
+    update: {password: passwordInvoiceSupport,},
     create: {
       firstname: 'Isaac',
       lastname: 'Lachnouff',
       email: "invoicesupport@invoicesupport.invoicesupport",
-      password: "invoicesupport",
+      password: passwordInvoiceSupport,
       birthDate: new Date('1992-06-10'),
       gender: "MR",
       phone: "0606060606",
