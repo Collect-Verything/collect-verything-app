@@ -20,10 +20,12 @@ import {
 } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from '../auth/guards/authentication/jwt-auth.guard';
+import { JwtSuperGuard } from '../auth/guards/super-admin/jwt-super-admin.guard';
 
 /*
- * Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre
- * Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
+ * TODO: Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre
+ * TODO: Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
+ * TODO: Creer un end point register pour les client avec assignation automatique du role USER
  * */
 
 @Controller('users')
@@ -33,6 +35,7 @@ export class UsersController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   async create(@Body() createUserDto: CreateUserDto) {
@@ -41,6 +44,7 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity, isArray: true })
   async findAll() {
@@ -50,6 +54,7 @@ export class UsersController {
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async findOne(@Param('id', ParseIntPipe) id: number) {
@@ -58,6 +63,7 @@ export class UsersController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   async update(
@@ -69,6 +75,7 @@ export class UsersController {
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param('id', ParseIntPipe) id: number) {
