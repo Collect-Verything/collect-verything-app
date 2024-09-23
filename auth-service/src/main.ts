@@ -13,6 +13,7 @@ async function bootstrap() {
       .setTitle('Collect & Verithing')
       .setDescription('CMS shop application')
       .setVersion('0.1')
+      .addBearerAuth()
       .build();
 
   const document = SwaggerModule.createDocument(app, config);
