@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import {UsersModule} from "../users/users.module";
+import {JwtStrategy} from "./jwt.strategy";
 
 export const jwtSecret = 'CollectVerythingSecret';
 
@@ -15,8 +17,9 @@ export const jwtSecret = 'CollectVerythingSecret';
       secret: jwtSecret,
       signOptions: { expiresIn: '5m' },
     }),
+    UsersModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}
