@@ -16,6 +16,8 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./common/styles/theme";
 import { ResourcePage } from "./shop/ressource";
 import { AdminDashboard } from "./admin/dashboard";
+import { Provider } from "react-redux";
+import { store } from "./features/store";
 
 const router = createBrowserRouter([
     {
@@ -69,9 +71,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ThemeProvider theme={theme}>
-            <RouterProvider router={router} />
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </Provider>
     </LocalizationProvider>,
 );
 
