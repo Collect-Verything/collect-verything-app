@@ -11,6 +11,6 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
     {
-        "rules": { "react/no-unescaped-entities": 0 }
+        // "rules": { "react/no-unescaped-entities": 0 }
     },
 ];
