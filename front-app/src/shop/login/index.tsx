@@ -2,12 +2,11 @@ import Grid from "@mui/material/Grid2";
 import { TextField, Typography } from "@mui/material";
 import { ButtonRounded } from "../../common/component/buttons";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
-import { loginRequest } from "./request";
 import Alert from "@mui/material/Alert";
-import { throwErrorResponse } from "../../common/utils/web";
+import { login, useAppDispatch } from "../../features/authentication-slice";
 
 export interface LoginProps {
     email: string;
@@ -18,18 +17,17 @@ export const LoginPage = () => {
     const [authLogin, setAuthLogin] = useState<LoginProps>({ email: "", password: "" });
     const [errorLogin, setErrorLogin] = useState(false);
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const handleLogin = () => {
         setErrorLogin(false);
-        loginRequest(authLogin)
-            .then(throwErrorResponse)
-            .then((data) => {
-                const accessToken = data.accessToken;
-                console.log("Access Token:", accessToken);
-            })
-            .catch((error) => {
+        dispatch(login(authLogin))
+            .catch((error: Error) => {
                 setErrorLogin(true);
                 console.error("Error during login:", error);
-            });
+            })
+            .then(() => navigate("/"));
     };
 
     return (
