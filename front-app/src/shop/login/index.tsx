@@ -1,14 +1,44 @@
 import Grid from "@mui/material/Grid2";
 import { TextField, Typography } from "@mui/material";
 import { ButtonRounded } from "../../common/component/buttons";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
+import { loginRequest } from "./request";
+import Alert from "@mui/material/Alert";
+import { throwErrorResponse } from "../../common/utils/web";
+
+export interface LoginProps {
+    email: string;
+    password: string;
+}
 
 export const LoginPage = () => {
+    const [authLogin, setAuthLogin] = useState<LoginProps>({ email: "", password: "" });
+    const [errorLogin, setErrorLogin] = useState(false);
+
+    const handleLogin = () => {
+        setErrorLogin(false);
+        loginRequest(authLogin)
+            .then(throwErrorResponse)
+            .then((data) => {
+                const accessToken = data.accessToken;
+                console.log("Access Token:", accessToken);
+            })
+            .catch((error) => {
+                setErrorLogin(true);
+                console.error("Error during login:", error);
+            });
+    };
+
     return (
         <Grid>
+            {errorLogin && (
+                <Alert sx={{ width: "99vw", margin: "auto", marginTop: "1vh" }} severity="error">
+                    An error occurred with your request.
+                </Alert>
+            )}
             <Grid container justifyContent="space-between" padding={1}>
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
@@ -34,6 +64,7 @@ export const LoginPage = () => {
                 </Grid>
                 <Grid>
                     <TextField
+                        onChange={(event) => setAuthLogin({ ...authLogin, email: event.target.value })}
                         InputProps={{
                             style: { borderRadius: "25px", width: 300 },
                         }}
@@ -44,6 +75,7 @@ export const LoginPage = () => {
                 </Grid>
                 <Grid>
                     <TextField
+                        onChange={(event) => setAuthLogin({ ...authLogin, password: event.target.value })}
                         InputProps={{
                             style: { borderRadius: "25px", width: 300 },
                         }}
@@ -54,7 +86,7 @@ export const LoginPage = () => {
                     />
                 </Grid>
                 <Grid>
-                    <ButtonRounded label="Login" />
+                    <ButtonRounded label="Login" handleFx={handleLogin} />
                 </Grid>
                 <Grid textAlign="center" mt={3}>
                     <Link style={{ textDecoration: "none", color: "black" }} to="forgot-password">
