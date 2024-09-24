@@ -15,6 +15,7 @@ import { Basket } from "./shop/basket";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./common/styles/theme";
 import { ResourcePage } from "./shop/ressource";
+import { AdminDashboard } from "./admin/dashboard";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
                 <Link to="/">Go Home</Link>
             </div>
         ),
+    },
+    {
+        path: "Admin",
+        element: <AdminDashboard />,
     },
     {
         path: "Login",

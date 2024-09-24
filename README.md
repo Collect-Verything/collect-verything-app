@@ -134,17 +134,9 @@ It is then necessary to install the dependencies of each application/microservic
 npm run install-all
   ```
   
-### Data seed 
+### Auth service
 
-1. Ajust .env file
-   ```sh
-   ```
-2. Create database if needed
-    ```sql
-    ```
-3. Seed entities and tables
-    ```shell
-    ```
+To lunch only the auth service, read the [Auth Read Me][Auth Read.Me]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -212,4 +204,4 @@ Ishak - Link: [Github](https://github.com/Ishak-rav)
 [Mui]: https://img.shields.io/badge/Mui-000000?style=for-the-badge&logo=Mui&logoColor=3d4ee3
 [Mui-url]: https://www.npmjs.com/
 
-
+[Auth Read.Me]: auth-service/README.md
