@@ -90,6 +90,13 @@ export const LoginPage = () => {
                     <Link style={{ textDecoration: "none", color: "black" }} to="forgot-password">
                         Mot de passe oublié ?
                     </Link>
+                    <Alert sx={{ width: "60vw", margin: "auto", marginTop: "1vh", textAlign: 'center' }} severity="info">
+                        Log as :<br/>
+                        - USER,  email // user@user.user // password: useruser .<br />
+                        - SUPER_ADMIN //  email: admin@admin.admin // password: adminadmin .<br />
+                        - JOB,  email // invoice@invoice.invoice // password: invoiceinvoice . <br />
+                        - Double JOB //  email : invoicesupport@invoicesupport.invoicesupport // password: invoicesupport .
+                    </Alert>
                 </Grid>
             </Grid>
         </Grid>
