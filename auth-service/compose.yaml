@@ -1,29 +1,27 @@
-version: '3.7'
-
+version: '3.8'
 services:
-
-  authentication:
-    container_name: auth-service
+  app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: nestjs-app
+    environment:
+      - DATABASE_URL=mysql://root:password@mysql:3306/collect-verything
     ports:
       - "3001:3001"
-    volumes:
-      - ./:/usr/src/app
-    command: npm run start:prod
-    restart: unless-stopped
+    depends_on:
+      - mysql
 
-  postgres:
-    image: postgres:13.5
-    restart: always
+  mysql:
+    image: mysql:8
+    container_name: mysql
     environment:
-      - POSTGRES_USER=myuser
-      - POSTGRES_PASSWORD=mypassword
-    volumes:
-      - postgres:/var/lib/postgresql/data
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: collect-verything
     ports:
-      - '5432:5432'
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
 
 volumes:
-  postgres:
+  mysql-data:
