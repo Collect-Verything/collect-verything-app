@@ -14,6 +14,8 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import { UserItemsDashboard } from "./items";
 
+const GAP_MENU_ITEMS_USER = 8;
+
 export const SideBar = () => {
     const [sideBar, setSideBar] = useState(true);
 
@@ -22,32 +24,37 @@ export const SideBar = () => {
     };
 
     return (
-        <Grid2 width={sideBar ? "20vw" : "5vw"} height="100vh" sx={{ backgroundColor: PRIMARY_COLOR }}>
-            <Grid pl={sideBar ? 15 : 0}>
+        <Grid2
+            width={sideBar ? "20vw" : "5vw"}
+            height="100vh"
+            sx={{ backgroundColor: PRIMARY_COLOR, boxShadow: `2px 3px 19px #bababa`, transition: "0.3s" }}
+            container
+            flexDirection="column"
+            justifyContent="space-between"
+        >
+            <Grid container alignContent="center" justifyContent="center">
                 <Link to="/">
                     <img
-                        style={{ paddingTop: 20 }}
-                        width={80}
+                        style={{ paddingTop: 20, transition: "0.3s" }}
+                        width={sideBar ? "70" : "50"}
                         src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`}
                         alt="Favicon"
                     />
                 </Link>
             </Grid>
 
-            {sideBar ? (
-                <Grid pl={18}>
-                    <ArrowBackIosNewIcon onClick={handleSideBar} />
-                </Grid>
-            ) : (
-                <Grid pl={3}>
-                    <ArrowForwardIosIcon onClick={handleSideBar} />
-                </Grid>
-            )}
-
             {/*SIDE MENU : SIMPLE USER */}
             {/*IF ROLE === USER */}
+            {/*TODO: Upgrad l'apparition du text */}
             {sideBar ? (
-                <Grid2 display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                <Grid2
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="left"
+                    ml={6}
+                    gap={GAP_MENU_ITEMS_USER}
+                >
                     {UserItemsDashboard.map((item) => (
                         <ButtonMenuDashboard url={item.url} key={item.label}>
                             {item.icon}
@@ -56,7 +63,13 @@ export const SideBar = () => {
                     ))}
                 </Grid2>
             ) : (
-                <Grid2 display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                <Grid2
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={GAP_MENU_ITEMS_USER}
+                >
                     <DashboardIcon />
                     <PersonIcon />
                     <PointOfSaleIcon />
@@ -64,6 +77,16 @@ export const SideBar = () => {
                     <SupportAgentIcon />
                     <ImportContactsIcon />
                 </Grid2>
+            )}
+
+            {sideBar ? (
+                <Grid container alignContent="center" justifyContent="center" mb={4}>
+                    <ArrowBackIosNewIcon onClick={handleSideBar} />
+                </Grid>
+            ) : (
+                <Grid container alignContent="center" justifyContent="center" mb={4}>
+                    <ArrowForwardIosIcon onClick={handleSideBar} />
+                </Grid>
             )}
         </Grid2>
     );
