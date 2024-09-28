@@ -58,7 +58,7 @@ export const SideBar = () => {
                     </ButtonMenuDashboard>
                     <ButtonMenuDashboard>
                         <DisplaySettingsIcon />
-                        <Typography>Parametrage solution</Typography>
+                        <Typography>Configuration solution</Typography>
                     </ButtonMenuDashboard>
                     <ButtonMenuDashboard>
                         <SupportAgentIcon />

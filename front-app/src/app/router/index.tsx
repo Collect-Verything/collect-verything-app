@@ -10,6 +10,11 @@ import { RegisterPage } from "../../shop/register";
 import React from "react";
 import { MainLayout } from "../../shop/main-layout";
 import { AuthMainLayout } from "../../auth/main-layout";
+import { Account } from "../../auth/account";
+import { ConfigProducts } from "../../auth/config-products";
+import { Documentation } from "../../auth/documentation";
+import { Facturation } from "../../auth/facturation";
+import { Support } from "../../auth/support";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +59,26 @@ export const router = createBrowserRouter([
             {
                 path: "",
                 element: <AuthDashboard />,
+            },
+            {
+                path: "account",
+                element: <Account />,
+            },
+            {
+                path: "facturation",
+                element: <Facturation />,
+            },
+            {
+                path: "config",
+                element: <ConfigProducts />,
+            },
+            {
+                path: "support",
+                element: <Support />,
+            },
+            {
+                path: "doc",
+                element: <Documentation />,
             },
         ],
     },
