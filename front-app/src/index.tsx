@@ -1,83 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./app/app/index.css";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
-import { HomePage } from "./shop/home";
-import { MainLayout } from "./common/component/main-layout";
-import { SolutionPage } from "./shop/solution";
-import { Tarification } from "./shop/tarification";
-import { LoginPage } from "./shop/login";
-import { RegisterPage } from "./shop/register";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Basket } from "./shop/basket";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./common/styles/theme";
-import { ResourcePage } from "./shop/ressource";
-import { AdminDashboard } from "./admin/dashboard";
-import { Provider } from "react-redux";
-import { store } from "./features/store";
+import { App } from "./app/app";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainLayout />,
-        children: [
-            {
-                path: "",
-                element: <HomePage />,
-            },
-            {
-                path: "Solution",
-                element: <SolutionPage />,
-            },
-            {
-                path: "Tarification",
-                element: <Tarification />,
-            },
-            {
-                path: "Ressource",
-                element: <ResourcePage />,
-            },
-            {
-                path: "Basket",
-                element: <Basket />,
-            },
-        ],
-    },
-    {
-        path: "test",
-        element: (
-            <div>
-                <h1>Hello TEST World</h1>
-                <Link to="/">Go Home</Link>
-            </div>
-        ),
-    },
-    {
-        path: "Admin",
-        element: <AdminDashboard />,
-    },
-    {
-        path: "Login",
-        element: <LoginPage />,
-    },
-    {
-        path: "Register",
-        element: <RegisterPage />,
-    },
-]);
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <RouterProvider router={router} />
-            </ThemeProvider>
-        </Provider>
-    </LocalizationProvider>,
-);
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

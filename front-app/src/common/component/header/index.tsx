@@ -22,7 +22,7 @@ export const Header = () => {
         <Grid container justifyContent="space-between" alignItems="center">
             <Grid pl={10}>
                 <Link to="/">
-                    <img width={80} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon" />
+                    <img style={{paddingTop: 20}} width={80} src={`${process.env.PUBLIC_URL}/assets/logo/logo-header.png`} alt="Favicon" />
                 </Link>
             </Grid>
             <Grid container spacing={10} pl={10}>
