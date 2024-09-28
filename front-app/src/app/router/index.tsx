@@ -15,6 +15,9 @@ import { Documentation } from "../../auth/documentation";
 import { Facturation } from "../../auth/facturation";
 import { Support } from "../../auth/support";
 import { AuthMainLayout } from "../../auth/main-layout";
+import {Job} from "../../auth/admin/job";
+import {Customer} from "../../auth/admin/customer";
+import {Stats} from "../../auth/admin/stats";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +55,7 @@ export const router = createBrowserRouter([
             </div>
         ),
     },
+    //  TODO : Implementer un USER Guard
     {
         path: "Auth",
         element: <AuthMainLayout />,
@@ -79,6 +83,18 @@ export const router = createBrowserRouter([
             {
                 path: "doc",
                 element: <Documentation />,
+            },
+            // TODO : Creer un SUper ADmin guard
+            // Next Is For SUPER_ADMIN ONLY
+            {
+                path: "job",
+                element: <Job />,
+            },            {
+                path: "customer",
+                element: <Customer />,
+            },           {
+                path: "stats",
+                element: <Stats />,
             },
         ],
     },
