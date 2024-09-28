@@ -6,12 +6,6 @@ import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { ButtonMenuDashboard } from "../../common/component/buttons";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonIcon from "@mui/icons-material/Person";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import { UserItemsDashboard } from "./items";
 
 const GAP_MENU_ITEMS_USER = 8;
@@ -70,12 +64,11 @@ export const SideBar = () => {
                     alignItems="center"
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    <DashboardIcon />
-                    <PersonIcon />
-                    <PointOfSaleIcon />
-                    <DisplaySettingsIcon />
-                    <SupportAgentIcon />
-                    <ImportContactsIcon />
+                    {UserItemsDashboard.map((item) => (
+                        <ButtonMenuDashboard url={item.url} key={item.label}>
+                            {item.icon}
+                        </ButtonMenuDashboard>
+                    ))}
                 </Grid2>
             )}
 
