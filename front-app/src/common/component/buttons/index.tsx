@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { noOp } from "../../utils/tools";
+import { noOp } from "../../utils/void";
 
 interface ButtonRoundedProps {
     label: string;
