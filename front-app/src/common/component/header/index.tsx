@@ -1,15 +1,22 @@
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { ButtonRounded } from "../buttons";
 import { websitePageItems, WebsitePageItemsProps } from "./list";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
+import { Badge } from "../badge";
+import {checkToken, useAppDispatch} from "../../../features/authentication-slice";
 
 export const Header = () => {
     // eslint-disable-next-line
     const { role } = useSelector((store: any) => store.authenticate);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(checkToken());
+    }, []);
 
     return (
         <Grid container justifyContent="space-between" alignItems="center">
@@ -30,7 +37,7 @@ export const Header = () => {
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">
                 {role ? (
-                    "badge"
+                    <Badge />
                 ) : (
                     <>
                         <Grid>

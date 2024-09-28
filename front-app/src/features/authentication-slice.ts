@@ -37,9 +37,18 @@ export const login = (authLogin: LoginProps) => async (dispatch: AppDispatch) =>
         const data = await throwErrorResponse(res);
 
         dispatch(authenticateSlice.actions.saveToken(data.accessToken));
+        localStorage.setItem("token", data.accessToken);
+
         // eslint-disable-next-line
     } catch (error: any) {
         throw new Error(`Login failed! ${error.message}`);
+    }
+};
+
+export const checkToken = () => async (dispatch: AppDispatch) => {
+    const token = await localStorage.getItem("token");
+    if (token) {
+        dispatch(authenticateSlice.actions.saveToken(token));
     }
 };
 
