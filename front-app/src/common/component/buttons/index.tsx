@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, Grid2 } from "@mui/material";
 import { noOp } from "../../utils/void";
+import { useNavigate } from "react-router-dom";
 
 interface ButtonRoundedProps {
     label: string;
@@ -77,5 +78,30 @@ export const ButtonRoundedSized = ({
         >
             {label}
         </Button>
+    );
+};
+
+interface ButtonMenuDashboardProps {
+    children: React.ReactNode;
+    url: string;
+}
+
+export const ButtonMenuDashboard = ({ children, url }: ButtonMenuDashboardProps) => {
+    const navigate = useNavigate();
+
+    return (
+        <Grid2
+            container
+            spacing={2}
+            onClick={() => navigate(`${url}`)}
+            sx={{
+                "&:hover": {
+                    cursor: "pointer",
+                    color: "gray",
+                },
+            }}
+        >
+            {children}
+        </Grid2>
     );
 };

@@ -4,11 +4,17 @@ import { SolutionPage } from "../../shop/solution";
 import { Tarification } from "../../shop/tarification";
 import { ResourcePage } from "../../shop/ressource";
 import { Basket } from "../../shop/basket";
-import { AdminDashboard } from "../../admin/dashboard";
+import { AuthDashboard } from "../../auth/dashboard";
 import { LoginPage } from "../../shop/login";
 import { RegisterPage } from "../../shop/register";
 import React from "react";
-import {MainLayout} from "../../common/component/main-layout";
+import { MainLayout } from "../../shop/main-layout";
+import { Account } from "../../auth/account";
+import { ConfigProducts } from "../../auth/config-products";
+import { Documentation } from "../../auth/documentation";
+import { Facturation } from "../../auth/facturation";
+import { Support } from "../../auth/support";
+import { AuthMainLayout } from "../../auth/main-layout";
 
 export const router = createBrowserRouter([
     {
@@ -38,17 +44,43 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        path: "test",
+        path: "*",
         element: (
             <div>
-                <h1>Hello TEST World</h1>
+                <h1>Error 404</h1>
                 <Link to="/">Go Home</Link>
             </div>
         ),
     },
     {
-        path: "Admin",
-        element: <AdminDashboard />,
+        path: "Auth",
+        element: <AuthMainLayout />,
+        children: [
+            {
+                path: "",
+                element: <AuthDashboard />,
+            },
+            {
+                path: "account",
+                element: <Account />,
+            },
+            {
+                path: "facturation",
+                element: <Facturation />,
+            },
+            {
+                path: "config",
+                element: <ConfigProducts />,
+            },
+            {
+                path: "support",
+                element: <Support />,
+            },
+            {
+                path: "doc",
+                element: <Documentation />,
+            },
+        ],
     },
     {
         path: "Login",

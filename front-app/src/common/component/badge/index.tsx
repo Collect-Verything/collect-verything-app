@@ -1,12 +1,14 @@
 import { Avatar, Box, IconButton, Menu, Tooltip, Typography } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
-import {logout, useAppDispatch} from "../../../features/authentication-slice";
+import { logout, useAppDispatch } from "../../../features/authentication-slice";
+import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const Badge = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -14,9 +16,18 @@ export const Badge = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseUserMenu = (arg:string) => {
-        if(arg === "Logout"){
+    const handleCloseUserMenu = (arg: string) => {
+        if (arg === "Logout") {
             dispatch(logout());
+        }
+        if (arg === "Dashboard") {
+            navigate("/auth");
+        }
+        if (arg === "Profile") {
+            navigate("/auth");
+        }
+        if (arg === "Account") {
+            navigate("/auth");
         }
         setAnchorElUser(null);
     };
@@ -45,7 +56,7 @@ export const Badge = () => {
                 onClose={handleCloseUserMenu}
             >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting)}>
+                    <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                         <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
                     </MenuItem>
                 ))}
