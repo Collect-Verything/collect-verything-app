@@ -9,12 +9,12 @@ import { LoginPage } from "../../shop/login";
 import { RegisterPage } from "../../shop/register";
 import React from "react";
 import { MainLayout } from "../../shop/main-layout";
-import { AuthMainLayout } from "../../auth/main-layout";
 import { Account } from "../../auth/account";
 import { ConfigProducts } from "../../auth/config-products";
 import { Documentation } from "../../auth/documentation";
 import { Facturation } from "../../auth/facturation";
 import { Support } from "../../auth/support";
+import { AuthMainLayout } from "../../auth/main-layout";
 
 export const router = createBrowserRouter([
     {
