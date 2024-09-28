@@ -8,7 +8,8 @@ import { AuthDashboard } from "../../auth/dashboard";
 import { LoginPage } from "../../shop/login";
 import { RegisterPage } from "../../shop/register";
 import React from "react";
-import {MainLayout} from "../../common/component/main-layout";
+import { MainLayout } from "../../shop/main-layout";
+import { AuthMainLayout } from "../../auth/main-layout";
 
 export const router = createBrowserRouter([
     {
@@ -48,7 +49,13 @@ export const router = createBrowserRouter([
     },
     {
         path: "Auth",
-        element: <AuthDashboard />,
+        element: <AuthMainLayout />,
+        children: [
+            {
+                path: "",
+                element: <AuthDashboard />,
+            },
+        ],
     },
     {
         path: "Login",
