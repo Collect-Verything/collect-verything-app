@@ -1,5 +1,5 @@
 import React from "react";
 
-export const AdminDashboard = () => {
+export const AuthDashboard = () => {
     return <p>admin</p>;
 };

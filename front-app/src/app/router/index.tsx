@@ -4,7 +4,7 @@ import { SolutionPage } from "../../shop/solution";
 import { Tarification } from "../../shop/tarification";
 import { ResourcePage } from "../../shop/ressource";
 import { Basket } from "../../shop/basket";
-import { AdminDashboard } from "../../admin/dashboard";
+import { AuthDashboard } from "../../auth/dashboard";
 import { LoginPage } from "../../shop/login";
 import { RegisterPage } from "../../shop/register";
 import React from "react";
@@ -38,17 +38,17 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        path: "test",
+        path: "*",
         element: (
             <div>
-                <h1>Hello TEST World</h1>
+                <h1>Error 404</h1>
                 <Link to="/">Go Home</Link>
             </div>
         ),
     },
     {
-        path: "Admin",
-        element: <AdminDashboard />,
+        path: "Auth",
+        element: <AuthDashboard />,
     },
     {
         path: "Login",
