@@ -9,6 +9,9 @@ import { UserItemsDashboardType } from "./types";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import { ROLES } from "../../common/const";
+import { ButtonMenuDashboard } from "../../common/component/buttons";
+import { Typography } from "@mui/material";
 
 export const UserItemsDashboard: UserItemsDashboardType[] = [
     {
@@ -85,3 +88,58 @@ export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
         url: "doc",
     },
 ];
+
+
+export const InvoiceItemsDashboard = SuperAdminItemsDashboard.filter(
+    (item) => item.url !== "support" && item.url !== "customer" && item.url !== "job",
+);
+export const SupportItemsDashboard = SuperAdminItemsDashboard.filter(
+    (item) => item.url !== "facturation" && item.url !== "customer" && item.url !== "job",
+);
+
+interface DisplayMenuDependingJobProps {
+    role: ROLES;
+    option: "with-label" | "only-icon";
+}
+
+export const DisplayMenuDependingJob = ({ role, option }: DisplayMenuDependingJobProps) => {
+    let listItemsMenu;
+    if (role === ROLES.SUPER_ADMIN) {
+        listItemsMenu = SuperAdminItemsDashboard;
+    }
+    if (role === ROLES.INVOICE) {
+        listItemsMenu = InvoiceItemsDashboard;
+    }
+    if (role === ROLES.SUPPORT) {
+        listItemsMenu = SupportItemsDashboard;
+    }
+    if (role === ROLES.USER) {
+        listItemsMenu = UserItemsDashboard;
+    }
+
+    if (listItemsMenu && option === "only-icon") {
+        return (
+            <>
+                {listItemsMenu.map((item) => (
+                    <ButtonMenuDashboard url={item.url} key={item.label}>
+                        {item.icon}
+                    </ButtonMenuDashboard>
+                ))}
+            </>
+        );
+    }
+    if (listItemsMenu && option === "with-label") {
+        return (
+            <>
+                {listItemsMenu.map((item) => (
+                    <ButtonMenuDashboard url={item.url} key={item.label}>
+                        {item.icon}
+                        <Typography>{item.label}</Typography>
+                    </ButtonMenuDashboard>
+                ))}
+            </>
+        );
+    }
+
+    return <p>Role undefined</p>;
+};
