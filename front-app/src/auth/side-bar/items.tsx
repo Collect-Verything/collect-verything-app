@@ -89,6 +89,9 @@ export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
     },
 ];
 
+/*
+ * Chaque job possede une mission particuliere mais possede a un accées a la documentation pour creer de la ressource selon les problemtaique metiers recontré
+ * */
 
 export const InvoiceItemsDashboard = SuperAdminItemsDashboard.filter(
     (item) => item.url !== "support" && item.url !== "customer" && item.url !== "job",
