@@ -1,21 +1,30 @@
-import React, { useState } from "react";
-import { Grid2, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid2 } from "@mui/material";
 import { PRIMARY_COLOR } from "../../common/styles/theme";
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { ButtonMenuDashboard } from "../../common/component/buttons";
-import { UserItemsDashboard } from "./items";
+import { DisplayMenuDependingJob } from "./items";
+import { useSelector } from "react-redux";
+import { checkToken, useAppDispatch } from "../../features/authentication-slice";
 
 const GAP_MENU_ITEMS_USER = 8;
 
 export const SideBar = () => {
     const [sideBar, setSideBar] = useState(true);
+    const dispatch = useAppDispatch();
+
+    // eslint-disable-next-line
+    const { role } = useSelector((store: any) => store.authenticate);
 
     const handleSideBar = () => {
         setSideBar(!sideBar);
     };
+
+    useEffect(() => {
+        dispatch(checkToken());
+    }, []);
 
     return (
         <Grid2
@@ -37,9 +46,7 @@ export const SideBar = () => {
                 </Link>
             </Grid>
 
-            {/*SIDE MENU : SIMPLE USER */}
-            {/*IF ROLE === USER */}
-            {/*TODO: Upgrad l'apparition du text */}
+            {/*TODO: Upgrad l'apparition du text a l'ouverture fermeture de la side */}
             {sideBar ? (
                 <Grid2
                     display="flex"
@@ -49,12 +56,7 @@ export const SideBar = () => {
                     ml={6}
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    {UserItemsDashboard.map((item) => (
-                        <ButtonMenuDashboard url={item.url} key={item.label}>
-                            {item.icon}
-                            <Typography>{item.label}</Typography>
-                        </ButtonMenuDashboard>
-                    ))}
+                    <DisplayMenuDependingJob role={role} option="with-label" />
                 </Grid2>
             ) : (
                 <Grid2
@@ -64,11 +66,7 @@ export const SideBar = () => {
                     alignItems="center"
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    {UserItemsDashboard.map((item) => (
-                        <ButtonMenuDashboard url={item.url} key={item.label}>
-                            {item.icon}
-                        </ButtonMenuDashboard>
-                    ))}
+                    <DisplayMenuDependingJob role={role} option="only-icon" />
                 </Grid2>
             )}
 
