@@ -93,12 +93,67 @@ export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
  * Chaque job possede une mission particuliere mais possede a un accées a la documentation pour creer de la ressource selon les problemtaique metiers recontré
  * */
 
-export const InvoiceItemsDashboard = SuperAdminItemsDashboard.filter(
-    (item) => item.url !== "support" && item.url !== "customer" && item.url !== "job",
-);
-export const SupportItemsDashboard = SuperAdminItemsDashboard.filter(
-    (item) => item.url !== "facturation" && item.url !== "customer" && item.url !== "job",
-);
+export const InvoiceItemsDashboard: UserItemsDashboardType[] = [
+    {
+        icon: <DashboardIcon />,
+        label: "Tableau de bord",
+        url: "",
+    },
+    {
+        icon: <PersonIcon />,
+        label: "Compte",
+        url: "account",
+    },
+    {
+        icon: <PointOfSaleIcon />,
+        label: "Facturation",
+        url: "facturation",
+    },
+    {
+        icon: <SignalCellularAltIcon />,
+        label: "Statistique",
+        url: "stats",
+    },
+    {
+        icon: <ImportContactsIcon />,
+        label: "Documentation",
+        url: "doc",
+    },
+];
+
+export const SupportItemsDashboard: UserItemsDashboardType[] = [
+    {
+        icon: <DashboardIcon />,
+        label: "Tableau de bord",
+        url: "",
+    },
+    {
+        icon: <PersonIcon />,
+        label: "Compte",
+        url: "account",
+    },
+    {
+        icon: <SignalCellularAltIcon />,
+        label: "Statistique",
+        url: "stats",
+    },
+    {
+        icon: <SupportAgentIcon />,
+        label: "Service client",
+        url: "support",
+    },
+    {
+        icon: <ImportContactsIcon />,
+        label: "Documentation",
+        url: "doc",
+    },
+];
+// export const InvoiceItemsDashboard = SuperAdminItemsDashboard.filter(
+//     (item) => item.url !== "support" && item.url !== "customer" && item.url !== "job",
+// );
+// export const SupportItemsDashboard = SuperAdminItemsDashboard.filter(
+//     (item) => item.url !== "facturation" && item.url !== "customer" && item.url !== "job",
+// );
 
 interface DisplayMenuDependingJobProps {
     role: ROLES;
