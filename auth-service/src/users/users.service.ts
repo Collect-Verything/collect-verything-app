@@ -37,6 +37,18 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
+  findAllUserJob() {
+    return this.prisma.user.findMany({
+      where: {
+        roles: {
+          none: {
+            name: "USER"
+          }
+        }
+      }
+    });
+  }
+
   findOne(id: number) {
     return this.prisma.user.findUnique({
       where: { id },

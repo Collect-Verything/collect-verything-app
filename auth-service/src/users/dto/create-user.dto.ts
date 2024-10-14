@@ -54,6 +54,8 @@ export class CreateUserDto {
   @ApiProperty()
   phone: string;
 
+  // TODO: Penser a passer les roles en non list
+
   @ApiProperty({ type: [Number] })
   @IsArray()
   roles: number[];

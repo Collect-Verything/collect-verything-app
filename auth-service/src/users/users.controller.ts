@@ -52,6 +52,16 @@ export class UsersController {
     return users.map((user) => new UserEntity(user));
   }
 
+  @Get('jobs')
+  // @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtSuperGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: UserEntity, isArray: true })
+  async findAllByJob() {
+    const users = await this.usersService.findAllUserJob();
+    return users.map((user) => new UserEntity(user));
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @UseGuards(JwtSuperGuard)
