@@ -55,7 +55,7 @@ export const CheckUserJob = (props: DialogUserJobProps) => {
                         <Typography color="secondary" mt={2}>
                             ID :
                         </Typography>
-                        {row.id}
+                        {row.userId}
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>

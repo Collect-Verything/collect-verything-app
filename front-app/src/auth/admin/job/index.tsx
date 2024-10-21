@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columns } from "./grid-definition";
 
+//  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas ce supprimer , le mettre en surbrillance dans le data row
+
 export const Job = () => {
     const [rows, setRows] = useState<User[]>([]);
 

@@ -84,8 +84,8 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(JwtSuperGuard)
+  // @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param('id', ParseIntPipe) id: number) {

@@ -10,6 +10,16 @@ export const apiPost = (url: string, method: "POST" | "PATCH" | "GET" | "DELETE"
     });
 };
 
+export const apiDelete = (url: string, method: "DELETE") => {
+    return fetch(`http://localhost:3001/${url}`, {
+        method: method,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    });
+};
+
 export const apiGet = async (url: string, method: "GET") => {
     const response = await fetch(`http://localhost:3001/${url}`, {
         method: method,

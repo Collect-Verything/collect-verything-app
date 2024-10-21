@@ -9,6 +9,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { DialogUserJobProps } from "../types";
 import ClearIcon from "@mui/icons-material/Clear";
+import { deleteAJobbers } from "../../request";
 
 export const DeleteUserJob = (props: DialogUserJobProps) => {
     const { buttonElement, rippleRef, row } = props;
@@ -16,6 +17,10 @@ export const DeleteUserJob = (props: DialogUserJobProps) => {
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+    const handleDeleteUserJob = () => {
+        deleteAJobbers(row.userId!).then(handleClose);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -41,17 +46,26 @@ export const DeleteUserJob = (props: DialogUserJobProps) => {
                 </Button>
             </strong>
 
-            <Dialog fullScreen={fullScreen} open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
-                <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+            <Dialog
+                sx={{ textAlign: "center" }}
+                fullScreen={fullScreen}
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="responsive-dialog-title"
+            >
+                <DialogTitle id="responsive-dialog-title">{"Suppression d'un salarié"}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        {row.firstname}
-                        Let Google help apps determine location. This means sending anonymous location data to Google,
-                        even when no apps are running.
+                    <DialogContentText>Souhaitez vous réellement supprimer le salarié ci dessous ?</DialogContentText>
+                    <DialogContentText color="secondary" mt={2}>
+                        {row.userId} - {row.firstname} {row.lastname}
                     </DialogContentText>
+                    <DialogContentText>{row.roles}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
+                    <Button autoFocus onClick={handleDeleteUserJob} color="error">
+                        Supprimer le salarié
+                    </Button>
+                    <Button autoFocus onClick={handleClose} color="secondary">
                         Annuler
                     </Button>
                 </DialogActions>
