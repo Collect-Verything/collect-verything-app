@@ -67,7 +67,7 @@ async function main() {
       email: 'user@user.user',
       password: passwordSimple,
       birthDate: new Date('1992-06-10'),
-      gender: 'MR',
+      gender: 'Monsieur',
       phone: '0606060606',
       role: {
         connect: { id: roleUser.id },
@@ -84,7 +84,7 @@ async function main() {
       email: 'invoice@invoice.invoice',
       password: passwordInvoice,
       birthDate: new Date('1992-06-10'),
-      gender: 'MR',
+      gender: 'Monsieur',
       phone: '0606060606',
       role: {
         connect: { id: roleInvoice.id },

@@ -6,6 +6,7 @@ import { columns } from "./grid-definition";
 import { getAllJobbers } from "./request";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas ce supprimer , le mettre en surbrillance dans le data row
+//  TODO: Creation d'un user, role obligatoire
 
 export const Job = () => {
     const [rows, setRows] = useState<User[]>([]);

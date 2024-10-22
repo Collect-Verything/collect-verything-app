@@ -42,8 +42,6 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(3)
   @ApiProperty()
   gender: string;
 

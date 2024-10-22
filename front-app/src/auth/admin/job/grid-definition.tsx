@@ -25,8 +25,6 @@ function CellActionUserJob(props: GridRenderCellParams) {
     const buttonElement = React.useRef<HTMLButtonElement>(null);
     const rippleRef = React.useRef<TouchRippleActions>(null);
 
-    console.log(row);
-
     return (
         <Box display="flex">
             <CheckUserJob row={row} buttonElement={buttonElement} rippleRef={rippleRef} />

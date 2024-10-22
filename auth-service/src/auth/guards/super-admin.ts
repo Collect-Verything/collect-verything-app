@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import {RoleName} from "../enum";
+import { ROLENAME } from '../enum';
 
 export interface JwtPayloadWithRoles {
   userId: number;
@@ -19,7 +19,7 @@ export class SuperAdminGuards implements CanActivate {
     if (authHeader) {
       const token = authHeader.split(' ')[1];
       const decodedToken = jwtDecode(token) as JwtPayloadWithRoles;
-      return decodedToken.role === RoleName.SUPER_ADMIN;
+      return decodedToken.role === ROLENAME.SUPER_ADMIN;
     } else {
       console.log('No Authorization header present');
       return false;

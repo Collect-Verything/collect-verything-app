@@ -9,7 +9,7 @@ import { UserItemsDashboardType } from "./types";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
-import { ROLES } from "../../common/const";
+import { ROLENAME } from "../../common/const";
 import { ButtonMenuDashboard } from "../../common/component/buttons";
 import { Typography } from "@mui/material";
 
@@ -156,22 +156,22 @@ export const SupportItemsDashboard: UserItemsDashboardType[] = [
 // );
 
 interface DisplayMenuDependingJobProps {
-    role: ROLES;
+    role: ROLENAME;
     option: "with-label" | "only-icon";
 }
 
 export const DisplayMenuDependingJob = ({ role, option }: DisplayMenuDependingJobProps) => {
     let listItemsMenu;
-    if (role === ROLES.SUPER_ADMIN) {
+    if (role === ROLENAME.SUPER_ADMIN) {
         listItemsMenu = SuperAdminItemsDashboard;
     }
-    if (role === ROLES.INVOICE) {
+    if (role === ROLENAME.INVOICE) {
         listItemsMenu = InvoiceItemsDashboard;
     }
-    if (role === ROLES.SUPPORT) {
+    if (role === ROLENAME.SUPPORT) {
         listItemsMenu = SupportItemsDashboard;
     }
-    if (role === ROLES.USER) {
+    if (role === ROLENAME.USER) {
         listItemsMenu = UserItemsDashboard;
     }
 
