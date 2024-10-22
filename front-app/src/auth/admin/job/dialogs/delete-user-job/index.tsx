@@ -19,7 +19,7 @@ export const DeleteUserJob = (props: DialogUserJobProps) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleDeleteUserJob = () => {
-        deleteAJobbers(row.userId!).then(handleClose);
+        deleteAJobbers(row.id!).then(handleClose);
     };
 
     const handleClickOpen = () => {
@@ -57,7 +57,7 @@ export const DeleteUserJob = (props: DialogUserJobProps) => {
                 <DialogContent>
                     <DialogContentText>Souhaitez vous réellement supprimer le salarié ci dessous ?</DialogContentText>
                     <DialogContentText color="secondary" mt={2}>
-                        {row.userId} - {row.firstname} {row.lastname}
+                        {row.id} - {row.firstname} {row.lastname}
                     </DialogContentText>
                     <DialogContentText>{row.roles}</DialogContentText>
                 </DialogContent>
