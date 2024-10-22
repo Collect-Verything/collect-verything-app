@@ -59,7 +59,7 @@ export const DeleteUserJob = (props: DialogUserJobProps) => {
                     <DialogContentText color="secondary" mt={2}>
                         {row.id} - {row.firstname} {row.lastname}
                     </DialogContentText>
-                    <DialogContentText>{row.roles}</DialogContentText>
+                    <DialogContentText> {row.role.name}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleDeleteUserJob} color="error">

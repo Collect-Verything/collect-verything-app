@@ -15,5 +15,14 @@ export interface User {
 
     phone: string;
 
-    roles: number[];
+    role: Role;
+
+    roleId: number;
+}
+
+interface Role {
+    id: number;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
 }

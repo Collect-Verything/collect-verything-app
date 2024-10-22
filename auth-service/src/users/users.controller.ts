@@ -21,7 +21,7 @@ import {
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from '../auth/guards/authentication/jwt-auth.guard';
 import { JwtSuperGuard } from '../auth/guards/super-admin/jwt-super-admin.guard';
-import {SuperAdminGuards} from "../auth/guards/super-admin";
+import { SuperAdminGuards } from '../auth/guards/super-admin';
 
 /*
  * TODO: Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre
@@ -88,6 +88,7 @@ export class UsersController {
   @Delete(':id')
   // @UseGuards(JwtAuthGuard)
   // @UseGuards(JwtSuperGuard)
+  // TODO : Faire en sorte de pouvoir passer le role en parametre et rendre le guard polyvalent
   @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })

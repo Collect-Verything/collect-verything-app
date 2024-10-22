@@ -61,7 +61,7 @@ export const CheckUserJob = (props: DialogUserJobProps) => {
                         <Typography color="secondary" mt={2}>
                             Role :
                         </Typography>
-                        {row.roles}
+                        {row.role.name}
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
