@@ -1,35 +1,22 @@
-// eslint-disable-next-line
-export const apiPost = (url: string, method: "POST" | "PATCH" | "GET" | "DELETE", data: any) => {
+export const apiPost = (url: string, data: any) => {
     return fetch(`http://localhost:3001/${url}`, {
-        method: method,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: "POST",
+        headers: gerHeaders(),
         body: JSON.stringify(data),
     });
 };
 
-export const apiDelete = (url: string, method: "DELETE") => {
+export const apiDelete = (url: string) => {
     return fetch(`http://localhost:3001/${url}`, {
-        method: method,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: "DELETE",
+        headers: gerHeaders(),
     });
 };
 
-export const apiGet = async (url: string, method: "GET") => {
+export const apiGet = async (url: string) => {
     const response = await fetch(`http://localhost:3001/${url}`, {
-        method: method,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        method: "GET",
+        headers: gerHeaders(),
     });
 
     if (!response.ok) {
@@ -43,4 +30,12 @@ export const throwErrorResponse = (res: Response) => {
         throw new Error(`HTTP error! status: ${res.status}`);
     }
     return res.json();
+};
+
+const gerHeaders = () => {
+    return {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
 };

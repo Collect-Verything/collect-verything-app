@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { apiGet } from "../../../common/utils/web";
 import { User } from "../../../common/types/user";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columns } from "./grid-definition";
+import { getAllJobbers } from "./request";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas ce supprimer , le mettre en surbrillance dans le data row
 
@@ -11,7 +11,7 @@ export const Job = () => {
     const [rows, setRows] = useState<User[]>([]);
 
     useEffect(() => {
-        apiGet(`users/jobs/`, "GET").then((res) => setRows(res));
+        getAllJobbers().then((res) => setRows(res));
     }, []);
 
     return (
