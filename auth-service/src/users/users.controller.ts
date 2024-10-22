@@ -21,6 +21,7 @@ import {
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from '../auth/guards/authentication/jwt-auth.guard';
 import { JwtSuperGuard } from '../auth/guards/super-admin/jwt-super-admin.guard';
+import {SuperAdminGuards} from "../auth/guards/super-admin";
 
 /*
  * TODO: Creer une distinction entre la creation d'un user de type register et la creation d'un user depuis interface admin dont la selection des role est libre
@@ -55,7 +56,8 @@ export class UsersController {
   @Get('jobs')
   // @UseGuards(JwtAuthGuard)
   // @UseGuards(JwtSuperGuard)
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
+  @UseGuards(SuperAdminGuards)
   @ApiOkResponse({ type: UserEntity, isArray: true })
   async findAllByJob() {
     const users = await this.usersService.findAllUserJob();
@@ -63,8 +65,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(JwtSuperGuard)
+  // @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async findOne(@Param('id', ParseIntPipe) id: number) {
@@ -72,8 +74,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(JwtSuperGuard)
+  // @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   async update(
@@ -86,9 +88,11 @@ export class UsersController {
   @Delete(':id')
   // @UseGuards(JwtAuthGuard)
   // @UseGuards(JwtSuperGuard)
+  @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param('id', ParseIntPipe) id: number) {
-    return new UserEntity(await this.usersService.remove(id));
+    // return new UserEntity(await this.usersService.remove(id));
+    return { ok: 'ok' };
   }
 }
