@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,8 +7,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { DialogUserJobProps } from "../types";
-import ModeIcon from "@mui/icons-material/Mode";
 import { TextField, Typography } from "@mui/material";
 import { User } from "../../../../../common/types/user";
 import Box from "@mui/material/Box";
@@ -19,23 +16,22 @@ import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { ROLENAME } from "../../../../../common/const";
-import { fieldList } from "./const";
-import { onChangeUser } from "./tool";
+import { onChangeUser } from "../modify-user-job/tool";
+import { fieldList } from "../modify-user-job/const";
+import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 
-// TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
+// TODO : Alert sur les champs obliatoire et control des champ
 
-export const ModifyUserJob = (props: DialogUserJobProps) => {
-    const { buttonElement, rippleRef, row } = props;
-
+export const CreateUserJob = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState<User>();
 
-    useEffect(() => {
-        setUser(row);
-    }, []);
+    const buttonElement = React.useRef<HTMLButtonElement>(null);
+    const rippleRef = React.useRef<TouchRippleActions>(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -45,13 +41,13 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
         setOpen(false);
     };
 
-    const handleModify = () => {
-        console.log("modify", user);
+    const handleCreate = () => {
+        console.log("create", user);
         handleClose();
     };
 
     const handleCancel = () => {
-        setUser(row);
+        setUser(user);
         handleClose();
     };
 
@@ -68,7 +64,7 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
                         }
                     }}
                 >
-                    <ModeIcon color="action" />
+                    <PersonAddAltIcon color="secondary" />
                 </Button>
             </strong>
 
@@ -79,20 +75,13 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Modification des informations d'un employé"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{"Céation d'un nouvel employé"}</DialogTitle>
                 <DialogContent>
                     <DialogContent>
                         <DialogContentText>
                             <Typography color="secondary" mt={2}>
-                                ID :
-                            </Typography>
-                            {row.id}
-                        </DialogContentText>
-                        <DialogContentText>
-                            <Typography color="secondary" mt={2}>
                                 Role :
                             </Typography>
-
                             <Box width={120} m="auto">
                                 <FormControl fullWidth>
                                     <Select
@@ -141,7 +130,7 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
                                 Date de naissance :
                             </Typography>
                             <DatePicker
-                                value={dayjs(row.birthDate)}
+                                value={dayjs(user?.birthDate)}
                                 onChange={(newDate) => {
                                     if (newDate) {
                                         onChangeUser("birthDate", setUser, newDate.toISOString());
@@ -168,8 +157,8 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
                     </DialogContent>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleModify} color="secondary">
-                        Modifier
+                    <Button autoFocus onClick={handleCreate} color="secondary">
+                        Créer
                     </Button>
                     <Button autoFocus onClick={handleCancel} color="error">
                         Annuler

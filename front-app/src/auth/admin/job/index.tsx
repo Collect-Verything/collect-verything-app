@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columns } from "./grid-definition";
 import { getAllJobbers } from "./request";
+import Grid from "@mui/material/Grid2";
+import { CreateUserJob } from "./dialogs/create-user-job";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas ce supprimer , le mettre en surbrillance dans le data row
 //  TODO: Creation d'un user, role obligatoire
@@ -16,7 +18,10 @@ export const Job = () => {
     }, []);
 
     return (
-        <Box sx={{ height: 300, width: "80%" }}>
+        <Box sx={{ height: 300, width: "80%" }} padding={5} margin="auto" marginTop={2}>
+            <Grid container justifyContent="flex-end" padding={5}>
+                <CreateUserJob />
+            </Grid>
             <DataGrid
                 rows={rows}
                 columns={columns}
