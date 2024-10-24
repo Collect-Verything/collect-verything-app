@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 /*
-* TODO : Trouver un moyen d'appliquer le check de maniere general tous le temp pour toue les pages,
+* TODO : Trouver un moyen d'appliquer le check de maniere general tous le temp pour toute les pages,
 * */
 
 const useAuthCheck = () => {
