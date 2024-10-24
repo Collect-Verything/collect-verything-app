@@ -24,7 +24,6 @@ import { createAJobber } from "../../request";
 import { defaultUser } from "../const";
 
 // TODO : Alert sur les champs obliatoire et control des champ
-// TODO : Refresh List if created
 interface CreateUserJobProps {
     handleGetAllUserJobs: () => void;
 }

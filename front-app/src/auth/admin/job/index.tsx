@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid2";
 import { CreateUserJob } from "./dialogs/create-user-job";
 import { useAppDispatch } from "../../../features/authentication-slice";
 import { fetchJobbers } from "../../../features/user-job-slice";
-import { useSelector } from "react-redux"; //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
+import { useSelector } from "react-redux";
 import CircularProgress from '@mui/material/CircularProgress';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
