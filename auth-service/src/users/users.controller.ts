@@ -90,15 +90,12 @@ export class UsersController {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
+  // TODO : Rendre le guard polyvalent ?
   @Delete(':id')
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(JwtSuperGuard)
-  // TODO : Faire en sorte de pouvoir passer le role en parametre et rendre le guard polyvalent
   @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param('id', ParseIntPipe) id: number) {
-    // return new UserEntity(await this.usersService.remove(id));
-    return { ok: 'ok' };
+    return new UserEntity(await this.usersService.remove(id));
   }
 }
