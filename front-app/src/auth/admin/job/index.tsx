@@ -13,14 +13,20 @@ import { CreateUserJob } from "./dialogs/create-user-job";
 export const Job = () => {
     const [rows, setRows] = useState<User[]>([]);
 
+    const handleGetAllUserJobs = () => {
+        getAllJobbers()
+            .then((res) => setRows(res))
+            .catch(() => console.log("Error fetching jobbers"));
+    };
+
     useEffect(() => {
-        getAllJobbers().then((res) => setRows(res));
+        handleGetAllUserJobs();
     }, []);
 
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
             <Grid container justifyContent="flex-end" padding={5}>
-                <CreateUserJob />
+                <CreateUserJob handleGetAllUserJobs={handleGetAllUserJobs} />
             </Grid>
             <DataGrid
                 rows={rows}
@@ -28,7 +34,7 @@ export const Job = () => {
                 initialState={{
                     pagination: {
                         paginationModel: {
-                            pageSize: 5,
+                            pageSize: 10,
                         },
                     },
                 }}

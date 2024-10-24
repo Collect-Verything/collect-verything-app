@@ -21,13 +21,17 @@ import { fieldList } from "../modify-user-job/const";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { createAJobber } from "../../request";
-import {defaultUser} from "../const";
+import { defaultUser } from "../const";
 
 // TODO : Alert sur les champs obliatoire et control des champ
 // TODO : Refresh List if created
+interface CreateUserJobProps {
+    handleGetAllUserJobs: () => void;
+}
 
+export const CreateUserJob = (props: CreateUserJobProps) => {
+    const { handleGetAllUserJobs } = props;
 
-export const CreateUserJob = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -47,7 +51,9 @@ export const CreateUserJob = () => {
 
     const handleCreate = () => {
         if (user) {
-            createAJobber(user).catch(()=>console.log("error during sending form user job"));
+            createAJobber(user)
+                .then(() => handleGetAllUserJobs())
+                .catch(() => console.log("error during sending form user job"));
         }
         console.log("create", user);
         handleClose();
@@ -175,4 +181,3 @@ export const CreateUserJob = () => {
         </React.Fragment>
     );
 };
-

@@ -5,7 +5,7 @@ export const defaultUser: User = {
     firstname: "",
     lastname: "",
     email: "",
-    password: "",
+    password: "InitPassword",
     birthDate: new Date(),
     gender: "",
     phone: "",
