@@ -18,7 +18,7 @@ export const Job = () => {
     }, []);
 
     return (
-        <Box sx={{ height: 300, width: "80%" }} padding={5} margin="auto" marginTop={2}>
+        <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
             <Grid container justifyContent="flex-end" padding={5}>
                 <CreateUserJob />
             </Grid>

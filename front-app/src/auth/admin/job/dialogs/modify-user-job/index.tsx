@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import { ROLENAME } from "../../../../../common/const";
 import { fieldList } from "./const";
 import { onChangeUser } from "./tool";
+import {defaultUser} from "../const";
 
 // TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
 
@@ -31,10 +32,12 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const [open, setOpen] = React.useState(false);
-    const [user, setUser] = React.useState<User>();
+    const [user, setUser] = React.useState<User>(defaultUser);
 
     useEffect(() => {
-        setUser(row);
+        if(Object.values(defaultUser).map((value) => value === '')){
+            setUser(row);
+        }
     }, []);
 
     const handleClickOpen = () => {

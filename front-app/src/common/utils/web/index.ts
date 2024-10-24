@@ -1,7 +1,7 @@
 export const apiPost = (url: string, data: any) => {
     return fetch(`http://localhost:3001/${url}`, {
         method: "POST",
-        headers: gerHeaders(),
+        headers: getHeaders(),
         body: JSON.stringify(data),
     });
 };
@@ -9,14 +9,14 @@ export const apiPost = (url: string, data: any) => {
 export const apiDelete = (url: string) => {
     return fetch(`http://localhost:3001/${url}`, {
         method: "DELETE",
-        headers: gerHeaders(),
+        headers: getHeaders(),
     });
 };
 
 export const apiGet = async (url: string) => {
     const response = await fetch(`http://localhost:3001/${url}`, {
         method: "GET",
-        headers: gerHeaders(),
+        headers: getHeaders(),
     });
 
     if (!response.ok) {
@@ -32,7 +32,7 @@ export const throwErrorResponse = (res: Response) => {
     return res.json();
 };
 
-const gerHeaders = () => {
+const getHeaders = () => {
     return {
         Accept: "application/json",
         "Content-Type": "application/json",
