@@ -20,7 +20,7 @@ export const columns: GridColDef<User>[] = [
     { field: "action", headerName: "Actions", renderCell: (params) => <CellActionUserJob {...params} />, width: 300 },
 ];
 
-function CellActionUserJob(props: GridRenderCellParams) {
+export const CellActionUserJob = (props: GridRenderCellParams)=> {
     const { row } = props;
     const buttonElement = React.useRef<HTMLButtonElement>(null);
     const rippleRef = React.useRef<TouchRippleActions>(null);

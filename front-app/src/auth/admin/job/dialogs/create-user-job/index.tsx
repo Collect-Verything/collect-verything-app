@@ -55,7 +55,6 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
                 .then(() => handleGetAllUserJobs())
                 .catch(() => console.log("error during sending form user job"));
         }
-        console.log("create", user);
         handleClose();
     };
 
