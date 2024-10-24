@@ -4,15 +4,10 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 const roundsOfHashing = 10;
 
-
-
 async function main() {
-
-const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
-const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
-const passwordInvoice = await bcrypt.hash('invoiceinvoice', roundsOfHashing);
-const passwordInvoiceSupport = await bcrypt.hash('invoicesupport', roundsOfHashing);
-
+  const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
+  const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
+  const passwordInvoice = await bcrypt.hash('invoiceinvoice', roundsOfHashing);
 
   const roleUser = await prisma.role.upsert({
     where: { name: 'USER' },
@@ -47,72 +42,52 @@ const passwordInvoiceSupport = await bcrypt.hash('invoicesupport', roundsOfHashi
   });
 
   const userSuperAdmin = await prisma.user.upsert({
-    where: { email: "admin@admin.admin" },
-    update: {password: passwordSuperAdmin,},
+    where: { email: 'admin@admin.admin' },
+    update: { password: passwordSuperAdmin },
     create: {
       firstname: 'Julien',
       lastname: 'Cansell',
-      email: "admin@admin.admin",
+      email: 'admin@admin.admin',
       password: passwordSuperAdmin,
       birthDate: new Date('1992-06-10'),
-      gender: "MR",
-      phone: "0606060606",
-      roles: {
+      gender: 'MR',
+      phone: '0606060606',
+      role: {
         connect: { id: roleSuperAdmin.id },
       },
     },
   });
 
   const userSimple = await prisma.user.upsert({
-    where: { email: "user@user.user" },
-    update: {password: passwordSimple,},
+    where: { email: 'user@user.user' },
+    update: { password: passwordSimple },
     create: {
       firstname: 'Brice',
       lastname: 'Bite',
-      email: "user@user.user",
+      email: 'user@user.user',
       password: passwordSimple,
       birthDate: new Date('1992-06-10'),
-      gender: "MR",
-      phone: "0606060606",
-      roles: {
+      gender: 'Monsieur',
+      phone: '0606060606',
+      role: {
         connect: { id: roleUser.id },
       },
     },
   });
 
   const userInvoice = await prisma.user.upsert({
-    where: { email: "invoice@invoice.invoice" },
-    update: {password: passwordInvoice,},
+    where: { email: 'invoice@invoice.invoice' },
+    update: { password: passwordInvoice },
     create: {
       firstname: 'Thomas',
       lastname: 'Titoon',
-      email: "invoice@invoice.invoice",
+      email: 'invoice@invoice.invoice',
       password: passwordInvoice,
       birthDate: new Date('1992-06-10'),
-      gender: "MR",
-      phone: "0606060606",
-      roles: {
+      gender: 'Monsieur',
+      phone: '0606060606',
+      role: {
         connect: { id: roleInvoice.id },
-      },
-    },
-  });
-
-  const userInvoiceSupport = await prisma.user.upsert({
-    where: { email: "invoicesupport@invoicesupport.invoicesupport" },
-    update: {password: passwordInvoiceSupport,},
-    create: {
-      firstname: 'Isaac',
-      lastname: 'Lachnouff',
-      email: "invoicesupport@invoicesupport.invoicesupport",
-      password: passwordInvoiceSupport,
-      birthDate: new Date('1992-06-10'),
-      gender: "MR",
-      phone: "0606060606",
-      roles: {
-        connect: [
-          { id: roleInvoice.id },
-          { id: roleSupport.id },
-        ],
       },
     },
   });
@@ -125,7 +100,6 @@ const passwordInvoiceSupport = await bcrypt.hash('invoicesupport', roundsOfHashi
     userSuperAdmin,
     userSimple,
     userInvoice,
-    userInvoiceSupport,
   });
 }
 

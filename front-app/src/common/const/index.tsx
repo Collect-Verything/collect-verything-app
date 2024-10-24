@@ -1,6 +1,6 @@
-export enum ROLES {
-    SUPER_ADMIN = "SUPER_ADMIN",
+export enum ROLENAME {
     USER = "USER",
+    SUPER_ADMIN = "SUPER_ADMIN",
     INVOICE = "INVOICE",
     SUPPORT = "SUPPORT",
 }

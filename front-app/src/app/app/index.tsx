@@ -14,7 +14,9 @@ export const App: React.FC = () => {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
-                    <RouterProvider router={router} />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <RouterProvider router={router} />
+                    </LocalizationProvider>
                 </ThemeProvider>
             </Provider>
         </LocalizationProvider>

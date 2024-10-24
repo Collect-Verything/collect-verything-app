@@ -14,4 +14,6 @@ export class AuthController {
   login(@Body() { email, password }: LoginDto) {
     return this.authService.login(email, password);
   }
+
+  // Register ?? ici ou dans user ?
 }

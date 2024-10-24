@@ -20,13 +20,14 @@ export const authenticateSlice = createSlice({
     reducers: {
         saveToken(state, action: PayloadAction<string>) {
             const tokenDecoded = getDecodedAccessToken(action.payload);
-            state.role = tokenDecoded.roles[0].name;
+            state.role = tokenDecoded.role;
             state.userId = tokenDecoded.userId;
             state.firstname = tokenDecoded.firstname;
             state.lastname = tokenDecoded.lastname;
         },
         logout(state) {
             state.role = undefined;
+            localStorage.removeItem("token");
         },
     },
 });
