@@ -9,17 +9,19 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { DialogUserJobProps } from "../types";
 import ClearIcon from "@mui/icons-material/Clear";
-import { deleteAJobbers } from "../../request";
+import { useAppDispatch } from "../../../../../features/authentication-slice";
+import { deleteById } from "../../../../../features/user-job-slice";
 
 export const DeleteUserJob = (props: DialogUserJobProps) => {
     const { buttonElement, rippleRef, row } = props;
+    const dispatch = useAppDispatch();
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleDeleteUserJob = () => {
-        deleteAJobbers(row.id!).then(handleClose);
+        dispatch(deleteById(String(row.id))).then(handleClose);
     };
 
     const handleClickOpen = () => {

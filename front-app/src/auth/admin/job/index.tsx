@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { User } from "../../../common/types/user";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columns } from "./grid-definition";
-import { getAllJobbers } from "./request";
 import Grid from "@mui/material/Grid2";
 import { CreateUserJob } from "./dialogs/create-user-job";
+import { useAppDispatch } from "../../../features/authentication-slice";
+import { fetchJobbers } from "../../../features/user-job-slice";
+import { useSelector } from "react-redux"; //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
+import CircularProgress from '@mui/material/CircularProgress';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
-//  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas ce supprimer , le mettre en surbrillance dans le data row
+//  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
 //  TODO: Creation d'un user, role obligatoire
 
 export const Job = () => {
-    const [rows, setRows] = useState<User[]>([]);
+    const dispatch = useAppDispatch();
+
+    const { usersJobList, status } = useSelector((store: any) => store.userJob);
 
     const handleGetAllUserJobs = () => {
-        getAllJobbers()
-            .then((res) => setRows(res))
-            .catch(() => console.log("Error fetching jobbers"));
+        dispatch(fetchJobbers());
     };
 
     useEffect(() => {
@@ -28,19 +31,26 @@ export const Job = () => {
             <Grid container justifyContent="flex-end" padding={5}>
                 <CreateUserJob handleGetAllUserJobs={handleGetAllUserJobs} />
             </Grid>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 10,
+            {status === "loading" ? (
+                    // TODO : Center au milieu de la page
+                    <CircularProgress  color="secondary"/>
+            ) : status === "failed" ? (
+                <PriorityHighIcon color="error"/>
+            ) : (
+                <DataGrid
+                    rows={usersJobList || []}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: 10,
+                            },
                         },
-                    },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-            />
+                    }}
+                    pageSizeOptions={[5]}
+                    disableRowSelectionOnClick
+                />
+            )}
         </Box>
     );
 };
