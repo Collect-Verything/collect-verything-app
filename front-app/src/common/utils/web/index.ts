@@ -25,6 +25,14 @@ export const apiGet = async (url: string) => {
     return response.json();
 };
 
+export const apiPatch = (url: string, data: any) => {
+    return fetch(`http://localhost:3001/${url}`, {
+        method: "PATCH",
+        headers: getHeaders(),
+        body: JSON.stringify(data),
+    });
+};
+
 export const throwErrorResponse = (res: Response) => {
     if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);

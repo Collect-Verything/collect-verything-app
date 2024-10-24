@@ -21,7 +21,9 @@ import dayjs from "dayjs";
 import { ROLENAME } from "../../../../../common/const";
 import { fieldList } from "./const";
 import { onChangeUser } from "./tool";
-import {defaultUser} from "../const";
+import { defaultUser } from "../const";
+import { patchById } from "../../../../../features/user-job-slice";
+import { useAppDispatch } from "../../../../../features/authentication-slice";
 
 // TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
 
@@ -34,8 +36,10 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
     const [open, setOpen] = React.useState(false);
     const [user, setUser] = React.useState<User>(defaultUser);
 
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
-        if(Object.values(defaultUser).map((value) => value === '')){
+        if (Object.values(defaultUser).map((value) => value === "")) {
             setUser(row);
         }
     }, []);
@@ -49,8 +53,7 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
     };
 
     const handleModify = () => {
-        console.log("modify", user);
-        handleClose();
+        dispatch(patchById(user)).then(handleClose);
     };
 
     const handleCancel = () => {
