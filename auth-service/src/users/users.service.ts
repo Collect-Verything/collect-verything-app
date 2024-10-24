@@ -38,6 +38,24 @@ export class UsersService {
     });
   }
 
+  async createJobber(createUserDto: CreateUserDto) {
+    const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
+
+    // TODO : Envoyer un mail a ce nouveau user avec son nouveau mot de passe
+    const hashedPassword = await bcrypt.hash('InitPassword', roundsOfHashing);
+
+    return this.prisma.user.create({
+      data: {
+        ...userData,
+        password: hashedPassword,
+        role: {
+          connect: { id: roleId },
+        },
+      },
+      include: { role: true },
+    });
+  }
+
   findAll() {
     return this.prisma.user.findMany();
   }

@@ -18,6 +18,10 @@ export interface User {
     role: Role;
 
     roleId: number;
+
+    updatedAt:string;
+
+    createdAt:string;
 }
 
 interface Role {
