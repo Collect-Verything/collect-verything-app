@@ -49,7 +49,7 @@ export const CheckUserJob = (props: DialogUserJobProps) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">Consultation et information de l'employé</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">Information de l'utilisateyr</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>

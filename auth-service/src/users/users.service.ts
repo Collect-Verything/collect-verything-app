@@ -56,10 +56,19 @@ export class UsersService {
     });
   }
 
+  /*
+   * Simple user only
+   * */
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      where: { roleId: 1 },
+      include: { role: true },
+    });
   }
 
+  /*
+   * Simple jobber only
+   * */
   findAllUserJob() {
     return this.prisma.user.findMany({
       where: {

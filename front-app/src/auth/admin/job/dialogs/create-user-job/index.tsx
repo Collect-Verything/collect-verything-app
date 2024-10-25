@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -22,16 +23,20 @@ import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { createAJobber } from "../../request";
 import { defaultUser } from "../const";
+import { createUser } from "../../../../../features/user-slice";
+import { useAppDispatch } from "../../../../../features/authentication-slice";
 
 // TODO : Alert sur les champs obliatoire et control des champ
 interface CreateUserJobProps {
-    handleGetAllUserJobs: () => void;
+    handleGetAll: () => void;
+    isUser?: boolean;
 }
 
 export const CreateUserJob = (props: CreateUserJobProps) => {
-    const { handleGetAllUserJobs } = props;
+    const { handleGetAll, isUser } = props;
 
     const theme = useTheme();
+    const dispatch = useAppDispatch();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const [open, setOpen] = React.useState(false);
@@ -49,9 +54,13 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
     };
 
     const handleCreate = () => {
-        if (user) {
+        if (isUser === true) {
+            dispatch(createUser(user)).then(handleClose);
+            console.log("1");
+        } else {
+            console.log("2");
             createAJobber(user)
-                .then(() => handleGetAllUserJobs())
+                .then(() => handleGetAll())
                 .catch(() => console.log("error during sending form user job"));
         }
         handleClose();
@@ -61,6 +70,14 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
         setUser(user);
         handleClose();
     };
+
+    useEffect(() => {
+        if (isUser) {
+            user.roleId = 1;
+            user.role.name = "USER";
+            user.role.id = 1;
+        }
+    }, []);
 
     return (
         <React.Fragment>
@@ -86,33 +103,37 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Céation d'un nouvel employé"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">
+                    {isUser ? "Céation d'un nouvel utilisateur" : "Céation d'un nouvel employé"}
+                </DialogTitle>
                 <DialogContent>
                     <DialogContent>
-                        <DialogContentText>
-                            <Typography color="secondary" mt={2}>
-                                Role :
-                            </Typography>
-                            <Box width={120} m="auto">
-                                <FormControl fullWidth>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={user?.role.name}
-                                        label="Civilité"
-                                        onChange={(e) => {
-                                            onChangeUser("role", setUser, e.target.value as string);
-                                        }}
-                                    >
-                                        {Object.values(ROLENAME).map((item) => (
-                                            <MenuItem key={item} value={item}>
-                                                {item}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                        </DialogContentText>
+                        {!isUser && (
+                            <DialogContentText>
+                                <Typography color="secondary" mt={2}>
+                                    Role :
+                                </Typography>
+                                <Box width={120} m="auto">
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={user?.role.name}
+                                            label="Civilité"
+                                            onChange={(e) => {
+                                                onChangeUser("role", setUser, e.target.value as string);
+                                            }}
+                                        >
+                                            {Object.values(ROLENAME).map((item) => (
+                                                <MenuItem key={item} value={item}>
+                                                    {item}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </DialogContentText>
+                        )}
                         <DialogContentText>
                             <Typography color="secondary" mt={2}>
                                 Civilité :

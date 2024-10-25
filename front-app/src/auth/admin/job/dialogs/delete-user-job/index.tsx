@@ -11,16 +11,23 @@ import { DialogUserJobProps } from "../types";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useAppDispatch } from "../../../../../features/authentication-slice";
 import { deleteById } from "../../../../../features/user-job-slice";
+import { useLocation } from "react-router-dom";
+import { deleteUserById } from "../../../../../features/user-slice";
 
 export const DeleteUserJob = (props: DialogUserJobProps) => {
     const { buttonElement, rippleRef, row } = props;
+
     const dispatch = useAppDispatch();
+    const location = useLocation();
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleDeleteUserJob = () => {
+        if (location.pathname.includes("customer")) {
+            dispatch(deleteUserById(String(row.id))).then(handleClose);
+        }
         dispatch(deleteById(String(row.id))).then(handleClose);
     };
 
