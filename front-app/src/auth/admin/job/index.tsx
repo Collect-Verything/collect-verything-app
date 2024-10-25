@@ -7,8 +7,8 @@ import { CreateUserJob } from "./dialogs/create-user-job";
 import { useAppDispatch } from "../../../features/authentication-slice";
 import { fetchJobbers } from "../../../features/user-job-slice";
 import { useSelector } from "react-redux";
-import CircularProgress from '@mui/material/CircularProgress';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import CircularProgress from "@mui/material/CircularProgress";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
 //  TODO: Creation d'un user, role obligatoire
@@ -29,13 +29,13 @@ export const Job = () => {
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
             <Grid container justifyContent="flex-end" padding={5}>
-                <CreateUserJob handleGetAllUserJobs={handleGetAllUserJobs} />
+                <CreateUserJob isUser={false} handleGetAll={handleGetAllUserJobs} />
             </Grid>
             {status === "loading" ? (
-                    // TODO : Center au milieu de la page
-                    <CircularProgress  color="secondary"/>
+                // TODO : Center au milieu de la page
+                <CircularProgress color="secondary" />
             ) : status === "failed" ? (
-                <PriorityHighIcon color="error"/>
+                <PriorityHighIcon color="error" />
             ) : (
                 <DataGrid
                     rows={usersJobList || []}

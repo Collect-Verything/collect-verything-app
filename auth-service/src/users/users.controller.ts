@@ -19,8 +19,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
-import { JwtAuthGuard } from '../auth/guards/authentication/jwt-auth.guard';
-import { JwtSuperGuard } from '../auth/guards/super-admin/jwt-super-admin.guard';
 import { SuperAdminGuards } from '../auth/guards/super-admin';
 
 /*
@@ -35,8 +33,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(JwtSuperGuard)
+  @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   async create(@Body() createUserDto: CreateUserDto) {
@@ -51,9 +48,13 @@ export class UsersController {
     return new UserEntity(await this.usersService.createJobber(createUserDto));
   }
 
+  /*
+   * Simple user only
+   * */
   @Get()
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(JwtSuperGuard)
+  // @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtSuperGuard)
+  @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity, isArray: true })
   async findAll() {
@@ -61,6 +62,9 @@ export class UsersController {
     return users.map((user) => new UserEntity(user));
   }
 
+  /*
+   * Simple jobber only
+   * */
   @Get('jobs')
   @UseGuards(SuperAdminGuards)
   @ApiOkResponse({ type: UserEntity, isArray: true })
