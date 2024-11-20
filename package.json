@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start-frontapp": "npm start --prefix front-app",
-    "start-auth-service": "npm run start --prefix auth-service",
-    "auth-dev": "npm run start:dev  --prefix auth-service",
-    "start": "npm run start-frontapp & npm run start-auth-service",
-    "install-all": "cd auth-service && npm install && cd ../front-app && npm install"
+    "start:front": "npm start --prefix front-app",
 
+    "start:auth-prod": "npm run start --prefix auth-service",
+    "start:auth-dev": "npm run start:dev  --prefix auth-service",
+
+    "start:prod": "npm run start:front & npm run start:auth-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev",
+
+    "install:front": "cd front-app && npm install",
+    "install:auth": "cd auth-service && npm install",
+
+    "install:all": "npm run install:front & npm run install:auth"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
