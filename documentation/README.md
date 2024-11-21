@@ -5,6 +5,8 @@
 - Development
   - [Linting][linting]
   - [Mono Repo][monorepo]
+  - [Prettier][prettier]
+  - [Environment][env]
  
 - Deployment:
   - [CI][ci]
@@ -26,7 +28,9 @@
 [monorepo]: development/mono-repo.md
 [dev-and-prod]: general/dev-and-prod.md
 [glossary]: general/glossary.md
+[env]: development/environment.md
 [rules]: general/rules.md
+[prettier]: development/prettier.md.md
 [ci]: ci-cd/ci.md
 [cd]: ci-cd/cd.md
 [Prisma]: database/prisma.md
