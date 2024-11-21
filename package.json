@@ -3,18 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "install:front": "cd front-app && npm install",
+    "install:auth": "cd auth-service && npm install",
+
+    "install:all": "npm run install:front & npm run install:auth",
+
     "start:front": "npm start --prefix front-app",
 
     "start:auth-prod": "npm run start --prefix auth-service",
     "start:auth-dev": "npm run start:dev  --prefix auth-service",
 
+    "generate:auth": "cd auth-service && npx prisma migrate dev --name \"Setup auth db\"",
+    "seed:auth": "cd auth-service && npx prisma db seed",
+    "db:auth": "npm run generate:auth && npm run seed:auth",
+
+    "db:all": "npm run db:auth",
+
     "start:prod": "npm run start:front & npm run start:auth-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev",
+    "start:dev": "npm run start:front & npm run start:auth-dev"
 
-    "install:front": "cd front-app && npm install",
-    "install:auth": "cd auth-service && npm install",
-
-    "install:all": "npm run install:front & npm run install:auth"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
