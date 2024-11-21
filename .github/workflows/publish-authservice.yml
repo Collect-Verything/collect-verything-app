@@ -44,6 +44,10 @@ jobs:
         working-directory: ./auth-service
         run: npm install
 
+      - name: Generate Prisma Client for auth-service
+        working-directory: ./auth-service
+        run: npx prisma generate
+
       - name: Run tests in auth-service
         working-directory: ./auth-service
         run: npm run test
