@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
-import { configEnv} from '../config';
+import { configEnv } from '../env-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,7 +28,7 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
-  await app.listen(configEnv.authPort);
+  await app.listen(configEnv.AUTH_PORT_API);
 }
 
 bootstrap();
