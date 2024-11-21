@@ -134,9 +134,26 @@ It is then necessary to install the dependencies of each application/microservic
 npm run install-all
   ```
   
-### Auth service
+### Database Services
 
-To lunch only the auth service, read the [Auth Read Me][Auth Read.Me]
+You must first enter the URL of each database in each .env of each service if this file is not present and remember to specify the name of the service concerned {SERVICE_NAME} like here:
+```.dotenv
+DATABASE_URL="mysql://root:Rootoorn@localhost:3306/collect-verything-{SERVICE_NAME}?schema=public"
+```
+
+To prepare a single database for a service read for example the [Auth Read Me][Auth Read.Me] 
+
+To run only one service from root by exemple auth-service:
+```bash
+ npm run db:auth
+```
+
+If you want create all databases and migrate all the tables and seeds of all services without exception:
+
+```bash
+ npm run db:all
+```
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
