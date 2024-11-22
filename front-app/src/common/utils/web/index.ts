@@ -1,5 +1,7 @@
+export const URL = "localhost";
+
 export const apiPost = (url: string, data: any) => {
-    return fetch(`http://localhost:3001/${url}`, {
+    return fetch(`http://${URL}:3001/${url}`, {
         method: "POST",
         headers: getHeaders(),
         body: JSON.stringify(data),
@@ -7,14 +9,14 @@ export const apiPost = (url: string, data: any) => {
 };
 
 export const apiDelete = (url: string) => {
-    return fetch(`http://localhost:3001/${url}`, {
+    return fetch(`http://${URL}:3001/${url}`, {
         method: "DELETE",
         headers: getHeaders(),
     });
 };
 
 export const apiGet = async (url: string) => {
-    const response = await fetch(`http://localhost:3001/${url}`, {
+    const response = await fetch(`http://${URL}:3001/${url}`, {
         method: "GET",
         headers: getHeaders(),
     });
@@ -26,7 +28,7 @@ export const apiGet = async (url: string) => {
 };
 
 export const apiPatch = (url: string, data: any) => {
-    return fetch(`http://localhost:3001/${url}`, {
+    return fetch(`http://${URL}:3001/${url}`, {
         method: "PATCH",
         headers: getHeaders(),
         body: JSON.stringify(data),

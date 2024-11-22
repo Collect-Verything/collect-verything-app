@@ -154,6 +154,10 @@ If you want create all databases and migrate all the tables and seeds of all ser
  npm run db:all
 ```
 
+But if your run app with docker you have nothing to do, just : (no hot reload for the moment )
+```bash
+docker compose up
+```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
