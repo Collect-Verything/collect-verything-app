@@ -1,6 +1,9 @@
 # Utilise une image Node.js comme base
 FROM node:18-alpine
 
+# Installer les outils nécessaires, comme nc
+RUN apk add --no-cache netcat-openbsd
+
 # Crée et utilise le répertoire de travail /auth-service
 WORKDIR /auth-service
 
