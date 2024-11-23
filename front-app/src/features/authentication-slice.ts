@@ -4,7 +4,6 @@ import { getDecodedAccessToken } from "../common/tools/jwt";
 import { AppDispatch } from "./store";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../shop/login/request";
-import { throwErrorResponse } from "../common/utils/web";
 
 const initialState = {
     role: undefined,
@@ -35,10 +34,14 @@ export const authenticateSlice = createSlice({
 export const login = (authLogin: LoginProps) => async (dispatch: AppDispatch) => {
     try {
         const res = await loginRequest(authLogin);
-        const data = await throwErrorResponse(res);
 
-        dispatch(authenticateSlice.actions.saveToken(data.accessToken));
-        localStorage.setItem("token", data.accessToken);
+        // TODO : Try to catch response code
+        // if (res.status.code !== 200) {
+        //     throw new Error(`HTTP error! status: ${res.status}`);
+        // }
+
+        dispatch(authenticateSlice.actions.saveToken(res.accessToken));
+        localStorage.setItem("token", res.accessToken);
 
         // eslint-disable-next-line
     } catch (error: any) {
