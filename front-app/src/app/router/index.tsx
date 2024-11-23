@@ -15,9 +15,9 @@ import { Documentation } from "../../auth/documentation";
 import { Facturation } from "../../auth/facturation";
 import { Support } from "../../auth/support";
 import { AuthMainLayout } from "../../auth/main-layout";
-import {Job} from "../../auth/admin/job";
-import {Customer} from "../../auth/admin/customer";
-import {Stats} from "../../auth/admin/stats";
+import { Job } from "../../auth/admin/job";
+import { Customer } from "../../auth/admin/customer";
+import { Stats } from "../../auth/admin/stats";
 
 export const router = createBrowserRouter([
     {
@@ -89,10 +89,12 @@ export const router = createBrowserRouter([
             {
                 path: "job",
                 element: <Job />,
-            },            {
+            },
+            {
                 path: "customer",
                 element: <Customer />,
-            },           {
+            },
+            {
                 path: "stats",
                 element: <Stats />,
             },
@@ -106,4 +108,5 @@ export const router = createBrowserRouter([
         path: "Register",
         element: <RegisterPage />,
     },
+    //     TODO : Forgot password
 ]);
