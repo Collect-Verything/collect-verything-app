@@ -20,6 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
 import { SuperAdminGuards } from '../auth/guards/super-admin';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 /*
  * TODO: Creer une distinction entre la creation d'un user de type register (accessible sans auth)  et la creation d'un user depuis interface admin dont la selection des role est libre
@@ -92,6 +93,18 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
+  }
+
+  @Patch('password/:id')
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: UserEntity })
+  async updatePassword(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePasswordDto: UpdateUserPasswordDto,
+  ) {
+    return new UserEntity(
+      await this.usersService.updatePassword(id, updatePasswordDto),
+    );
   }
 
   // TODO : Rendre le guard polyvalent ?

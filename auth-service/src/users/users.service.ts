@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 export const roundsOfHashing = 10;
 
@@ -106,6 +107,38 @@ export class UsersService {
               connect: { id: roleId },
             }
           : undefined,
+      },
+      include: { role: true },
+    });
+  }
+
+  async updatePassword(id: number, updatePasswordDto: UpdateUserPasswordDto) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      updatePasswordDto.oldPassword,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new BadRequestException('Invalid old password');
+    }
+
+    const hashedPassword = await bcrypt.hash(
+      updatePasswordDto.newPassword,
+      roundsOfHashing,
+    );
+
+    return this.prisma.user.update({
+      where: { id },
+      data: {
+        password: hashedPassword,
       },
       include: { role: true },
     });
