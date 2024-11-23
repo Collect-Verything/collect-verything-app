@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { ButtonRounded } from "../../common/component/buttons";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,11 +23,11 @@ export const LoginPage = () => {
     const handleLogin = () => {
         setErrorLogin(false);
         dispatch(login(authLogin))
+            .then(() => navigate("/"))
             .catch((error: Error) => {
                 setErrorLogin(true);
                 console.error("Error during login:", error);
-            })
-            .then(() => navigate("/"));
+            });
     };
 
     return (
@@ -69,6 +69,7 @@ export const LoginPage = () => {
                         id="outlined-basic"
                         label="Votre adresse email"
                         variant="outlined"
+                        value={authLogin.email}
                     />
                 </Grid>
                 <Grid>
@@ -80,7 +81,9 @@ export const LoginPage = () => {
                         sx={{ marginTop: 3, marginBottom: 4 }}
                         id="outlined-basic"
                         label="Votre mot de passe"
+                        type="password"
                         variant="outlined"
+                        value={authLogin.password}
                     />
                 </Grid>
                 <Grid>
@@ -90,13 +93,25 @@ export const LoginPage = () => {
                     <Link style={{ textDecoration: "none", color: "black" }} to="forgot-password">
                         Mot de passe oublié ?
                     </Link>
-                    <Alert sx={{ width: "60vw", margin: "auto", marginTop: "1vh", textAlign: 'center' }} severity="info">
-                        Log as :<br/>
-                        - USER,  email // user@user.user // password: useruser .<br />
-                        - SUPER_ADMIN //  email: admin@admin.admin // password: adminadmin .<br />
-                        - JOB,  email // invoice@invoice.invoice // password: invoiceinvoice . <br />
-                        - Double JOB //  email : invoicesupport@invoicesupport.invoicesupport // password: invoicesupport .
-                    </Alert>
+                    <Grid margin="auto" mt="1vh" bgcolor="#9834" borderRadius="15px" padding={3}>
+                        {[
+                            ["admin@admin.fr", "adminadmin", "SUPER_ADMIN"],
+                            ["user@user.fr", "useruser", "USER"],
+                            ["invoice@invoice.fr", "invoiceinvoice", "INVOICE"],
+                        ].map((i) => (
+                            <Grid container key={i[0]} mt={2} alignItems="center">
+                                <Button
+                                    variant="contained"
+                                    onClick={() => setAuthLogin({ email: i[0], password: i[1] })}
+                                >
+                                    {i[2]}
+                                </Button>
+                                <Typography ml={2}>
+                                    {i[0]} - {i[1]}
+                                </Typography>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
