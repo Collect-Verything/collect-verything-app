@@ -30,7 +30,13 @@ export const SideBar = () => {
         <Grid2
             width={sideBar ? "20vw" : "5vw"}
             height="100vh"
-            sx={{ backgroundColor: PRIMARY_COLOR, boxShadow: `2px 3px 19px #bababa`, transition: "0.3s" }}
+            sx={{
+                backgroundColor: PRIMARY_COLOR,
+                boxShadow: `2px 3px 19px #bababa`,
+                transition: "0.3s",
+                position: "sticky",
+                top: 0,
+            }}
             container
             flexDirection="column"
             justifyContent="space-between"

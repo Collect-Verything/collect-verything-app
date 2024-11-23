@@ -1,46 +1,4 @@
-export const URL = "localhost";
-
-export const apiPost = (url: string, data: any) => {
-    return fetch(`http://${URL}:3001/${url}`, {
-        method: "POST",
-        headers: getHeaders(),
-        body: JSON.stringify(data),
-    });
-};
-
-export const apiDelete = (url: string) => {
-    return fetch(`http://${URL}:3001/${url}`, {
-        method: "DELETE",
-        headers: getHeaders(),
-    });
-};
-
-export const apiGet = async (url: string) => {
-    const response = await fetch(`http://${URL}:3001/${url}`, {
-        method: "GET",
-        headers: getHeaders(),
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch data");
-    }
-    return response.json();
-};
-
-export const apiPatch = (url: string, data: any) => {
-    return fetch(`http://${URL}:3001/${url}`, {
-        method: "PATCH",
-        headers: getHeaders(),
-        body: JSON.stringify(data),
-    });
-};
-
-export const throwErrorResponse = (res: Response) => {
-    if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-};
+const URL = "localhost";
 
 const getHeaders = () => {
     return {
@@ -48,4 +6,35 @@ const getHeaders = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
+};
+
+type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
+
+const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?: any) => {
+    const response = await fetch(`http://${URL}:${portWithServicePath}`, {
+        method: method,
+        headers: getHeaders(),
+        body: data ? JSON.stringify(data) : undefined,
+    });
+
+    if (!response.ok) {
+        throw new Error();
+    }
+
+    return await response.json();
+};
+
+export const apiGet = (path: string) => apiRequest(path, "GET");
+
+export const apiPost = (path: string, data: any) => apiRequest(path, "POST", data);
+
+export const apiPatch = (path: string, data: any) => apiRequest(path, "PATCH", data);
+
+export const apiDelete = (path: string) => apiRequest(path, "DELETE");
+
+export const throwErrorResponse = (res: Response) => {
+    if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
 };
