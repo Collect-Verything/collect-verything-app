@@ -42,15 +42,15 @@ async function main() {
   });
 
   const userSuperAdmin = await prisma.user.upsert({
-    where: { email: 'admin@admin.admin' },
+    where: { email: 'admin@admin.fr' },
     update: { password: passwordSuperAdmin },
     create: {
       firstname: 'Julien',
       lastname: 'Cansell',
-      email: 'admin@admin.admin',
+      email: 'admin@admin.fr',
       password: passwordSuperAdmin,
       birthDate: new Date('1992-06-10'),
-      gender: 'MR',
+      gender: 'Monsieur',
       phone: '0606060606',
       role: {
         connect: { id: roleSuperAdmin.id },
@@ -59,12 +59,12 @@ async function main() {
   });
 
   const userSimple = await prisma.user.upsert({
-    where: { email: 'user@user.user' },
+    where: { email: 'user@user.fr' },
     update: { password: passwordSimple },
     create: {
       firstname: 'Brice',
       lastname: 'Bite',
-      email: 'user@user.user',
+      email: 'user@user.fr',
       password: passwordSimple,
       birthDate: new Date('1992-06-10'),
       gender: 'Monsieur',
@@ -76,12 +76,12 @@ async function main() {
   });
 
   const userInvoice = await prisma.user.upsert({
-    where: { email: 'invoice@invoice.invoice' },
+    where: { email: 'invoice@invoice.fr' },
     update: { password: passwordInvoice },
     create: {
       firstname: 'Thomas',
       lastname: 'Titoon',
-      email: 'invoice@invoice.invoice',
+      email: 'invoice@invoice.fr',
       password: passwordInvoice,
       birthDate: new Date('1992-06-10'),
       gender: 'Monsieur',
