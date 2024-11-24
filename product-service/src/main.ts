@@ -13,7 +13,7 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-      .setTitle('Collect & Verithing - Product')
+      .setTitle('Collect & Verything - Product')
       .setDescription('Manage products and services')
       .setVersion('0.1')
       .build();

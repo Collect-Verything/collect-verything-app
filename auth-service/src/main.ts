@@ -17,7 +17,7 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Collect & Verithing - Authentication')
+    .setTitle('Collect & Verything - Authentication')
     .setDescription('Manage users and auth')
     .setVersion('0.1')
     .addBearerAuth()
