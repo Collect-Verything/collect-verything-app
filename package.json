@@ -8,9 +8,9 @@
 
     "install:front": "cd front-app && npm install",
     "install:auth": "cd auth-service && npm install",
-    "install:solution": "cd solution-service && npm install",
+    "install:product": "cd product-service && npm install",
 
-    "install:all": "npm run install:front & npm run install:auth & npm run install:solution",
+    "install:all": "npm run install:front & npm run install:auth & npm run install:product",
 
         "__FRONT__": "",
 
@@ -27,15 +27,15 @@
 
     "db:all": "npm run db:auth",
 
-        "__SOLUTION__": "",
+        "__PRODUCT__": "",
 
-    "start:solution-prod": "npm run start --prefix solution-service",
-    "start:solution-dev": "npm run start:dev  --prefix solution-service",
+    "start:product-prod": "npm run start --prefix product-service",
+    "start:product-dev": "npm run start:dev  --prefix product-service",
 
         "__START__": "",
 
-    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:solution-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:solution-dev"
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev"
 
   },
   "devDependencies": {
