@@ -25,12 +25,19 @@
     "seed:auth": "cd auth-service && npx prisma db seed",
     "db:auth": "npm run generate:auth && npm run seed:auth",
 
-    "db:all": "npm run db:auth",
 
         "__PRODUCT__": "",
 
     "start:product-prod": "npm run start --prefix product-service",
     "start:product-dev": "npm run start:dev  --prefix product-service",
+
+    "generate:product": "cd product-service && npx prisma migrate dev --name \"Setup product db\"",
+    "seed:product": "cd product-service && npx prisma db seed",
+    "db:product": "npm run generate:product && npm run seed:product",
+
+        "__DATABASE__": "",
+
+    "db:all": "npm run db:auth && npm run db:product",
 
         "__START__": "",
 
