@@ -15,9 +15,10 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
+
   const config = new DocumentBuilder()
-    .setTitle('Collect & Verithing')
-    .setDescription('CMS shop application')
+    .setTitle('Collect & Verithing - Authentication')
+    .setDescription('Manage users and auth')
     .setVersion('0.1')
     .addBearerAuth()
     .build();
