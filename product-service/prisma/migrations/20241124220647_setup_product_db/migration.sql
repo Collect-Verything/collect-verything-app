@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `Service` (
+CREATE TABLE `Product` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `picture_path` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE `Service` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `Service_name_key`(`name`),
-    UNIQUE INDEX `Service_title_key`(`title`),
+    UNIQUE INDEX `Product_name_key`(`name`),
+    UNIQUE INDEX `Product_title_key`(`title`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
