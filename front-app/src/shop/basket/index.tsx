@@ -12,19 +12,15 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import { PAID_FREQUENCY } from "../../common/component/inputs";
-import { productsDetails, ProductsDetailsType } from "../../common/assets/products/products-details";
-import { ListBasketType } from "../tarification";
+import { productsDetails } from "../../common/assets/products/products-details";
+import { ListBasketType } from "../boutique";
 import { getHt, getTva, mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import { Button } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../../common/component/buttons";
-
-interface BasketDetailsType {
-    product: ProductsDetailsType;
-    frequency: PAID_FREQUENCY;
-}
+import { PAID_FREQUENCY } from "../boutique/const";
+import { BasketDetailsType } from "./type";
 
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
@@ -283,13 +279,3 @@ export const Basket = () => {
         </section>
     );
 };
-
-// interface CardProductProps {
-//     item: BasketDetailsType;
-// }
-//
-// const CardProduct = ({ item }: CardProductProps) => {
-//     return (
-//
-//     );
-// };

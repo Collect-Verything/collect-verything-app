@@ -1,21 +1,20 @@
 import Grid from "@mui/material/Grid2";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { PRODUCT_FORMULA } from "./const";
 import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../styles/theme";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ProductEntity } from "../../../shop/boutique/type";
 
-interface SolutionUnitProductProps {
-    formula: string;
+export interface VitrineUnitProductProps {
+    product: ProductEntity;
 }
 
-export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
-
-    const nav= useNavigate();
+export const VitrineUnitProduct: React.FC<VitrineUnitProductProps> = ({ product }) => {
+    const nav = useNavigate();
 
     const handleRedirectSolution = () => {
-        nav('/tarification')
-    }
+        nav("/boutique");
+    };
 
     return (
         <Box
@@ -50,7 +49,6 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                     transition: "0.3s",
                     cursor: "pointer",
                     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
-
                 },
             }}
         >
@@ -65,12 +63,12 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                     <Typography variant="subtitle2" mt={2}>
                         Principales fonctionnalités :
                     </Typography>
-                    <Typography variant="subtitle2">• Le processus optimisé</Typography>
-                    <Typography variant="subtitle2">• Analyses de données standard</Typography>
-                    <Typography variant="subtitle2">• 10 emplacements des stocks</Typography>
-                    <Typography variant="subtitle2">• Assistance par chat à tout moment</Typography>
-                    <Typography variant="subtitle2">• Vente globale localisée</Typography>
-                    <Typography variant="subtitle2">• Stockage serveur 2go</Typography>
+                    <Typography variant="subtitle2">{product.description}</Typography>
+                    {/*<Typography variant="subtitle2">• Analyses de données standard</Typography>*/}
+                    {/*<Typography variant="subtitle2">• 10 emplacements des stocks</Typography>*/}
+                    {/*<Typography variant="subtitle2">• Assistance par chat à tout moment</Typography>*/}
+                    {/*<Typography variant="subtitle2">• Vente globale localisée</Typography>*/}
+                    {/*<Typography variant="subtitle2">• Stockage serveur 2go</Typography>*/}
                 </Grid>
 
                 <Box
@@ -95,34 +93,36 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                     </Typography>
                 </Box>
                 <Grid mt={9}>
-                    <Typography variant="subtitle2" color="black">
-                        • Le processus optimisé
-                    </Typography>
-                    <Typography variant="subtitle2" color="black">
-                        • Analyses de données standard
-                    </Typography>
-                    <Typography
-                        variant="subtitle2"
-                        color={
-                            formula === PRODUCT_FORMULA.PREMIUM || formula === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"
-                        }
-                    >
-                        • 10 emplacements des stocks
-                    </Typography>
-                    <Typography
-                        variant="subtitle2"
-                        color={
-                            formula === PRODUCT_FORMULA.PREMIUM || formula === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"
-                        }
-                    >
-                        • Vente globale localisée
-                    </Typography>
-                    <Typography variant="subtitle2" color={formula === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>
-                        • Stockage serveur 2go
-                    </Typography>
-                    <Typography variant="subtitle2" color={formula === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>
-                        • Assistance par chat à tout moment
-                    </Typography>
+                    <Typography variant="subtitle2">{product.details}</Typography>
+                    {/*TODO : Mise En Page a faire */}
+                    {/*<Typography variant="subtitle2" color="black">*/}
+                    {/*    • Le processus optimisé*/}
+                    {/*</Typography>*/}
+                    {/*<Typography variant="subtitle2" color="black">*/}
+                    {/*    • Analyses de données standard*/}
+                    {/*</Typography>*/}
+                    {/*<Typography*/}
+                    {/*    variant="subtitle2"*/}
+                    {/*    color={*/}
+                    {/*        product === PRODUCT_FORMULA.PREMIUM || product === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"*/}
+                    {/*    }*/}
+                    {/*>*/}
+                    {/*    • 10 emplacements des stocks*/}
+                    {/*</Typography>*/}
+                    {/*<Typography*/}
+                    {/*    variant="subtitle2"*/}
+                    {/*    color={*/}
+                    {/*        product === PRODUCT_FORMULA.PREMIUM || product === PRODUCT_FORMULA.MEDIUM ? "black" : "grey"*/}
+                    {/*    }*/}
+                    {/*>*/}
+                    {/*    • Vente globale localisée*/}
+                    {/*</Typography>*/}
+                    {/*<Typography variant="subtitle2" color={product === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>*/}
+                    {/*    • Stockage serveur 2go*/}
+                    {/*</Typography>*/}
+                    {/*<Typography variant="subtitle2" color={product === PRODUCT_FORMULA.PREMIUM ? "black" : "grey"}>*/}
+                    {/*    • Assistance par chat à tout moment*/}
+                    {/*</Typography>*/}
                 </Grid>
             </Grid>
 
@@ -142,7 +142,7 @@ export const SolutionUnitProduct = ({ formula }: SolutionUnitProductProps) => {
                 }}
             >
                 <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-                    {formula}
+                    {product.name}
                 </Typography>
             </Box>
         </Box>

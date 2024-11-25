@@ -1,7 +1,7 @@
 import { createBrowserRouter, Link } from "react-router-dom";
 import { HomePage } from "../../shop/home";
-import { SolutionPage } from "../../shop/solution";
-import { Tarification } from "../../shop/tarification";
+import { VitrinePage } from "../../shop/vitrine";
+import { BoutiquePage } from "../../shop/boutique";
 import { ResourcePage } from "../../shop/ressource";
 import { Basket } from "../../shop/basket";
 import { AuthDashboard } from "../../auth/dashboard";
@@ -29,12 +29,12 @@ export const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "Solution",
-                element: <SolutionPage />,
+                path: "Vitrine",
+                element: <VitrinePage />,
             },
             {
-                path: "Tarification",
-                element: <Tarification />,
+                path: "Boutique",
+                element: <BoutiquePage />,
             },
             {
                 path: "Ressource",
