@@ -2,11 +2,18 @@ import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
 import { InputsRoundedWithChild, SwitchInputsRoundedWithChild } from "../../common/component/inputs";
 import { ButtonRounded } from "../../common/component/buttons";
-import React from "react";
-import { SolutionUnitProduct } from "../../common/component/solution";
-import { PRODUCT_FORMULA } from "../../common/component/solution/const";
+import React, { useEffect, useState } from "react";
+import { VitrineUnitProduct } from "../../common/component/solution";
+import { ProductEntity } from "../boutique/type";
+import { getProduct } from "./request";
 
-export const SolutionPage = () => {
+export const VitrinePage = () => {
+    const [products, setProducts] = useState<ProductEntity[]>();
+
+    useEffect(() => {
+        getProduct().then(setProducts);
+    }, []);
+
     return (
         <Grid
             container
@@ -34,11 +41,14 @@ export const SolutionPage = () => {
 
             <SwitchInputsRoundedWithChild />
 
-            <Grid container spacing={6} mt="5vh" pt={5}>
-                {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula, index) => (
-                    <SolutionUnitProduct key={index} formula={formula} />
-                ))}
-            </Grid>
+            {products && (
+                <Grid container spacing={6} mt="5vh" pt={5}>
+                    {products.map((product, index) => (
+                        // {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula, index) => (
+                        <VitrineUnitProduct key={index} product={product} />
+                    ))}
+                </Grid>
+            )}
         </Grid>
     );
 };

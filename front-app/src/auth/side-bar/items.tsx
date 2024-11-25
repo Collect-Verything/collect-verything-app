@@ -31,7 +31,7 @@ export const UserItemsDashboard: UserItemsDashboardType[] = [
     },
     {
         icon: <DisplaySettingsIcon />,
-        label: "Configuration solution",
+        label: "Configuration du Service",
         url: "config",
     },
     {
