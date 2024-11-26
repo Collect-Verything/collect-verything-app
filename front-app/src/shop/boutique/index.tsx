@@ -3,13 +3,8 @@ import React, { useEffect, useState } from "react";
 import { ProductEntity } from "./type";
 import { CardProductService } from "./component";
 import { Typography } from "@mui/material";
-import { PAID_FREQUENCY, TYPE_PRODUCT } from "./const";
-import {getProduct} from "../vitrine/request";
-
-export interface ListBasketType {
-    productId: number;
-    paidFrequency: PAID_FREQUENCY;
-}
+import { TYPE_PRODUCT } from "./const";
+import { getProduct } from "../vitrine/request";
 
 export const BoutiquePage = () => {
     const [listProducts, setListProducts] = useState<ProductEntity[]>();

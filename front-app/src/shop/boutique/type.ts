@@ -1,3 +1,5 @@
+import { PAID_FREQUENCY } from "./const";
+
 export interface ProductEntity {
     id: number;
     picture_path: string;
@@ -11,4 +13,10 @@ export interface ProductEntity {
     published: boolean;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface ListBasketType {
+    product: ProductEntity;
+    paidFrequency: PAID_FREQUENCY;
+    quantity: number;
 }
