@@ -5,13 +5,13 @@ import { ButtonRounded } from "../../common/component/buttons";
 import React, { useEffect, useState } from "react";
 import { VitrineUnitProduct } from "../../common/component/solution";
 import { ProductEntity } from "../boutique/type";
-import { getProduct } from "./request";
+import { getAllProducts } from "./request";
 
 export const VitrinePage = () => {
     const [products, setProducts] = useState<ProductEntity[]>();
 
     useEffect(() => {
-        getProduct().then(setProducts);
+        getAllProducts().then(setProducts);
     }, []);
 
     return (

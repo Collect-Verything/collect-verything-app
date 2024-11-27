@@ -4,7 +4,7 @@ import { ProductEntity } from "./type";
 import { CardProductService } from "./component";
 import { Typography } from "@mui/material";
 import { TYPE_PRODUCT } from "./const";
-import { getProduct } from "../vitrine/request";
+import { getAllProducts } from "../vitrine/request";
 
 export const BoutiquePage = () => {
     const [listProducts, setListProducts] = useState<ProductEntity[]>();
@@ -13,7 +13,7 @@ export const BoutiquePage = () => {
     const [services, setService] = useState<ProductEntity[] | undefined>(undefined);
 
     useEffect(() => {
-        getProduct().then(setListProducts);
+        getAllProducts().then(setListProducts);
         if (listProducts) {
             setProducts(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.PRODUCT));
             setService(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.SERVICE));
