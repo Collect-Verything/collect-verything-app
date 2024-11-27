@@ -128,6 +128,8 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                                         onChangeProduct(item.key, setProduct, e.target.value as string);
                                     }}
                                     value={product?.[item.key]}
+                                    multiline={["details", "description"].includes(item.key)}
+                                    maxRows={["details", "description"].includes(item.key) ? 10 : undefined}
                                 />
                             </DialogContentText>
                         ))}
