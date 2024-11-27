@@ -7,14 +7,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { DialogUserJobProps } from "../types";
+import { DialogProps } from "../../../../../common/types/dialogs";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useAppDispatch } from "../../../../../features/authentication-slice";
 import { deleteById } from "../../../../../features/user-job-slice";
 import { useLocation } from "react-router-dom";
 import { deleteUserById } from "../../../../../features/user-slice";
+import { User } from "../../../../../common/types/user";
 
-export const DeleteUserJob = (props: DialogUserJobProps) => {
+export const DeleteUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
     const dispatch = useAppDispatch();

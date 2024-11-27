@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { DialogUserJobProps } from "../types";
+import { DialogProps } from "../../../../../common/types/dialogs";
 import ModeIcon from "@mui/icons-material/Mode";
 import { TextField, Typography } from "@mui/material";
 import { User } from "../../../../../common/types/user";
@@ -28,7 +28,7 @@ import { patchUserById } from "../../../../../features/user-slice";
 
 // TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
 
-export const ModifyUserJob = (props: DialogUserJobProps) => {
+export const ModifyUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
     const theme = useTheme();

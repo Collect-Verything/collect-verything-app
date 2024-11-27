@@ -8,10 +8,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { DialogUserJobProps } from "../types";
 import { Grid2, Typography } from "@mui/material";
+import { User } from "../../../../../common/types/user";
+import { DialogProps } from "../../../../../common/types/dialogs";
 
-export const CheckUserJob = (props: DialogUserJobProps) => {
+export const CheckUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
     const [open, setOpen] = React.useState(false);
@@ -49,7 +50,7 @@ export const CheckUserJob = (props: DialogUserJobProps) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">Information de l'utilisateyr</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">Information de l'utilisateur</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
