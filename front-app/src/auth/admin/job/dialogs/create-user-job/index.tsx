@@ -18,7 +18,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { ROLENAME } from "../../../../../common/const";
 import { onChangeUser } from "../modify-user-job/tool";
-import { fieldList } from "../modify-user-job/const";
+import { fieldListUser } from "../modify-user-job/const";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { createAJobber } from "../../request";
@@ -171,7 +171,7 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
                             />
                         </DialogContentText>
 
-                        {fieldList.map((item) => (
+                        {fieldListUser.map((item) => (
                             <DialogContentText key={item.label}>
                                 <Typography color="secondary" mt={2}>
                                     {item.label}

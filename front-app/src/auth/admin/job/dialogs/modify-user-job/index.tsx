@@ -19,7 +19,7 @@ import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { ROLENAME } from "../../../../../common/const";
-import { fieldList } from "./const";
+import { fieldListUser } from "./const";
 import { onChangeUser } from "./tool";
 import { defaultUser } from "../const";
 import { patchById } from "../../../../../features/user-job-slice";
@@ -160,7 +160,7 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
                             />
                         </DialogContentText>
 
-                        {fieldList.map((item) => (
+                        {fieldListUser.map((item) => (
                             <DialogContentText key={item.label}>
                                 <Typography color="secondary" mt={2}>
                                     {item.label}
