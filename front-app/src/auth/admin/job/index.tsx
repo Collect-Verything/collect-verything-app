@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { columns } from "./grid-definition";
+import { columnsUser } from "./grid-definition";
 import Grid from "@mui/material/Grid2";
 import { CreateUserJob } from "./dialogs/create-user-job";
 import { useAppDispatch } from "../../../features/authentication-slice";
@@ -39,7 +39,7 @@ export const Job = () => {
             ) : (
                 <DataGrid
                     rows={usersJobList || []}
-                    columns={columns}
+                    columns={columnsUser}
                     initialState={{
                         pagination: {
                             paginationModel: {

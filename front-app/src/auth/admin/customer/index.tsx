@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../../features/authentication-slice";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import { columns } from "../job/grid-definition";
+import { columnsUser } from "../job/grid-definition";
 import { fetchUsers } from "../../../features/user-slice";
 import { CreateUserJob } from "../job/dialogs/create-user-job";
 
@@ -38,7 +38,7 @@ export const Customer = () => {
             ) : (
                 <DataGrid
                     rows={usersList || []}
-                    columns={columns}
+                    columns={columnsUser}
                     initialState={{
                         pagination: {
                             paginationModel: {
