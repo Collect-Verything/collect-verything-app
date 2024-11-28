@@ -35,15 +35,15 @@ export const PaiementCard = (props: PaiementCardProps) => {
 
     const handlePayement = () => {
         setStatusButtonPaiement(true);
+
         setTimeout(() => {
             console.log("Simulation paiement");
             setStatusPaiement(true);
             setStatusButtonPaiement(false);
             localStorage.removeItem("basket");
         }, 2000);
-        updateStockById(groupStockId);
 
-        // TODO : Requete retrait du stock
+        updateStockById(groupStockId).catch(console.error);
     };
 
     useEffect(() => {

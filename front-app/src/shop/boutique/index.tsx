@@ -14,11 +14,14 @@ export const BoutiquePage = () => {
 
     useEffect(() => {
         getAllProducts().then(setListProducts);
+    }, []);
+
+    useEffect(() => {
         if (listProducts) {
             setProducts(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.PRODUCT));
             setService(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.SERVICE));
         }
-    }, [listProducts, setService, setProducts]);
+    }, [listProducts]);
 
     return (
         <Grid container mt={2} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
