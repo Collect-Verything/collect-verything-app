@@ -47,10 +47,10 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
 
     /*
      * TODO : window.location.reload()  mettre un context pour UX et eviter une page qui ce recharge, avec gestion d'etat de chargement comme pour l'etat user ...
-     * TODO : Add rules on length of url path , must be superior than 22
+     * TODO : Add rules on field to prevent error from server
+     * TODO : Upgrade visibility of dialog
      * */
     const handleModify = () => {
-        // Patch user
         patchProductById(row.id, product)
             .then(handleClose)
             .then(() => window.location.reload())
