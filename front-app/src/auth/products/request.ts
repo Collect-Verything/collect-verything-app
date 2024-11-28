@@ -1,4 +1,4 @@
-import { apiDelete, apiPatch, apiPost } from "../../common/utils/web";
+import { apiDelete, apiGet, apiPatch, apiPost } from "../../common/utils/web";
 import { ProductUrlWithPort } from "../../app/micro-services";
 import { ProductEntity } from "../../shop/boutique/type";
 
@@ -12,4 +12,8 @@ export const patchProductById = (id: number, product: ProductEntity) => {
 
 export const createProduct = (product: ProductEntity) => {
     return apiPost(`${ProductUrlWithPort}`, product);
+};
+
+export const findAllProducts = () => {
+    return apiGet(`${ProductUrlWithPort}/all`);
 };

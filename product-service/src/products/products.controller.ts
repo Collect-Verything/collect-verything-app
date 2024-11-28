@@ -26,10 +26,16 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
-  @Get()
+  @Get('all')
   @ApiCreatedResponse({ type: ProductEntity, isArray: true })
   findAll() {
     return this.productsService.findAll();
+  }
+
+  @Get()
+  @ApiCreatedResponse({ type: ProductEntity, isArray: true })
+  findAllVisible() {
+    return this.productsService.findAllVisible();
   }
 
   @Get('non-visible')

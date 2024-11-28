@@ -7,12 +7,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import { columnsProduct } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
 import { CreateProduct } from "./dialogs/create-product";
+import { findAllProducts } from "./request";
 
 export const ProductsPage = () => {
     const [products, setProducts] = useState<ProductEntity[]>();
 
     useEffect(() => {
-        getAllProducts().then(setProducts);
+        findAllProducts().then(setProducts);
     }, []);
 
     if (!products)

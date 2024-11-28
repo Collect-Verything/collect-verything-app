@@ -13,6 +13,10 @@ export class ProductsService {
   }
 
   findAll() {
+    return this.prisma.product.findMany();
+  }
+
+  findAllVisible() {
     return this.prisma.product.findMany({ where: { published: true } });
   }
 
