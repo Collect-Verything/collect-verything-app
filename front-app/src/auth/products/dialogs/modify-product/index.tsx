@@ -55,7 +55,6 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
             .then(handleClose)
             .then(() => window.location.reload())
             .catch(() => console.log("error during patch product"));
-
     };
 
     const handleCancel = () => {
@@ -131,10 +130,12 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={product?.published}
+                                        value={product?.published ? "true" : "false"}
                                         label="Visibilité"
                                         onChange={(e) => {
-                                            onChangeProduct("published", setProduct, e.target.value as string);
+                                            setProduct((old) => {
+                                                return { ...old, published: e.target.value === "true" };
+                                            });
                                         }}
                                     >
                                         <MenuItem value="true">Visible</MenuItem>
@@ -142,26 +143,27 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                                     </Select>
                                 </FormControl>
                             </Box>
-
                         </DialogContentText>
 
-                        {fieldListProduct .filter((field) => field.key !== "published").map((item) => (
-                            <DialogContentText key={item.label}>
-                                <Typography color="secondary" mt={2}>
-                                    {item.label}
-                                </Typography>
-                                <TextField
-                                    id="standard-basic"
-                                    variant="standard"
-                                    onChange={(e) => {
-                                        onChangeProduct(item.key, setProduct, e.target.value as string);
-                                    }}
-                                    value={product?.[item.key]}
-                                    multiline={["details", "description"].includes(item.key)}
-                                    maxRows={["details", "description"].includes(item.key) ? 10 : undefined}
-                                />
-                            </DialogContentText>
-                        ))}
+                        {fieldListProduct
+                            .filter((field) => field.key !== "published")
+                            .map((item) => (
+                                <DialogContentText key={item.label}>
+                                    <Typography color="secondary" mt={2}>
+                                        {item.label}
+                                    </Typography>
+                                    <TextField
+                                        id="standard-basic"
+                                        variant="standard"
+                                        onChange={(e) => {
+                                            onChangeProduct(item.key, setProduct, e.target.value as string);
+                                        }}
+                                        value={product?.[item.key]}
+                                        multiline={["details", "description"].includes(item.key)}
+                                        maxRows={["details", "description"].includes(item.key) ? 10 : undefined}
+                                    />
+                                </DialogContentText>
+                            ))}
                     </DialogContent>
                 </DialogContent>
                 <DialogActions>
