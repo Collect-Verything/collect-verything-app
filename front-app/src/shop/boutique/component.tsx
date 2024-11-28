@@ -6,6 +6,7 @@ import { ListBasketType, ProductEntity } from "./type";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { mounthToAnnual } from "../../common/utils/pricing";
 import { PAID_FREQUENCY, TYPE_PRODUCT } from "./const";
+import { PRODUCT_TYPE } from "../../common/const/product";
 
 interface CardProductServiceProps {
     products: ProductEntity[];
@@ -104,17 +105,21 @@ const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRound
                 <Typography>{p.price} €</Typography>
             )}
             <Grid>
-                <Button
-                    sx={{ color: "black" }}
-                    onClick={() =>
-                        handleSetStorage(
-                            p,
-                            products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
-                        )
-                    }
-                >
-                    <LocalMallIcon />
-                </Button>
+                {p.stock === 0 && p.type === PRODUCT_TYPE.PRODUCT ? (
+                    <Typography>Hors Stock</Typography>
+                ) : (
+                    <Button
+                        sx={{ color: "black" }}
+                        onClick={() =>
+                            handleSetStorage(
+                                p,
+                                products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
+                            )
+                        }
+                    >
+                        <LocalMallIcon />
+                    </Button>
+                )}
             </Grid>
         </Grid>
     );
