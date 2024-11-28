@@ -6,6 +6,8 @@ import { ProductEntity } from "../../shop/boutique/type";
 import { CheckProduct } from "./dialogs/check-product";
 import { DeleteProduct } from "./dialogs/delete-product";
 import { ModifyProduct } from "./dialogs/modify-product";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export const columnsProduct: GridColDef<ProductEntity>[] = [
     { field: "id", headerName: "Id", width: 30 },
@@ -18,7 +20,12 @@ export const columnsProduct: GridColDef<ProductEntity>[] = [
     { field: "type", headerName: "Type", width: 110 },
     { field: "stock", headerName: "Stock", width: 70 },
     { field: "price", headerName: "Prix", width: 70 },
-    { field: "published", headerName: "Visible", width: 70 },
+    {
+        field: "published",
+        headerName: "Visible",
+        width: 70,
+        renderCell: (params) => (params.value ? <VisibilityIcon /> : <VisibilityOffIcon />),
+    },
 
     { field: "createdAt", headerName: "Date création", width: 150 },
     { field: "updatedAt", headerName: "Date mise à jour", width: 110 },
