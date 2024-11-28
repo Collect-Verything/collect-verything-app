@@ -25,6 +25,8 @@ interface CreateProductProps {
     handleGetAll: () => void;
 }
 
+// TODO : Catch error to display alert in dialog if a field is not correct ,by catching error server or by a rules apply to a field
+
 export const CreateProduct = (props: CreateProductProps) => {
     const { handleGetAll } = props;
 
@@ -143,6 +145,11 @@ export const CreateProduct = (props: CreateProductProps) => {
                                         variant="standard"
                                         onChange={(e) => {
                                             onChangeProduct(item.key, setProduct, e.target.value as string);
+                                        }}
+                                        InputProps={{
+                                            ...((item.key === "stock" || item.key === "price") && {
+                                                inputProps: { min: 0 },
+                                            }),
                                         }}
                                         value={product?.[item.key]}
                                         multiline={["details", "description"].includes(item.key)}

@@ -158,6 +158,12 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                                         onChange={(e) => {
                                             onChangeProduct(item.key, setProduct, e.target.value as string);
                                         }}
+                                        InputProps={{
+                                            ...((item.key === "stock" || item.key === "price") && {
+                                                inputProps: { min: 0 },
+                                            }),
+                                        }}
+                                        type={["stock", "price"].includes(item.key) ? "number" : "text"}
                                         value={product?.[item.key]}
                                         multiline={["details", "description"].includes(item.key)}
                                         maxRows={["details", "description"].includes(item.key) ? 10 : undefined}
