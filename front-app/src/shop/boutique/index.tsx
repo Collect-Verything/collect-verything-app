@@ -24,7 +24,15 @@ export const BoutiquePage = () => {
     }, [listProducts]);
 
     return (
-        <Grid container mt={2} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+        <Grid
+            container
+            mt={2}
+            display="flex"
+            flexDirection="column"
+            alignContent="center"
+            justifyContent="space-around"
+            spacing={3}
+        >
             {services && services.length > 0 && <CardProductService products={services} />}
             {products && products.length > 0 && <CardProductService products={products} />}
             {!products && <Typography>Aucun produits pour le moment</Typography>}

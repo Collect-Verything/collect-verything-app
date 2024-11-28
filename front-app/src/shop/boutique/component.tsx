@@ -40,6 +40,7 @@ export const CardProductService = (props: CardProductServiceProps) => {
                         marginLeft={2}
                         marginRight={2}
                         margin="auto"
+                        height="500px"
                     >
                         <Typography textAlign="center">{p.name}</Typography>
                         <Typography variant="h4" mt={3} mb={2}>

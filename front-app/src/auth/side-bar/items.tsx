@@ -48,6 +48,8 @@ export const UserItemsDashboard: UserItemsDashboardType[] = [
     },
 ];
 
+// TODO : Add theme section to personnalize theme web site and modify theme context mui
+
 export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
