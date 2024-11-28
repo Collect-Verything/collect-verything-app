@@ -1,9 +1,19 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import {ApiCreatedResponse, ApiTags} from "@nestjs/swagger";
-import {ProductEntity} from "./entities/product.entity";
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ProductEntity } from './entities/product.entity';
+import { StockAndID } from './entities/type';
 
 @Controller('products')
 @ApiTags('products')
@@ -17,13 +27,13 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiCreatedResponse({ type: ProductEntity, isArray: true  })
+  @ApiCreatedResponse({ type: ProductEntity, isArray: true })
   findAll() {
     return this.productsService.findAll();
   }
 
   @Get('non-visible')
-  @ApiCreatedResponse({ type: ProductEntity, isArray: true  })
+  @ApiCreatedResponse({ type: ProductEntity, isArray: true })
   findAllNonVisible() {
     return this.productsService.findNonVisible();
   }
@@ -34,9 +44,18 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
+  @Patch('update-stock')
+  @ApiCreatedResponse({ type: StockAndID })
+  updateStock(@Body() stockAndIds: StockAndID[]) {
+    return this.productsService.updateStock(stockAndIds);
+  }
+
   @Patch(':id')
   @ApiCreatedResponse({ type: ProductEntity })
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateProductDto: UpdateProductDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
     return this.productsService.update(id, updateProductDto);
   }
 
