@@ -11,13 +11,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
+
   const config = new DocumentBuilder()
-    .setTitle('Collect & Verithing')
-    .setDescription('CMS shop application')
+    .setTitle('Collect & Verything - Authentication')
+    .setDescription('Manage users and auth')
     .setVersion('0.1')
     .addBearerAuth()
     .build();

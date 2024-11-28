@@ -1,7 +1,7 @@
 import { createBrowserRouter, Link } from "react-router-dom";
 import { HomePage } from "../../shop/home";
-import { SolutionPage } from "../../shop/solution";
-import { Tarification } from "../../shop/tarification";
+import { VitrinePage } from "../../shop/vitrine";
+import { BoutiquePage } from "../../shop/boutique";
 import { ResourcePage } from "../../shop/ressource";
 import { Basket } from "../../shop/basket";
 import { AuthDashboard } from "../../auth/dashboard";
@@ -18,6 +18,10 @@ import { AuthMainLayout } from "../../auth/main-layout";
 import { Job } from "../../auth/admin/job";
 import { Customer } from "../../auth/admin/customer";
 import { Stats } from "../../auth/admin/stats";
+import { ProductsPage } from "../../auth/products";
+import { URL_FRONT } from "./const";
+
+// TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
 
 export const router = createBrowserRouter([
     {
@@ -25,23 +29,23 @@ export const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             {
-                path: "",
+                path: URL_FRONT.HOME,
                 element: <HomePage />,
             },
             {
-                path: "Solution",
-                element: <SolutionPage />,
+                path: URL_FRONT.VITRINE,
+                element: <VitrinePage />,
             },
             {
-                path: "Tarification",
-                element: <Tarification />,
+                path: URL_FRONT.BOUTIQUE,
+                element: <BoutiquePage />,
             },
             {
-                path: "Ressource",
+                path: URL_FRONT.RESSOURCE,
                 element: <ResourcePage />,
             },
             {
-                path: "Basket",
+                path: URL_FRONT.BASKET,
                 element: <Basket />,
             },
         ],
@@ -57,55 +61,59 @@ export const router = createBrowserRouter([
     },
     //  TODO : Implementer un USER Guard
     {
-        path: "Auth",
+        path: URL_FRONT.ADMIN,
         element: <AuthMainLayout />,
         children: [
             {
-                path: "",
+                path: URL_FRONT.HOME,
                 element: <AuthDashboard />,
             },
             {
-                path: "account",
+                path: URL_FRONT.ACCOUNT,
                 element: <Account />,
             },
             {
-                path: "facturation",
+                path: URL_FRONT.PRODUCTS,
+                element: <ProductsPage />,
+            },
+            {
+                path: URL_FRONT.FACTURATION,
                 element: <Facturation />,
             },
             {
-                path: "config",
+                path: URL_FRONT.CONFIG_SERVICE,
                 element: <ConfigProducts />,
             },
             {
-                path: "support",
+                path: URL_FRONT.SUPPORT,
                 element: <Support />,
             },
             {
-                path: "doc",
+                path: URL_FRONT.DOC,
                 element: <Documentation />,
             },
             // TODO : Creer un SUper ADmin guard
             // Next Is For SUPER_ADMIN ONLY
             {
-                path: "job",
+                path: URL_FRONT.GESTION_PERSON,
                 element: <Job />,
             },
             {
-                path: "customer",
+                path: URL_FRONT.GESTION_CUSTOMER,
                 element: <Customer />,
             },
             {
-                path: "stats",
+                path: URL_FRONT.STATS,
                 element: <Stats />,
             },
         ],
     },
     {
-        path: "Login",
+        path: URL_FRONT.LOGIN,
         element: <LoginPage />,
     },
     {
-        path: "Register",
+        path: URL_FRONT.REGISTER,
         element: <RegisterPage />,
     },
     //     TODO : Forgot password

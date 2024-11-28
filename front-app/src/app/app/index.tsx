@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { router } from "../router";
 import { store } from "../../features/store";
 import { theme } from "../../common/styles/theme";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 export const App: React.FC = () => {
     return (

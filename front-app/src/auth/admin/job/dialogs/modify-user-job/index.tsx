@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { DialogUserJobProps } from "../types";
+import { DialogProps } from "../../../../../common/types/dialogs";
 import ModeIcon from "@mui/icons-material/Mode";
 import { TextField, Typography } from "@mui/material";
 import { User } from "../../../../../common/types/user";
@@ -18,8 +18,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { ROLENAME } from "../../../../../common/const";
-import { fieldList } from "./const";
+import { ROLENAME } from "../../../../../common/const/user";
+import { fieldListUser } from "./const";
 import { onChangeUser } from "./tool";
 import { defaultUser } from "../const";
 import { patchById } from "../../../../../features/user-job-slice";
@@ -28,7 +28,7 @@ import { patchUserById } from "../../../../../features/user-slice";
 
 // TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
 
-export const ModifyUserJob = (props: DialogUserJobProps) => {
+export const ModifyUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
     const theme = useTheme();
@@ -160,7 +160,7 @@ export const ModifyUserJob = (props: DialogUserJobProps) => {
                             />
                         </DialogContentText>
 
-                        {fieldList.map((item) => (
+                        {fieldListUser.map((item) => (
                             <DialogContentText key={item.label}>
                                 <Typography color="secondary" mt={2}>
                                     {item.label}

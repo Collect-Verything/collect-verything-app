@@ -131,7 +131,7 @@ Once the application is closed it is necessary to install the root dependencies
 
 It is then necessary to install the dependencies of each application/microservice, to do this you must execute the following command in root:
 ```sh
-npm run install-all
+npm run install:all
   ```
   
 ### Database Services
@@ -157,6 +157,13 @@ If you want create all databases and migrate all the tables and seeds of all ser
 But if your run app with docker you have nothing to do, just : (no hot reload for the moment )
 ```bash
 docker compose up
+```
+
+### Env
+You need to assign ports for all services, create a .env file in the mono root if it is not present:
+```env
+AUTH_PORT=3001
+SOLUTION_PORT=3002
 ```
 
 

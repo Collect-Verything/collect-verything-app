@@ -9,83 +9,92 @@ import { UserItemsDashboardType } from "./types";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
-import { ROLENAME } from "../../common/const";
+import { ROLENAME } from "../../common/const/user";
 import { ButtonMenuDashboard } from "../../common/component/buttons";
 import { Typography } from "@mui/material";
+import CategoryIcon from "@mui/icons-material/Category";
+import { SECTION_NAME, URL_FRONT } from "../../app/router/const";
 
 export const UserItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
-        label: "Tableau de bord",
-        url: "",
+        label: SECTION_NAME.DASHBOARD,
+        url: URL_FRONT.DASHBOARD,
     },
     {
         icon: <PersonIcon />,
-        label: "Compte",
-        url: "account",
+        label: SECTION_NAME.ACCOUNT,
+        url: URL_FRONT.ACCOUNT,
     },
     {
         icon: <PointOfSaleIcon />,
-        label: "Facturation",
-        url: "facturation",
+        label: SECTION_NAME.FACTURATION,
+        url: URL_FRONT.FACTURATION,
     },
     {
         icon: <DisplaySettingsIcon />,
-        label: "Configuration solution",
-        url: "config",
+        label: SECTION_NAME.CONFIG_SERVICE,
+        url: URL_FRONT.CONFIG_SERVICE,
     },
     {
         icon: <SupportAgentIcon />,
-        label: "Service client",
-        url: "support",
+        label: SECTION_NAME.SUPPORT,
+        url: URL_FRONT.SUPPORT,
     },
     {
         icon: <ImportContactsIcon />,
-        label: "Documentation",
-        url: "doc",
+        label: SECTION_NAME.DOC,
+        url: URL_FRONT.DOC,
     },
 ];
+
+// TODO : Add theme section to personnalize theme web site and modify theme context mui
 
 export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
-        label: "Tableau de bord",
-        url: "",
+        label: SECTION_NAME.DASHBOARD,
+        url: URL_FRONT.DASHBOARD,
     },
     {
         icon: <PersonIcon />,
-        label: "Compte",
-        url: "account",
+        label: SECTION_NAME.ACCOUNT,
+        url: URL_FRONT.ACCOUNT,
+    },
+    {
+        icon: <CategoryIcon />,
+        label: SECTION_NAME.PRODUCTS,
+        url: URL_FRONT.PRODUCTS,
     },
     {
         icon: <PointOfSaleIcon />,
-        label: "Facturation",
-        url: "facturation",
+        label: SECTION_NAME.FACTURATION,
+        url: URL_FRONT.FACTURATION,
     },
     {
         icon: <Diversity2Icon />,
-        label: "Gestion du personnel",
-        url: "job",
+        label: SECTION_NAME.GESTION_PERSON,
+        url: URL_FRONT.GESTION_PERSON,
     },
     {
         icon: <ConnectWithoutContactIcon />,
-        label: "Gestion client",
-        url: "customer",
+        label: SECTION_NAME.GESTION_CUSTOMER,
+        url: URL_FRONT.GESTION_CUSTOMER,
     },
     {
         icon: <SignalCellularAltIcon />,
-        label: "Statistique",
-        url: "stats",
+        label: SECTION_NAME.STATS,
+        url: URL_FRONT.STATS,
     },
     {
         icon: <SupportAgentIcon />,
-        label: "Service client",
-        url: "support",
+        label: SECTION_NAME.SUPPORT,
+        url: URL_FRONT.SUPPORT,
     },
     {
         icon: <ImportContactsIcon />,
-        label: "Documentation",
-        url: "doc",
+        label: SECTION_NAME.DOC,
+        url: URL_FRONT.DOC,
     },
 ];
 
@@ -96,28 +105,28 @@ export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
 export const InvoiceItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
-        label: "Tableau de bord",
-        url: "",
+        label: SECTION_NAME.DASHBOARD,
+        url: URL_FRONT.DASHBOARD,
     },
     {
         icon: <PersonIcon />,
-        label: "Compte",
-        url: "account",
+        label: SECTION_NAME.ACCOUNT,
+        url: URL_FRONT.ACCOUNT,
     },
     {
         icon: <PointOfSaleIcon />,
-        label: "Facturation",
-        url: "facturation",
+        label: SECTION_NAME.FACTURATION,
+        url: URL_FRONT.FACTURATION,
     },
     {
         icon: <SignalCellularAltIcon />,
-        label: "Statistique",
-        url: "stats",
+        label: SECTION_NAME.STATS,
+        url: URL_FRONT.STATS,
     },
     {
         icon: <ImportContactsIcon />,
-        label: "Documentation",
-        url: "doc",
+        label: SECTION_NAME.DOC,
+        url: URL_FRONT.DOC,
     },
 ];
 
@@ -125,27 +134,27 @@ export const SupportItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
         label: "Tableau de bord",
-        url: "",
+        url: URL_FRONT.DASHBOARD,
     },
     {
         icon: <PersonIcon />,
         label: "Compte",
-        url: "account",
+        url: URL_FRONT.ACCOUNT,
     },
     {
         icon: <SignalCellularAltIcon />,
         label: "Statistique",
-        url: "stats",
+        url: URL_FRONT.STATS,
     },
     {
         icon: <SupportAgentIcon />,
         label: "Service client",
-        url: "support",
+        url: URL_FRONT.SUPPORT,
     },
     {
         icon: <ImportContactsIcon />,
         label: "Documentation",
-        url: "doc",
+        url: URL_FRONT.DOC,
     },
 ];
 // export const InvoiceItemsDashboard = SuperAdminItemsDashboard.filter(

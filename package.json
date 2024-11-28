@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+
+        "__INSTALL__": "",
+
     "install:front": "cd front-app && npm install",
     "install:auth": "cd auth-service && npm install",
+    "install:product": "cd product-service && npm install",
 
-    "install:all": "npm run install:front & npm run install:auth",
+    "install:all": "npm run install:front & npm run install:auth & npm run install:product",
+
+        "__FRONT__": "",
 
     "start:front": "npm start --prefix front-app",
+
+        "__AUTH__": "",
 
     "start:auth-prod": "npm run start --prefix auth-service",
     "start:auth-dev": "npm run start:dev  --prefix auth-service",
@@ -17,10 +25,24 @@
     "seed:auth": "cd auth-service && npx prisma db seed",
     "db:auth": "npm run generate:auth && npm run seed:auth",
 
-    "db:all": "npm run db:auth",
 
-    "start:prod": "npm run start:front & npm run start:auth-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev"
+        "__PRODUCT__": "",
+
+    "start:product-prod": "npm run start --prefix product-service",
+    "start:product-dev": "npm run start:dev  --prefix product-service",
+
+    "generate:product": "cd product-service && npx prisma migrate dev --name \"Setup product db\"",
+    "seed:product": "cd product-service && npx prisma db seed",
+    "db:product": "npm run generate:product && npm run seed:product",
+
+        "__DATABASE__": "",
+
+    "db:all": "npm run db:auth && npm run db:product",
+
+        "__START__": "",
+
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev"
 
   },
   "devDependencies": {

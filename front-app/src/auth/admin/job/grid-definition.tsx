@@ -7,16 +7,16 @@ import { ModifyUserJob } from "./dialogs/modify-user-job";
 import { DeleteUserJob } from "./dialogs/delete-user-job";
 import { Box } from "@mui/material";
 
-export const columns: GridColDef<User>[] = [
+export const columnsUser: GridColDef<User>[] = [
     { field: "id", headerName: "Id", width: 30 },
     { field: "firstname", headerName: "Nom", width: 90 },
-    { field: "lastname", headerName: "Prenom", width: 100, editable: true },
-    { field: "email", headerName: "Email", width: 190, editable: true },
-    { field: "birthDate", headerName: "Date naissance", type: "number", width: 110, editable: true },
+    { field: "lastname", headerName: "Prenom", width: 100 },
+    { field: "email", headerName: "Email", width: 190},
+    { field: "birthDate", headerName: "Date naissance", width: 110 },
     { field: "gender", headerName: "Genre", width: 70 },
-    { field: "phone", headerName: "Téléphone", width: 150, editable: true },
-    { field: "createdAt", headerName: "Date création", width: 150, editable: true },
-    { field: "updatedAt", headerName: "Date mise à jour", type: "number", width: 110, editable: true },
+    { field: "phone", headerName: "Téléphone", width: 150 },
+    { field: "createdAt", headerName: "Date création", width: 150 },
+    { field: "updatedAt", headerName: "Date mise à jour", width: 110},
     { field: "action", headerName: "Actions", renderCell: (params) => <CellActionUserJob {...params} />, width: 300 },
 ];
 

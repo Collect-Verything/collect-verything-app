@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { columns } from "./grid-definition";
+import { columnsUser } from "./grid-definition";
 import Grid from "@mui/material/Grid2";
-import { CreateUserJob } from "./dialogs/create-user-job";
+import { CreateUserAndJob } from "./dialogs/create-user-job";
 import { useAppDispatch } from "../../../features/authentication-slice";
 import { fetchJobbers } from "../../../features/user-job-slice";
 import { useSelector } from "react-redux";
@@ -29,7 +29,7 @@ export const Job = () => {
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
             <Grid container justifyContent="flex-end" padding={5}>
-                <CreateUserJob isUser={false} handleGetAll={handleGetAllUserJobs} />
+                <CreateUserAndJob isUser={false} handleGetAll={handleGetAllUserJobs} />
             </Grid>
             {status === "loading" ? (
                 // TODO : Center au milieu de la page
@@ -39,7 +39,7 @@ export const Job = () => {
             ) : (
                 <DataGrid
                     rows={usersJobList || []}
-                    columns={columns}
+                    columns={columnsUser}
                     initialState={{
                         pagination: {
                             paginationModel: {

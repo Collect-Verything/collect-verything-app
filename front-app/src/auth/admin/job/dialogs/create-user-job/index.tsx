@@ -16,9 +16,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { ROLENAME } from "../../../../../common/const";
+import { ROLENAME } from "../../../../../common/const/user";
 import { onChangeUser } from "../modify-user-job/tool";
-import { fieldList } from "../modify-user-job/const";
+import { fieldListUser } from "../modify-user-job/const";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { createAJobber } from "../../request";
@@ -32,7 +32,7 @@ interface CreateUserJobProps {
     isUser?: boolean;
 }
 
-export const CreateUserJob = (props: CreateUserJobProps) => {
+export const CreateUserAndJob = (props: CreateUserJobProps) => {
     const { handleGetAll, isUser } = props;
 
     const theme = useTheme();
@@ -56,9 +56,7 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
     const handleCreate = () => {
         if (isUser === true) {
             dispatch(createUser(user)).then(handleClose);
-            console.log("1");
         } else {
-            console.log("2");
             createAJobber(user)
                 .then(() => handleGetAll())
                 .catch(() => console.log("error during sending form user job"));
@@ -171,7 +169,7 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
                             />
                         </DialogContentText>
 
-                        {fieldList.map((item) => (
+                        {fieldListUser.map((item) => (
                             <DialogContentText key={item.label}>
                                 <Typography color="secondary" mt={2}>
                                     {item.label}

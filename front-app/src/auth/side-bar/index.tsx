@@ -9,7 +9,7 @@ import { DisplayMenuDependingJob } from "./items";
 import { useSelector } from "react-redux";
 import { checkToken, useAppDispatch } from "../../features/authentication-slice";
 
-const GAP_MENU_ITEMS_USER = 8;
+const GAP_MENU_ITEMS_USER = 5;
 
 export const SideBar = () => {
     const [sideBar, setSideBar] = useState(true);
