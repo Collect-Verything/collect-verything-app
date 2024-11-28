@@ -10,21 +10,28 @@ import {
     MDBTypography,
 } from "mdb-react-ui-kit";
 import { getHt, getTva, sanitizePrice } from "../../../common/utils/pricing";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import CircularProgress from "@mui/material/CircularProgress";
+import { ListBasketType } from "../../boutique/type";
+import { PRODUCT_TYPE } from "../../../common/const/product";
+import { updateStockById } from "./request";
+import { StockAndID } from "./type";
 
 interface PaiementCardProps {
     backgroundColor: string;
     totalPrice: number;
+    listBasket: ListBasketType[];
 }
 
 export const PaiementCard = (props: PaiementCardProps) => {
-    const { backgroundColor, totalPrice } = props;
+    const { backgroundColor, totalPrice, listBasket } = props;
+
     const [statusPaiement, setStatusPaiement] = useState<boolean>(false);
     const [statusButtonPaiement, setStatusButtonPaiement] = useState<boolean>(false);
+    const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
 
     const handlePayement = () => {
         setStatusButtonPaiement(true);
@@ -34,7 +41,37 @@ export const PaiementCard = (props: PaiementCardProps) => {
             setStatusButtonPaiement(false);
             localStorage.removeItem("basket");
         }, 2000);
+        updateStockById(groupStockId);
+
+        // TODO : Requete retrait du stock
     };
+
+    useEffect(() => {
+        const cleanList: StockAndID[] = [];
+        const groupListProduct: StockAndID[] = [];
+
+        listBasket.forEach((item) => {
+            if (item.product.type === PRODUCT_TYPE.PRODUCT) {
+                const existingStockIndex = cleanList.findIndex((stock) => stock.id === item.product.id);
+                if (existingStockIndex !== -1) {
+                    cleanList[existingStockIndex].quantity += 1;
+                } else {
+                    cleanList.push({ id: item.product.id, quantity: 1 });
+                }
+            }
+        });
+
+        cleanList.forEach((item) => {
+            const existingGroupIndex = groupListProduct.findIndex((groupItem) => groupItem.id === item.id);
+            if (existingGroupIndex !== -1) {
+                groupListProduct[existingGroupIndex].quantity += item.quantity;
+            } else {
+                groupListProduct.push({ id: item.id, quantity: item.quantity });
+            }
+        });
+
+        setGroupStockId(groupListProduct);
+    }, [listBasket]);
 
     return (
         <MDBCol lg="5">
@@ -60,10 +97,10 @@ export const PaiementCard = (props: PaiementCardProps) => {
                         </div>
 
                         <p className="small">Card type</p>
-                            <MDBIcon fab icon="cc-mastercard fa-2x me-2" />
-                            <MDBIcon fab icon="cc-visa fa-2x me-2" />
-                            <MDBIcon fab icon="cc-amex fa-2x me-2" />
-                            <MDBIcon fab icon="cc-paypal fa-2x me-2" />
+                        <MDBIcon fab icon="cc-mastercard fa-2x me-2" />
+                        <MDBIcon fab icon="cc-visa fa-2x me-2" />
+                        <MDBIcon fab icon="cc-amex fa-2x me-2" />
+                        <MDBIcon fab icon="cc-paypal fa-2x me-2" />
 
                         <form className="mt-4">
                             <MDBInput

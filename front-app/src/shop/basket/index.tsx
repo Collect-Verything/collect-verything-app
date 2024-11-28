@@ -162,7 +162,11 @@ export const Basket = () => {
                                     {/*TODO : If not connected by context auth, login or register*/}
                                     {/*TODO : If  connected by context auth, paiement*/}
 
-                                    <PaiementCard backgroundColor={backgroundColor} totalPrice={totalPrice} />
+                                    <PaiementCard
+                                        backgroundColor={backgroundColor}
+                                        totalPrice={totalPrice}
+                                        listBasket={listBasket}
+                                    />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>
