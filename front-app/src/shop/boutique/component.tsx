@@ -2,7 +2,7 @@ import { Button, Switch, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { PRIMARY_COLOR } from "../../common/styles/theme";
 import React, { useEffect, useState } from "react";
-import { ListBasketType, ProductEntity } from "./type";
+import { ProductEntity } from "./type";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { mounthToAnnual } from "../../common/utils/pricing";
 import { PAID_FREQUENCY, TYPE_PRODUCT } from "./const";
@@ -11,6 +11,8 @@ import { PRODUCT_TYPE } from "../../common/const/product";
 interface CardProductServiceProps {
     products: ProductEntity[];
 }
+
+// TODO : Clean basket logic and quantity
 
 export const CardProductService = (props: CardProductServiceProps) => {
     const { products } = props;
@@ -62,7 +64,6 @@ interface SwitchRoundedWithPriceProps {
 }
 
 const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRoundedWithPriceProps) => {
-
     const [checked, setChecked] = React.useState(true);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
     const [quantity, setQuantity] = useState(1);

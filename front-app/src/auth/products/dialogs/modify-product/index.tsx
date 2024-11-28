@@ -119,7 +119,33 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                             </Box>
                         </DialogContentText>
 
-                        {fieldListProduct.map((item) => (
+                        {/*TODO : Fix modification bool*/}
+
+                        <DialogContentText>
+                            <Typography color="secondary" mt={2}>
+                                Visible :
+                            </Typography>
+
+                            <Box width={120} m="auto">
+                                <FormControl fullWidth>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={product?.published}
+                                        label="Visibilité"
+                                        onChange={(e) => {
+                                            onChangeProduct("published", setProduct, e.target.value as string);
+                                        }}
+                                    >
+                                        <MenuItem value="true">Visible</MenuItem>
+                                        <MenuItem value="false">Non visible</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
+
+                        </DialogContentText>
+
+                        {fieldListProduct .filter((field) => field.key !== "published").map((item) => (
                             <DialogContentText key={item.label}>
                                 <Typography color="secondary" mt={2}>
                                     {item.label}
