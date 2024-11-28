@@ -1,4 +1,4 @@
-import { Button, Switch, Typography } from "@mui/material";
+import { Button, Switch, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { PRIMARY_COLOR } from "../../common/styles/theme";
 import React, { useEffect, useState } from "react";
@@ -44,6 +44,7 @@ export const CardProductService = (props: CardProductServiceProps) => {
                             {p.title}
                         </Typography>
                         <Typography variant="subtitle2">{p.description}</Typography>
+
                         <SwitchPriceToBasket products={products} price={p.price} p={p} mt={3} mb={3} />
                     </Grid>
                 ))}
@@ -61,15 +62,15 @@ interface SwitchRoundedWithPriceProps {
 }
 
 const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRoundedWithPriceProps) => {
+
     const [checked, setChecked] = React.useState(true);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
+    const [quantity, setQuantity] = useState(1);
 
-    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
-
-    const handleSetStorage = (product: ProductEntity, paidFrequency: PAID_FREQUENCY) => {
+    const handleSetStorage = (product: ProductEntity, paidFrequency: PAID_FREQUENCY, quantity: number) => {
         const existingBasket = JSON.parse(localStorage.getItem("basket") || "[]");
-        const updatedBasket = [...existingBasket, { product, paidFrequency }];
-        setListBasket(updatedBasket);
+        const newItems = Array.from({ length: quantity }, () => ({ product, paidFrequency }));
+        const updatedBasket = [...existingBasket, ...newItems];
         localStorage.setItem("basket", JSON.stringify(updatedBasket));
     };
 
@@ -102,7 +103,20 @@ const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRound
                     <Switch checked={checked} onChange={handleChange} inputProps={{ "aria-label": "controlled" }} />
                 </Grid>
             ) : (
-                <Typography>{p.price} €</Typography>
+                <>
+                    <Typography>{p.price} €</Typography>
+                    {p.stock !== 0 && (
+                        <TextField
+                            id="standard-basic"
+                            label="Quantité"
+                            variant="standard"
+                            type="number"
+                            value={quantity}
+                            InputProps={{ inputProps: { min: 1, max: p.stock } }}
+                            onChange={(e) => setQuantity(Number(e.target.value))}
+                        />
+                    )}
+                </>
             )}
             <Grid>
                 {p.stock === 0 && p.type === PRODUCT_TYPE.PRODUCT ? (
@@ -114,6 +128,7 @@ const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRound
                             handleSetStorage(
                                 p,
                                 products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
+                                quantity,
                             )
                         }
                     >
