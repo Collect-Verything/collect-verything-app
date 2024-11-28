@@ -21,6 +21,8 @@ import { Stats } from "../../auth/admin/stats";
 import { ProductsPage } from "../../auth/products";
 import { URL_FRONT } from "./const";
 
+// TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
+
 export const router = createBrowserRouter([
     {
         path: "/",
