@@ -18,7 +18,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { ROLENAME } from "../../../../../common/const";
+import { ROLENAME } from "../../../../../common/const/user";
 import { fieldListUser } from "./const";
 import { onChangeUser } from "./tool";
 import { defaultUser } from "../const";

@@ -9,7 +9,7 @@ import { UserItemsDashboardType } from "./types";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
-import { ROLENAME } from "../../common/const";
+import { ROLENAME } from "../../common/const/user";
 import { ButtonMenuDashboard } from "../../common/component/buttons";
 import { Typography } from "@mui/material";
 import CategoryIcon from "@mui/icons-material/Category";

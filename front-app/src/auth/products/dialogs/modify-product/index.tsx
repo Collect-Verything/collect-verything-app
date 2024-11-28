@@ -20,6 +20,7 @@ import { defaultProduct } from "../const";
 import { fieldListProduct } from "./const";
 import { onChangeProduct } from "./tool";
 import { patchProductById } from "../../request";
+import { PRODUCT_TYPE } from "../../../../common/const/product";
 
 export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -109,8 +110,8 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
                                             onChangeProduct("type", setProduct, e.target.value as string);
                                         }}
                                     >
-                                        <MenuItem value="SERVICE">Service</MenuItem>
-                                        <MenuItem value="PRODUCT">Produit</MenuItem>
+                                        <MenuItem value={PRODUCT_TYPE.SERVICE}>Service</MenuItem>
+                                        <MenuItem value={PRODUCT_TYPE.PRODUCT}>Produit</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>

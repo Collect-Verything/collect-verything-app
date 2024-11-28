@@ -16,7 +16,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { ROLENAME } from "../../../../../common/const";
+import { ROLENAME } from "../../../../../common/const/user";
 import { onChangeUser } from "../modify-user-job/tool";
 import { fieldListUser } from "../modify-user-job/const";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";

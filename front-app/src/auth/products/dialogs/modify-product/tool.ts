@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ProductEntity } from "../../../../shop/boutique/type";
+import { PRODUCT_TYPE } from "../../../../common/const/product";
 
 export const onChangeProduct = (
     param: keyof ProductEntity,
@@ -16,6 +17,6 @@ export const onChangeProduct = (
 };
 
 const getTypeProduct = (role: string) => {
-    if (role === "SERVICE") return "SERVICE";
-    return "PRODUCT";
+    if (role === PRODUCT_TYPE.SERVICE) return PRODUCT_TYPE.SERVICE;
+    return PRODUCT_TYPE.PRODUCT;
 };
