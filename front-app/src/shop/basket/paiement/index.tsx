@@ -60,18 +60,10 @@ export const PaiementCard = (props: PaiementCardProps) => {
                         </div>
 
                         <p className="small">Card type</p>
-                        <a href="#!" type="submit" className="text-white">
                             <MDBIcon fab icon="cc-mastercard fa-2x me-2" />
-                        </a>
-                        <a href="#!" type="submit" className="text-white">
                             <MDBIcon fab icon="cc-visa fa-2x me-2" />
-                        </a>
-                        <a href="#!" type="submit" className="text-white">
                             <MDBIcon fab icon="cc-amex fa-2x me-2" />
-                        </a>
-                        <a href="#!" type="submit" className="text-white">
                             <MDBIcon fab icon="cc-paypal fa-2x me-2" />
-                        </a>
 
                         <form className="mt-4">
                             <MDBInput
