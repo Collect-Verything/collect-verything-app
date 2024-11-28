@@ -53,7 +53,9 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
         // Patch user
         patchProductById(row.id, product)
             .then(handleClose)
-            .then(() => window.location.reload());
+            .then(() => window.location.reload())
+            .catch(() => console.log("error during patch product"));
+
     };
 
     const handleCancel = () => {

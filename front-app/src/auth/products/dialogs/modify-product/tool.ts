@@ -8,10 +8,10 @@ export const onChangeProduct = (
     value: string,
 ) => {
     setProduct((old) => {
-        // if (!old) return old;
-        if (param === "type") {
-            return { ...old, type: getTypeProduct(value) };
-        }
+        if (param === "type") return { ...old, type: getTypeProduct(value) };
+        if (param === "price") return { ...old, price: Number(value) };
+        if (param === "stock") return { ...old, stock: Number(value) };
+        if (param === "published") return { ...old, published: Boolean(value) };
         return { ...old, [param]: value };
     });
 };

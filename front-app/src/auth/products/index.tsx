@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsProduct } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
+import { CreateProduct } from "./dialogs/create-product";
 
 export const ProductsPage = () => {
     const [products, setProducts] = useState<ProductEntity[]>();
@@ -24,7 +25,7 @@ export const ProductsPage = () => {
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
             <Grid container justifyContent="flex-end" padding={5}>
-                {/*<CreateUserJob isUser={false} handleGetAll={handleGetAllUserJobs} />*/}
+                <CreateProduct handleGetAll={getAllProducts} />
             </Grid>
 
             <DataGrid
