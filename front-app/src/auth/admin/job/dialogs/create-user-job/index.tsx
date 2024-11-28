@@ -32,7 +32,7 @@ interface CreateUserJobProps {
     isUser?: boolean;
 }
 
-export const CreateUserJob = (props: CreateUserJobProps) => {
+export const CreateUserAndJob = (props: CreateUserJobProps) => {
     const { handleGetAll, isUser } = props;
 
     const theme = useTheme();
@@ -56,9 +56,7 @@ export const CreateUserJob = (props: CreateUserJobProps) => {
     const handleCreate = () => {
         if (isUser === true) {
             dispatch(createUser(user)).then(handleClose);
-            console.log("1");
         } else {
-            console.log("2");
             createAJobber(user)
                 .then(() => handleGetAll())
                 .catch(() => console.log("error during sending form user job"));
