@@ -51,7 +51,7 @@ As part of this project, my goal is to implement the essential functionalities o
 
 <!-- FEATURES -->
 
-## Features
+## Features 
 
 ### Basic features:
 
