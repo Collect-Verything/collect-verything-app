@@ -7,6 +7,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
+import { ROLENAME_ID } from './enum';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -39,5 +41,23 @@ export class AuthService {
         firstname: user.firstname,
       }),
     };
+  }
+
+  async register(createUserDto: CreateUserDto) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { roleId, ...userData } = createUserDto;
+
+    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+
+    return this.prisma.user.create({
+      data: {
+        ...userData,
+        password: hashedPassword,
+        role: {
+          connect: { id: ROLENAME_ID.USER },
+        },
+      },
+      include: { role: true },
+    });
   }
 }

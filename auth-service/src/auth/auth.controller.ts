@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AuthEntity } from './entity/auth.entity';
 import { LoginDto } from './dto/login.dto';
+import { UserEntity } from '../users/entities/user.entity';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -15,5 +17,9 @@ export class AuthController {
     return this.authService.login(email, password);
   }
 
-  // Register ?? ici ou dans user ?
+  @Post('register')
+  @ApiOkResponse({ type: UserEntity })
+  async register(@Body() registerForm: CreateUserDto) {
+    return this.authService.register(registerForm);
+  }
 }
