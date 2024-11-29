@@ -82,12 +82,12 @@ export const ALERT_MESSAGE_FIELD: AlertMessageFieldType = {
 export const checkRegisterForm = (
     registerForm: UserRegisterType,
     setAlerts: Dispatch<SetStateAction<AlertRegisterType | undefined>>,
-): Promise<void> => {
-    return new Promise((resolve, reject) => {
+): Promise<boolean> => {
+    return new Promise((resolve) => {
         // Civilité
         if (!registerForm.gender) {
             setAlerts(ALERT_MESSAGE_FIELD.GENDER);
-            reject();
+            resolve(false); // Retourne une erreur
             return;
         }
 
@@ -104,77 +104,77 @@ export const checkRegisterForm = (
 
         if (registerForm.birthDate && !isOver18) {
             setAlerts(ALERT_MESSAGE_FIELD.BIRTHDATE_LEGAL);
-            reject();
+            resolve(false);
             return;
         }
 
         // Nom
         if (!registerForm.lastname) {
             setAlerts(ALERT_MESSAGE_FIELD.LASTNAME_PRESENT);
-            reject();
+            resolve(false);
             return;
         }
 
         if (registerForm.lastname.length < 2 || registerForm.lastname.length > 20) {
             setAlerts(ALERT_MESSAGE_FIELD.LASTNAME_LENGTH);
-            reject();
+            resolve(false);
             return;
         }
 
         // Prénom
         if (!registerForm.firstname) {
             setAlerts(ALERT_MESSAGE_FIELD.FIRSTNAME_PRESENT);
-            reject();
+            resolve(false);
             return;
         }
 
         if (registerForm.firstname.length < 2 || registerForm.firstname.length > 20) {
             setAlerts(ALERT_MESSAGE_FIELD.FIRSTNAME_LENGTH);
-            reject();
+            resolve(false);
             return;
         }
 
         // Email
         if (!registerForm.email) {
             setAlerts(ALERT_MESSAGE_FIELD.EMAIL_PRESENT);
-            reject();
+            resolve(false);
             return;
         }
 
         if (!emailRegex.test(registerForm.email)) {
             setAlerts(ALERT_MESSAGE_FIELD.EMAIL_REGEX);
-            reject();
+            resolve(false);
             return;
         }
 
         // Mot de passe
         if (!registerForm.password) {
             setAlerts(ALERT_MESSAGE_FIELD.PASSWORD_PRESENT);
-            reject();
+            resolve(false);
             return;
         }
 
         if (registerForm.password.length < 6 || registerForm.password.length > 25) {
             setAlerts(ALERT_MESSAGE_FIELD.PASSWORD_LENGTH);
-            reject();
+            resolve(false);
             return;
         }
 
         // Confirmation du mot de passe
         if (!registerForm.confirmPassword) {
             setAlerts(ALERT_MESSAGE_FIELD.CONFIRM_PASSWORD_PRESENT);
-            reject();
+            resolve(false);
             return;
         }
 
         if (registerForm.confirmPassword !== registerForm.password) {
             setAlerts(ALERT_MESSAGE_FIELD.CONFIRM_PASSWORD_LENGTH);
-            reject();
+            resolve(false);
             return;
         }
 
         // Toutes les validations sont ok
         setAlerts(undefined);
-        resolve();
+        resolve(true);
     });
 };

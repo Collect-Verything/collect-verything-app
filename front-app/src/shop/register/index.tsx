@@ -29,14 +29,21 @@ export const RegisterPage = () => {
     const [alerts, setAlerts] = React.useState<AlertRegisterType | undefined>();
 
     const handleRegister = async () => {
-        checkRegisterForm(registerForm, setAlerts)
-            .then(() => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { confirmPassword, ...cleanedRegisterForm } = registerForm;
-                return registerRequest(cleanedRegisterForm);
-            })
-            .then(() => setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS))
-            .catch(() => setAlerts(ALERT_MESSAGE_FIELD.REGISTER_FAILED));
+        const isValid = await checkRegisterForm(registerForm, setAlerts);
+
+        if (!isValid) {
+            return;
+        }
+
+        try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { confirmPassword, ...cleanedRegisterForm } = registerForm;
+            await registerRequest(cleanedRegisterForm);
+            setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS);
+            setRegisterForm(initRegisterForm);
+        } catch {
+            setAlerts(ALERT_MESSAGE_FIELD.REGISTER_FAILED);
+        }
     };
 
     return (
