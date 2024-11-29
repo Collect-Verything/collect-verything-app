@@ -109,7 +109,7 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={user?.role.name}
-                                        label="Civilité"
+                                        label="Role"
                                         onChange={(e) => {
                                             onChangeUser("role", setUser, e.target.value as string);
                                         }}

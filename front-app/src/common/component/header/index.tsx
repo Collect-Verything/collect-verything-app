@@ -8,6 +8,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
 import { Badge } from "../badge";
 import { checkToken, useAppDispatch } from "../../../features/authentication-slice";
+import { URL_FRONT } from "../../../app/router/const";
 
 export const Header = () => {
     // eslint-disable-next-line
@@ -36,7 +37,7 @@ export const Header = () => {
                         {item.label}
                     </Link>
                 ))}
-                <Link style={{ textDecoration: "none", color: "black" }} to={"/basket"}>
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.BASKET}`}>
                     <ShoppingCartIcon color="secondary" />
                 </Link>
             </Grid>
@@ -46,7 +47,7 @@ export const Header = () => {
                 ) : (
                     <>
                         <Grid>
-                            <Link style={{ textDecoration: "none", color: "black" }} to="login">
+                            <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.LOGIN}`}>
                                 Se connecter
                             </Link>
                         </Grid>

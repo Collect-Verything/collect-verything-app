@@ -7,6 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
 import Alert from "@mui/material/Alert";
 import { login, useAppDispatch } from "../../features/authentication-slice";
+import { URL_FRONT } from "../../app/router/const";
 
 export interface LoginProps {
     email: string;
@@ -41,7 +42,7 @@ export const LoginPage = () => {
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
                 </Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to="/register">
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.REGISTER}`}>
                     <ButtonRounded label="Register" />
                 </Link>
             </Grid>

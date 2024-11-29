@@ -4,21 +4,39 @@ import { ButtonRounded } from "../../common/component/buttons";
 import React from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import "./style.css";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
+import { URL_FRONT } from "../../app/router/const";
+import {
+    ALERT_MESSAGE_FIELD,
+    AlertRegisterType,
+    checkRegisterForm,
+    initRegisterForm,
+    onChangeRegisterField,
+    userRegisterList,
+    UserRegisterType,
+} from "./const";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Alert from "@mui/material/Alert";
+import { registerRequest } from "./request";
 
 export const RegisterPage = () => {
-    const [civilityName, setCivilityName] = React.useState<string>("");
-    const [value, setValue] = React.useState<Dayjs | null>(null);
+    const [registerForm, setRegisterForm] = React.useState<UserRegisterType>(initRegisterForm);
+    const [alerts, setAlerts] = React.useState<AlertRegisterType | undefined>();
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setCivilityName(event.target.value as string);
+    const handleRegister = async () => {
+        checkRegisterForm(registerForm, setAlerts)
+            .then(() => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { confirmPassword, ...cleanedRegisterForm } = registerForm;
+                return registerRequest(cleanedRegisterForm);
+            })
+            .then(() => setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS))
+            .catch(() => setAlerts(ALERT_MESSAGE_FIELD.REGISTER_FAILED));
     };
 
     return (
@@ -29,107 +47,68 @@ export const RegisterPage = () => {
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
                 </Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to="/login">
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.LOGIN}`}>
                     <ButtonRounded label="Login" />
                 </Link>
             </Grid>
 
             <Grid pb={5} container flexDirection="column" justifyContent="center" alignItems="center">
+                {alerts && <Alert severity={alerts.alertStatus}>{alerts.alertMessage}</Alert>}
                 <Grid>
                     <Typography pb={3} variant="h3" color="black">
                         Welcome !
                     </Typography>
                 </Grid>
-                <Grid>
-                    <TextField
-                        InputProps={{
-                            style: { borderRadius: "25px", width: 300 },
-                        }}
-                        sx={{ paddingBottom: 2 }}
-                        id="outlined-basic"
-                        label="Nom"
-                        variant="outlined"
-                    />
-                </Grid>
-                <Grid>
-                    <TextField
-                        InputProps={{
-                            style: { borderRadius: "25px", width: 300 },
-                        }}
-                        sx={{ paddingBottom: 2 }}
-                        id="outlined-basic"
-                        label="Prènom"
-                        variant="outlined"
-                    />
-                </Grid>
-                <Grid>
-                    <FormControl sx={{ m: 1, width: 300, paddingBottom: 2 }}>
-                        <InputLabel id="demo-simple-select-label">Civilité</InputLabel>
-                        <Select
-                            sx={{ borderRadius: "25px" }}
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={civilityName}
-                            label="Civilité"
-                            onChange={handleChange}
-                            variant="outlined"
-                        >
-                            <MenuItem value={10}>Monsieur</MenuItem>
-                            <MenuItem value={20}>Madame</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid>
-                    <DatePicker
-                        sx={{
-                            m: 1,
-                            width: 300,
-                            paddingBottom: 2,
-                            borderRadius: "25px%",
-                        }}
-                        value={value}
-                        onChange={(newValue) => setValue(newValue)}
-                    />
-                </Grid>
-                <Grid>
-                    <TextField
-                        InputProps={{
-                            style: { borderRadius: "25px", width: 300 },
-                        }}
-                        sx={{ paddingBottom: 2 }}
-                        id="outlined-basic"
-                        type="email"
-                        label="Adresse email"
-                        variant="outlined"
-                    />
-                </Grid>
-                <Grid>
-                    <TextField
-                        InputProps={{
-                            style: { borderRadius: "25px", width: 300 },
-                        }}
-                        sx={{ paddingBottom: 2 }}
-                        id="outlined-basic"
-                        type="password"
-                        label="Mot de passe"
-                        variant="outlined"
-                    />
-                </Grid>
-                <Grid>
-                    <TextField
-                        InputProps={{
-                            style: { borderRadius: "25px", width: 300 },
-                        }}
-                        sx={{ paddingBottom: 2 }}
-                        id="outlined-basic"
-                        type="password"
-                        label="Confirmation mot de passe"
-                        variant="outlined"
-                    />
-                </Grid>
 
+                {userRegisterList.map((field) => (
+                    <Grid key={field.key}>
+                        {field.key === "gender" && (
+                            <FormControl fullWidth sx={{ marginBottom: 2, borderRadius: "14px" }}>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={registerForm?.gender}
+                                    label="Civilité"
+                                    onChange={(e) => {
+                                        onChangeRegisterField("gender", setRegisterForm, e.target.value as string);
+                                    }}
+                                >
+                                    <MenuItem value="Monsieur">Monsieur</MenuItem>
+                                    <MenuItem value="Madame">Madame</MenuItem>
+                                </Select>
+                            </FormControl>
+                        )}
+
+                        {field.key === "birthDate" && (
+                            <DatePicker
+                                sx={{ marginBottom: 2, borderRadius: "14px" }}
+                                label={field.label}
+                                value={dayjs(registerForm.birthDate)}
+                                onChange={(e) => {
+                                    if (e) onChangeRegisterField(field.key, setRegisterForm, e.toISOString());
+                                }}
+                            />
+                        )}
+
+                        {field.key !== "birthDate" && field.key !== "gender" && (
+                            <TextField
+                                InputProps={{
+                                    style: { borderRadius: "25px", width: 300 },
+                                }}
+                                sx={{ paddingBottom: 2 }}
+                                label={field.label}
+                                onChange={(e) => onChangeRegisterField(field.key, setRegisterForm, e.target.value)}
+                                type={field.key === "password" || field.key === "confirmPassword" ? "password" : "text"}
+                                error={
+                                    field.key === "confirmPassword" &&
+                                    registerForm.password !== registerForm.confirmPassword
+                                }
+                            />
+                        )}
+                    </Grid>
+                ))}
                 <Grid mt={2}>
-                    <ButtonRounded label="Register" />
+                    <ButtonRounded label="Register" handleFx={handleRegister} />
                 </Grid>
             </Grid>
         </Grid>
