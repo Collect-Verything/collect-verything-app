@@ -55,6 +55,11 @@ export const LoginPage = () => {
                 justifyContent="center"
                 alignItems="center"
                 marginTop={15}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        handleLogin();
+                    }
+                }}
             >
                 <Grid>
                     <Typography pb={3} variant="h3" color="black">
