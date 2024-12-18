@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid2";
 import { TextField, Typography } from "@mui/material";
-import { ButtonRoundedSized } from "../../common/component/buttons";
+import { ButtonRoundedSized } from "../component/buttons";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
