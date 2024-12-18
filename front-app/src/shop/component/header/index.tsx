@@ -52,7 +52,7 @@ export const Header = () => {
                             </Link>
                         </Grid>
                         <Grid>
-                            <Button sx={{ textTransform: "none" }}>
+                            <Button sx={{ textTransform: "none" }} href={`${URL_FRONT.REGISTER}`}>
                                 <ButtonRounded label="Démarer un essai" />
                             </Button>
                         </Grid>

@@ -1,9 +1,9 @@
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
 import React from "react";
-import { legalItems, LegalProps } from "../../assets/legal-text";
-import { ScrollDialogChildText } from "../../dialog";
-import { socialMediaItems, SocialMediaProps } from "../../assets/social-media-links";
+import { legalItems, LegalProps } from "../../../common/assets/legal-text";
+import { ScrollDialogChildText } from "../../../common/dialog";
+import { socialMediaItems, SocialMediaProps } from "../../../common/assets/social-media-links";
 
 export const Footer = () => (
     <Grid justifyContent="space-between" alignItems="center" textAlign="center" spacing={2} mt={10}>

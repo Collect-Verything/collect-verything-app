@@ -4,7 +4,7 @@ import "./style.css";
 import { Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import { PRIMARY_COLOR } from "../../styles/theme";
+import { PRIMARY_COLOR } from "../../../common/styles/theme";
 
 interface InputsRoundedWithChildProps {
     children: React.ReactNode;
