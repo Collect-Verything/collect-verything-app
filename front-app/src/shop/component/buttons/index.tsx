@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Grid2 } from "@mui/material";
-import { noOp } from "../../utils/void";
+import { noOp } from "../../../common/utils/void";
 import { useNavigate } from "react-router-dom";
 
 interface ButtonRoundedProps {

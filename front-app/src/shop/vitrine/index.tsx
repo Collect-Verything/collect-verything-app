@@ -1,9 +1,9 @@
 import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
-import { InputsRoundedWithChild, SwitchInputsRoundedWithChild } from "../../common/component/inputs";
-import { ButtonRounded } from "../../common/component/buttons";
+import { InputsRoundedWithChild, SwitchInputsRoundedWithChild } from "../component/inputs";
+import { ButtonRounded } from "../component/buttons";
 import React, { useEffect, useState } from "react";
-import { VitrineUnitProduct } from "../../common/component/solution";
+import { VitrineUnitProduct } from "../component/solution";
 import { ProductEntity } from "../boutique/type";
 import { getAllProducts } from "./request";
 

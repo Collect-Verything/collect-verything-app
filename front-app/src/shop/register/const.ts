@@ -2,7 +2,7 @@ import { User } from "../../common/types/user";
 import { Dispatch, SetStateAction } from "react";
 import { AlertColor, AlertPropsColorOverrides } from "@mui/material/Alert/Alert";
 import { OverridableStringUnion } from "@mui/types";
-import {emailRegex} from "../../common/utils/regex";
+import { emailRegex } from "../../common/utils/regex";
 
 interface LabelKey<T> {
     label: string;
@@ -60,20 +60,51 @@ export interface AlertRegisterType {
 type AlertMessageFieldType = {
     [key: string]: AlertRegisterType;
 };
+
+// type AlertMessageFieldType = Record<string, AlertRegisterType>;
+
+// interface AlertMessageFieldType {
+//     [key: string]: AlertRegisterType;
+// };
+
 export const ALERT_MESSAGE_FIELD: AlertMessageFieldType = {
     GENDER: { field: "gender", alertStatus: "warning", alertMessage: "Votre civilité doit être présente" },
     BIRTHDATE_LEGAL: { field: "birthDate", alertStatus: "warning", alertMessage: "Vous devez avoir plus de 18 ans" },
     LASTNAME_PRESENT: { field: "lastname", alertStatus: "warning", alertMessage: "Le nom doit être présent" },
-    LASTNAME_LENGTH: { field: "lastname", alertStatus: "warning", alertMessage: "Le nom doit contenir entre 2 et 20 caractères" },
+    LASTNAME_LENGTH: {
+        field: "lastname",
+        alertStatus: "warning",
+        alertMessage: "Le nom doit contenir entre 2 et 20 caractères",
+    },
     FIRSTNAME_PRESENT: { field: "firstname", alertStatus: "warning", alertMessage: "Le prénom doit être présent" },
-    FIRSTNAME_LENGTH: { field: "firstname", alertStatus: "warning", alertMessage: "Le prénom doit contenir entre 2 et 20 caractères" },
+    FIRSTNAME_LENGTH: {
+        field: "firstname",
+        alertStatus: "warning",
+        alertMessage: "Le prénom doit contenir entre 2 et 20 caractères",
+    },
     EMAIL_PRESENT: { field: "email", alertStatus: "warning", alertMessage: "L'email doit être présent" },
     EMAIL_REGEX: { field: "email", alertStatus: "warning", alertMessage: "L'email est invalide" },
-    PASSWORD_PRESENT: { field: "password", alertStatus: "warning", alertMessage: "Le mot de passe doit être présent",},
-    PASSWORD_LENGTH: { field: "password", alertStatus: "warning", alertMessage: "Le mot de passe doit contenir entre 6 et 25 caractères" },
-    CONFIRM_PASSWORD_PRESENT: { field: "confirmPassword", alertStatus: "warning", alertMessage: "La confirmation du mot de passe doit être présente" },
-    CONFIRM_PASSWORD_LENGTH: { field: "confirmPassword", alertStatus: "warning", alertMessage: "La confirmation du mot de passe ne correspond pas" },
-    REGISTER_FAILED: { field: undefined, alertStatus: "error", alertMessage: "Une erreur est apparu lors de votre inscription" },
+    PASSWORD_PRESENT: { field: "password", alertStatus: "warning", alertMessage: "Le mot de passe doit être présent" },
+    PASSWORD_LENGTH: {
+        field: "password",
+        alertStatus: "warning",
+        alertMessage: "Le mot de passe doit contenir entre 6 et 25 caractères",
+    },
+    CONFIRM_PASSWORD_PRESENT: {
+        field: "confirmPassword",
+        alertStatus: "warning",
+        alertMessage: "La confirmation du mot de passe doit être présente",
+    },
+    CONFIRM_PASSWORD_LENGTH: {
+        field: "confirmPassword",
+        alertStatus: "warning",
+        alertMessage: "La confirmation du mot de passe ne correspond pas",
+    },
+    REGISTER_FAILED: {
+        field: undefined,
+        alertStatus: "error",
+        alertMessage: "Une erreur est apparu lors de votre inscription",
+    },
     REGISTER_SUCCESS: { field: undefined, alertStatus: "success", alertMessage: "Inscription validé" },
 } as const;
 
@@ -87,7 +118,7 @@ export const checkRegisterForm = (
         // Civilité
         if (!registerForm.gender) {
             setAlerts(ALERT_MESSAGE_FIELD.GENDER);
-            resolve(false); // Retourne une erreur
+            resolve(false);
             return;
         }
 
@@ -99,8 +130,7 @@ export const checkRegisterForm = (
             age > 18 ||
             (age === 18 &&
                 (currentDate.getMonth() > birthDate.getMonth() ||
-                    (currentDate.getMonth() === birthDate.getMonth() &&
-                        currentDate.getDate() >= birthDate.getDate())));
+                    (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() >= birthDate.getDate())));
 
         if (registerForm.birthDate && !isOver18) {
             setAlerts(ALERT_MESSAGE_FIELD.BIRTHDATE_LEGAL);

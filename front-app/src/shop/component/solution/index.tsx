@@ -1,9 +1,9 @@
 import Grid from "@mui/material/Grid2";
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../styles/theme";
+import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
-import { ProductEntity } from "../../../shop/boutique/type";
+import { ProductEntity } from "../../boutique/type";
 
 export interface VitrineUnitProductProps {
     product: ProductEntity;

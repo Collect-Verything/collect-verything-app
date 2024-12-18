@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import { Button, TextField, Typography } from "@mui/material";
-import { ButtonRounded } from "../../common/component/buttons";
+import { ButtonRounded } from "../component/buttons";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
