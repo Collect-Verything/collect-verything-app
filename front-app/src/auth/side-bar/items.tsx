@@ -10,7 +10,7 @@ import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import { ROLENAME } from "../../common/const/user";
-import { ButtonMenuDashboard } from "../../common/component/buttons";
+import { ButtonMenuDashboard } from "../../shop/component/buttons";
 import { Typography } from "@mui/material";
 import CategoryIcon from "@mui/icons-material/Category";
 import { SECTION_NAME, URL_FRONT } from "../../app/router/const";

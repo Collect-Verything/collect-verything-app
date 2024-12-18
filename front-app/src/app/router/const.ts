@@ -17,6 +17,7 @@ export enum URL_FRONT {
     RESSOURCE = "Ressource",
     BASKET = "Basket",
     ADMIN = "Auth",
+    DETAILS = "Details",
 }
 
 export enum SECTION_NAME {
