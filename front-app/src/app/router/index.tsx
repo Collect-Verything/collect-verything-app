@@ -23,6 +23,9 @@ import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
 import StripeStatusPayement from "../../shop/stripe";
 import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
+import {ForgotPasswordPage} from "../../shop/forgot-password";
+
+// TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
 
 export const router = createBrowserRouter([
     {
@@ -133,5 +136,8 @@ export const router = createBrowserRouter([
         path: URL_FRONT.REGISTER,
         element: <RegisterPage />,
     },
-    //     TODO : Forgot password
+    {
+        path: URL_FRONT.FORGOT_PASSWORD,
+        element: <ForgotPasswordPage />,
+    },
 ]);
