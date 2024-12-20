@@ -22,4 +22,10 @@ export class AuthController {
   async register(@Body() registerForm: CreateUserDto) {
     return this.authService.register(registerForm);
   }
+
+  @Post('forgot-password')
+  //@ApiOkResponse({ type: UserEntity })
+  async forgotPassword(@Body() obj: { mail: string }) {
+    return this.authService.forgotPassword(obj.mail);
+  }
 }
