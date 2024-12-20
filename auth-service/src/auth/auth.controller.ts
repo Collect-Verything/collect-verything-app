@@ -5,7 +5,6 @@ import { AuthEntity } from './entity/auth.entity';
 import { LoginDto } from './dto/login.dto';
 import { UserEntity } from '../users/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import {ForgotEntity} from "./entity/forgot.entity";
 
 @Controller('auth')
 @ApiTags('auth')
@@ -25,7 +24,7 @@ export class AuthController {
   }
 
   @Post('forgot-password')
-  @ApiOkResponse({ type: ForgotEntity })
+  //@ApiOkResponse({ type: ForgotEntity })
   async forgotPassword(@Body() mail:{email:string}) {
     return this.authService.forgotPassword(mail);
   }
