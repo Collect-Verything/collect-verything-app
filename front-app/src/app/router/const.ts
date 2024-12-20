@@ -18,6 +18,7 @@ export enum URL_FRONT {
     BASKET = "Basket",
     ADMIN = "Auth",
     DETAILS = "Details",
+    FORGOT_PASSWORD = "forgot-password",
 }
 
 export enum SECTION_NAME {

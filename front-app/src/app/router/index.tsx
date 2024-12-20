@@ -21,6 +21,7 @@ import { Stats } from "../../auth/admin/stats";
 import { ProductsPage } from "../../auth/products";
 import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
+import {ForgotPasswordPage} from "../../shop/forgot-password";
 
 // TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
 
@@ -121,5 +122,8 @@ export const router = createBrowserRouter([
         path: URL_FRONT.REGISTER,
         element: <RegisterPage />,
     },
-    //     TODO : Forgot password
+    {
+        path: URL_FRONT.FORGOT_PASSWORD,
+        element: <ForgotPasswordPage />,
+    },
 ]);
