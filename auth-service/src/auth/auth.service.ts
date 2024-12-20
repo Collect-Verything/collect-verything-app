@@ -10,11 +10,13 @@ import * as bcrypt from 'bcrypt';
 import { ROLENAME_ID } from './enum';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import {ForgotEntity} from "./entity/forgot.entity";
+import {UsersService} from "../users/users.service";
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
+    private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
@@ -63,8 +65,9 @@ export class AuthService {
     });
   }
 
-  async forgotPassword(mail: ForgotEntity){
-    console.log(mail);
+  async forgotPassword(mail:{email:string}){
+    const currentUser = await this.usersService.findOneByMail(mail.email)
+    await this.usersService.updateForgotPassword(currentUser.id)
     return {'Res':mail}
   }
 }

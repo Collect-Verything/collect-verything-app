@@ -88,6 +88,12 @@ export class UsersService {
     });
   }
 
+  findOneByMail(email: string) {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const { roleId, ...userData } = updateUserDto;
 
@@ -128,6 +134,7 @@ export class UsersService {
       where: { id },
     });
 
+
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -155,7 +162,18 @@ export class UsersService {
     });
   }
 
-  remove(id: number) {
+  async updateForgotPassword(id: number) {
+    //Créer un tool de génération de password par défaut et sécurisé
+    const newPassword = await bcrypt.hash(
+        "motdepasse",
+        roundsOfHashing,
+    );
+    console.log(newPassword);
+    console.log(id)
+    return this.prisma.user.update({where : {id},data:{password: newPassword}} );
+  }
+
+    remove(id: number) {
     return this.prisma.user.delete({ where: { id } });
   }
 }
