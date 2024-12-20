@@ -70,7 +70,7 @@ NEW_SERVICE_PORT=666  Trouver un port disponible et logique
 Nous devons ensuite assigner ce nouveau port a notre nouveau service qui possede un port par defaut, pour cela il faut creer le fichier suivant à la racine du dossier de notre nouveau service :
 ```bash
 cd new-service
-mkdir env-config.ts
+touch env-config.ts
 ```
 
 Installer la dependance dotenv:
