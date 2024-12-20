@@ -9,8 +9,7 @@ import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { ROLENAME_ID } from './enum';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import {ForgotEntity} from "./entity/forgot.entity";
-import {UsersService} from "../users/users.service";
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
@@ -65,9 +64,10 @@ export class AuthService {
     });
   }
 
-  async forgotPassword(mail:{email:string}){
-    const currentUser = await this.usersService.findOneByMail(mail.email)
-    await this.usersService.updateForgotPassword(currentUser.id)
-    return {'Res':mail}
+  async forgotPassword(mail: { email: string }) {
+    const currentUser = await this.usersService.findOneByMail(mail.email);
+    await this.usersService.updateForgotPassword(currentUser.id);
+    return { Res: mail };
   }
+
 }

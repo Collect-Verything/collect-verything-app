@@ -63,7 +63,7 @@ export class AuthController {
   }
 
   @Post('forgot-password')
-  @ApiOkResponse({ type: ForgotEntity })
+  //@ApiOkResponse({ type: ForgotEntity })
   async forgotPassword(@Body() mail:{email:string}) {
     return this.authService.forgotPassword(mail);
   }

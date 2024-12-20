@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import {generateRandomPassword} from "../utils";
 
 export const roundsOfHashing = 10;
 
@@ -163,14 +164,13 @@ export class UsersService {
   }
 
   async updateForgotPassword(id: number) {
-    //Créer un tool de génération de password par défaut et sécurisé
-    const newPassword = await bcrypt.hash(
-        "motdepasse",
+    const newPassword = generateRandomPassword(10);
+    const newPasswordEncrypt = await bcrypt.hash(
+        newPassword,
         roundsOfHashing,
     );
     console.log(newPassword);
-    console.log(id)
-    return this.prisma.user.update({where : {id},data:{password: newPassword}} );
+    return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
   }
 
     remove(id: number) {
