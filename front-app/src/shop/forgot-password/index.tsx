@@ -5,11 +5,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
-//import Alert from "@mui/material/Alert";
-//import { login, useAppDispatch } from "../../features/authentication-slice";
 import { URL_FRONT } from "../../app/router/const";
 import {TextField, Typography} from "@mui/material";
 import {forgotPasswordRequest} from "./request";
+import Alert from "@mui/material/Alert";
 
 export interface ForgotPassword {
     email: string;
@@ -17,9 +16,11 @@ export interface ForgotPassword {
 
 export const ForgotPasswordPage = () => {
     const [email, setEmail] = useState<ForgotPassword>({ email: "" });
+    const [alerts, setAlerts] = React.useState<boolean>(false);
 
     const handleForgotPassword = () => {
-        forgotPasswordRequest(email).then(()=>setEmail({email:""}));
+        setAlerts(false);
+        forgotPasswordRequest(email).then(()=>setEmail({email:""})).catch(()=>setAlerts(true));
     };
 
     return (
@@ -32,6 +33,7 @@ export const ForgotPasswordPage = () => {
                     <ButtonRounded label="Register" />
                 </Link>
             </Grid>
+            {alerts && <Alert severity={"warning"}>Une erreur est survenue, veuillez nous contacter</Alert>}
             <BackgroundBlurPng url="assets/blur/bg-blur-2.png" blur="0" />
             <Grid
                 pt={5}
