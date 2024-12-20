@@ -16,6 +16,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 import { Request, Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { configEnv } from '../../env-config';
+import {ForgotEntity} from "./entity/forgot.entity";
 
 @Controller(configEnv.AUTH_URL_AUTH)
 @ApiTags(configEnv.AUTH_URL_AUTH)
@@ -62,8 +63,8 @@ export class AuthController {
   }
 
   @Post('forgot-password')
-  //@ApiOkResponse({ type: UserEntity })
-  async forgotPassword(@Body() obj: { mail: string }) {
-    return this.authService.forgotPassword(obj.mail);
+  @ApiOkResponse({ type: ForgotEntity })
+  async forgotPassword(@Body() mail:ForgotEntity) {
+    return this.authService.forgotPassword(mail);
   }
 }
