@@ -61,4 +61,9 @@ export class AuthService {
       include: { role: true },
     });
   }
+
+  async forgotPassword(mail: string){
+    console.log(mail);
+    return {'Res':'OK'}
+  }
 }
