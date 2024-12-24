@@ -20,6 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { onChangeProduct } from "../modify-product/tool";
 import { PRODUCT_TYPE } from "../../../../common/const/product";
 import { fieldListProduct } from "../modify-product/const";
+import { apiPost } from "../../../../common/utils/web";
 
 interface CreateProductProps {
     handleGetAll: () => void;
@@ -48,6 +49,8 @@ export const CreateProduct = (props: CreateProductProps) => {
     };
 
     const handleCreate = () => {
+        apiPost(`3003/create`, product).then(console.log);
+
         createProduct(product)
             .then(() => handleGetAll())
             .then(() => window.location.reload())
