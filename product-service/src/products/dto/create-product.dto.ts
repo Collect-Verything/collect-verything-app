@@ -7,7 +7,12 @@ export class CreateProductDto {
   @IsNotEmpty()
   @MinLength(22)
   @ApiProperty()
-  picture_path;
+  picture_path: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  stripe_id: string;
 
   @IsString()
   @IsNotEmpty()
