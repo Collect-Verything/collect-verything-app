@@ -21,10 +21,10 @@ export class AppController {
     return { client_secret: intent.client_secret };
   }
 
-    @Post("create")
-    create(@Body() product: ProductEntity) {
-        return this.appService.createProduct(product);
-    }
+  @Post('create')
+  create(@Body() product: ProductEntity) {
+    return this.appService.createProduct(product);
+  }
 
 }
 

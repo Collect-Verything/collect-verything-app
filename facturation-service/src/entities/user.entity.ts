@@ -1,6 +1,7 @@
 export class ProductEntity {
     id: number;
     picture_path: string;
+    stripe_id: string;
     name: string;
     title: string;
     description: string;

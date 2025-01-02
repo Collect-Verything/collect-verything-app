@@ -49,13 +49,14 @@ export const CreateProduct = (props: CreateProductProps) => {
     };
 
     const handleCreate = () => {
-        apiPost(`3003/create`, product).then(console.log);
-
-        createProduct(product)
-            .then(() => handleGetAll())
-            .then(() => window.location.reload())
+        apiPost(`3003/create`, product)
+            .then((res) => (product.stripe_id = res.id))
+            .then(() => {
+                createProduct(product)
+                    .then(() => handleGetAll())
+                    .then(() => window.location.reload());
+            })
             .catch(() => console.log("error during sending form product"));
-
         handleClose();
     };
 
