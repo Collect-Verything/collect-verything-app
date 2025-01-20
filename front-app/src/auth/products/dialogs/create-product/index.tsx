@@ -50,7 +50,11 @@ export const CreateProduct = (props: CreateProductProps) => {
 
     const handleCreate = () => {
         apiPost(`3003/create`, product)
-            .then((res) => (product.stripe_id = res.id))
+            .then((res) => {
+                product.stripe_id = res.id;
+                product.stripe_id_price = res.default_price.id;
+            })
+            .then(() => console.log(product))
             .then(() => {
                 createProduct(product)
                     .then(() => handleGetAll())

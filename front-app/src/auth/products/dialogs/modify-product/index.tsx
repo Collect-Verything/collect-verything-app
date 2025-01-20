@@ -21,6 +21,7 @@ import { fieldListProduct } from "./const";
 import { onChangeProduct } from "./tool";
 import { patchProductById } from "../../request";
 import { PRODUCT_TYPE } from "../../../../common/const/product";
+import { apiPatch } from "../../../../common/utils/web";
 
 export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -51,10 +52,13 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
      * TODO : Upgrade visibility of dialog
      * */
     const handleModify = () => {
-        patchProductById(row.id, product)
-            .then(handleClose)
-            .then(() => window.location.reload())
-            .catch(() => console.log("error during patch product"));
+        apiPatch("3003/update", product).then((res) => {
+            console.log(res);
+            patchProductById(row.id, res)
+                .then(handleClose)
+                .then(() => window.location.reload())
+                .catch(() => console.log("error during patch product"));
+        });
     };
 
     const handleCancel = () => {

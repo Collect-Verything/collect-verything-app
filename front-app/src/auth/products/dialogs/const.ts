@@ -4,6 +4,7 @@ export const defaultProduct: ProductEntity = {
     createdAt: new Date(),
     description: "",
     stripe_id: "",
+    stripe_id_price: "",
     details: "",
     id: 0,
     name: "",

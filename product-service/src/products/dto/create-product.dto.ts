@@ -1,8 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsBoolean, IsNotEmpty, IsNumber, IsString, MinLength} from "class-validator";
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateProductDto {
-
   @IsString()
   @IsNotEmpty()
   @MinLength(22)
@@ -13,6 +18,11 @@ export class CreateProductDto {
   @IsNotEmpty()
   @ApiProperty()
   stripe_id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  stripe_id_price: string;
 
   @IsString()
   @IsNotEmpty()
@@ -41,7 +51,7 @@ export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(7)
-  @ApiProperty({ enum: ['SERVICE', 'PRODUCT']})
+  @ApiProperty({ enum: ['SERVICE', 'PRODUCT'] })
   type: string;
 
   @IsNumber()

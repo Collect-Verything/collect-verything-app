@@ -2,6 +2,7 @@
 CREATE TABLE `Product` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `stripe_id` VARCHAR(191) NOT NULL,
+    `stripe_id_price` VARCHAR(191) NOT NULL,
     `picture_path` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE `Product` (
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `Product_stripe_id_key`(`stripe_id`),
+    UNIQUE INDEX `Product_stripe_id_price_key`(`stripe_id_price`),
     UNIQUE INDEX `Product_name_key`(`name`),
     UNIQUE INDEX `Product_title_key`(`title`),
     PRIMARY KEY (`id`)
