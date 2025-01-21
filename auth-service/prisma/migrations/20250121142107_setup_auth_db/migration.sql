@@ -12,6 +12,7 @@ CREATE TABLE `Role` (
 -- CreateTable
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_stripe` VARCHAR(191) NOT NULL,
     `firstname` VARCHAR(191) NOT NULL,
     `lastname` VARCHAR(191) NOT NULL,
     `roleId` INTEGER NOT NULL,

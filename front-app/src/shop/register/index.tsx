@@ -23,6 +23,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
 import { apiPost } from "../../common/utils/web";
+import { registerRequest } from "./request";
 
 export const RegisterPage = () => {
     const [registerForm, setRegisterForm] = React.useState<UserRegisterType>(initRegisterForm);
@@ -39,8 +40,10 @@ export const RegisterPage = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { confirmPassword, ...cleanedRegisterForm } = registerForm;
 
-            // await registerRequest(cleanedRegisterForm)
-            apiPost(`3003/create-customer`, cleanedRegisterForm);
+            apiPost(`3003/create-customer`, cleanedRegisterForm).then((res) => {
+                cleanedRegisterForm.id_stripe = res.id;
+                registerRequest(cleanedRegisterForm);
+            });
 
             setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS);
             setRegisterForm(initRegisterForm);

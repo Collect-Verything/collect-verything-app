@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { apiGet, apiPost } from "../../common/utils/web";
 import { ListBasketType } from "../boutique/type";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
 
 // Doc : https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
 
@@ -180,9 +181,10 @@ interface PaymentPageGenerationProps {
 
 export const PaymentPageGeneration = ({ basket }: PaymentPageGenerationProps) => {
     const [paymentLink, setPaymentLink] = useState<{ url: string } | null>(null);
+    const { id_stripe } = useSelector((store: any) => store.authenticate);
 
     const generatePaymentPage = () => {
-        apiPost(`3003/create-payment-link`, basket).then(setPaymentLink);
+        apiPost(`3003/create-session/${id_stripe}`, basket).then(setPaymentLink);
     };
 
     return (

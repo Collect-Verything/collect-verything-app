@@ -73,13 +73,15 @@ export class AppController {
         state: '',
       },
     });
-    console.log(customer);
     return customer;
   }
 
-  //   PAIEMENT
-  @Post('create-payment-link')
-  async paymentCreate(@Body() basket: any) {
+  //   SESSION
+  @Post('create-session/:id_stripe')
+  async sessionCreate(
+    @Param('id_stripe') id_stripe: string,
+    @Body() basket: any,
+  ) {
     const listRaw = [];
 
     const groupedItems = basket.reduce((acc, row) => {
@@ -95,9 +97,12 @@ export class AppController {
       listRaw.push(groupedItems[key]);
     }
 
-    const paymentLink = await stripe.paymentLinks.create({
+    const session = await stripe.checkout.sessions.create({
+      customer: id_stripe,
+      success_url: 'http://localhost:3000/stripe-status-payement',
       line_items: listRaw,
+      mode: 'subscription',
     });
-    return paymentLink;
+    return session;
   }
 }

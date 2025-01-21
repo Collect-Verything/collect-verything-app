@@ -8,6 +8,7 @@ import { loginRequest } from "../shop/login/request";
 const initialState = {
     role: undefined,
     userId: undefined,
+    id_stripe: undefined,
     firstname: undefined,
     lastname: undefined,
 };
@@ -21,6 +22,7 @@ export const authenticateSlice = createSlice({
             const tokenDecoded = getDecodedAccessToken(action.payload);
             state.role = tokenDecoded.role;
             state.userId = tokenDecoded.userId;
+            state.id_stripe = tokenDecoded.id_stripe;
             state.firstname = tokenDecoded.firstname;
             state.lastname = tokenDecoded.lastname;
         },

@@ -13,6 +13,10 @@ import { RoleEntity } from '../../roles/entities/role.entity';
 export class CreateUserDto {
   @ApiProperty()
   @IsString()
+  id_stripe: string;
+
+  @ApiProperty()
+  @IsString()
   @IsNotEmpty()
   @MinLength(2)
   @MaxLength(20)

@@ -1,5 +1,6 @@
 export interface User {
   id?: number;
+  id_stripe?: string;
   firstname: string;
   lastname: string;
   email: string;
