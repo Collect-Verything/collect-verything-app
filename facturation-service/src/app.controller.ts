@@ -76,7 +76,8 @@ export class AppController {
     return customer;
   }
 
-  //   SESSION
+  //   SESSION BASKET
+
   @Post('create-session/:id_stripe')
   async sessionCreate(
     @Param('id_stripe') id_stripe: string,
@@ -98,11 +99,29 @@ export class AppController {
     }
 
     const session = await stripe.checkout.sessions.create({
-      customer: id_stripe,
-      success_url: 'http://localhost:3000/stripe-status-payement',
       line_items: listRaw,
+      customer: id_stripe,
       mode: 'subscription',
+      ui_mode: 'embedded',
+      return_url:
+        'http://localhost:3000/checkout/return?session_id={CHECKOUT_SESSION_ID}',
     });
-    return session;
+
+    return { clientSecret: session.client_secret };
+  }
+
+  //   EVENT
+  // Dans un terminal:
+  // stripe login
+  // stripe listen --forward-to localhost:3003/event
+
+  // Dans un autre
+  // stripe trigger payment_intent.succeeded
+
+  // Creer un module event
+  // creer une abse de donnée pour sotcker les lien des facture de chaque client ...
+  @Post('event')
+  async eventGet(@Body() eventObject: any) {
+    console.log(eventObject);
   }
 }

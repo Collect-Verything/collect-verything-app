@@ -25,6 +25,9 @@ export const authenticateSlice = createSlice({
             state.id_stripe = tokenDecoded.id_stripe;
             state.firstname = tokenDecoded.firstname;
             state.lastname = tokenDecoded.lastname;
+
+            //     FIX later
+            localStorage.setItem("id_stripe", tokenDecoded.id_stripe);
         },
         logout(state) {
             state.role = undefined;

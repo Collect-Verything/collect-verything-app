@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+    Elements,
+    EmbeddedCheckout,
+    EmbeddedCheckoutProvider,
+    PaymentElement,
+    useElements,
+    useStripe,
+} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { apiGet, apiPost } from "../../common/utils/web";
 import { ListBasketType } from "../boutique/type";
-import { Button } from "@mui/material";
-import { useSelector } from "react-redux";
 
 // Doc : https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
 
@@ -180,21 +185,21 @@ interface PaymentPageGenerationProps {
 }
 
 export const PaymentPageGeneration = ({ basket }: PaymentPageGenerationProps) => {
-    const [paymentLink, setPaymentLink] = useState<{ url: string } | null>(null);
-    const { id_stripe } = useSelector((store: any) => store.authenticate);
+    const id_stripe = localStorage.getItem("id_stripe");
 
-    const generatePaymentPage = () => {
-        apiPost(`3003/create-session/${id_stripe}`, basket).then(setPaymentLink);
-    };
+    const fetchClientSecret = useCallback(() => {
+        return apiPost(`3003/create-session/${id_stripe}`, basket).then((data) => data.clientSecret);
+    }, [id_stripe]);
+
+    const options = { fetchClientSecret };
 
     return (
         <>
-            <Button onClick={generatePaymentPage}>Passer à la page de paiement</Button>
-            {paymentLink && (
-                <>
-                    <Button href={paymentLink.url}>Link</Button>
-                </>
-            )}
+            <div id="checkout">
+                <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+                    <EmbeddedCheckout />
+                </EmbeddedCheckoutProvider>
+            </div>
         </>
     );
 };
