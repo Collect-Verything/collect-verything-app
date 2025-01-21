@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { apiGet } from "../../common/utils/web";
-
+import { apiGet, apiPost } from "../../common/utils/web";
+import { ListBasketType } from "../boutique/type";
+import { Button } from "@mui/material";
 
 // Doc : https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
-
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -17,8 +17,8 @@ function transformNumber(value: number): number {
         return value * 100;
     } else {
         // Si c'est un flottant
-        const [integerPart, decimalPart] = value.toString().split('.');
-        const reversedDecimal = decimalPart.split('').reverse().join('');
+        const [integerPart, decimalPart] = value.toString().split(".");
+        const reversedDecimal = decimalPart.split("").reverse().join("");
         return parseInt(integerPart + reversedDecimal, 10);
     }
 }
@@ -28,12 +28,10 @@ interface Intent {
 }
 
 interface StripeLayoutProps {
-    totalPrice: number
+    totalPrice: number;
 }
 
-export const StripLayout = ({totalPrice}:StripeLayoutProps) => {
-
-
+export const StripLayout = ({ totalPrice }: StripeLayoutProps) => {
     const [intent, setIntent] = useState<Intent>();
 
     useEffect(() => {
@@ -55,6 +53,7 @@ export const StripLayout = ({totalPrice}:StripeLayoutProps) => {
         </Elements>
     );
 };
+
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
@@ -92,7 +91,9 @@ const CheckoutForm = () => {
             <PaymentElement />
             <button disabled={!stripe}>Submit</button>
             {/* Show error message to your customers */}
-            {errorMessage && <div>{typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage)}</div>}
+            {errorMessage && (
+                <div>{typeof errorMessage === "string" ? errorMessage : JSON.stringify(errorMessage)}</div>
+            )}
         </form>
     );
 };
@@ -148,11 +149,10 @@ export const PaymentStatus = () => {
     return message;
 };
 
-
 const StripeStatusPayement = () => {
     return (
         <Elements stripe={stripePromise}>
-            <Page />  {/* TestPage est maintenant dans le contexte Elements */}
+            <Page /> {/* TestPage est maintenant dans le contexte Elements */}
         </Elements>
     );
 };
@@ -160,16 +160,39 @@ const StripeStatusPayement = () => {
 export default StripeStatusPayement;
 
 const Page = () => {
-    const statusMessage = PaymentStatus();  // Utilisation du hook PaymentStatus
+    const statusMessage = PaymentStatus(); // Utilisation du hook PaymentStatus
 
     return (
         <div>
             <h2>Payment Status</h2>
             {statusMessage ? (
-                <p>{statusMessage}</p>  // Affichage du message selon le statut du paiement
+                <p>{statusMessage}</p> // Affichage du message selon le statut du paiement
             ) : (
-                <p>Loading...</p>  // Affichage du message pendant la récupération du statut
+                <p>Loading...</p> // Affichage du message pendant la récupération du statut
             )}
         </div>
+    );
+};
+
+interface PaymentPageGenerationProps {
+    basket: ListBasketType[];
+}
+
+export const PaymentPageGeneration = ({ basket }: PaymentPageGenerationProps) => {
+    const [paymentLink, setPaymentLink] = useState<{ url: string } | null>(null);
+
+    const generatePaymentPage = () => {
+        apiPost(`3003/create-payment-link`, basket).then(setPaymentLink);
+    };
+
+    return (
+        <>
+            <Button onClick={generatePaymentPage}>Passer à la page de paiement</Button>
+            {paymentLink && (
+                <>
+                    <Button href={paymentLink.url}>Link</Button>
+                </>
+            )}
+        </>
     );
 };

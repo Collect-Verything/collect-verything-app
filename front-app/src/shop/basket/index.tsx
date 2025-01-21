@@ -19,7 +19,7 @@ import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
-import { StripLayout } from "../stripe";
+import { PaymentPageGeneration, StripLayout } from "../stripe";
 
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
@@ -59,7 +59,7 @@ export const Basket = () => {
         setTotalPrice(newTotal);
     }, [listBasket]);
 
-    if(!totalPrice) return null
+    if (!totalPrice) return null;
 
     return (
         <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
@@ -176,6 +176,9 @@ export const Basket = () => {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+            {/*TEST*/}
+            <PaymentPageGeneration basket={listBasket} />
+            {/*TEST*/}
             <StripLayout totalPrice={totalPrice} />
         </section>
     );

@@ -1,16 +1,21 @@
-export class ProductEntity {
+export interface User {
+  id?: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  birthDate: Date;
+  gender: string;
+  phone: string;
+  role: Role;
+  roleId: number;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface Role {
   id: number;
-  picture_path: string;
-  stripe_id: string;
-  stripe_id_price: string;
   name: string;
-  title: string;
-  description: string;
-  details: string;
-  type: string;
-  stock: number;
-  price: number;
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

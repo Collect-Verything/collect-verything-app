@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ProductEntity } from './entities/user.entity';
+import { ProductEntity } from './entities/product.entity';
 
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
