@@ -1,4 +1,4 @@
-export class ProductEntity {
+export class StripeProductEntity {
   id: number;
   picture_path: string;
   stripe_id: string;

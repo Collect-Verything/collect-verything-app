@@ -22,6 +22,7 @@ import { onChangeProduct } from "./tool";
 import { patchProductById } from "../../request";
 import { PRODUCT_TYPE } from "../../../../common/const/product";
 import { apiPatch } from "../../../../common/utils/web";
+import { FacturationUrlWithPort } from "../../../../app/micro-services";
 
 export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -52,8 +53,7 @@ export const ModifyProduct = (props: DialogProps<ProductEntity>) => {
      * TODO : Upgrade visibility of dialog
      * */
     const handleModify = () => {
-        apiPatch("3003/update", product).then((res) => {
-            console.log(res);
+        apiPatch(`${FacturationUrlWithPort}/product/update`, product).then((res) => {
             patchProductById(row.id, res)
                 .then(handleClose)
                 .then(() => window.location.reload())

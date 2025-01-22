@@ -12,5 +12,5 @@ export const UserUrlWithPort = `${USER_SERVICE.port}/${USER_SERVICE.servicePath}
 export const PRODUCT_SERVICE: MicroServiceUrlPortType = { servicePath: "products", port: 3002 };
 export const ProductUrlWithPort = `${PRODUCT_SERVICE.port}/${PRODUCT_SERVICE.servicePath}`;
 
-export const FACTURATION_SERVICE: MicroServiceUrlPortType = { servicePath: "", port: 3003 };
+export const FACTURATION_SERVICE: MicroServiceUrlPortType = { servicePath: "stripe", port: 3003 };
 export const FacturationUrlWithPort = `${FACTURATION_SERVICE.port}/${FACTURATION_SERVICE.servicePath}`;

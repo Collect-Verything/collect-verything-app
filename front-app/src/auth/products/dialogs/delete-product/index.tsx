@@ -11,13 +11,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import { ProductEntity } from "../../../../shop/boutique/type";
 import { deleteProductById } from "../../request";
-import { useNavigate } from "react-router-dom";
 import { apiDelete } from "../../../../common/utils/web";
+import { FacturationUrlWithPort } from "../../../../app/micro-services";
 
 export const DeleteProduct = (props: DialogProps<ProductEntity>) => {
     const { buttonElement, rippleRef, row } = props;
-
-    const nav = useNavigate();
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -25,13 +23,13 @@ export const DeleteProduct = (props: DialogProps<ProductEntity>) => {
 
     /*
      * TODO : window.location.reload()  mettre un context pour UX et eviter une page qui ce recharge, avec gestion d'etat de chargement comme pour l'etat user ...
-     * */
+     * * */
+
     const handleDeleteProduct = () => {
-        apiDelete(`3003/delete/${row.stripe_id}`).then(() => {
-            deleteProductById(row.id)
-                .then(handleClose)
-                .then(() => window.location.reload());
-        });
+        deleteProductById(row.id)
+            .then(handleClose)
+            .then(() => window.location.reload());
+        apiDelete(`${FacturationUrlWithPort}/product/delete/${row.stripe_id}`);
     };
 
     const handleClickOpen = () => {
