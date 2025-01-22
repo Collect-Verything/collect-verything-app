@@ -22,6 +22,7 @@ import { ProductsPage } from "../../auth/products";
 import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
 import StripeStatusPayement from "../../shop/stripe";
+import { PaymentPageGeneration } from "../../shop/stripe/embedded-checkout";
 
 // TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
 
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path: URL_FRONT.BASKET,
                 element: <Basket />,
+            },
+            {
+                path: URL_FRONT.STRIP_CHECKOUT,
+                element: <PaymentPageGeneration />,
             },
             {
                 path: URL_FRONT.DETAILS,

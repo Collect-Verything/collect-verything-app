@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Elements, EmbeddedCheckout, EmbeddedCheckoutProvider, useStripe } from "@stripe/react-stripe-js";
+import React, { useEffect, useState } from "react";
+import { Elements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { apiPost } from "../../common/utils/web";
-import { ListBasketType } from "../boutique/type";
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -65,27 +63,4 @@ const Page = () => {
         </div>
     );
 };
-
-interface PaymentPageGenerationProps {
-    basket: ListBasketType[];
-}
-
-export const PaymentPageGeneration = ({ basket }: PaymentPageGenerationProps) => {
-    const id_stripe = localStorage.getItem("id_stripe");
-
-    const fetchClientSecret = useCallback(() => {
-        return apiPost(`3003/create-session/${id_stripe}`, basket).then((data) => data.clientSecret);
-    }, [id_stripe]);
-
-    const options = { fetchClientSecret };
-
-    return (
-        <>
-            <div id="checkout">
-                <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-                    <EmbeddedCheckout />
-                </EmbeddedCheckoutProvider>
-            </div>
-        </>
-    );
-};
+//

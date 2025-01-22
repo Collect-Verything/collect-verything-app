@@ -19,7 +19,6 @@ import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
-import { PaymentPageGeneration } from "../stripe";
 
 export const Basket = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
@@ -78,7 +77,7 @@ export const Basket = () => {
                                         <Grid container justifyContent="space-between">
                                             <Grid>
                                                 <MDBTypography tag="h5">
-                                                    <MDBIcon fas icon="long-arrow-alt-left me-2" /> Panier
+                                                    <MDBIcon /> Panier
                                                 </MDBTypography>
                                             </Grid>
                                             {listBasket.length > 0 && (
@@ -172,8 +171,6 @@ export const Basket = () => {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-
-            <PaymentPageGeneration basket={listBasket} />
         </section>
     );
 };

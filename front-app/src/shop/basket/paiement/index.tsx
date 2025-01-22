@@ -10,6 +10,7 @@ import { StockAndID } from "./type";
 import { useSelector } from "react-redux";
 import { URL_FRONT } from "../../../app/router/const";
 import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
+import { useNavigate } from "react-router-dom";
 
 interface PaiementCardProps {
     totalPrice: number;
@@ -22,13 +23,21 @@ export const PaiementCard = (props: PaiementCardProps) => {
     const { role } = useSelector((store: any) => store.authenticate);
     const { totalPrice, listBasket } = props;
 
+    const nav = useNavigate();
+
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
 
-    const handlePayement = () => {
+    const handlePaymentPageRedirect = () => {
         // TODO
         // Methode pour mettre a jour le stock, a placer dans la page de confirmation du paiement au retour de la confirm de paiement de strip
         // Effectuer egalement un emise a jour du panier placé dans le local storage
+
+        nav("/embedded-checkout");
+
+        // Cette methode de mise a jour devrait etre fait à la confimartion de paiement suite a webhook strip ou alors à la confirmation dans le front
+        // ATTENTION ----------------
         updateStockById(groupStockId).catch(console.error);
+        // ATTENTION ----------------
     };
 
     useEffect(() => {
@@ -108,7 +117,7 @@ export const PaiementCard = (props: PaiementCardProps) => {
 
                         <MDBBtn color="dark" block size="lg">
                             {/*TODO : Redirection sur la page stripe de paiement*/}
-                            <div className="d-flex justify-content-between" onClick={handlePayement}>
+                            <div className="d-flex justify-content-between" onClick={handlePaymentPageRedirect}>
                                 <span>{sanitizePrice(totalPrice)}</span>
                                 <span>
                                     PAYER
