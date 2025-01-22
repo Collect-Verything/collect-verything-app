@@ -20,25 +20,22 @@ interface PaiementCardProps {
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const PaiementCard = (props: PaiementCardProps) => {
-    const { role } = useSelector((store: any) => store.authenticate);
     const { totalPrice, listBasket } = props;
+    const { role } = useSelector((store: any) => store.authenticate);
 
     const nav = useNavigate();
-
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
 
     const handlePaymentPageRedirect = () => {
-        // TODO
-        // Methode pour mettre a jour le stock, a placer dans la page de confirmation du paiement au retour de la confirm de paiement de strip
-        // Effectuer egalement un emise a jour du panier placé dans le local storage
-
         nav(`/${URL_FRONT.EMBEDDED_CHECKOUT}`);
 
-
+        // TODO : Local Sotrage + Update sotck
         // Cette methode de mise a jour devrait etre fait à la confimartion de paiement suite a webhook strip ou alors à la confirmation dans le front
-        // ATTENTION ----------------
+        // Effacer local storage
+        // Mettre a jour le stock produits service , ou alors webhook ?
+        // ICI ----------------
         updateStockById(groupStockId).catch(console.error);
-        // ATTENTION ----------------
+        // ICI ----------------
     };
 
     useEffect(() => {
