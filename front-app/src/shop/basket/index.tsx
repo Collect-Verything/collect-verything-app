@@ -19,18 +19,11 @@ import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
+import { setFromLocalStorage } from "../../common/utils/local-storage";
 
 export const Basket = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
-
-    const loadBasketFromStorage = () => {
-        const storedBasket = localStorage.getItem("basket");
-        if (storedBasket) {
-            const basketItems = JSON.parse(storedBasket);
-            setListBasket(basketItems);
-        }
-    };
 
     const handleClearAll = () => {
         setListBasket([]);
@@ -44,7 +37,7 @@ export const Basket = () => {
     };
 
     useEffect(() => {
-        loadBasketFromStorage();
+        setFromLocalStorage("basket", setListBasket);
     }, []);
 
     useEffect(() => {

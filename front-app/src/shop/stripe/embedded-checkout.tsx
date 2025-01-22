@@ -8,6 +8,7 @@ import { Button, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import { URL_FRONT } from "../../app/router/const";
+import {setFromLocalStorage} from "../../common/utils/local-storage";
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -16,23 +17,15 @@ export const PaymentPageGeneration = () => {
     const id_stripe = localStorage.getItem("id_stripe") || "";
     const nav = useNavigate();
 
-    const fetchClientSecret = useCallback(() => {
-        return apiPost(`3003/create-session/${id_stripe}`, listBasket).then((data) => data.clientSecret);
+    const fetchClientSecret = useCallback(async () => {
+        const data = await apiPost(`3003/create-session/${id_stripe}`, listBasket);
+        return data.clientSecret;
     }, [listBasket]);
 
     const options = { fetchClientSecret };
 
-    const loadBasketFromStorage = () => {
-        const storedBasket = localStorage.getItem("basket");
-
-        if (storedBasket) {
-            const basketItems = JSON.parse(storedBasket);
-            setListBasket(basketItems);
-        }
-    };
-
     useEffect(() => {
-        loadBasketFromStorage();
+        setFromLocalStorage("basket", setListBasket);
     }, []);
 
     if (listBasket.length === 0 || !id_stripe) return null;
