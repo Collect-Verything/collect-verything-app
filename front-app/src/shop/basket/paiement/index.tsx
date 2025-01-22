@@ -1,4 +1,4 @@
-import { MDBBtn, MDBCardBody, MDBCardImage, MDBCol, MDBIcon, MDBInput, MDBRow, MDBTypography } from "mdb-react-ui-kit";
+import { MDBBtn, MDBCardBody, MDBCardImage, MDBCol, MDBIcon, MDBTypography } from "mdb-react-ui-kit";
 import { getHt, getTva, sanitizePrice } from "../../../common/utils/pricing";
 import React, { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
@@ -94,60 +94,11 @@ export const PaiementCard = (props: PaiementCardProps) => {
                                 />
                             </div>
 
-                            <p className="small">Card type</p>
+                            <p className="small">Type de carte disponible</p>
                             <MDBIcon fab icon="cc-mastercard fa-2x me-2" />
                             <MDBIcon fab icon="cc-visa fa-2x me-2" />
                             <MDBIcon fab icon="cc-amex fa-2x me-2" />
                             <MDBIcon fab icon="cc-paypal fa-2x me-2" />
-
-                            <form className="mt-4">
-                                <MDBInput
-                                    className="mb-4"
-                                    label="Cardholder's Name"
-                                    type="text"
-                                    size="lg"
-                                    placeholder="Cardholder's Name"
-                                    contrast
-                                />
-
-                                <MDBInput
-                                    className="mb-4"
-                                    label="Card Number"
-                                    type="text"
-                                    size="lg"
-                                    minLength={19}
-                                    maxLength={19}
-                                    placeholder="1234 5678 9012 3457"
-                                    contrast
-                                />
-
-                                <MDBRow className="mb-4">
-                                    <MDBCol md="6">
-                                        <MDBInput
-                                            className="mb-4"
-                                            label="Expiration"
-                                            type="text"
-                                            size="lg"
-                                            minLength={7}
-                                            maxLength={7}
-                                            placeholder="MM/YYYY"
-                                            contrast
-                                        />
-                                    </MDBCol>
-                                    <MDBCol md="6">
-                                        <MDBInput
-                                            className="mb-4"
-                                            label="Cvv"
-                                            type="text"
-                                            size="lg"
-                                            minLength={3}
-                                            maxLength={3}
-                                            placeholder="&#9679;&#9679;&#9679;"
-                                            contrast
-                                        />
-                                    </MDBCol>
-                                </MDBRow>
-                            </form>
 
                             <hr />
 

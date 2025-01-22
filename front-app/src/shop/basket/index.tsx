@@ -13,13 +13,13 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { ListBasketType } from "../boutique/type";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
-import { PaymentPageGeneration, StripLayout } from "../stripe";
+import { PaymentPageGeneration } from "../stripe";
 
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
@@ -59,7 +59,14 @@ export const Basket = () => {
         setTotalPrice(newTotal);
     }, [listBasket]);
 
-    if (!totalPrice) return null;
+    if (!totalPrice)
+        return (
+            <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: "50vh" }}>
+                <Typography variant="h3" color="textSecondary">
+                    Aucun article dans votre panier
+                </Typography>
+            </Grid>
+        );
 
     return (
         <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
@@ -160,11 +167,6 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-
-                                    {/*TODO : Paiement card if connected*/}
-                                    {/*TODO : If not connected by context auth, login or register*/}
-                                    {/*TODO : If  connected by context auth, paiement*/}
-
                                     <PaiementCard
                                         backgroundColor={backgroundColor}
                                         totalPrice={totalPrice}
@@ -176,10 +178,8 @@ export const Basket = () => {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-            {/*TEST*/}
+
             <PaymentPageGeneration basket={listBasket} />
-            {/*TEST*/}
-            <StripLayout totalPrice={totalPrice} />
         </section>
     );
 };
