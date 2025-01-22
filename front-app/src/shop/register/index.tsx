@@ -24,6 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
 import { apiPost } from "../../common/utils/web";
 import { registerRequest } from "./request";
+import { FacturationUrlWithPort } from "../../app/micro-services";
 
 export const RegisterPage = () => {
     const [registerForm, setRegisterForm] = React.useState<UserRegisterType>(initRegisterForm);
@@ -40,7 +41,7 @@ export const RegisterPage = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { confirmPassword, ...cleanedRegisterForm } = registerForm;
 
-            apiPost(`3003/create-customer`, cleanedRegisterForm).then((res) => {
+            apiPost(`${FacturationUrlWithPort}/customer/create`, cleanedRegisterForm).then((res) => {
                 cleanedRegisterForm.id_stripe = res.id;
                 registerRequest(cleanedRegisterForm);
             });

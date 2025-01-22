@@ -1,37 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './entities/user.entity';
 
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
+// TODO: Creer le type de basket
+
 @Injectable()
 export class AppService {
-  async createStripeCustomer(cleanedRegisterForm: User) {
-    const customer = await stripe.customers.create({
-      email: cleanedRegisterForm.email,
-      name: cleanedRegisterForm.lastname,
-      phone: cleanedRegisterForm.phone,
-      description: cleanedRegisterForm.id,
-      shipping: {
-        address: {
-          city: '',
-          country: '',
-          line1: '',
-          postal_code: '',
-          state: '',
-        },
-        name: cleanedRegisterForm.lastname,
-      },
-      address: {
-        city: '',
-        country: '',
-        line1: '',
-        postal_code: '',
-        state: '',
-      },
-    });
-    return customer;
-  }
-
   async createStripeSession(id_stripe: string, basket: any) {
     const listRaw = [];
 

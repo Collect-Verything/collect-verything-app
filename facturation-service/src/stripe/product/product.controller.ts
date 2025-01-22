@@ -1,23 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
 import { StripeProductService } from './product.service';
 import { StripeProductEntity } from './product.entity';
 
 @Controller('stripe/product')
 export class StripeProductController {
   constructor(private readonly stripeProductService: StripeProductService) {}
-
-  @Get()
-  test() {
-    return 'yes';
-  }
 
   @Post('create')
   ProductCreate(@Body() product: StripeProductEntity) {
