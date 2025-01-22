@@ -21,8 +21,6 @@ import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
 import { PaymentPageGeneration } from "../stripe";
 
-const backgroundColor = PRIMARY_DARKER_COLOR;
-
 export const Basket = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -167,11 +165,7 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-                                    <PaiementCard
-                                        backgroundColor={backgroundColor}
-                                        totalPrice={totalPrice}
-                                        listBasket={listBasket}
-                                    />
+                                    <PaiementCard totalPrice={totalPrice} listBasket={listBasket} />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>
