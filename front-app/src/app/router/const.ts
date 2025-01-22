@@ -13,7 +13,7 @@ export enum URL_FRONT {
     REGISTER = "Register",
     HOME = "",
     VITRINE = "Vitrine",
-    STRIP_CHECKOUT = "embedded-checkout",
+    EMBEDDED_CHECKOUT = "embedded-checkout",
     BOUTIQUE = "Boutique",
     RESSOURCE = "Ressource",
     BASKET = "Basket",

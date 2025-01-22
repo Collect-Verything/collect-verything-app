@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
                 element: <Basket />,
             },
             {
-                path: URL_FRONT.STRIP_CHECKOUT,
+                path: URL_FRONT.EMBEDDED_CHECKOUT,
                 element: <PaymentPageGeneration />,
             },
             {

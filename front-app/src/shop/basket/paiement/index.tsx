@@ -32,7 +32,8 @@ export const PaiementCard = (props: PaiementCardProps) => {
         // Methode pour mettre a jour le stock, a placer dans la page de confirmation du paiement au retour de la confirm de paiement de strip
         // Effectuer egalement un emise a jour du panier placé dans le local storage
 
-        nav("/embedded-checkout");
+        nav(`/${URL_FRONT.EMBEDDED_CHECKOUT}`);
+
 
         // Cette methode de mise a jour devrait etre fait à la confimartion de paiement suite a webhook strip ou alors à la confirmation dans le front
         // ATTENTION ----------------
