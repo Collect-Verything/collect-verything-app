@@ -54,6 +54,8 @@ export const PaymentPageGeneration = () => {
     );
 };
 
+// TODO : Regler le probleme de store, utiliser la methode de kylian, typer le store, ne pas utiliser le local storage et ameliorer le chargement au niveau de la generation du stripe user id
+
 // KILYAN EXEMPLE  f
 
 // export const PaymentPageGeneration = () => {
