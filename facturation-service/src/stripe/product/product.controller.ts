@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Param, Patch, Post } from '@nestjs/common';
 import { StripeProductService } from './product.service';
 import { StripeProductEntity } from './product.entity';
+import { STRIPE_URL } from '../const';
 
-@Controller('stripe/product')
+@Controller(`${STRIPE_URL}/product`)
 export class StripeProductController {
   constructor(private readonly stripeProductService: StripeProductService) {}
 
