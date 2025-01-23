@@ -8,7 +8,8 @@ import { Button, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import { URL_FRONT } from "../../app/router/const";
-import {setFromLocalStorage} from "../../common/utils/local-storage";
+import { setFromLocalStorage } from "../../common/utils/local-storage";
+import { FacturationUrlWithPort } from "../../app/micro-services";
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -18,7 +19,7 @@ export const PaymentPageGeneration = () => {
     const nav = useNavigate();
 
     const fetchClientSecret = useCallback(async () => {
-        const data = await apiPost(`3003/create-session/${id_stripe}`, listBasket);
+        const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${id_stripe}`, listBasket);
         return data.clientSecret;
     }, [listBasket]);
 
