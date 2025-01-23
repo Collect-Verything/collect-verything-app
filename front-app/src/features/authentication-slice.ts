@@ -5,6 +5,7 @@ import { AppDispatch } from "./store";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../shop/login/request";
 
+// Partiel<User>
 const initialState = {
     role: undefined,
     userId: undefined,
@@ -12,6 +13,7 @@ const initialState = {
     firstname: undefined,
     lastname: undefined,
 };
+
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
 // TODO : FIX -> quand je recharge la page, l'etat ne semble plus etre present. Probleme constaté sur la page de paiement.
@@ -33,6 +35,10 @@ export const authenticateSlice = createSlice({
             state.role = undefined;
             localStorage.removeItem("token");
         },
+        updateToken(state, action: PayloadAction<any>) {
+            state.id_stripe = action.payload;
+            localStorage.setItem("id_stripe", action.payload);
+        },
     },
 });
 
@@ -52,6 +58,10 @@ export const login = (authLogin: LoginProps) => async (dispatch: AppDispatch) =>
     } catch (error: any) {
         throw new Error(`Login failed! ${error.message}`);
     }
+};
+
+export const updateStripeId = (id: string) => async (dispatch: AppDispatch) => {
+    dispatch(authenticateSlice.actions.updateToken(id));
 };
 
 export const checkToken = () => async (dispatch: AppDispatch) => {

@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { AlertColor, AlertPropsColorOverrides } from "@mui/material/Alert/Alert";
 import { OverridableStringUnion } from "@mui/types";
 import { emailRegex } from "../../common/utils/regex";
+import {STRIPE_DETECTION} from "../../common/utils/stripe";
 
 interface LabelKey<T> {
     label: string;
@@ -22,9 +23,11 @@ export const userRegisterList: LabelKey<UserRegisterType>[] = [
 
 export interface UserRegisterType extends User {
     confirmPassword: string;
+    id_stripe: STRIPE_DETECTION.NONE_USER,
 }
 
 export const initRegisterForm: UserRegisterType = {
+    id_stripe: STRIPE_DETECTION.NONE_USER,
     birthDate: new Date(),
     confirmPassword: "",
     createdAt: "",
@@ -37,7 +40,7 @@ export const initRegisterForm: UserRegisterType = {
     phone: "",
     role: { id: 1, name: "USER", createdAt: "", updatedAt: "" },
     roleId: 0,
-    updatedAt: "",
+    updatedAt: ""
 };
 
 export const onChangeRegisterField = (

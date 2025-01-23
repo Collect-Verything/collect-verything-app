@@ -28,7 +28,7 @@ export const apiGet = (path: string) => apiRequest(path, "GET");
 
 export const apiPost = (path: string, data: any) => apiRequest(path, "POST", data);
 
-export const apiPatch = (path: string, data: any) => apiRequest(path, "PATCH", data);
+export const apiPatch = (path: string, data?: any) => apiRequest(path, "PATCH", data);
 
 export const apiDelete = (path: string) => apiRequest(path, "DELETE");
 

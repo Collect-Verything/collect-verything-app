@@ -96,6 +96,18 @@ export class UsersController {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
+  // TODO : Creer la classe pour ApiCreatedResponse et comprendre le fonctionnement
+
+  @Patch('stripe-user/:userId/:stripeId')
+  @ApiCreatedResponse({ type: UserEntity })
+  @ApiBearerAuth()
+  async updateStripeUserId(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('stripeId') stripeId: string,
+  ) {
+    return this.usersService.updateUserIdStripe(userId, stripeId);
+  }
+
   @Patch('password/:id')
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })

@@ -11,23 +11,23 @@ import { useSelector } from "react-redux";
 import { URL_FRONT } from "../../../app/router/const";
 import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
+import { STRIPE_DETECTION } from "../../../common/utils/stripe";
 
 interface PaiementCardProps {
     totalPrice: number;
     listBasket: ListBasketType[];
 }
-
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const PaiementCard = (props: PaiementCardProps) => {
     const { totalPrice, listBasket } = props;
-    const { role } = useSelector((store: any) => store.authenticate);
+    const { role,id_stripe } = useSelector((store: any) => store.authenticate);
 
     const nav = useNavigate();
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
 
     const handlePaymentPageRedirect = () => {
-        nav(`/${URL_FRONT.EMBEDDED_CHECKOUT}`);
+            nav(`/${URL_FRONT.EMBEDDED_CHECKOUT}`);
 
         // TODO : Local Sotrage + Update sotck
         // Cette methode de mise a jour devrait etre fait à la confimartion de paiement suite a webhook strip ou alors à la confirmation dans le front
