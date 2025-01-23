@@ -1,29 +1,26 @@
-import { useAppDispatch } from "../../features/user-slice";
 import { apiGet, apiPatch, apiPost } from "../../common/utils/web";
 import { FacturationUrlWithPort, UserUrlWithPort } from "../../app/micro-services";
-import { updateStripeId } from "../../features/authentication-slice";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { URL_FRONT } from "../../app/router/const";
 
 export const CreateUserStripePage = () => {
-    const { userId,id_stripe } = useSelector((store: any) => store.authenticate);
+    const { userId } = useSelector((store: any) => store.authenticate);
     const nav = useNavigate();
-    const dispatch = useAppDispatch();
 
     const [isCreate, setIsCreate] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            localStorage.removeItem("id_stripe");
             try {
 
                 const userById = await apiGet(`${UserUrlWithPort}/${userId}`);
                 const stripeResponse = await apiPost(`${FacturationUrlWithPort}/customer/create`, userById);
                 const stripe_id = stripeResponse.id;
                 await apiPatch(`${UserUrlWithPort}/stripe-user/${userId}/${stripe_id}`);
-                dispatch(updateStripeId(stripe_id));
+                localStorage.setItem("id_stripe",stripe_id);
                 setIsCreate(true);
             } catch (e) {
                 console.log(e);
@@ -33,11 +30,10 @@ export const CreateUserStripePage = () => {
         fetchData();
     }, []);
 
-    // nav("/embedded-checkout");
 
     return (
         <>
-            {isCreate ? (
+            {!isCreate ? (
                 <p>Chargement...</p>
             ) : (
                 <>

@@ -1,6 +1,6 @@
 import { ListBasketType } from "../boutique/type";
 import React, { useCallback, useEffect, useState } from "react";
-import {apiGet, apiPatch, apiPost} from "../../common/utils/web";
+import { apiPost } from "../../common/utils/web";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Grid from "@mui/material/Grid2";
@@ -9,12 +9,9 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useNavigate } from "react-router-dom";
 import { URL_FRONT } from "../../app/router/const";
 import { setFromLocalStorage } from "../../common/utils/local-storage";
-import {FacturationUrlWithPort, UserUrlWithPort} from "../../app/micro-services";
-import {STRIPE_DETECTION} from "../../common/utils/stripe";
-import {updateStripeId} from "../../features/authentication-slice";
-import {useSelector} from "react-redux";
-import {useAppDispatch} from "../../features/user-slice";
-import {User} from "../../common/types/user";
+import { FacturationUrlWithPort } from "../../app/micro-services";
+import { STRIPE_DETECTION } from "../../common/utils/stripe";
+import { useSelector } from "react-redux";
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -22,13 +19,11 @@ export const PaymentPageGeneration = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
 
     const [stripIdState, setStripIdState] = useState<string>();
-    // const id_stripe = localStorage.getItem("id_stripe");
     const nav = useNavigate();
-    const { userId,id_stripe } = useSelector((store: any) => store.authenticate);
-    const dispatch = useAppDispatch();
+    const { id_stripe } = useSelector((store: any) => store.authenticate);
 
     const fetchClientSecret = useCallback(async () => {
-        const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${id_stripe}`, listBasket);
+        const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${stripIdState}`, listBasket);
         return data.clientSecret;
     }, [listBasket]);
 
@@ -39,38 +34,25 @@ export const PaymentPageGeneration = () => {
         setStripIdState(localStorage.getItem("id_stripe")!);
     }, []);
 
-
-    const generateStripeId = async () =>{
-        const userById = await apiGet(`${UserUrlWithPort}/${userId}`);
-        const stripeResponse = await apiPost(`${FacturationUrlWithPort}/customer/create`, userById);
-        const stripe_id = stripeResponse.id;
-        await apiPatch(`${UserUrlWithPort}/stripe-user/${userId}/${stripe_id}`);
-        dispatch(updateStripeId(stripe_id));
-    }
-
-
     if (listBasket.length === 0 || !id_stripe) return null;
 
     return (
         <>
-            {stripIdState === STRIPE_DETECTION.NONE_USER &&
-            <Button onClick={generateStripeId}>Generer </Button> }
-            {stripIdState !== STRIPE_DETECTION.NONE_USER &&
-        <Grid id="checkout">
-            <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${URL_FRONT.BASKET}`)}>
-                <KeyboardBackspaceIcon color="secondary" />
-                <Typography color="black">Retour au panier</Typography>
-            </Button>
-            <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-                <EmbeddedCheckout />
-            </EmbeddedCheckoutProvider>
-        </Grid>
-            }
+            {stripIdState === STRIPE_DETECTION.NONE_USER && <Button href={"create-user-stripe"}>Generer </Button>}
+            {stripIdState !== STRIPE_DETECTION.NONE_USER && (
+                <Grid id="checkout">
+                    <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${URL_FRONT.BASKET}`)}>
+                        <KeyboardBackspaceIcon color="secondary" />
+                        <Typography color="black">Retour au panier</Typography>
+                    </Button>
+                    <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+                        <EmbeddedCheckout />
+                    </EmbeddedCheckoutProvider>
+                </Grid>
+            )}
         </>
     );
 };
-
-
 
 // KILYAN EXEMPLE  f
 
@@ -125,7 +107,6 @@ export const PaymentPageGeneration = () => {
 //         </>
 //     );
 // };
-
 
 // _------------------------
 // _------------------------
