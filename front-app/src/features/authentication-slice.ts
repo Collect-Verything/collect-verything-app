@@ -4,9 +4,9 @@ import { getDecodedAccessToken } from "../common/tools/jwt";
 import { AppDispatch } from "./store";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../shop/login/request";
-import {User} from "../common/types/user";
+import { User } from "../common/types/user";
 
-const initialState:Partial<User> = {
+const initialState: Partial<User> = {
     role: undefined,
     id: undefined,
     id_stripe: undefined,
@@ -23,14 +23,11 @@ export const authenticateSlice = createSlice({
     reducers: {
         saveToken(state, action: PayloadAction<string>) {
             const tokenDecoded = getDecodedAccessToken(action.payload);
-            console.log(tokenDecoded);
             state.role = tokenDecoded.role;
             state.id = tokenDecoded.id;
             state.id_stripe = tokenDecoded.id_stripe;
             state.firstname = tokenDecoded.firstname;
             state.lastname = tokenDecoded.lastname;
-
-            localStorage.setItem("id_stripe", tokenDecoded.id_stripe);
         },
         logout(state) {
             state.role = undefined;
@@ -38,7 +35,6 @@ export const authenticateSlice = createSlice({
         },
         updateToken(state, action: PayloadAction<any>) {
             state.id_stripe = action.payload;
-            localStorage.setItem("id_stripe", action.payload);
         },
     },
 });
@@ -66,7 +62,7 @@ export const updateStripeId = (id: string) => async (dispatch: AppDispatch) => {
 };
 
 export const checkToken = () => async (dispatch: AppDispatch) => {
-    const token = await localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
         dispatch(authenticateSlice.actions.saveToken(token));
     }
