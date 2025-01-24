@@ -13,11 +13,11 @@ import { FacturationUrlWithPort } from "../../app/micro-services";
 import { STRIPE_DETECTION } from "../../common/utils/stripe";
 import { useSelector } from "react-redux";
 import { User } from "../../common/types/user";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
 export const PaymentPageGeneration = () => {
-
     const user = useSelector((store: any) => store.authenticate);
 
     const nav = useNavigate();
@@ -45,10 +45,11 @@ export const PaymentPageGeneration = () => {
     return (
         <>
             {userState?.id_stripe === STRIPE_DETECTION.NONE_USER && (
-                <Grid container justifyContent="center" height="50vh">
-                    <Button href={"create-user-stripe"}>Generer </Button>
+                <Grid direction="row" height="50vh" container justifyContent="center" alignItems="center">
+                    <CircularProgress color="secondary" size="4rem" />
                 </Grid>
             )}
+
             {userState?.id_stripe !== STRIPE_DETECTION.NONE_USER && (
                 <Grid id="checkout">
                     <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${URL_FRONT.BASKET}`)}>
