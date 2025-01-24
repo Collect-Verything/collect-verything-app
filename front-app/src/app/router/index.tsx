@@ -25,7 +25,8 @@ import StripeStatusPayement from "../../shop/stripe";
 import { CreateUserStripePage } from "../../shop/stripe/create-user-stripe";
 import {PaymentPageGeneration} from "../../shop/stripe/embedded-checkout";
 
-// TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
+// TODO : Remplacer avec les constante
+// TODO : Placer les url stripe-status-payement et create-user-stripe dans un guard qui permet d'y acceder si l'on est conecté
 
 export const router = createBrowserRouter([
     {

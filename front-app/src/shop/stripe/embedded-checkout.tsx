@@ -16,10 +16,11 @@ import { useSelector } from "react-redux";
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
 export const PaymentPageGeneration = () => {
-    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
-
-    const [stripIdState, setStripIdState] = useState<string>();
     const nav = useNavigate();
+
+    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
+    const [stripIdState, setStripIdState] = useState<string>();
+
     const { id_stripe } = useSelector((store: any) => store.authenticate);
 
     const fetchClientSecret = useCallback(async () => {
@@ -31,14 +32,18 @@ export const PaymentPageGeneration = () => {
 
     useEffect(() => {
         setFromLocalStorage("basket", setListBasket);
-        setStripIdState(localStorage.getItem("id_stripe")!);
+        setStripIdState(id_stripe);
     }, []);
 
     if (listBasket.length === 0 || !id_stripe) return null;
 
     return (
         <>
-            {stripIdState === STRIPE_DETECTION.NONE_USER && <Button href={"create-user-stripe"}>Generer </Button>}
+            {stripIdState === STRIPE_DETECTION.NONE_USER && (
+                <Grid container justifyContent="center" height="50vh">
+                    <Button href={"create-user-stripe"}>Generer </Button>
+                </Grid>
+            )}
             {stripIdState !== STRIPE_DETECTION.NONE_USER && (
                 <Grid id="checkout">
                     <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${URL_FRONT.BASKET}`)}>

@@ -23,6 +23,7 @@ export const authenticateSlice = createSlice({
     reducers: {
         saveToken(state, action: PayloadAction<string>) {
             const tokenDecoded = getDecodedAccessToken(action.payload);
+            console.log(tokenDecoded);
             state.role = tokenDecoded.role;
             state.userId = tokenDecoded.userId;
             state.id_stripe = tokenDecoded.id_stripe;

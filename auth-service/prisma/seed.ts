@@ -48,7 +48,7 @@ async function main() {
     where: { email: 'admin@admin.fr' },
     update: { password: passwordSuperAdmin },
     create: {
-      id_stripe: '',
+      id_stripe: 'not-exist',
       firstname: 'Julien',
       lastname: 'Cansell',
       email: 'admin@admin.fr',
@@ -66,7 +66,7 @@ async function main() {
     where: { email: 'user@user.fr' },
     update: { password: passwordSimple },
     create: {
-      id_stripe: '',
+      id_stripe: 'not-exist',
       firstname: 'Brice',
       lastname: 'Bite',
       email: 'user@user.fr',
@@ -84,7 +84,7 @@ async function main() {
     where: { email: 'invoice@invoice.fr' },
     update: { password: passwordInvoice },
     create: {
-      id_stripe: '',
+      id_stripe: 'not-exist',
       firstname: 'Thomas',
       lastname: 'Titoon',
       email: 'invoice@invoice.fr',
