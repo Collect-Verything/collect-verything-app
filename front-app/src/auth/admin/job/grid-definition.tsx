@@ -9,14 +9,15 @@ import { Box } from "@mui/material";
 
 export const columnsUser: GridColDef<User>[] = [
     { field: "id", headerName: "Id", width: 30 },
+    { field: "id_stripe", headerName: "Stripe ID", width: 40 },
     { field: "firstname", headerName: "Nom", width: 90 },
     { field: "lastname", headerName: "Prenom", width: 100 },
     { field: "email", headerName: "Email", width: 190},
     { field: "birthDate", headerName: "Date naissance", width: 110 },
     { field: "gender", headerName: "Genre", width: 70 },
     { field: "phone", headerName: "Téléphone", width: 150 },
-    { field: "createdAt", headerName: "Date création", width: 150 },
-    { field: "updatedAt", headerName: "Date mise à jour", width: 110},
+    { field: "createdAt", headerName: "Date création", width: 100 },
+    { field: "updatedAt", headerName: "Date mise à jour", width: 100},
     { field: "action", headerName: "Actions", renderCell: (params) => <CellActionUserJob {...params} />, width: 300 },
 ];
 
