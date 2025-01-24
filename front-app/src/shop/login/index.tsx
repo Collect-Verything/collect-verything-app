@@ -104,6 +104,7 @@ export const LoginPage = () => {
                             ["admin@admin.fr", "adminadmin", "SUPER_ADMIN"],
                             ["user@user.fr", "useruser", "USER"],
                             ["invoice@invoice.fr", "invoiceinvoice", "INVOICE"],
+                            ["@gmail.com", "Password", "PASSWORD"],
                         ].map((i) => (
                             <Grid container key={i[0]} mt={2} alignItems="center">
                                 <Button
