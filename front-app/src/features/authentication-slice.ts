@@ -4,11 +4,11 @@ import { getDecodedAccessToken } from "../common/tools/jwt";
 import { AppDispatch } from "./store";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../shop/login/request";
+import {User} from "../common/types/user";
 
-// Partiel<User>
-const initialState = {
+const initialState:Partial<User> = {
     role: undefined,
-    userId: undefined,
+    id: undefined,
     id_stripe: undefined,
     firstname: undefined,
     lastname: undefined,
@@ -25,7 +25,7 @@ export const authenticateSlice = createSlice({
             const tokenDecoded = getDecodedAccessToken(action.payload);
             console.log(tokenDecoded);
             state.role = tokenDecoded.role;
-            state.userId = tokenDecoded.userId;
+            state.id = tokenDecoded.id;
             state.id_stripe = tokenDecoded.id_stripe;
             state.firstname = tokenDecoded.firstname;
             state.lastname = tokenDecoded.lastname;

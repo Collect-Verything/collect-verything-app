@@ -25,11 +25,11 @@ export const Account = () => {
     const [alertPassword, setAlertPassword] = useState<AlertType>({ type: undefined, text: "" });
     const [isModifyPassword, setIsModifyPassword] = useState(true);
 
-    const { userId } = useSelector((store: any) => store.authenticate);
+    const { id } = useSelector((store: any) => store.authenticate);
 
     const handleCancelModifyUser = () => {
         setAlertUserForm({ type: undefined, text: "" });
-        getUserById(userId).then(setUser);
+        getUserById(id).then(setUser);
         setIsModifyUser(true);
     };
 
@@ -48,7 +48,7 @@ export const Account = () => {
                     text: "Erreur lors de la modification de votre profil",
                 }),
             );
-        await getUserById(userId).then(setUser);
+        await getUserById(id).then(setUser);
         setIsModifyUser(true);
     };
 
@@ -59,7 +59,7 @@ export const Account = () => {
         }
 
         if (modifyPasswordSet?.newPassword === modifyPasswordSet?.confirmPassword) {
-            patchModifyPasswordUser(userId, modifyPasswordSet!)
+            patchModifyPasswordUser(id, modifyPasswordSet!)
                 .then(() => {
                     setAlertPassword({ type: "success", text: "Mot de passe modifié avec succée" });
                     setIsModifyPassword(true);
@@ -75,7 +75,7 @@ export const Account = () => {
     };
 
     useEffect(() => {
-        getUserById(userId).then(setUser);
+        getUserById(id).then(setUser);
     }, []);
 
     return (

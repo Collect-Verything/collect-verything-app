@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 export const CreateUserStripePage = () => {
-    const { userId } = useSelector((store: any) => store.authenticate);
+    const { id } = useSelector((store: any) => store.authenticate);
     const nav = useNavigate();
 
     const [isCreate, setIsCreate] = useState(false);
@@ -16,10 +16,10 @@ export const CreateUserStripePage = () => {
             localStorage.removeItem("id_stripe");
             try {
 
-                const userById = await apiGet(`${UserUrlWithPort}/${userId}`);
+                const userById = await apiGet(`${UserUrlWithPort}/${id}`);
                 const stripeResponse = await apiPost(`${FacturationUrlWithPort}/customer/create`, userById);
                 const stripe_id = stripeResponse.id;
-                await apiPatch(`${UserUrlWithPort}/stripe-user/${userId}/${stripe_id}`);
+                await apiPatch(`${UserUrlWithPort}/stripe-user/${id}/${stripe_id}`);
                 localStorage.setItem("id_stripe",stripe_id);
                 setIsCreate(true);
             } catch (e) {
