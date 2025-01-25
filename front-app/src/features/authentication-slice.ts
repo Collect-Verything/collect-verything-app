@@ -34,7 +34,6 @@ export const authenticateSlice = createSlice({
         },
         updateStripeIdCustomer(state, action: PayloadAction<any>) {
             state.id_stripe = action.payload;
-            localStorage.setItem("id_stripe", action.payload);
         },
     },
 });
