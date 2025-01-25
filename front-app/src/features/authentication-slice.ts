@@ -16,7 +16,6 @@ const initialState: Partial<User> = {
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
-// TODO : FIX -> quand je recharge la page, l'etat ne semble plus etre present. Probleme constaté sur la page de paiement.
 export const authenticateSlice = createSlice({
     name: "authenticate",
     initialState,
@@ -33,8 +32,9 @@ export const authenticateSlice = createSlice({
             state.role = undefined;
             localStorage.removeItem("token");
         },
-        updateToken(state, action: PayloadAction<any>) {
+        updateStripeIdCustomer(state, action: PayloadAction<any>) {
             state.id_stripe = action.payload;
+            localStorage.setItem("id_stripe", action.payload);
         },
     },
 });
@@ -58,7 +58,7 @@ export const login = (authLogin: LoginProps) => async (dispatch: AppDispatch) =>
 };
 
 export const updateStripeId = (id: string) => async (dispatch: AppDispatch) => {
-    dispatch(authenticateSlice.actions.updateToken(id));
+    dispatch(authenticateSlice.actions.updateStripeIdCustomer(id));
 };
 
 export const checkToken = () => async (dispatch: AppDispatch) => {

@@ -22,11 +22,7 @@ import { ProductsPage } from "../../auth/products";
 import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
 import StripeStatusPayement from "../../shop/stripe";
-import { CreateUserStripePage } from "../../shop/stripe/create-user-stripe";
-import {PaymentPageGeneration} from "../../shop/stripe/embedded-checkout";
-
-// TODO : Remplacer avec les constante
-// TODO : Placer les url stripe-status-payement et create-user-stripe dans un guard qui permet d'y acceder si l'on est conecté
+import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
 
 export const router = createBrowserRouter([
     {
@@ -54,20 +50,20 @@ export const router = createBrowserRouter([
                 element: <Basket />,
             },
             {
-                path: URL_FRONT.EMBEDDED_CHECKOUT,
-                element: <PaymentPageGeneration />,
+                path: URL_FRONT.CHECK_USER_STRIPE_ID,
+                element: <CheckUserStripeIdForPayment />,
             },
             {
                 path: URL_FRONT.DETAILS,
                 element: <DetailsProductPage />,
             },
             {
-                path: "stripe-status-payement",
+                path: URL_FRONT.CHECK_USER_STRIPE_ID,
                 element: <StripeStatusPayement />,
             },
             {
-                path: "create-user-stripe",
-                element: <CreateUserStripePage />,
+                path: URL_FRONT.PAYMENT,
+                element: <PaymentPage />,
             },
         ],
     },
