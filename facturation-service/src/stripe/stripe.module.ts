@@ -8,6 +8,8 @@ import { StripeCheckoutController } from './checkout/checkout.controller';
 import { StripeEventController } from './event/event.controller';
 import { StripeEventService } from './event/event.service';
 import { PrismaModule } from '../prisma/prisma.module';
+import { StripeInvoiceController } from './invoice/invoice.controller';
+import { StripeInvoiceService } from './invoice/invoice.service';
 
 @Module({
   controllers: [
@@ -15,12 +17,14 @@ import { PrismaModule } from '../prisma/prisma.module';
     StripeCustomerController,
     StripeCheckoutController,
     StripeEventController,
+    StripeInvoiceController,
   ],
   providers: [
     StripeProductService,
     StripeCustomerService,
     StripeCheckoutService,
     StripeEventService,
+    StripeInvoiceService,
   ],
   imports: [PrismaModule],
 })

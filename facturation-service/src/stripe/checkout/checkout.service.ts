@@ -26,8 +26,8 @@ export class StripeCheckoutService {
       customer: id_stripe,
       mode: 'subscription',
       ui_mode: 'embedded',
-      return_url:
-        'http://localhost:3000/checkout/return?session_id={CHECKOUT_SESSION_ID}',
+      return_url: 'http://localhost:3000/payment-status',
+      // 'http://localhost:3000/payment-status?session_id={CHECKOUT_SESSION_ID}',
     });
 
     return { clientSecret: session.client_secret };

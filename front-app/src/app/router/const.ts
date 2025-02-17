@@ -14,6 +14,7 @@ export enum URL_FRONT {
     HOME = "",
     VITRINE = "Vitrine",
     CHECK_USER_STRIPE_ID = "check-user-stripe-id",
+    PAYMENT_STATUS = "payment-status",
     PAYMENT = "payment",
     BOUTIQUE = "Boutique",
     RESSOURCE = "Ressource",

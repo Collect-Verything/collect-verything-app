@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
                 element: <DetailsProductPage />,
             },
             {
-                path: URL_FRONT.CHECK_USER_STRIPE_ID,
+                path: URL_FRONT.PAYMENT_STATUS,
                 element: <StripeStatusPayement />,
             },
             {
