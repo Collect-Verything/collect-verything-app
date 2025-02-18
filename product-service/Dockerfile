@@ -3,10 +3,11 @@ FROM node:18-alpine
 
 # Installer les outils nécessaires, comme nc
 RUN apk add --no-cache netcat-openbsd
+# https://github.com/prisma/prisma/discussions/19341
 RUN apk add --no-cache openssl
 
 # Crée et utilise le répertoire de travail /auth-service
-WORKDIR /auth-service
+WORKDIR /product-service
 
 # Copie les fichiers package.json et package-lock.json
 COPY package.json ./
@@ -22,7 +23,7 @@ COPY . .
 RUN chmod +x ./start.sh
 
 # Expose le port sur lequel l'application écoute
-EXPOSE 3001
+EXPOSE 3002
 
 # Utiliser le script pour attendre MySQL avant de démarrer Prisma
 CMD ["sh", "./start.sh"]
