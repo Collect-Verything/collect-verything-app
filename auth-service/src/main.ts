@@ -11,9 +11,9 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   app.enableCors({
-    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`],
+    // TODO : configEnv ne marche pas dockerisé
+    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`,`http://localhost:3000`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    credentials: true,
   });
 
   const config = new DocumentBuilder()
