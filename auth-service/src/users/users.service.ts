@@ -169,7 +169,6 @@ export class UsersService {
         newPassword,
         roundsOfHashing,
     );
-    console.log(newPassword);
     return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
   }
 
