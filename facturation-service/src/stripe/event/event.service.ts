@@ -17,6 +17,7 @@ export class StripeEventService {
   }
 
   // payment_intent.succeeded
+  // Service
   async invoiceTreatment(invoice: any) {
     return this.prisma.facture.create({
       data: {
@@ -30,5 +31,7 @@ export class StripeEventService {
         end:invoice.object.lines.data[0].period.end,
       },
     })
+  // Product
+  //   ...
   }
 }
