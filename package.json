@@ -41,10 +41,13 @@
     "start:facturation-prod": "npm run start --prefix facturation-service",
     "start:facturation-dev": "npm run start:dev  --prefix facturation-service",
 
+    "generate:facturation": "cd product-service && npx prisma migrate dev --name \"Setup facturation db\"",
+    "seed:facturation": "cd facturation-service && npx prisma db seed",
+    "db:facturation": "npm run generate:facturation && npm run seed:facturation",
 
         "__DATABASE__": "",
 
-    "db:all": "npm run db:auth && npm run db:product",
+    "db:all": "npm run db:auth && npm run db:product && npm run db:facturation",
 
         "__START__": "",
 
