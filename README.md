@@ -202,14 +202,6 @@ Previously we saw how to setup and launch the entire application, but you can do
 It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
 
 
-### Env
-You need to assign ports for all services, create a .env file in the mono root if it is not present:
-```env
-AUTH_PORT=3001
-SOLUTION_PORT=3002
-```
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
