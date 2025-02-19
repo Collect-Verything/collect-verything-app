@@ -52,8 +52,8 @@
 
         "__START__": "",
 
-    "start:prod": "npm run start:front && npm run start:auth-prod && npm run start:product-prod && npm run start:facturation-prod",
-    "start:dev": "npm run start:front && npm run start:auth-dev && npm run start:product-dev && npm run start:facturation-dev"
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev"
 
   },
   "devDependencies": {
