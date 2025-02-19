@@ -7,9 +7,10 @@ Si l'on souhaite creer un service il est necessaire de :
  npx @nestjs/cli new new-service
 ```
 
-## Creation des scripts tous la gestion simplfifié depuis le root 
+## Creation des scripts pour la pour setup l'app en mode dev rapidement
 
-*Install*
+*Install* :
+
 ```json
       "__INSTALL__":"", # Permet un reperage plus facile par section
 
@@ -20,7 +21,7 @@ Si l'on souhaite creer un service il est necessaire de :
     "install:all": "npm run install:front & npm run install:auth & npm run install:new-service", # Ajout script install all 
 ```
 
-*Run start*
+*Run start* : 
 ```json
         "__NEW SERVICE__": "",
 
@@ -29,20 +30,20 @@ Si l'on souhaite creer un service il est necessaire de :
 
 ```
 
-*Database*
+*Database* : 
 ```json
     "generate:auth": "cd auth-service && npx prisma migrate dev --name \"Setup auth db\"",
     "seed:auth": "cd auth-service && npx prisma db seed",
     "db:auth": "npm run generate:auth && npm run seed:auth",
     
-    "generate:new-service": "cd new-service && npx prisma migrate dev --name \"Setup new-service db\"", # Ajout script de migration
+    "generate:new-service": "cd new-service && npx prisma migrate dev --name \"Setup new-service db\"", # Ajout script de migration si existant puis ...
     "seed:new-service": "cd new-service && npx prisma db seed", # $*$ Ajout commande seed du service 
     "db:new-service": "npm run generate:new-service && npm run seed:new-service", # Script de la generation du service
 
     "db:all": "npm run db:auth & npm run db:new-service",  # Ajout du run global du serice crée
 ```
 
-Attention pour pouvoir executer ces commandes il est necessaire que dans le package.json du nouveau service generé les commande suivante soit crée pour les scripts possedant une $*$ :
+Attention pour pouvoir executer ces commandes il est necessaire que dans le package.json du nouveau service generé les commandes suivante soit crée pour les scripts possedant une $*$ :
 ```json
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -109,3 +110,14 @@ npm run start:new_solution-dev
 # ou alors 
 npm run start:dev
 ```
+
+
+*Docker* : 
+
+Copier-coller les fichiers suivant present dans un service deja existant puis les ajuster selon le service
+
+- .dockerignore
+- Dockerfile
+- start.sh
+
+Puis ajouter au compose.yaml du root le nouveau service puis sa base de donnée, attention à dercerner un nouveau port pour la base de donnée.
