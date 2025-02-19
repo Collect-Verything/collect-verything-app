@@ -112,6 +112,17 @@ export class UsersService {
     });
   }
 
+  async updateUserIdStripe(userId: number, userStripId: string) {
+    return this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        id_stripe: userStripId,
+      },
+    });
+  }
+
   async updatePassword(id: number, updatePasswordDto: UpdateUserPasswordDto) {
     const user = await this.prisma.user.findUnique({
       where: { id },

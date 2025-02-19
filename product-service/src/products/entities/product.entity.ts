@@ -9,6 +9,12 @@ export class ProductEntity implements Product {
   picture_path: string;
 
   @ApiProperty()
+  stripe_id: string;
+
+  @ApiProperty()
+  stripe_id_price: string;
+
+  @ApiProperty()
   name: string;
 
   @ApiProperty()

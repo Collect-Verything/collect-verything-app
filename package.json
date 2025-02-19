@@ -35,14 +35,24 @@
     "seed:product": "cd product-service && npx prisma db seed",
     "db:product": "npm run generate:product && npm run seed:product",
 
+
+        "__FACTURATION__": "",
+
+    "start:facturation-prod": "npm run start --prefix facturation-service",
+    "start:facturation-dev": "npm run start:dev  --prefix facturation-service",
+
+    "generate:facturation": "cd product-service && npx prisma migrate dev --name \"Setup facturation db\"",
+    "seed:facturation": "cd facturation-service && npx prisma db seed",
+    "db:facturation": "npm run generate:facturation && npm run seed:facturation",
+
         "__DATABASE__": "",
 
-    "db:all": "npm run db:auth && npm run db:product",
+    "db:all": "npm run db:auth && npm run db:product && npm run db:facturation",
 
         "__START__": "",
 
-    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev"
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev"
 
   },
   "devDependencies": {

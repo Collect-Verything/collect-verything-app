@@ -13,26 +13,17 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { ListBasketType } from "../boutique/type";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
-
-const backgroundColor = PRIMARY_DARKER_COLOR;
+import { setFromLocalStorage } from "../../common/utils/local-storage";
 
 export const Basket = () => {
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
-
-    const loadBasketFromStorage = () => {
-        const storedBasket = localStorage.getItem("basket");
-        if (storedBasket) {
-            const basketItems = JSON.parse(storedBasket);
-            setListBasket(basketItems);
-        }
-    };
 
     const handleClearAll = () => {
         setListBasket([]);
@@ -46,7 +37,7 @@ export const Basket = () => {
     };
 
     useEffect(() => {
-        loadBasketFromStorage();
+        setFromLocalStorage("basket", setListBasket);
     }, []);
 
     useEffect(() => {
@@ -57,6 +48,15 @@ export const Basket = () => {
         }, 0);
         setTotalPrice(newTotal);
     }, [listBasket]);
+
+    if (!totalPrice)
+        return (
+            <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: "50vh" }}>
+                <Typography variant="h3" color="textSecondary">
+                    Aucun article dans votre panier
+                </Typography>
+            </Grid>
+        );
 
     return (
         <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
@@ -70,7 +70,7 @@ export const Basket = () => {
                                         <Grid container justifyContent="space-between">
                                             <Grid>
                                                 <MDBTypography tag="h5">
-                                                    <MDBIcon fas icon="long-arrow-alt-left me-2" /> Panier
+                                                    <MDBIcon /> Panier
                                                 </MDBTypography>
                                             </Grid>
                                             {listBasket.length > 0 && (
@@ -157,16 +157,7 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-
-                                    {/*TODO : Paiement card if connected*/}
-                                    {/*TODO : If not connected by context auth, login or register*/}
-                                    {/*TODO : If  connected by context auth, paiement*/}
-
-                                    <PaiementCard
-                                        backgroundColor={backgroundColor}
-                                        totalPrice={totalPrice}
-                                        listBasket={listBasket}
-                                    />
+                                    <PaiementCard totalPrice={totalPrice} listBasket={listBasket} />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>

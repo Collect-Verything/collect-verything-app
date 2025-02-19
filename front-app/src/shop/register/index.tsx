@@ -24,6 +24,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
 import { registerRequest } from "./request";
 
+// TODO : Les champs doivent etre vide a la validation du formulaire
+// TODO : Effectuer une redirection sur login apres avoir informé l'utilisateur que le register est confirmé
+
 export const RegisterPage = () => {
     const [registerForm, setRegisterForm] = React.useState<UserRegisterType>(initRegisterForm);
     const [alerts, setAlerts] = React.useState<AlertRegisterType | undefined>();

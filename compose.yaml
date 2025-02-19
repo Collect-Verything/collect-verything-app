@@ -35,9 +35,61 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: collect-verything-auth
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-auth-data:/var/lib/mysql
+
+  product-service:
+    build:
+      context: product-service
+      dockerfile: Dockerfile
+    container_name: product-service
+    environment:
+      - DATABASE_URL=mysql://root:password@mysql-product:3306/collect-verything-product
+      - PRODUCT_PORT=${PRODUCT_PORT}
+    ports:
+      - "${PRODUCT_PORT}:${PRODUCT_PORT}"
+    depends_on:
+      - mysql-product
+
+  mysql-product:
+    image: mysql:8
+    container_name: mysql-product
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: collect-verything-product
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-product-data:/var/lib/mysql
+
+  facturation-service:
+    build:
+      context: facturation-service
+      dockerfile: Dockerfile
+    container_name: facturation-service
+    environment:
+      - DATABASE_URL=mysql://root:password@mysql-facturation:3306/collect-verything-facturation
+      - FACTURATION_PORT=${FACTURATION_PORT}
+    ports:
+      - "${FACTURATION_PORT}:${FACTURATION_PORT}"
+    depends_on:
+      - mysql-facturation
+
+  mysql-facturation:
+    image: mysql:8
+    container_name: mysql-facturation
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: collect-verything-facturation
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql-facturation-data:/var/lib/mysql
+
+
 
 volumes:
-  mysql-data:
+  mysql-auth-data:
+  mysql-product-data:
+  mysql-facturation-data:

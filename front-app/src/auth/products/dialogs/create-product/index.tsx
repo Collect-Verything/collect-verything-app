@@ -20,6 +20,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { onChangeProduct } from "../modify-product/tool";
 import { PRODUCT_TYPE } from "../../../../common/const/product";
 import { fieldListProduct } from "../modify-product/const";
+import { apiPost } from "../../../../common/utils/web";
+import { FacturationUrlWithPort } from "../../../../app/micro-services";
 
 interface CreateProductProps {
     handleGetAll: () => void;
@@ -47,12 +49,20 @@ export const CreateProduct = (props: CreateProductProps) => {
         setOpen(false);
     };
 
+    // TODO : Ameliorer la creation d'un produit, car une erreur du back concernant un champ provoque quand meme une creation dans stripe, appliquer regle avant ?
     const handleCreate = () => {
-        createProduct(product)
-            .then(() => handleGetAll())
-            .then(() => window.location.reload())
+        apiPost(`${FacturationUrlWithPort}/product/create`, product)
+            .then((res) => {
+                product.stripe_id = res.id;
+                product.stripe_id_price = res.default_price.id;
+            })
+            .then(() => console.log(product))
+            .then(() => {
+                createProduct(product)
+                    .then(() => handleGetAll())
+                    .then(() => window.location.reload());
+            })
             .catch(() => console.log("error during sending form product"));
-
         handleClose();
     };
 

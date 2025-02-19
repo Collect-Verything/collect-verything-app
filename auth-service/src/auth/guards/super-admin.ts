@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { ROLENAME } from '../enum';
 
 export interface JwtPayloadWithRoles {
-  userId: number;
+  id: number;
   role: string;
 }
 

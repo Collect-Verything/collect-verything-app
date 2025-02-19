@@ -26,6 +26,7 @@ import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
  * TODO: Creer une distinction entre la creation d'un user de type register (accessible sans auth)  et la creation d'un user depuis interface admin dont la selection des role est libre
  * TODO: Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
  * TODO: Creer un end point register pour les client avec assignation automatique du role USER
+ * TODO: Penser a la supression d'un client, a son historique de facture, faut il vraiment le suprimer ou alors le rendre non visible, ou creer un role OFFLINE par exemple
  * */
 
 @Controller('users')
@@ -93,6 +94,18 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
+  }
+
+  // TODO : Creer la classe pour ApiCreatedResponse et comprendre le fonctionnement
+
+  @Patch('stripe-user/:userId/:stripeId')
+  @ApiCreatedResponse({ type: UserEntity })
+  @ApiBearerAuth()
+  async updateStripeUserId(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('stripeId') stripeId: string,
+  ) {
+    return this.usersService.updateUserIdStripe(userId, stripeId);
   }
 
   @Patch('password/:id')

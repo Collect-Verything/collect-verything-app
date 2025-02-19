@@ -60,6 +60,12 @@ export const CheckUserJob = (props: DialogProps<User>) => {
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
+                            Stripe ID :
+                        </Typography>
+                        {row.id_stripe}
+                    </DialogContentText>
+                    <DialogContentText>
+                        <Typography color="secondary" mt={2}>
                             Role :
                         </Typography>
                         {row.role.name}

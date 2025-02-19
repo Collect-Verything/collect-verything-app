@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Facture {
+  id               String    @id
+  amount           Int
+  customer         String
+  currency         String
+  invoice_link     String
+  invoice_download String
+  start            Int
+  end              Int
+}

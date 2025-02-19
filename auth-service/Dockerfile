@@ -3,6 +3,7 @@ FROM node:18-alpine
 
 # Installer les outils nécessaires, comme nc
 RUN apk add --no-cache netcat-openbsd
+RUN apk add --no-cache openssl
 
 # Crée et utilise le répertoire de travail /auth-service
 WORKDIR /auth-service

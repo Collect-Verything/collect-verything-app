@@ -4,6 +4,9 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 const roundsOfHashing = 10;
 
+/*
+ *  Les clients du seed ne possede pas d'id Stripe, il faut obligatoirement ce register pour possede un id stripe
+ * */
 async function main() {
   const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
   const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
@@ -45,6 +48,7 @@ async function main() {
     where: { email: 'admin@admin.fr' },
     update: { password: passwordSuperAdmin },
     create: {
+      id_stripe: '',
       firstname: 'Julien',
       lastname: 'Cansell',
       email: 'admin@admin.fr',
@@ -62,6 +66,7 @@ async function main() {
     where: { email: 'user@user.fr' },
     update: { password: passwordSimple },
     create: {
+      id_stripe: '',
       firstname: 'Brice',
       lastname: 'Bite',
       email: 'user@user.fr',
@@ -79,6 +84,7 @@ async function main() {
     where: { email: 'invoice@invoice.fr' },
     update: { password: passwordInvoice },
     create: {
+      id_stripe: '',
       firstname: 'Thomas',
       lastname: 'Titoon',
       email: 'invoice@invoice.fr',

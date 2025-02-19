@@ -18,7 +18,7 @@ docker run --name auth-service -d -p 3001:3001 auth-service
 ```
 
 
-## (new)Run both app
+## (new)Run all app
 
 
 Delete old containers if already create and run this commande in root folder :

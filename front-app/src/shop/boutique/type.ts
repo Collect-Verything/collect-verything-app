@@ -3,6 +3,8 @@ import { PAID_FREQUENCY } from "./const";
 export interface ProductEntity {
     id: number;
     picture_path: string;
+    stripe_id: string;
+    stripe_id_price: string;
     name: string;
     title: string;
     description: string;

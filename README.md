@@ -124,40 +124,83 @@ As part of this project, my goal is to implement the essential functionalities o
 
 ### Prerequisites
 
-Once the application is closed it is necessary to install the root dependencies
-  ```sh
-  npm i
-  ```
+Before launching the applications, you must create the .env in the root then the .env in each service
 
-It is then necessary to install the dependencies of each application/microservice, to do this you must execute the following command in root:
+The .env in the root contains the ports of each service:
+```env
+FRONT_PORT=3000
+AUTH_PORT=3001
+PRODUCT_PORT=3002
+FACTURATION_PORT=3003
+```
+
+The env points of each service include the url of the database of each service, with your personalized information
+
+- Auth: 
+```env
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-auth?schema=public"
+```
+
+- Facturation:
+```env
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-facture?schema=public"
+```
+
+- Product:
+```env
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?schema=public"
+```
+
+Once the .env is created, it is now enough to install the dependencies of all the services with the command present in the package.json
 ```sh
 npm run install:all
-  ```
-  
-### Database Services
-
-You must first enter the URL of each database in each .env of each service if this file is not present and remember to specify the name of the service concerned {SERVICE_NAME} like here:
-```.dotenv
-DATABASE_URL="mysql://root:Rootoorn@localhost:3306/collect-verything-{SERVICE_NAME}?schema=public"
 ```
 
-To prepare a single database for a service read for example the [Auth Read Me][Auth Read.Me] 
-
-To run only one service from root by exemple auth-service:
-```bash
- npm run db:auth
-```
-
-If you want create all databases and migrate all the tables and seeds of all services without exception:
-
+Then generate, create the database and seed the dataset of all services with the following command:
 ```bash
  npm run db:all
 ```
 
-But if your run app with docker you have nothing to do, just : (no hot reload for the moment )
+Now that everything is setup, just launch all the applications at the same time with the following command:
+```bash
+npm run start:dev
+```
+
+## Docker
+
+If you all want to run it all at once via docker you can run the following command without forgetting to create the .env:
+
 ```bash
 docker compose up
 ```
+
+## Unit launch
+
+Previously we saw how to setup and launch the entire application, but you can do it individually. To do this you can look at the package.json file and consult the command available in each section, they are logically grouped by package as follows:
+```bash
+        "__INSTALL__": "",
+#        ... Unit installation script
+
+#        ... Globalized installation script
+
+        "__FRONT__": "",
+#        ... Front launch script
+
+        "__AUTH__": "",
+#        ... Auth service launch script
+
+#        ... Script to setup auth database
+
+        "__DATABASE__": "",
+#        ... Script for base setup and seed of all services
+
+        "__START__": "",
+#        ... Script to launch all apps
+
+```
+
+It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
+
 
 ### Env
 You need to assign ports for all services, create a .env file in the mono root if it is not present:

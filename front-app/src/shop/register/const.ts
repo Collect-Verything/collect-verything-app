@@ -22,9 +22,11 @@ export const userRegisterList: LabelKey<UserRegisterType>[] = [
 
 export interface UserRegisterType extends User {
     confirmPassword: string;
+    id_stripe: "";
 }
 
 export const initRegisterForm: UserRegisterType = {
+    id_stripe: "",
     birthDate: new Date(),
     confirmPassword: "",
     createdAt: "",
