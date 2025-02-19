@@ -10,8 +10,9 @@
     "install:auth": "cd auth-service && npm install",
     "install:product": "cd product-service && npm install",
     "install:facturation": "cd facturation-service && npm install",
+    "install:config": "cd config-service && npm install",
 
-    "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation",
+    "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation & npm run install:config",
 
         "__FRONT__": "",
 
@@ -42,9 +43,14 @@
     "start:facturation-prod": "npm run start --prefix facturation-service",
     "start:facturation-dev": "npm run start:dev  --prefix facturation-service",
 
-    "generate:facturation": "cd product-service && npx prisma migrate dev --name \"Setup facturation db\"",
+    "generate:facturation": "cd facturation-service && npx prisma migrate dev --name \"Setup facturation db\"",
     "seed:facturation": "cd facturation-service && npx prisma db seed",
     "db:facturation": "npm run generate:facturation && npm run seed:facturation",
+
+        "__CONFIG__": "",
+
+    "start:config-prod": "npm run start --prefix config-service",
+    "start:config-dev": "npm run start:dev  --prefix config-service",
 
         "__DATABASE__": "",
 
@@ -52,8 +58,8 @@
 
         "__START__": "",
 
-    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev"
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod  & npm run start:config-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev & npm run start:config-dev"
 
   },
   "devDependencies": {
