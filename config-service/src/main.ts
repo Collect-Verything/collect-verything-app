@@ -16,9 +16,12 @@ import {configEnv} from "../env-config";
 // ----[x] Ajout du nouveau port dans le .env du root et
 // ----[x] Creer fichier env-config.ts (suivre pattern present dans les autres service)
 // ----[x] npm i dotenv dans el service concerné
-// [ ] Mettre a jour le document ReadeMe.md du root pour y ajouter la ligne concernant le nouveau service, suivre le pattern
+// [x] Mettre a jour le document ReadeMe.md du root pour y ajouter la ligne concernant le nouveau service, suivre le pattern
 // [ ] Mettre a jour les fichier en rapport avec Docker compose, file, start.sh
-// [ ] Mettre a jour les action github en rajouttant le nouveau service, donc un nouveau fichier, suivre le pattern.
+// ----[ ] Dockerfile
+// ----[ ] compose.yaml
+// ----[ ] start.sh
+// [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier, suivre le pattern.
 // [ ] Mettre ce proccess au propre dans la documentation, servira de guide pas a pas pour les prochain service.
 
 
