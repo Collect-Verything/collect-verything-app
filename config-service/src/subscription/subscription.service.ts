@@ -1,26 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSubscriptionDto } from './dto/create-subscription.dto';
-import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
+
+// npm install stripe --save
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
+
+// TODO : Mettre clé stripe dans .env
 
 @Injectable()
 export class SubscriptionService {
-  create(createSubscriptionDto: CreateSubscriptionDto) {
-    return 'This action adds a new subscription';
-  }
-
-  findAll() {
-    return `This action returns all subscription`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} subscription`;
-  }
-
-  update(id: number, updateSubscriptionDto: UpdateSubscriptionDto) {
-    return `This action updates a #${id} subscription`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} subscription`;
+  async findAll() {
+    return await stripe.subscriptions.list({
+      customer: "cus_RmzpxFcuDJqenR",
+    });
   }
 }
