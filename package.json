@@ -9,8 +9,9 @@
     "install:front": "cd front-app && npm install",
     "install:auth": "cd auth-service && npm install",
     "install:product": "cd product-service && npm install",
+    "install:facturation": "cd facturation-service && npm install",
 
-    "install:all": "npm run install:front & npm run install:auth & npm run install:product",
+    "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation",
 
         "__FRONT__": "",
 
