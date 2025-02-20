@@ -10,7 +10,7 @@ import { RegisterPage } from "../../shop/register";
 import React from "react";
 import { MainLayout } from "../../shop/main-layout";
 import { Account } from "../../auth/account";
-import { ConfigProducts } from "../../auth/config-products";
+import { SubscriptionConfigDisplay } from "../../auth/config";
 import { Documentation } from "../../auth/documentation";
 import { Facturation } from "../../auth/facturation";
 import { Support } from "../../auth/support";
@@ -98,8 +98,8 @@ export const router = createBrowserRouter([
                 element: <Facturation />,
             },
             {
-                path: URL_FRONT.CONFIG_SERVICE,
-                element: <ConfigProducts />,
+                path: URL_FRONT.CONFIG,
+                element: <SubscriptionConfigDisplay />,
             },
             {
                 path: URL_FRONT.SUPPORT,

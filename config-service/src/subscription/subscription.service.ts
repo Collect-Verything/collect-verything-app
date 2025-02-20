@@ -27,7 +27,7 @@ export class SubscriptionService {
 
     await this.upsertSubscriptionsByUserId(user_stripe_id, listSub.data);
 
-    return this.prisma.solutionSubscription.findMany({
+    return this.prisma.subscription.findMany({
       where: { user_stripe_id },
     });
   }
@@ -35,7 +35,7 @@ export class SubscriptionService {
   async upsertSubscriptionsByUserId(user_stripe_id: string, listSub: any[]) {
     await Promise.all(
       listSub.map(async (sub: any) => {
-        await this.prisma.solutionSubscription.upsert({
+        await this.prisma.subscription.upsert({
           where: { sub_stripe_id: sub.id },
           update: {
             active_stripe: sub.active ?? false,

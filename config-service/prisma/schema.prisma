@@ -16,7 +16,7 @@ datasource db {
 // TODO : Mettre une table de configuration en lien avec une sub, une config appartient uniquement a une subscription
 //  Si un solution est configured alors configured pass a true et published est disponible tant que active_stripe est true ...
 
-model SolutionSubscription {
+model Subscription {
   id                   Int      @id @default(autoincrement())
   user_stripe_id       String
   sub_stripe_id        String   @unique

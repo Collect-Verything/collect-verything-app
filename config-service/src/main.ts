@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {configEnv} from "../env-config";
+import { configEnv } from '../env-config';
 
 // TODO :
 // [x] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
@@ -10,7 +10,9 @@ import {configEnv} from "../env-config";
 // [x] Generer les premiere ressource avec la commande
 // [ ] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root.
 // ----[x] Installation
-// ----[ ] Base de donnée
+// ----[ ] Base de donnée :
+// --------[ ] Generer schema
+// --------[ ] Seed
 // ----[x] Run
 // [ ] Configuration du fichier main du nouveau service
 // ----[x] Ajout du nouveau port dans le .env du root et
@@ -24,14 +26,17 @@ import {configEnv} from "../env-config";
 // [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier, suivre le pattern.
 // [ ] Mettre ce proccess au propre dans la documentation, servira de guide pas a pas pour les prochain service.
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     // TODO : configEnv ne marche pas dockerisé
-    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`,`http://localhost:3000`],
+    origin: [
+      `http://localhost:${configEnv.FRONT_PORT_CLIENT}`,
+      `http://localhost:3000`,
+    ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
   await app.listen(configEnv.CONFIG_PORT_API);
 }
+
 bootstrap();

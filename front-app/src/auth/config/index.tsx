@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { SolutionSubscription } from "./type";
+import { Subscription } from "./type";
 import { getUserListSolutionSub } from "./request"; // Pour recuperer des config de solution client il faut suivre le workflox definit dans la doc conernant la facturation des service, une fois ceci fait un  ou des subscription sont disponible et consultable
 
 // Pour recuperer des config de solution client il faut suivre le workflox definit dans la doc conernant la facturation des service, une fois ceci fait un  ou des subscription sont disponible et consultable
 
-export const ConfigProducts = () => {
+export const SubscriptionConfigDisplay = () => {
     const user = useSelector((store: any) => store.authenticate);
-    const [listSolutions, setListSolutions] = useState<SolutionSubscription[]>([]);
+    const [listSolutions, setListSolutions] = useState<Subscription[]>([]);
 
     useEffect(() => {
         getUserListSolutionSub(user.id_stripe).then(setListSolutions);

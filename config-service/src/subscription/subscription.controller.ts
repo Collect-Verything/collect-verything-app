@@ -1,7 +1,9 @@
 import {Controller, Get, Param} from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
+import {CONFIG_URL} from "../const";
 
-@Controller('subscription')
+
+@Controller(`${CONFIG_URL}/sub`)
 export class SubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
 

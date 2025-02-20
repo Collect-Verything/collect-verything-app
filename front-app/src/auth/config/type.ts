@@ -1,4 +1,4 @@
-export interface SolutionSubscription {
+export interface Subscription {
     id: number;
     user_stripe_id: string;
     sub_stripe_id: string;
