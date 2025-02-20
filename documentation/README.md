@@ -29,6 +29,7 @@
 - Workflow
   - Stripe 
     - [Facturation] [facturation]
+    - [Subscription] [subscription]
 
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
@@ -38,6 +39,7 @@
 [env]: development/environment.md
 [rules]: general/rules.md
 [facturation]: workflow/stripe/facturation.md
+[subscription]: workflow/stripe/subscription.md
 [prettier]: development/prettier.md.md
 [ci]: ci-cd/ci.md
 [cd]: ci-cd/cd.md
