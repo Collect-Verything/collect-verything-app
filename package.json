@@ -52,9 +52,12 @@
     "start:config-prod": "npm run start --prefix config-service",
     "start:config-dev": "npm run start:dev  --prefix config-service",
 
+    "generate:config": "cd config-service && npx prisma migrate dev --name \"Setup config db\"",
+    "db:config": "npm run generate:config",
+
         "__DATABASE__": "",
 
-    "db:all": "npm run db:auth && npm run db:product && npm run db:facturation",
+    "db:all": "npm run db:auth && npm run db:product && npm run db:facturation && npm run db:config",
 
         "__START__": "",
 
