@@ -23,8 +23,8 @@ model SolutionSubscription {
   active_stripe        Boolean
   published            Boolean  @default(false)
   configured           Boolean  @default(false)
-  current_period_end   Boolean  @default(false)
-  current_period_start Boolean  @default(false)
+  current_period_end   Int
+  current_period_start Int
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 }

@@ -6,8 +6,8 @@ CREATE TABLE `SolutionSubscription` (
     `active_stripe` BOOLEAN NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `configured` BOOLEAN NOT NULL DEFAULT false,
-    `current_period_end` BOOLEAN NOT NULL DEFAULT false,
-    `current_period_start` BOOLEAN NOT NULL DEFAULT false,
+    `current_period_end` INTEGER NOT NULL,
+    `current_period_start` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
