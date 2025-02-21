@@ -1,15 +1,21 @@
-import {DialogProps} from "../../common/types/dialogs";
-import {Subscription} from "./type";
+import { DialogProps } from "../../common/types/dialogs";
+import { Subscription } from "./type";
 import React from "react";
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {Button, Grid2, Typography} from "@mui/material";
+import { Button, Grid2, Typography } from "@mui/material";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
+import { apiPost } from "../../common/utils/web";
+import { ConfigUrlWithPort } from "../../app/micro-services";
+import { SUBSCRIPTION_URL } from "./request";
+import { useSelector } from "react-redux";
+import { fetchUserSubscriptions } from "../../features/subscription-slice";
+import { useAppDispatch } from "../../features/authentication-slice";
 
 export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -17,6 +23,15 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+    const user = useSelector((store: any) => store.authenticate);
+    const dispatch = useAppDispatch();
+
+    const cancelSubRequest = (subIdStripe: string) => {
+        apiPost(`${ConfigUrlWithPort}/${SUBSCRIPTION_URL}/${subIdStripe}`, {})
+            .then(() => dispatch(fetchUserSubscriptions(user.id_stripe)))
+            .catch(console.error);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -76,7 +91,11 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
 
                     {row.active_stripe ? (
                         <DialogContentText mt={4}>
-                            <Button variant="outlined" color="warning">
+                            <Button
+                                onClick={() => cancelSubRequest(row.sub_stripe_id)}
+                                variant="outlined"
+                                color="warning"
+                            >
                                 Desactiver l'abonement
                             </Button>
                         </DialogContentText>

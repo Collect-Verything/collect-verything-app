@@ -72,4 +72,12 @@ export class SubscriptionService {
       }),
     );
   }
+
+  async cancelSubById(user_stripe_id: string) {
+    await stripe.subscriptions.cancel(user_stripe_id);
+    return this.prisma.subscription.update({
+      where: { sub_stripe_id: user_stripe_id },
+      data: { active_stripe: false, published: false },
+    });
+  }
 }
