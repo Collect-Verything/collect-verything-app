@@ -1,20 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
-// npm install stripe --save
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
 // TODO : Mettre clé stripe dans .env
+// TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
+// TODO : Une solution active peut être desactivé via une annulation guidée, passant le statut de la subscription a false et la visibilité a false.
 
-//  Une subscription devenue inactive, dont le paiement n'est pas renouvellé n'est plus presente dans la liste de sub renvoyé par stripe
-// La subscription etant persisté dans notre base nous permet de noter la derniere date de current_period_end, ou alors de ce baser sur le parametre active de lobecjt sub
+/**
+ * Service de gestion des abonnements Stripe.
+ *
+ * Méthodes :
+ * - `findAllByUserId(user_stripe_id: string)`:
+ *   Récupère la liste des abonnements d'un utilisateur via Stripe,
+ *   les synchronise avec la base de données et retourne la liste mise à jour.
+ *
+ * - `syncSubscriptions(user_stripe_id: string, stripeSubs: any[])`:
+ *   - Compare les abonnements actifs fournis par Stripe avec ceux en base.
+ *   - Désactive les abonnements qui ont expiré (non présents dans la réponse Stripe).
+ *   - Ajoute les nouveaux abonnements et met à jour les existants.
+ *
+ * 🔍 **Gestion des abonnements expirés :**
+ * Lorsqu'un abonnement arrive à échéance, il **disparaît** de la liste des abonnements
+ * retournée par Stripe. Cette absence permet de **passer son statut à inactif**
+ * dans la base et de proposer au client un renouvellement de contrat.
+ */
 
-// Client souhaite reactiver une solution qui n'st plus active/en cours de subscription
-// Faire une dif entre la liste persisité et la liste get => Permet de savoir quel solution n'est plus active
-//Une solution plus active peux etre reactivable via une nouvelle facturation "guidé" => cette nouvelle transaction guidé permettra de remplacer l'id subscription de lancienne solution pkus active et recuperera la configuration precedente
-
-// Stocker l'id de l'ancienne subscription ?
 @Injectable()
 export class SubscriptionService {
   constructor(private prisma: PrismaService) {}
@@ -28,7 +40,6 @@ export class SubscriptionService {
   }
 
   async syncSubscriptions(user_stripe_id: string, stripeSubs: any[]) {
-
     const stripeSubIds = stripeSubs.map((sub) => sub.id);
 
     await this.prisma.subscription.updateMany({

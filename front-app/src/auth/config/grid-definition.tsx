@@ -1,24 +1,18 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Subscription } from "./type";
-import {Button, Typography} from "@mui/material";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import { Box, Button } from "@mui/material";
 import React from "react";
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-
-// Les bool :
-// - active_stripe
-// - configured
-// - published
-// Seront representé par des points rouge ou vert selon l'etat
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
+import {InfoSubscriptionDialog} from "./dialog";
 
 export const columnsConfig: GridColDef<Subscription>[] = [
     {
         field: "id",
         headerName: "ID",
         width: 30,
-        align: 'center',
+        align: "center",
         renderCell: (params) => params.value,
     },
     {
@@ -31,35 +25,35 @@ export const columnsConfig: GridColDef<Subscription>[] = [
         field: "active_stripe",
         headerName: "Contrat actif",
         width: 100,
-        align: 'center',
-        renderCell: (params) => params.value === true ?"🟢": "🔴",
+        align: "center",
+        renderCell: (params) => (params.value === true ? "🟢" : "🔴"),
     },
     {
         field: "configured",
         headerName: "Configué",
         width: 100,
-        align: 'center',
-        renderCell: (params) => params.value === true ?"🟢": "🔴",
+        align: "center",
+        renderCell: (params) => (params.value === true ? "🟢" : "🔴"),
     },
     {
         field: "published",
         headerName: "Visible",
         width: 80,
-        align: 'center',
-        renderCell: (params) => params.value === true ?"🟢": "🔴",
+        align: "center",
+        renderCell: (params) => (params.value === true ? "🟢" : "🔴"),
     },
     {
         field: "current_period_start",
         headerName: "Actif depuis",
         width: 150,
-        align: 'center',
+        align: "center",
         renderCell: (params) => new Date(params.value * 1000).toLocaleDateString("fr-FR"),
     },
     {
         field: "current_period_end",
         headerName: "Actif jusqu'au",
         width: 150,
-        align: 'center',
+        align: "center",
         renderCell: (params) => new Date(params.value * 1000).toLocaleDateString("fr-FR"),
     },
     {
@@ -87,15 +81,21 @@ export const columnsConfig: GridColDef<Subscription>[] = [
         },
     },
     {
-        field: "d",
+        field: "sub_stripe_id",
         headerName: "Abonnement",
-        width: 120,
-        renderCell: () => {
-            return (
-                <Button>
-                    <ReceiptIcon color="secondary" />
-                </Button>
-            );
-        },
+        renderCell: (params) => <CellActionSubscription {...params} />,
+        width: 300,
     },
 ];
+
+export const CellActionSubscription = (props: GridRenderCellParams) => {
+    const { row } = props;
+    const buttonElement = React.useRef<HTMLButtonElement>(null);
+    const rippleRef = React.useRef<TouchRippleActions>(null);
+
+    return (
+        <Box display="flex">
+            <InfoSubscriptionDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />
+        </Box>
+    );
+};
