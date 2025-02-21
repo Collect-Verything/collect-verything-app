@@ -84,7 +84,7 @@ export const columnsConfig: GridColDef<Subscription>[] = [
         field: "sub_stripe_id",
         headerName: "Abonnement",
         renderCell: (params) => <CellActionSubscription {...params} />,
-        width: 300,
+        width: 120,
     },
 ];
 
