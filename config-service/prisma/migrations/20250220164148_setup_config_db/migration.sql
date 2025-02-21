@@ -3,7 +3,7 @@ CREATE TABLE `Subscription` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_stripe_id` VARCHAR(191) NOT NULL,
     `sub_stripe_id` VARCHAR(191) NOT NULL,
-    `active_stripe` BOOLEAN NOT NULL,
+    `active_stripe` BOOLEAN NOT NULL DEFAULT true,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `configured` BOOLEAN NOT NULL DEFAULT false,
     `current_period_end` INTEGER NOT NULL,

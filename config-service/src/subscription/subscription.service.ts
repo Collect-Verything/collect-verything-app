@@ -15,7 +15,6 @@ const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 //Une solution plus active peux etre reactivable via une nouvelle facturation "guidé" => cette nouvelle transaction guidé permettra de remplacer l'id subscription de lancienne solution pkus active et recuperera la configuration precedente
 
 // Stocker l'id de l'ancienne subscription ?
-
 @Injectable()
 export class SubscriptionService {
   constructor(private prisma: PrismaService) {}
@@ -24,21 +23,32 @@ export class SubscriptionService {
     const listSub = await stripe.subscriptions.list({
       customer: user_stripe_id,
     });
-
-    await this.upsertSubscriptionsByUserId(user_stripe_id, listSub.data);
-
-    return this.prisma.subscription.findMany({
-      where: { user_stripe_id },
-    });
+    await this.syncSubscriptions(user_stripe_id, listSub.data);
+    return this.prisma.subscription.findMany({ where: { user_stripe_id } });
   }
 
-  async upsertSubscriptionsByUserId(user_stripe_id: string, listSub: any[]) {
+  async syncSubscriptions(user_stripe_id: string, stripeSubs: any[]) {
+
+    const stripeSubIds = stripeSubs.map((sub) => sub.id);
+
+    await this.prisma.subscription.updateMany({
+      where: {
+        user_stripe_id,
+        sub_stripe_id: { notIn: stripeSubIds },
+      },
+      data: {
+        active_stripe: false,
+      },
+    });
+
     await Promise.all(
-      listSub.map(async (sub: any) => {
+      stripeSubs.map(async (sub: any) => {
         await this.prisma.subscription.upsert({
           where: { sub_stripe_id: sub.id },
           update: {
-            active_stripe: sub.active ?? false,
+            active_stripe: sub.status === 'active',
+            current_period_start: sub.current_period_start,
+            current_period_end: sub.current_period_end,
           },
           create: {
             user_stripe_id: user_stripe_id,

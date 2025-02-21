@@ -20,7 +20,7 @@ model Subscription {
   id                   Int      @id @default(autoincrement())
   user_stripe_id       String
   sub_stripe_id        String   @unique
-  active_stripe        Boolean
+  active_stripe        Boolean @default(true)
   published            Boolean  @default(false)
   configured           Boolean  @default(false)
   current_period_end   Int
