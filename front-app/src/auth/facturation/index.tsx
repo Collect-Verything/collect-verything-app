@@ -10,12 +10,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { columnsInvoices } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
 
+// TODO : Creer un recovery facturation comme pour les sub
+
 /*
  * Les composant facturation sont pour le moment commun à un user comme a un super admin ou metier concerné.
  * If user get facture from user id present dans le token
  * If metier or super adinm get all facture
  * Trouver un moyen de rendre commun le composant mais de changer le type de requete selon le role detecté
  * */
+
 export const Facturation = () => {
     const user = useSelector((store: any) => store.authenticate);
     const dispatch = useAppDispatch();

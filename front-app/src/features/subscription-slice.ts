@@ -1,9 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
 import { useDispatch } from "react-redux";
-import { getUserListSolutionSub } from "../auth/config/request";
+import { getRecoverSubs, getUserListSolutionSub } from "../auth/config/request";
 import { Subscription } from "../auth/config/type";
 import { User } from "../common/types/user";
+
+/*
+* @fetchUserSubscriptions : Recuperation des user sub
+* @recoveryUserSubscriptions : Permet de recuperer les sub d'un user dans le cas ou la base des sub est vide, mais pas les config...
+* */
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
@@ -26,6 +31,13 @@ export const fetchUserSubscriptions = createAsyncThunk(
     },
 );
 
+export const recoveryUserSubscriptions = createAsyncThunk(
+    "subscription/recoveryUserSubscriptions",
+    async (userStripeId: Pick<User, "id_stripe">) => {
+        return await getRecoverSubs(userStripeId);
+    },
+);
+
 // TODO : Les statut et erreur
 
 export const subscriptionSlice = createSlice({
@@ -34,6 +46,7 @@ export const subscriptionSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // fetchUserSubscriptions
             .addCase(fetchUserSubscriptions.pending, (state) => {
                 state.status = "loading";
             })
@@ -42,6 +55,17 @@ export const subscriptionSlice = createSlice({
                 state.listSub = action.payload;
             })
             .addCase(fetchUserSubscriptions.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message ?? null;
+            })
+            // recoveryUserSubscriptions
+            .addCase(recoveryUserSubscriptions.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(recoveryUserSubscriptions.fulfilled, (state) => {
+                state.status = "succeeded";
+            })
+            .addCase(recoveryUserSubscriptions.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message ?? null;
             });

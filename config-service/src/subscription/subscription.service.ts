@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service'; // eslint-disable-next-line @typescript-eslint/no-require-imports
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
@@ -79,5 +79,13 @@ export class SubscriptionService {
       where: { sub_stripe_id: user_stripe_id },
       data: { active_stripe: false, published: false },
     });
+  }
+
+  async recoverInactiveSubByUserId(user_stripe_id: string) {
+    const subscriptions = await stripe.subscriptions.list({
+      status: 'canceled',
+      customer: user_stripe_id,
+    });
+    await this.syncSubscriptions(user_stripe_id, subscriptions.data);
   }
 }
