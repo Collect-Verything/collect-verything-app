@@ -17,6 +17,8 @@ import { useSelector } from "react-redux";
 import { fetchUserSubscriptions } from "../../features/subscription-slice";
 import { useAppDispatch } from "../../features/authentication-slice";
 
+// Pour le moment la reactivation n'est pas encore mis en place
+
 export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
 

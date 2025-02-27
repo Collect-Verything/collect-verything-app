@@ -68,6 +68,7 @@ export const columnsConfig: GridColDef<Subscription>[] = [
             );
         },
     },
+    // Etablir des regles sur l'accessibilité selon configuration etc ...
     {
         field: "c",
         headerName: "Consulter",
