@@ -17,18 +17,28 @@ datasource db {
 //  Si un solution est configured alors configured pass a true et published est disponible tant que active_stripe est true ...
 
 model Subscription {
-  id                   Int      @id @default(autoincrement())
+  id                   Int            @id @default(autoincrement())
   user_stripe_id       String
-  sub_stripe_id        String   @unique
-  active_stripe        Boolean @default(true)
-  published            Boolean  @default(false)
-  configured           Boolean  @default(false)
+  sub_stripe_id        String         @unique
+  active_stripe        Boolean        @default(true)
+  published            Boolean        @default(false)
+  configured           Boolean        @default(false)
   current_period_end   Int
   current_period_start Int
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  configuration        Configuration?
 }
 
+model Configuration {
+  id             Int          @id @default(autoincrement())
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  subscriptionId Int          @unique
+  url            String       @unique
+  brand_name     String       @unique
+  admin_email    String
+  website_type   String
+}
 
 // Subscription object List -> data[0]
 
