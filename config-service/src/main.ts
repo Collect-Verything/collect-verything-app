@@ -1,6 +1,7 @@
-import { NestFactory } from '@nestjs/core';
+import {HttpAdapterHost, NestFactory} from '@nestjs/core';
 import { AppModule } from './app.module';
 import { configEnv } from '../env-config';
+import {PrismaClientExceptionFilter} from "./prisma-client-exception/prisma-client-exception.filter";
 
 // TODO :
 // [x] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
@@ -28,6 +29,7 @@ import { configEnv } from '../env-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.enableCors({
     // TODO : configEnv ne marche pas dockerisé
     origin: [
@@ -36,6 +38,10 @@ async function bootstrap() {
     ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
+
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
+
   await app.listen(configEnv.CONFIG_PORT_API);
 }
 

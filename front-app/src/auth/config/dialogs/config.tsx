@@ -12,15 +12,15 @@ import DialogActions from "@mui/material/DialogActions";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import { apiPatch, apiPost } from "../../../common/utils/web";
 import { ConfigUrlWithPort } from "../../../app/micro-services";
-import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 // Pour le moment la reactivation n'est pas encore mis en place
 
 export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
-    const nav = useNavigate();
 
     const [config, setConfig] = useState<Partial<Configuration>>();
+    const [error, setError] = useState<string|undefined>();
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -34,12 +34,13 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
         }
     }, []);
 
+    // TODO : Catch error better
+
     const handleCreateConfig = () => {
         apiPost(`${ConfigUrlWithPort}/conf/${row.id}`, config)
-            .then(handleClose)
-            .then(() => apiPatch(`${ConfigUrlWithPort}/sub/${row.id}`))
-            .then(() => nav("/auth/config"))
-            .catch(console.error);
+
+        .then(() => apiPatch(`${ConfigUrlWithPort}/sub/${row.id}`)).then(handleClose)
+            .catch(()=>setError("Un probleme est survenu avec votre requete, l'url choisit ou le nom de marque existe deja "));
     };
 
     // const user = useSelector((store: any) => store.authenticate);
@@ -64,6 +65,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
 
     const handleClose = () => {
         setOpen(false);
+        setError(undefined)
     };
     return (
         <Grid2>
@@ -89,6 +91,9 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
+                {error &&
+                <Alert severity="warning">{error}</Alert>
+                }
                 <DialogTitle id="responsive-dialog-title">Configuration</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
