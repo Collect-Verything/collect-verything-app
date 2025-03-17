@@ -2,10 +2,10 @@ import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Subscription } from "./type";
 import { Box, Button } from "@mui/material";
 import React from "react";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
-import {InfoSubscriptionDialog} from "./dialog";
+import { InfoSubscriptionDialog } from "./dialogs/sub-info";
+import { ConfigDialog } from "./dialogs/config";
 
 export const columnsConfig: GridColDef<Subscription>[] = [
     {
@@ -60,13 +60,7 @@ export const columnsConfig: GridColDef<Subscription>[] = [
         field: "b",
         headerName: "Configuration",
         width: 120,
-        renderCell: () => {
-            return (
-                <Button>
-                    <SettingsApplicationsIcon color="secondary" />
-                </Button>
-            );
-        },
+        renderCell: (params) => <CellActionConfig {...params} />,
     },
     // Etablir des regles sur l'accessibilité selon configuration etc ...
     {
@@ -97,6 +91,18 @@ export const CellActionSubscription = (props: GridRenderCellParams) => {
     return (
         <Box display="flex">
             <InfoSubscriptionDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />
+        </Box>
+    );
+};
+
+export const CellActionConfig = (props: GridRenderCellParams) => {
+    const { row } = props;
+    const buttonElement = React.useRef<HTMLButtonElement>(null);
+    const rippleRef = React.useRef<TouchRippleActions>(null);
+
+    return (
+        <Box display="flex">
+            <ConfigDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />
         </Box>
     );
 };

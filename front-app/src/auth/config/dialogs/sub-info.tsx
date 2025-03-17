@@ -1,5 +1,5 @@
-import { DialogProps } from "../../common/types/dialogs";
-import { Subscription } from "./type";
+import { DialogProps } from "../../../common/types/dialogs";
+import { Subscription } from "../type";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -10,12 +10,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import { apiPost } from "../../common/utils/web";
-import { ConfigUrlWithPort } from "../../app/micro-services";
-import { SUBSCRIPTION_URL } from "./request";
+import { apiPost } from "../../../common/utils/web";
+import { ConfigUrlWithPort } from "../../../app/micro-services";
+import { SUBSCRIPTION_URL } from "../request";
 import { useSelector } from "react-redux";
-import { fetchUserSubscriptions } from "../../features/subscription-slice";
-import { useAppDispatch } from "../../features/authentication-slice";
+import { fetchUserSubscriptions } from "../../../features/subscription-slice";
+import { useAppDispatch } from "../../../features/authentication-slice";
 
 // Pour le moment la reactivation n'est pas encore mis en place
 

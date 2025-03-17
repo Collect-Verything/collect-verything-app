@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { CONFIG_URL } from '../const';
 
@@ -19,5 +19,10 @@ export class SubscriptionController {
   @Post(':sub_stripe_id')
   cancelSubById(@Param('sub_stripe_id') sub_stripe_id: string) {
     return this.subscriptionService.cancelSubById(sub_stripe_id);
+  }
+
+  @Patch(':sub_id')
+  configuredSubById(@Param('sub_id') sub_id: string) {
+    return this.subscriptionService.configuredSubById(sub_id);
   }
 }

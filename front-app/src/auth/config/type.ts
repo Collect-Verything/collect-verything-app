@@ -9,4 +9,15 @@ export interface Subscription {
     current_period_start: number;
     createdAt: string;
     updatedAt: string;
+    configuration: Configuration;
+}
+
+export interface Configuration {
+    id: number;
+    url: string;
+    brand_name: string;
+    admin_email: string;
+    website_type: string;
+    createdAt: string;
+    updatedAt: string;
 }

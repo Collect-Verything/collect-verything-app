@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service'; // eslint-disable-next-line @typescript-eslint/no-require-imports
+import { PrismaService } from '../prisma/prisma.service';
+import { ConfigurationService } from '../configuration/configuration.service'; // eslint-disable-next-line @typescript-eslint/no-require-imports
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
@@ -29,14 +30,20 @@ const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
 @Injectable()
 export class SubscriptionService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private configService: ConfigurationService,
+  ) {}
 
   async findAllByUserId(user_stripe_id: string) {
     const listSub = await stripe.subscriptions.list({
       customer: user_stripe_id,
     });
     await this.syncSubscriptions(user_stripe_id, listSub.data);
-    return this.prisma.subscription.findMany({ where: { user_stripe_id } });
+    return this.prisma.subscription.findMany({
+      where: { user_stripe_id },
+      include: { configuration: true },
+    });
   }
 
   async syncSubscriptions(user_stripe_id: string, stripeSubs: any[]) {
@@ -87,5 +94,14 @@ export class SubscriptionService {
       customer: user_stripe_id,
     });
     await this.syncSubscriptions(user_stripe_id, subscriptions.data);
+  }
+
+  async configuredSubById(sub_id: string) {
+    return this.prisma.subscription.update({
+      where: { id: Number(sub_id) },
+      data: {
+        configured: true,
+      },
+    });
   }
 }
