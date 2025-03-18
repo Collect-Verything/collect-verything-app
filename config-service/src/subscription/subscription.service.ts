@@ -96,12 +96,22 @@ export class SubscriptionService {
     await this.syncSubscriptions(user_stripe_id, subscriptions.data);
   }
 
-  async configuredSubById(sub_id: string) {
+  async configureSubById(sub_id: string, is_active:boolean) {
     return this.prisma.subscription.update({
       where: { id: Number(sub_id) },
       data: {
-        configured: true,
+        configured: Boolean(is_active),
       },
     });
   }
+
+  async publishWebSite(sub_id: string, is_publish:boolean) {
+    return this.prisma.subscription.update({
+      where: { id: Number(sub_id) },
+      data: {
+        published: Boolean(is_publish),
+      },
+    });
+  }
+
 }

@@ -23,6 +23,10 @@ export class ConfigurationService {
   }
 
   findOne(id: number) {
-    return this.prisma.configuration.findUnique({ where: { id: id } });
+    return this.prisma.configuration.findUnique({ where: { id } });
+  }
+
+  deleteOne(id: number) {
+    return this.prisma.configuration.delete({ where: { id } });
   }
 }

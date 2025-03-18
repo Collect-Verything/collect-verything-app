@@ -10,7 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
-import { apiPatch, apiPost } from "../../../common/utils/web";
+import { apiDelete, apiPatch, apiPost } from "../../../common/utils/web";
 import { ConfigUrlWithPort } from "../../../app/micro-services";
 import Alert from "@mui/material/Alert";
 
@@ -20,7 +20,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
 
     const [config, setConfig] = useState<Partial<Configuration>>();
-    const [error, setError] = useState<string|undefined>();
+    const [error, setError] = useState<string | undefined>();
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -38,9 +38,22 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
 
     const handleCreateConfig = () => {
         apiPost(`${ConfigUrlWithPort}/conf/${row.id}`, config)
+            .then(() => apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${true}`))
+            .then(handleClose)
+            .catch(() =>
+                setError("Un probleme est survenu avec votre requete, l'url choisit ou le nom de marque existe deja "),
+            );
+    };
 
-        .then(() => apiPatch(`${ConfigUrlWithPort}/sub/${row.id}`)).then(handleClose)
-            .catch(()=>setError("Un probleme est survenu avec votre requete, l'url choisit ou le nom de marque existe deja "));
+    const handleDeleteConfig = async () => {
+        await apiDelete(`${ConfigUrlWithPort}/conf/${row.configuration.id}`);
+        await apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${false}`);
+        handleClose();
+    };
+
+    const handlePublish = async () => {
+        await apiPatch(`${ConfigUrlWithPort}/sub/publish/${row.id}/${true}`);
+        handleClose();
     };
 
     // const user = useSelector((store: any) => store.authenticate);
@@ -65,7 +78,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
 
     const handleClose = () => {
         setOpen(false);
-        setError(undefined)
+        setError(undefined);
     };
     return (
         <Grid2>
@@ -91,9 +104,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                {error &&
-                <Alert severity="warning">{error}</Alert>
-                }
+                {error && <Alert severity="warning">{error}</Alert>}
                 <DialogTitle id="responsive-dialog-title">Configuration</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -170,16 +181,41 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                     {/*TODO : Regle sur la mise en ligne, attente retour erreur serveur*/}
                     {/*Si ok apsser la sub en configurer*/}
                     {/*Refresh la liste via la slice*/}
-                    {row.configured ? (
+                    {row.configured && !row.published && (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="info" disabled={true}>
-                                Votre site est en ligne
+                                Votre site est configuré
                             </Button>
                         </DialogContentText>
-                    ) : (
+                    )}
+
+                    {!row.configured && (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="success" onClick={handleCreateConfig}>
-                                Mettre en ligne votre site
+                                Configurer votre site
+                            </Button>
+                        </DialogContentText>
+                    )}
+                    {row.configured && !row.published && (
+                        <>
+                            <DialogContentText mt={4}>
+                                <Button variant="outlined" onClick={handlePublish} color="info">
+                                    Souhaitez vous publier votre site
+                                </Button>
+                            </DialogContentText>
+
+                            <DialogContentText mt={4}>
+                                <Button variant="outlined" color="warning" onClick={handleDeleteConfig}>
+                                    Annuler cette configuration
+                                </Button>
+                            </DialogContentText>
+                        </>
+                    )}
+                    {row.configured && row.published && (
+                        <DialogContentText mt={4}>
+                            <Typography>Votre site est configuré et actuellement en ligne</Typography>
+                            <Button variant="outlined" color="warning">
+                                Cesser l'activité
                             </Button>
                         </DialogContentText>
                     )}

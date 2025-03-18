@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ConfigurationService } from './configuration.service';
 import { CreateConfigurationDto } from './dto/create-configuration.dto';
 import { CONFIG_URL } from '../const';
@@ -26,5 +26,10 @@ export class ConfigurationController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.configurationService.findOne(+id);
+  }
+
+  @Delete(':id')
+  deleteOne(@Param('id') id: string) {
+    return this.configurationService.deleteOne(+id);
   }
 }

@@ -37,7 +37,7 @@ export const columnsConfig: GridColDef<Subscription>[] = [
     },
     {
         field: "published",
-        headerName: "Visible",
+        headerName: "Publié",
         width: 80,
         align: "center",
         renderCell: (params) => (params.value === true ? "🟢" : "🔴"),
