@@ -18,7 +18,7 @@ const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?
     });
 
     if (!response.ok) {
-        throw new Error();
+        throw new Error(String(response.status));
     }
 
     return await response.json();

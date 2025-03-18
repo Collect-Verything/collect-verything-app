@@ -13,11 +13,16 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import { apiDelete, apiPatch, apiPost } from "../../../common/utils/web";
 import { ConfigUrlWithPort } from "../../../app/micro-services";
 import Alert from "@mui/material/Alert";
+import { fetchUserSubscriptions } from "../../../features/subscription-slice";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../features/authentication-slice"; // Pour le moment la reactivation et l'annulation n'est pas effective
 
-// Pour le moment la reactivation n'est pas encore mis en place
+// Pour le moment la reactivation et l'annulation n'est pas effective
 
 export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
+    const user = useSelector((store: any) => store.authenticate);
+    const dispatch = useAppDispatch();
 
     const [config, setConfig] = useState<Partial<Configuration>>();
     const [error, setError] = useState<string | undefined>();
@@ -27,37 +32,38 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     useEffect(() => {
-        if (row.configuration) {
-            setConfig(row.configuration);
-        } else {
-            console.log("NOT Define");
-        }
+        if (row.configuration) setConfig(row.configuration);
     }, []);
 
-    // TODO : Catch error better
+    // TODO : Fix error detection
 
-    const handleCreateConfig = () => {
-        apiPost(`${ConfigUrlWithPort}/conf/${row.id}`, config)
-            .then(() => apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${true}`))
-            .then(handleClose)
-            .catch(() =>
-                setError("Un probleme est survenu avec votre requete, l'url choisit ou le nom de marque existe deja "),
-            );
+    const handleCreateConfig = async () => {
+        try {
+            await apiPost(`${ConfigUrlWithPort}/conf/${row.id}`, config);
+            await apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${true}`);
+            await dispatch(fetchUserSubscriptions(user.id_stripe));
+            handleClose();
+        } catch (error) {
+            if (error === "409") {
+                setError("L'url ou le nom de magasin est déjà utilisé");
+            } else {
+                setError("Un probleme est apparut lors de votre requete");
+            }
+        }
     };
 
     const handleDeleteConfig = async () => {
         await apiDelete(`${ConfigUrlWithPort}/conf/${row.configuration.id}`);
         await apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${false}`);
+        dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error);
         handleClose();
     };
 
     const handlePublish = async () => {
         await apiPatch(`${ConfigUrlWithPort}/sub/publish/${row.id}/${true}`);
+        dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error);
         handleClose();
     };
-
-    // const user = useSelector((store: any) => store.authenticate);
-    // const dispatch = useAppDispatch();
 
     // const cancelSubRequest = (subIdStripe: string) => {
     //     apiPost(`${ConfigUrlWithPort}/${SUBSCRIPTION_URL}/${subIdStripe}`, {})
@@ -178,9 +184,6 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                         )}
                     </DialogContentText>
 
-                    {/*TODO : Regle sur la mise en ligne, attente retour erreur serveur*/}
-                    {/*Si ok apsser la sub en configurer*/}
-                    {/*Refresh la liste via la slice*/}
                     {row.configured && !row.published && (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="info" disabled={true}>
@@ -188,7 +191,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                             </Button>
                         </DialogContentText>
                     )}
-
+                    {/*TODO : Gerer exception*/}
                     {!row.configured && (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="success" onClick={handleCreateConfig}>
@@ -196,11 +199,13 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                             </Button>
                         </DialogContentText>
                     )}
+
+                    {/*TODO : Gerer exception et afficher un loader*/}
                     {row.configured && !row.published && (
                         <>
                             <DialogContentText mt={4}>
                                 <Button variant="outlined" onClick={handlePublish} color="info">
-                                    Souhaitez vous publier votre site
+                                    Publier votre site
                                 </Button>
                             </DialogContentText>
 
