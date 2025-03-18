@@ -1,7 +1,4 @@
 ## Next:
-- Créer un dialogue pour la configuration.
-- Lorsque la configuration est validée, cela permet de passer le booléen config à true.
-- Une fois config à true, il sera possible d'activer ou non la visibilité (visibilité factice, détails à prévoir plus tard).
 - Dialog config une fois validé permet de deployer le site web
 
 #### Visibilité :
@@ -17,4 +14,12 @@ La visibilité d’un site pourrait être due à un client qui a choisi de ne pa
 N'oubliez pas de changer la création des produits atonement avec une récurrence annuelle.
 
 A voire si la visibilité est vraiment pertinente ? Supprimer ...
+
+
+
+
+### Api gateway
+### Deploy produit client
+### Heberger, docker
+### Kubernetes
 
