@@ -8,7 +8,7 @@ export enum URL_FRONT {
     STATS = "stats",
     SUPPORT = "support",
     DOC = "doc",
-    CONFIG_SERVICE = "config",
+    CONFIG = "config",
     LOGIN = "Login",
     REGISTER = "Register",
     HOME = "",

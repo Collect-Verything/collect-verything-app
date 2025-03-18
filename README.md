@@ -132,6 +132,7 @@ FRONT_PORT=3000
 AUTH_PORT=3001
 PRODUCT_PORT=3002
 FACTURATION_PORT=3003
+CONFIG_PORT=3004
 ```
 
 The env points of each service include the url of the database of each service, with your personalized information
@@ -149,6 +150,11 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-facture?sch
 - Product:
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?schema=public"
+```
+
+- Config:
+```env
+DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?schema=public"
 ```
 
 Once the .env is created, it is now enough to install the dependencies of all the services with the command present in the package.json

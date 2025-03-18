@@ -7,6 +7,8 @@ import { ModifyUserJob } from "./dialogs/modify-user-job";
 import { DeleteUserJob } from "./dialogs/delete-user-job";
 import { Box } from "@mui/material";
 
+// TODO : Traiter les dates presente dans le tableau, split("T")[0] || passer de 1992-06-10T00:00:00.000Z à 1992-06-10
+
 export const columnsUser: GridColDef<User>[] = [
     { field: "id", headerName: "Id", width: 30 },
     { field: "id_stripe", headerName: "Stripe ID", width: 40 },

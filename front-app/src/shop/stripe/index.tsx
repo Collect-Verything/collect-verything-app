@@ -63,6 +63,11 @@ const StripeStatusPayement = () => {
                 <Typography variant="h5">
                     Paiement effectué avec succès <DoneOutlineIcon color="success" />
                 </Typography>
+
+
+                <Typography variant="h5">
+                    SI L'APPLICATION N'EST PAS EN PROD, PENSER A SIMULER L'EVENEMENT FACTURATION AVEC POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
+                </Typography>
             </Grid2>
             <Grid2>
                 <Button href={`/auth/${URL_FRONT.FACTURATION}`}>

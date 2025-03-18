@@ -4,6 +4,8 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { StockAndID } from './entities/type';
 
+// TODO :  Faire un check sur la difference de creation de produits et de service et sur la recurrence des abonement si service, verifier que service genere des facture consultable et que produits generer des facture par mail ...
+
 @Injectable()
 export class ProductsService {
   constructor(private prisma: PrismaService) {}

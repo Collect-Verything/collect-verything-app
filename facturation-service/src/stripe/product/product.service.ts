@@ -13,7 +13,7 @@ export class StripeProductService {
         currency: 'eur',
         ...(product.type === 'SERVICE' && {
           recurring: {
-            interval: 'month',
+            interval: 'year',
           },
         }),
       },
@@ -33,7 +33,7 @@ export class StripeProductService {
         product: product.stripe_id,
         ...(product.type === 'SERVICE' && {
           recurring: {
-            interval: 'month',
+            interval: 'year',
           },
         }),
       });

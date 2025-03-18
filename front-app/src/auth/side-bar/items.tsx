@@ -34,7 +34,7 @@ export const UserItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DisplaySettingsIcon />,
         label: SECTION_NAME.CONFIG_SERVICE,
-        url: URL_FRONT.CONFIG_SERVICE,
+        url: URL_FRONT.CONFIG,
     },
     {
         icon: <SupportAgentIcon />,
