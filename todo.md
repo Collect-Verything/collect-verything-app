@@ -23,3 +23,15 @@ A voire si la visibilité est vraiment pertinente ? Supprimer ...
 ### Heberger, docker
 ### Kubernetes
 
+
+## Fix error terminal au lancement:
+```
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+[Nest] 4030  - 03/18/2025, 6:18:56 PM   ERROR [ExceptionsHandler] No such customer: 'undefined'
+Error: No such customer: 'undefined'
+    at generateV1Error (/Users/canse/Documents/M2I/Apps-Projet-M2I/collect-verything-app/config-service/node_modules/stripe/cjs/Error.js:11:20)
+    at res.toJSON.then.Error_js_1.StripeAPIError.message (/Users/canse/Documents/M2I/Apps-Projet-M2I/collect-verything-app/config-service/node_modules/stripe/cjs/RequestSender.js:108:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+No issues found.
+```
