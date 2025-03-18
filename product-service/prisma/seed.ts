@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const service1 = await prisma.product.upsert({
-    where: { title: 'Standard' },
+    where: { stripe_id: 'prod_RS3pxsNscqx8wE' },
     update: {},
     create: {
       picture_path: 'http://image',
@@ -31,7 +31,7 @@ async function main() {
   });
 
   const service2 = await prisma.product.upsert({
-    where: { name: 'Medium' },
+    where: { stripe_id: 'prod_RS3qjdPSLTR2Uz' },
     update: {},
     create: {
       picture_path: 'http://image',
@@ -60,7 +60,7 @@ async function main() {
   });
 
   const service3 = await prisma.product.upsert({
-    where: { name: 'Premium' },
+    where: { stripe_id: 'prod_RS3rCG1UsHuVOn' },
     update: {},
     create: {
       picture_path: 'http://image',
@@ -90,33 +90,6 @@ async function main() {
     },
   });
 
-  // const service4 = await prisma.product.upsert({
-  //     where: { name: 'Expert' },
-  //     update: {},
-  //     create: {
-  //         picture_path: "http://image" ,
-  //         name: "Expert",
-  //         title: "L'excellence à votre porté",
-  //         description: "Bla bla sur Bla bla sur Bla bla sur Bla bla sur Bla bla sur Bla bla sur Bla bla sur Bla bla sur Bla bla sur " ,
-  //         details: "• Le processus optimisé\n" +
-  //             "• Analyses de données standard\n" +
-  //             "• 10 emplacements des stocks\n" +
-  //             "• Assistance par chat à tout moment\n" +
-  //             "• Vente globale localisée\n" +
-  //             "• Stockage serveur 2go\n" +
-  //             "• Le processus optimisé\n" +
-  //             "• Analyses de données standard\n" +
-  //             "• 10 emplacements des stocks\n" +
-  //             "• Vente globale localisée\n" +
-  //             "• Stockage serveur 2go\n" +
-  //             "• Assistance par chat à tout moment\n",
-  //         type: "SERVICE",
-  //         stock: 0,
-  //         price: 40.00,
-  //         published: false,
-  //     },
-  // });
-
   console.log({ serv1: service1, serv2: service2, serv3: service3 });
 }
 
@@ -126,6 +99,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    // close Prisma Client at the end
     await prisma.$disconnect();
   });
