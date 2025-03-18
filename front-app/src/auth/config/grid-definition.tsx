@@ -16,10 +16,13 @@ export const columnsConfig: GridColDef<Subscription>[] = [
         renderCell: (params) => params.value,
     },
     {
-        field: "",
+        field: "configuration.url",
         headerName: "Url",
         width: 180,
-        renderCell: () => "Url du site web subscription.config.domain",
+        renderCell: (params) => {
+            const url = params.row.configuration?.url;
+            return url ? `http://ipserveur/${url}` : "Aucune Url définie pour le moment";
+        },
     },
     {
         field: "active_stripe",
