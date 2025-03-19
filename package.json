@@ -11,8 +11,9 @@
     "install:product": "cd product-service && npm install",
     "install:facturation": "cd facturation-service && npm install",
     "install:config": "cd config-service && npm install",
+    "install:gateway": "cd api-gateway && npm install",
 
-    "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation & npm run install:config",
+    "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation & npm run install:config & npm run install:gateway",
 
         "__FRONT__": "",
 
@@ -55,14 +56,20 @@
     "generate:config": "cd config-service && npx prisma migrate dev --name \"Setup config db\"",
     "db:config": "npm run generate:config",
 
+
+        "__API GATEWAY__": "",
+
+    "start:gateway-prod": "npm run start --prefix api-gateway",
+    "start:gateway-dev": "npm run start:dev  --prefix api-gateway",
+
         "__DATABASE__": "",
 
     "db:all": "npm run db:auth && npm run db:product && npm run db:facturation && npm run db:config",
 
         "__START__": "",
-    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod & npm run start:config-prod",
-    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev & npm run start:config-dev",
-    "start:dev-w": "start /b npm run start:front && start /b npm run start:auth-dev && start /b npm run start:product-dev && start /b npm run start:facturation-dev && start /b npm run start:config-dev"
+    "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod & npm run start:config-prod & npm run start:gateway-prod",
+    "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev & npm run start:config-dev & npm run start:gateway-dev",
+    "start:dev-w": "start /b npm run start:front && start /b npm run start:auth-dev && start /b npm run start:product-dev && start /b npm run start:facturation-dev && start /b npm run start:config-dev && start /b npm run start:gateway-dev"
 
   },
   "devDependencies": {
