@@ -10,7 +10,7 @@ async function bootstrap() {
 
   app.enableCors({
     // TODO : configEnv ne marche pas dockerisé
-    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`,`http://localhost:3000`],
+    origin: [`http://localhost:2999`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 

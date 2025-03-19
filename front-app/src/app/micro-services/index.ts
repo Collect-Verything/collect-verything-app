@@ -4,16 +4,16 @@ import { MicroServiceUrlPortType } from "./type";
  */
 
 export const AUTH_SERVICE: MicroServiceUrlPortType = { servicePath: "auth", port: 3001 };
-export const AuthUrlWithPort = `${AUTH_SERVICE.port}/${AUTH_SERVICE.servicePath}`;
+export const AuthUrlWithPort = `2999/${AUTH_SERVICE.port}/${AUTH_SERVICE.servicePath}`;
 
 export const USER_SERVICE: MicroServiceUrlPortType = { servicePath: "users", port: 3001 };
-export const UserUrlWithPort = `${USER_SERVICE.port}/${USER_SERVICE.servicePath}`;
+export const UserUrlWithPort = `2999/${USER_SERVICE.port}/${USER_SERVICE.servicePath}`;
 
 export const PRODUCT_SERVICE: MicroServiceUrlPortType = { servicePath: "products", port: 3002 };
-export const ProductUrlWithPort = `${PRODUCT_SERVICE.port}/${PRODUCT_SERVICE.servicePath}`;
+export const ProductUrlWithPort = `2999/${PRODUCT_SERVICE.port}/${PRODUCT_SERVICE.servicePath}`;
 
 export const FACTURATION_SERVICE: MicroServiceUrlPortType = { servicePath: "stripe", port: 3003 };
-export const FacturationUrlWithPort = `${FACTURATION_SERVICE.port}/${FACTURATION_SERVICE.servicePath}`;
+export const FacturationUrlWithPort = `2999/${FACTURATION_SERVICE.port}/${FACTURATION_SERVICE.servicePath}`;
 
 export const CONFIG_SERVICE: MicroServiceUrlPortType = { servicePath: "config", port: 3004 };
-export const ConfigUrlWithPort = `${CONFIG_SERVICE.port}/${CONFIG_SERVICE.servicePath}`;
+export const ConfigUrlWithPort = `2999/${CONFIG_SERVICE.port}/${CONFIG_SERVICE.servicePath}`;

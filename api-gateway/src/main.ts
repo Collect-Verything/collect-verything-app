@@ -4,15 +4,15 @@ import { ProxyModule } from './proxy.module';
 // TODO :
 // [x] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
 // [x] Afficher les dossier caché dans le finder et aller dans le dossier du nouveai service puis supprimer le dossier caché .git
-// [ ] Dans le git dif retablif le fichier  present /.idea/vsc.xml (pour retablir le repo originel
-// [ ] Supprimer les fichier  service et controller app. et supprimer egalement ces elements present dans le main module (generé a la creation)
+// [x] Dans le git dif retablif le fichier  present /.idea/vsc.xml (pour retablir le repo originel
+// [x] Supprimer les fichier  service et controller app. et supprimer egalement ces elements present dans le main module (generé a la creation)
 // [ ] Generer les premiere ressource avec la commande
-// [ ] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root.
-// ----[ ] Installation
+// [x] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root.
+// ----[x] Installation
 // ----[] x Base de donnée :
 // --------[] x Generer schema
 // --------[] x Seed
-// ----[ ] Run
+// ----[x] Run
 // [ ] Configuration du fichier main du nouveau service
 // ----[ ] Ajout du nouveau port dans le .env du root et
 // ----[ ] Creer fichier env-config.ts (suivre pattern present dans les autres service)
@@ -27,6 +27,13 @@ import { ProxyModule } from './proxy.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(ProxyModule);
+
+  app.enableCors({
+    // TODO : configEnv ne marche pas dockerisé
+    origin: [`http://localhost:3000`],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  });
+
   await app.listen(2999);
 }
 
