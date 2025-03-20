@@ -15,6 +15,15 @@ services:
       - CHOKIDAR_USEPOLLING=true
     command: npm start
 
+  api-gateway:
+    build:
+      context: api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "2999:2999"
+
   auth-service:
     build:
       context: auth-service
