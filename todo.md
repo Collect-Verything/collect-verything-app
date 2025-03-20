@@ -1,7 +1,9 @@
 ## Next:
+
 - Dialog config une fois validé permet de deployer le site web
 
 #### Visibilité :
+
 La visibilité permet à un client d’accéder à l'URL officielle de son site web ou d'afficher un message de maintenance, par exemple.
 Un site possède une URL de configuration, qui est invisible du public, ainsi qu'une URL publique accessible par n’importe qui.
 Le client devrait pouvoir rendre son site non visible tout en ayant la possibilité de le consulter pour le configurer.
@@ -15,16 +17,16 @@ N'oubliez pas de changer la création des produits atonement avec une récurrenc
 
 A voire si la visibilité est vraiment pertinente ? Supprimer ...
 
-
-
-
 ### Api gateway
+
 ### Deploy produit client
+
 ### Heberger, docker
+
 ### Kubernetes
 
-
 ## Fix error terminal au lancement:
+
 ```
 Files successfully emitted, waiting for typecheck results...
 Issues checking in progress...
@@ -34,4 +36,14 @@ Error: No such customer: 'undefined'
     at res.toJSON.then.Error_js_1.StripeAPIError.message (/Users/canse/Documents/M2I/Apps-Projet-M2I/collect-verything-app/config-service/node_modules/stripe/cjs/RequestSender.js:108:62)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 No issues found.
+```
+
+## Error dialog modification produit (super admin)
+
+```error
+ERROR
+ResizeObserver loop completed with undelivered notifications.
+    at handleError (http://localhost:3000/static/js/bundle.js:157601:58)
+    at http://localhost:3000/static/js/bundle.js:157620:7
+
 ```
