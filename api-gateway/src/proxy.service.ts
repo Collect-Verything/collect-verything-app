@@ -3,6 +3,7 @@ import { Request } from 'express';
 import axios from 'axios';
 import { checkFreePath } from '../common/tool';
 import { portByPath } from '../common/const';
+import { configEnv } from '../env-config';
 
 @Injectable()
 export class ProxyService {
@@ -12,20 +13,19 @@ export class ProxyService {
     // FREE ROOT
     if (checkFreePath(req.url)) {
       const res = await axios[req.method.toLowerCase()](
-        `http://localhost:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+        `http://${configEnv.DOMAIN}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
         req.body,
       );
       return res.data;
 
       // PROTECTED ROOT
     } else {
-
       // CHECK TOKEN
       if (req.headers.authorization) {
-
         // CHECK TOKEN ON AUTH SERVICE
+        const urlCheckToken: string = `http://${configEnv.DOMAIN}:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`;
         const responseCheckToken = await axios.post(
-          'http://localhost:3001/auth/validate-token',
+          urlCheckToken,
           {},
           {
             headers: { Authorization: req.headers.authorization },
@@ -33,7 +33,6 @@ export class ProxyService {
         );
 
         if (responseCheckToken.status === 200) {
-          
           // EXECUTE REQUEST
           const res = await axios({
             method: req.method.toLowerCase(),

@@ -3,74 +3,48 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-
-        "__INSTALL__": "",
-
+    "__INSTALL__": "",
     "install:front": "cd front-app && npm install",
     "install:auth": "cd auth-service && npm install",
     "install:product": "cd product-service && npm install",
     "install:facturation": "cd facturation-service && npm install",
     "install:config": "cd config-service && npm install",
     "install:gateway": "cd api-gateway && npm install",
-
     "install:all": "npm run install:front & npm run install:auth & npm run install:product & npm run install:facturation & npm run install:config & npm run install:gateway",
-
-        "__FRONT__": "",
-
+    "__FRONT__": "",
     "start:front": "npm start --prefix front-app",
-
-        "__AUTH__": "",
-
+    "__AUTH__": "",
     "start:auth-prod": "npm run start --prefix auth-service",
     "start:auth-dev": "npm run start:dev  --prefix auth-service",
-
     "generate:auth": "cd auth-service && npx prisma migrate dev --name \"Setup auth db\"",
     "seed:auth": "cd auth-service && npx prisma db seed",
     "db:auth": "npm run generate:auth && npm run seed:auth",
-
-
-        "__PRODUCT__": "",
-
+    "__PRODUCT__": "",
     "start:product-prod": "npm run start --prefix product-service",
     "start:product-dev": "npm run start:dev  --prefix product-service",
-
     "generate:product": "cd product-service && npx prisma migrate dev --name \"Setup product db\"",
     "seed:product": "cd product-service && npx prisma db seed",
     "db:product": "npm run generate:product && npm run seed:product",
-
-
-        "__FACTURATION__": "",
-
+    "__FACTURATION__": "",
     "start:facturation-prod": "npm run start --prefix facturation-service",
     "start:facturation-dev": "npm run start:dev  --prefix facturation-service",
-
     "generate:facturation": "cd facturation-service && npx prisma migrate dev --name \"Setup facturation db\"",
     "seed:facturation": "cd facturation-service && npx prisma db seed",
     "db:facturation": "npm run generate:facturation && npm run seed:facturation",
-
-        "__CONFIG__": "",
-
+    "__CONFIG__": "",
     "start:config-prod": "npm run start --prefix config-service",
     "start:config-dev": "npm run start:dev  --prefix config-service",
-
     "generate:config": "cd config-service && npx prisma migrate dev --name \"Setup config db\"",
     "db:config": "npm run generate:config",
-
-
-        "__API GATEWAY__": "",
-
+    "__API GATEWAY__": "",
     "start:gateway-prod": "npm run start --prefix api-gateway",
     "start:gateway-dev": "npm run start:dev  --prefix api-gateway",
-
-        "__DATABASE__": "",
-
+    "__DATABASE__": "",
     "db:all": "npm run db:auth && npm run db:product && npm run db:facturation && npm run db:config",
-
-        "__START__": "",
+    "__START__": "",
     "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod & npm run start:config-prod & npm run start:gateway-prod",
     "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev & npm run start:config-dev & npm run start:gateway-dev",
     "start:dev-w": "start /b npm run start:front && start /b npm run start:auth-dev && start /b npm run start:product-dev && start /b npm run start:facturation-dev && start /b npm run start:config-dev && start /b npm run start:gateway-dev"
-
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
@@ -78,5 +52,8 @@
     "eslint-plugin-react": "^7.36.1",
     "globals": "^15.9.0",
     "typescript-eslint": "^8.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }
