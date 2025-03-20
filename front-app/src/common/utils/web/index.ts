@@ -1,3 +1,4 @@
+// const URL = configEnv.DOMAIN;
 const URL = "localhost";
 
 const getHeaders = () => {
