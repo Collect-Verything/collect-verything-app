@@ -25,6 +25,8 @@ import { ProxyModule } from './proxy.module';
 // [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier, suivre le pattern.
 // [ ] Mettre ce proccess au propre dans la documentation, servira de guide pas a pas pour les prochain service.
 
+// TODO : Assigner des ip fix pour le reseau privé et configuré les cors selon le sip fixe données (docker)
+
 async function bootstrap() {
   const app = await NestFactory.create(ProxyModule);
 
@@ -33,7 +35,6 @@ async function bootstrap() {
     origin: [`http://localhost:3000`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
-
   await app.listen(2999);
 }
 

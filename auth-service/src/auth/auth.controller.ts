@@ -41,17 +41,17 @@ export class AuthController {
     try {
       const authHeader = req.headers.authorization;
       if (!authHeader) {
-        throw new UnauthorizedException('Authorization token is missing');
+        return new UnauthorizedException('Authorization token is missing');
       }
 
       const token = authHeader.split(' ')[1];
       if (!token) {
-        throw new UnauthorizedException('Bearer token is missing');
+        return new UnauthorizedException('Bearer token is missing');
       }
 
       const decoded = this.jwtService.verify(token);
       if (!decoded) {
-        throw new UnauthorizedException('Invalid token');
+        return new UnauthorizedException('Invalid token');
       }
 
       res.status(HttpStatus.OK).send({ message: 'Token is valid' });

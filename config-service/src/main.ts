@@ -1,7 +1,7 @@
-import {HttpAdapterHost, NestFactory} from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { configEnv } from '../env-config';
-import {PrismaClientExceptionFilter} from "./prisma-client-exception/prisma-client-exception.filter";
+import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 
 // TODO :
 // [x] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
@@ -16,7 +16,7 @@ import {PrismaClientExceptionFilter} from "./prisma-client-exception/prisma-clie
 // --------[ ] Seed
 // ----[x] Run
 // [ ] Configuration du fichier main du nouveau service
-// ----[x] Ajout du nouveau port dans le .env du root et
+// ----[x] Ajout du nouveau port dans le .env du root
 // ----[x] Creer fichier env-config.ts (suivre pattern present dans les autres service)
 // ----[x] npm i dotenv dans el service concerné
 // [x] Mettre a jour le document ReadeMe.md du root pour y ajouter la ligne concernant le nouveau service, suivre le pattern
@@ -32,9 +32,7 @@ async function bootstrap() {
 
   app.enableCors({
     // TODO : configEnv ne marche pas dockerisé
-    origin: [
-      `http://localhost:2999`,
-    ],
+    origin: [`http://localhost:2999`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 

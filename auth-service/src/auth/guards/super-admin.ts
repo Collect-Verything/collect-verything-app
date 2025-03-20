@@ -14,14 +14,14 @@ export class SuperAdminGuards implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
-    const authHeader = request.headers['authorization'];
+    const authHeader: Request = request.headers.authorization;
 
     if (authHeader) {
-      const token = authHeader.split(' ')[1];
+      const token = String(authHeader).split(' ')[1];
       const decodedToken = jwtDecode(token) as JwtPayloadWithRoles;
       return decodedToken.role === ROLENAME.SUPER_ADMIN;
     } else {
-      console.log('No Authorization header present');
+      console.error('❌ Aucun header Authorization reçu');
       return false;
     }
   }
