@@ -38,12 +38,7 @@ Error: No such customer: 'undefined'
 No issues found.
 ```
 
-## Error dialog modification produit (super admin)
 
-```error
-ERROR
-ResizeObserver loop completed with undelivered notifications.
-    at handleError (http://localhost:3000/static/js/bundle.js:157601:58)
-    at http://localhost:3000/static/js/bundle.js:157620:7
+## Faire une distinction sur les .env localhost par rapport au nom de reseau docker 
 
-```
+Actuellement tous les DOMAON sont en local host, mais avec docker certain domain seront remplacé par un reseau privé docker par exemple ou une adresse ip ...
