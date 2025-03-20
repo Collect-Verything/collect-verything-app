@@ -15,9 +15,10 @@ import { UserEntity } from '../users/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { Request, Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
+import { configEnv } from '../../env-config';
 
-@Controller('auth')
-@ApiTags('auth')
+@Controller(configEnv.AUTH_URL_AUTH)
+@ApiTags(configEnv.AUTH_URL_AUTH)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,

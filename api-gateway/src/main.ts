@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ProxyModule } from './proxy.module';
+import { configEnv } from '../env-config';
 
 // TODO :
 // [x] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
@@ -25,17 +26,14 @@ import { ProxyModule } from './proxy.module';
 // [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier, suivre le pattern.
 // [ ] Mettre ce proccess au propre dans la documentation, servira de guide pas a pas pour les prochain service.
 
-// TODO : Assigner des ip fix pour le reseau privé et configuré les cors selon le sip fixe données (docker)
-
 async function bootstrap() {
   const app = await NestFactory.create(ProxyModule);
 
   app.enableCors({
-    // TODO : configEnv ne marche pas dockerisé
-    origin: [`http://localhost:3000`],
+    origin: [`http://${configEnv.DOMAIN}:${configEnv.FRONT_PORT}`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
-  await app.listen(2999);
+  await app.listen(configEnv.API_GATEWAY_PORT);
 }
 
 bootstrap();

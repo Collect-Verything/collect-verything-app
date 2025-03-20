@@ -36,7 +36,7 @@ export class ProxyService {
           // EXECUTE REQUEST
           const res = await axios({
             method: req.method.toLowerCase(),
-            url: `http://localhost:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+            url: `http://${configEnv.DOMAIN}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
             data: req.body,
             headers: {
               'Cache-Control': 'no-cache',

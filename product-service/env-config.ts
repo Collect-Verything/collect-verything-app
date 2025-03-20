@@ -4,6 +4,10 @@ import * as path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const configEnv = {
-  PRODUCT_PORT_API: process.env.PRODUCT_PORT,
-  FRONT_PORT_CLIENT: process.env.FRONT_PORT,
+  DOMAIN: process.env.DOMAIN,
+
+  API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,
+
+  PRODUCT_PORT: process.env.PRODUCT_PORT,
+  PRODUCT_URL: process.env.PRODUCT_URL,
 };

@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ConfigurationService } from './configuration.service';
 import { CreateConfigurationDto } from './dto/create-configuration.dto';
-import { CONFIG_URL } from '../const';
+import { configEnv } from '../../env-config';
 
-@Controller(`${CONFIG_URL}/conf`)
+@Controller(`${configEnv.CONFIG_URL}/conf`)
 export class ConfigurationController {
   constructor(private readonly configurationService: ConfigurationService) {}
 
