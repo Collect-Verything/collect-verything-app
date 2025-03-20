@@ -1,8 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { STRIPE_URL } from '../const';
 import { StripeEventService } from './event.service';
+import { configEnv } from '../../../env-config';
 
-@Controller(`${STRIPE_URL}/event`)
+@Controller(`${configEnv.FACTURATION_URL}/event`)
 export class StripeEventController {
   constructor(private readonly stripeEventService: StripeEventService) {}
 

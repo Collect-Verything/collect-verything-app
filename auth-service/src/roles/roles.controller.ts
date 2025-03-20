@@ -2,9 +2,10 @@ import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { RoleEntity } from './entities/role.entity';
+import { configEnv } from '../../env-config';
 
-@Controller('roles')
-@ApiTags('roles')
+@Controller(configEnv.AUTH_URL_ROLES)
+@ApiTags(configEnv.AUTH_URL_ROLES)
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 

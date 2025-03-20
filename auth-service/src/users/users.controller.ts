@@ -21,16 +21,15 @@ import {
 import { UserEntity } from './entities/user.entity';
 import { SuperAdminGuards } from '../auth/guards/super-admin';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { configEnv } from '../../env-config';
 
 /*
- * TODO: Creer une distinction entre la creation d'un user de type register (accessible sans auth)  et la creation d'un user depuis interface admin dont la selection des role est libre
  * TODO: Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
- * TODO: Creer un end point register pour les client avec assignation automatique du role USER
  * TODO: Penser a la supression d'un client, a son historique de facture, faut il vraiment le suprimer ou alors le rendre non visible, ou creer un role OFFLINE par exemple
  * */
 
-@Controller('users')
-@ApiTags('users')
+@Controller(configEnv.AUTH_URL_USERS)
+@ApiTags(configEnv.AUTH_URL_USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

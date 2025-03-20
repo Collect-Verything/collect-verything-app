@@ -126,13 +126,28 @@ As part of this project, my goal is to implement the essential functionalities o
 
 Before launching the applications, you must create the .env in the root then the .env in each service
 
-The .env in the root contains the ports of each service:
+The .env in the root contains ports and url's of each service:
 ```env
+# URL AND PORT
+
+DOMAIN='localhost'
 FRONT_PORT=3000
+
+API_GATEWAY_PORT=2999
+
 AUTH_PORT=3001
+AUTH_URL_AUTH='auth'
+AUTH_URL_ROLES='roles'
+AUTH_URL_USERS='users'
+
 PRODUCT_PORT=3002
+PRODUCT_URL='products'
+
 FACTURATION_PORT=3003
+FACTURATION_URL='stripe'
+
 CONFIG_PORT=3004
+CONFIG_URL='config'
 ```
 
 The env points of each service include the url of the database of each service, with your personalized information

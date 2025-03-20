@@ -11,8 +11,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   app.enableCors({
-    // TODO : configEnv ne marche pas dockerisé
-    origin: [`http://localhost:${configEnv.FRONT_PORT_CLIENT}`,`http://localhost:3000`],
+    origin: [`http://${configEnv.DOMAIN}:${configEnv.API_GATEWAY_PORT}`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
@@ -29,7 +28,7 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
-  await app.listen(configEnv.AUTH_PORT_API);
+  await app.listen(configEnv.AUTH_PORT);
 }
 
 bootstrap();

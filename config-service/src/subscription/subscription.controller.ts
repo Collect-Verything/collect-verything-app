@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
-import { CONFIG_URL } from '../const';
+import { configEnv } from '../../env-config';
 
-@Controller(`${CONFIG_URL}/sub`)
+@Controller(`${configEnv.CONFIG_URL}/sub`)
 export class SubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
 
