@@ -1,25 +1,20 @@
-# Utilise une image Node.js comme base
+# Utilise une image Node.js légère
 FROM node:18-alpine
 
-# Installer les outils nécessaires, comme nc
-RUN apk add --no-cache netcat-openbsd
-RUN apk add --no-cache openssl
-
-# Crée et utilise le répertoire de travail /auth-service
+# Définir le répertoire de travail
 WORKDIR /api-gateway
 
-# Copie les fichiers package.json et package-lock.json
-COPY package.json ./
-COPY package-lock.json ./
+# Copier uniquement les fichiers nécessaires pour optimiser le cache
+COPY package.json package-lock.json ./
 
-# Installe les dépendances de production
+# Installer uniquement les dépendances de production
 RUN npm install
 
-# Copie tous les fichiers du projet dans le conteneur
+# Copier le reste du projet
 COPY . .
 
-# Expose le port utilisé par l'API Gateway
+# Exposer le port utilisé par l'API Gateway
 EXPOSE 2999
 
-# Commande de démarrage de l'application
-CMD ["npm", "run", "start:dev"]
+# Lancer l'application en production
+CMD ["npm", "run", "start"]

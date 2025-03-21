@@ -1,5 +1,6 @@
 // const URL = configEnv.DOMAIN;
-const URL = "localhost";
+const URL = process.env.DOMAIN_URL;
+// const URL = "0.0.0.0";
 
 const getHeaders = () => {
     return {
@@ -18,6 +19,7 @@ const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?
         body: data ? JSON.stringify(data) : undefined,
     });
 
+    // await throwErrorResponse(response)
     if (!response.ok) {
         throw new Error(String(response.status));
     }
@@ -33,9 +35,9 @@ export const apiPatch = (path: string, data?: any) => apiRequest(path, "PATCH", 
 
 export const apiDelete = (path: string) => apiRequest(path, "DELETE");
 
-export const throwErrorResponse = (res: Response) => {
+export const throwErrorResponse = async (res: Response) => {
     if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+        throw new Error(String(res.status));
     }
-    return res.json();
+    return await res.json();
 };

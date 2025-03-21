@@ -12,8 +12,10 @@ export class ProxyService {
 
     // FREE ROOT
     if (checkFreePath(req.url)) {
+      // const freePath = `http://${getDomain(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`;
+
       const res = await axios[req.method.toLowerCase()](
-        `http://${configEnv.DOMAIN}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+        `http://auth-service:3001/auth/login`,
         req.body,
       );
       return res.data;

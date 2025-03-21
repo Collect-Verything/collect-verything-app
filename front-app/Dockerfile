@@ -1,16 +1,21 @@
-FROM node:13.12.0-alpine
+# Étape 1 : Build du front
+FROM node:18-alpine AS build
 
-WORKDIR /front
+WORKDIR /app
 
-ENV PATH /front/node_modules/.bin:$PATH
+COPY package.json package-lock.json ./
+RUN npm install
 
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+COPY . .
 
-COPY . ./
+RUN npm run build
 
-EXPOSE 3000
+# Étape 2 : Serveur Nginx
+FROM nginx:1.23
 
-CMD ["npm", "start"]
+# Correction ici : React utilise `build/`, pas `dist/`
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

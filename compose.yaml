@@ -1,104 +1,59 @@
-version: '3.7'
+version: '3.8'
+
+networks:
+  my_private_network:
+    driver: bridge
 
 services:
-
+  # 🌍 FRONT-END (Public)
   front-app:
-    container_name: front-app
     build: ./front-app
-    volumes:
-      - './:/app'
-      - '/app/node_modules'
+    container_name: front-app
     ports:
-      - "3000:3000"
-    stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: npm start
+      - "80:80"
+    networks:
+      - my_private_network
+    env_file:
+      - .env
 
+  # 🚀 API GATEWAY (Seul service exposé)
   api-gateway:
-    build:
-      context: api-gateway
-      dockerfile: Dockerfile
+    build: ./api-gateway
     container_name: api-gateway
     restart: always
     ports:
       - "2999:2999"
+    networks:
+      - my_private_network
+    depends_on:
+      - auth-service
+    env_file:
+      - .env
 
+  # 🔒 AUTH SERVICE (Privé)
   auth-service:
-    build:
-      context: auth-service
-      dockerfile: Dockerfile
+    build: ./auth-service
     container_name: auth-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-auth:3306/collect-verything-auth
-      - AUTH_PORT=${AUTH_PORT}
-    ports:
-      - "${AUTH_PORT}:${AUTH_PORT}"
+    networks:
+      - my_private_network
+    env_file:
+      - .env
     depends_on:
       - mysql-auth
 
+  # 🗄️ BASE DE DONNÉES (MySQL AUTH)
   mysql-auth:
     image: mysql:8
     container_name: mysql-auth
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-auth
+      MYSQL_DATABASE: auth_db
     ports:
       - "3307:3306"
     volumes:
       - mysql-auth-data:/var/lib/mysql
-
-  product-service:
-    build:
-      context: product-service
-      dockerfile: Dockerfile
-    container_name: product-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-product:3306/collect-verything-product
-      - PRODUCT_PORT=${PRODUCT_PORT}
-    ports:
-      - "${PRODUCT_PORT}:${PRODUCT_PORT}"
-    depends_on:
-      - mysql-product
-
-  mysql-product:
-    image: mysql:8
-    container_name: mysql-product
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-product
-    ports:
-      - "3308:3306"
-    volumes:
-      - mysql-product-data:/var/lib/mysql
-
-  facturation-service:
-    build:
-      context: facturation-service
-      dockerfile: Dockerfile
-    container_name: facturation-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-facturation:3306/collect-verything-facturation
-      - FACTURATION_PORT=${FACTURATION_PORT}
-    ports:
-      - "${FACTURATION_PORT}:${FACTURATION_PORT}"
-    depends_on:
-      - mysql-facturation
-
-  mysql-facturation:
-    image: mysql:8
-    container_name: mysql-facturation
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-facturation
-    ports:
-      - "3309:3306"
-    volumes:
-      - mysql-facturation-data:/var/lib/mysql
-
-
+    networks:
+      - my_private_network
 
 volumes:
   mysql-auth-data:
-  mysql-product-data:
-  mysql-facturation-data:
