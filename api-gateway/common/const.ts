@@ -14,6 +14,7 @@ portByPath.set(configEnv.CONFIG_URL, configEnv.CONFIG_PORT);
 
 const domainService = new Map()
 domainService.set("auth", configEnv.DOMAIN_AUTH);
+domainService.set("product", configEnv.DOMAIN_PRODUCT);
 export const getDomain = (firstPath: string) =>{
     return domainService.get(firstPath)
 }

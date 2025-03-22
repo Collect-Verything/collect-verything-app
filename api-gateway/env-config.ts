@@ -5,6 +5,10 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const configEnv = {
   DOMAIN: process.env.DOMAIN,
+  DOMAIN_AUTH: process.env.DOMAIN_AUTH,
+  DOMAIN_PRODUCT: process.env.DOMAIN_PRODUCT,
+
+
   FRONT_PORT: process.env.FRONT_PORT,
 
   API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,

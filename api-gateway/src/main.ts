@@ -36,7 +36,6 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
   await app.listen(configEnv.API_GATEWAY_PORT);
-  console.log(app)
 }
 
 bootstrap();

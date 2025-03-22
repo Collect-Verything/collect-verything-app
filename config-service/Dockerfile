@@ -6,7 +6,7 @@ RUN apk add --no-cache netcat-openbsd
 RUN apk add --no-cache openssl
 
 # Crée et utilise le répertoire de travail /auth-service
-WORKDIR /product-service
+WORKDIR /config-service
 
 # Copie les fichiers package.json et package-lock.json
 COPY package.json ./
@@ -22,7 +22,7 @@ COPY . .
 RUN chmod +x ./start.sh
 
 # Expose le port sur lequel l'application écoute
-EXPOSE 3002
+EXPOSE 3001
 
 # Utiliser le script pour attendre MySQL avant de démarrer Prisma
 CMD ["sh", "./start.sh"]
