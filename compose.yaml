@@ -30,6 +30,9 @@ services:
       - product-service
     env_file:
       - .env
+    environment:
+      - NODE_ENV=production
+      - NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
 
   # 🔒 AUTH SERVICE (Privé)
   auth-service:

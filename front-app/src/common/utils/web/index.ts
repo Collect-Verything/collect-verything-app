@@ -1,5 +1,5 @@
 // const URL = configEnv.DOMAIN;
-const URL = process.env.DOMAIN_URL;
+const URL = process.env.REACT_APP_DOMAIN_URL;
 // const URL = "0.0.0.0";
 
 const getHeaders = () => {
