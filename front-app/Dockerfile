@@ -1,21 +1,36 @@
 # Étape 1 : Build du front
-FROM node:18-alpine AS build
+#FROM node:18-alpine AS build
+#
+#WORKDIR /app
+#
+#COPY package.json package-lock.json ./
+#RUN npm install
+#
+#COPY . .
+#
+#RUN npm run build
+#
+## Étape 2 : Serveur Nginx
+#FROM nginx:1.23
+#
+## Correction ici : React utilise `build/`, pas `dist/`
+#COPY --from=build /app/build /usr/share/nginx/html
+#
+#EXPOSE 80
+#
+#CMD ["nginx", "-g", "daemon off;"]
+#
 
-WORKDIR /app
+FROM node:18-alpine
 
-COPY package.json package-lock.json ./
+WORKDIR /front-app
+
+COPY package.json .
+
 RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 3000
 
-# Étape 2 : Serveur Nginx
-FROM nginx:1.23
-
-# Correction ici : React utilise `build/`, pas `dist/`
-COPY --from=build /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "npm", "start" ]

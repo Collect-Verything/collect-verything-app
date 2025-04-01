@@ -1,20 +1,28 @@
 version: '3.8'
 
-networks:
-  my_private_network:
-    driver: bridge
-
 services:
   # 🌍 FRONT-END (Public)
+#  front-app:
+#    build: ./front-app
+#    container_name: front-app
+#    ports:
+#      - "80:80"
+#    networks:
+#      - my_private_network
+#    env_file:
+#      - .env
   front-app:
     build: ./front-app
     container_name: front-app
     ports:
-      - "80:80"
-    networks:
-      - my_private_network
-    env_file:
-      - .env
+      - '3000:3000'
+    volumes:
+      - ./front-app:/front-app
+      - /front-app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api-gateway
 
   # 🚀 API GATEWAY (Seul service exposé)
   api-gateway:
@@ -23,13 +31,14 @@ services:
     restart: always
     ports:
       - "2999:2999"
-    networks:
-      - my_private_network
     depends_on:
       - auth-service
-      - product-service
+#      - product-service
     env_file:
       - .env
+    volumes:
+      - ./api-gateway:/api-gateway
+      - /api-gateway/node_modules
     environment:
       - NODE_ENV=production
       - NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
@@ -38,8 +47,6 @@ services:
   auth-service:
     build: ./auth-service
     container_name: auth-service
-    networks:
-      - my_private_network
     env_file:
       - .env
     depends_on:
@@ -56,38 +63,38 @@ services:
       - "3307:3306"
     volumes:
       - mysql-auth-data:/var/lib/mysql
-    networks:
-      - my_private_network
 
-  # 🔒 PRODUCT SERVICE (Privé)
-  product-service:
-    build: ./product-service
-    container_name: product-service
-    networks:
-      - my_private_network
-    env_file:
-      - .env
-    depends_on:
-      - mysql-product
-    ports:
-      - "3002:3002"
-    volumes:
-      - ./product-service:/app
-
-  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
-  mysql-product:
-    image: mysql:8
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: product_db
-    ports:
-      - "3308:3306"
-    volumes:
-      - mysql-prod-data:/var/lib/mysql
-    networks:
-      - my_private_network
-
+#
+#  # 🔒 PRODUCT SERVICE (Privé)
+#  product-service:
+#    build: ./product-service
+#    container_name: product-service
+#    networks:
+#      - my_private_network
+#    env_file:
+#      - .env
+#    depends_on:
+#      - mysql-product
+#    ports:
+#      - "3002:3002"
+#    volumes:
+#      - ./product-service:/app
+#
+#  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
+#  mysql-product:
+#    image: mysql:8
+#    restart: always
+#    container_name: product-db
+#    environment:
+#      MYSQL_ROOT_PASSWORD: rootpassword
+#      MYSQL_DATABASE: product_db
+#    ports:
+#      - "3308:3306"
+#    volumes:
+#      - mysql-prod-data:/var/lib/mysql
+#    networks:
+#      - my_private_network
+#
 
 volumes:
   mysql-auth-data:
