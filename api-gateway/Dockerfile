@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 2999
 
 # Lancer l'application en production
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:debug"]
