@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import axios from 'axios';
 import { checkFreePath } from '../common/tool';
-import { portByPath } from '../common/const';
+import { domainServiceByPath, portByPath } from '../common/const';
 import { configEnv } from '../env-config';
 
 @Injectable()
@@ -56,9 +56,7 @@ export class ProxyService {
 
           const res = await axios({
             method: req.method.toLowerCase(),
-            // url: `http://${configEnv.DOMAIN}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
-            // Creer une methode  pour mettre en domaine le service docker basé sur le req.url.split de 1, creer un dictionnaire
-            url: `http://auth-service:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+            url: `http://${domainServiceByPath.get(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
             data: req.body,
             headers: {
               'Cache-Control': 'no-cache',
