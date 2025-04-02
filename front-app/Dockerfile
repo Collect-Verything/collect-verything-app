@@ -1,4 +1,4 @@
-# Étape 1 : Build du front
+# Étape 1 : Build du front      # Check previous config docker comose
 #FROM node:18-alpine AS build
 #
 #WORKDIR /app
