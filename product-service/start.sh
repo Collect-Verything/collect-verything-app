@@ -14,5 +14,5 @@ npx prisma migrate dev --name "Setup product db"
 npx prisma db seed
 
 # Démarrer l'application TODO : changer le script start pour lancement prod
-npm run start:dev
+npm run start:debug
 
