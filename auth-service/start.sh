@@ -13,6 +13,6 @@ npx prisma generate
 npx prisma migrate dev --name "Setup auth db"
 npx prisma db seed
 
-# Démarrer l'application TODO : changer le script start pour lancement prod
-npm run start:dev
+# Démarrer l'application TODO : Adapter le run start pour la prod
+npm run start:debug
 

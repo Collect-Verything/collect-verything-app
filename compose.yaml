@@ -31,24 +31,24 @@ services:
     restart: always
     ports:
       - "2999:2999"
-    depends_on:
-      - auth-service
-#      - product-service
     env_file:
       - .env
     volumes:
       - ./api-gateway:/api-gateway
       - /api-gateway/node_modules
-    environment:
-      - NODE_ENV=production
-      - NPM_CONFIG_REGISTRY=https://registry.npmjs.org/
+    depends_on:
+      - auth-service
 
   # 🔒 AUTH SERVICE (Privé)
   auth-service:
     build: ./auth-service
     container_name: auth-service
+    restart: always
     env_file:
       - .env
+    volumes:
+      - ./auth-service:/auth-service
+      - /auth-service/node_modules
     depends_on:
       - mysql-auth
 
