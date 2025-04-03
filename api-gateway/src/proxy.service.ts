@@ -47,7 +47,7 @@ export class ProxyService {
 
           console.log('4 ____URL REQUEST VERS SERVICE ___');
           console.log(
-            `http://${configEnv.DOMAIN}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+              `http://${domainServiceByPath.get(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
           );
 
           console.log(req.url);

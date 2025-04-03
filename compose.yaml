@@ -39,6 +39,7 @@ services:
     depends_on:
       - auth-service
       - product-service
+      - config-service
 
   # 🔒 AUTH SERVICE (Privé)
   auth-service:
@@ -93,6 +94,36 @@ services:
     volumes:
       - mysql-prod-data:/var/lib/mysql
 
+  # 🔒 CONFIG SERVICE (Privé)
+  config-service:
+    build: ./config-service
+    container_name: config-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./config-service:/config-service
+      - /config-service/node_modules
+    depends_on:
+      - mysql-config
+
+  # 🗄️ BASE DE DONNÉES (MySQL CONFIG)
+  mysql-config:
+    image: mysql:8
+    restart: always
+    container_name: mysql-config
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: config-db
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql-config-data:/var/lib/mysql
+
+
+# Creer facturation service , pour creer un produits, une fois le produi crée, acheter avec une user et test config service
+
 volumes:
   mysql-auth-data:
   mysql-prod-data:
+  mysql-config-data:

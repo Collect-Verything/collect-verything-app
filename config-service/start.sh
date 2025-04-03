@@ -1,5 +1,5 @@
 # Attendre que MySQL soit prêt
-until nc -z -v -w30 mysql-auth 3306
+until nc -z -v -w30 mysql-config 3306
 do
   echo "En attente de la base de données MySQL..."
   sleep 1
@@ -14,5 +14,5 @@ npx prisma migrate dev --name "Setup config db"
 npx prisma db seed
 
 # Démarrer l'application TODO : changer le script start pour lancement prod
-npm run start:dev
+npm run start:debug
 
