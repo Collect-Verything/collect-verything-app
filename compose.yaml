@@ -40,6 +40,7 @@ services:
       - auth-service
       - product-service
       - config-service
+      - facturation-service
 
   # 🔒 AUTH SERVICE (Privé)
   auth-service:
@@ -120,6 +121,31 @@ services:
     volumes:
       - mysql-config-data:/var/lib/mysql
 
+  # 🔒 FACTURATION SERVICE (Privé)
+  facturation-service:
+    build: ./facturation-service
+    container_name: facturation-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./facturation-service:/facturation-service
+      - /facturation-service/node_modules
+    depends_on:
+      - mysql-facturation
+
+  # 🗄️ BASE DE DONNÉES (MySQL FACTURATIO)
+  mysql-facturation:
+    image: mysql:8
+    restart: always
+    container_name: mysql-facturation
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: facturation-db
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql-facturation-data:/var/lib/mysql
 
 # Creer facturation service , pour creer un produits, une fois le produi crée, acheter avec une user et test config service
 
@@ -127,3 +153,4 @@ volumes:
   mysql-auth-data:
   mysql-prod-data:
   mysql-config-data:
+  mysql-facturation-data:

@@ -6,11 +6,14 @@ RUN apk add --no-cache openssl
 WORKDIR /facturation-service
 
 COPY package.json ./
-#COPY package.json package-lock.json ./
-RUN npm install --only=production
+
+RUN npm install
 
 COPY . .
 
+RUN chmod +x ./start.sh
+
 EXPOSE 3003
 
-CMD ["npm", "run", "start"]
+CMD ["sh", "./start.sh"]
+
