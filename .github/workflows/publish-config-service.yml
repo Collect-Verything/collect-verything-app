@@ -1,4 +1,4 @@
-name: Front-End CI
+name: Config-Service CI
 
 on:
   push:
@@ -19,12 +19,12 @@ jobs:
 #        with:
 #          node-version: '18'
 #
-#      - name: Install dependencies for front-end
-#        working-directory: ./front-app
+#      - name: Install dependencies for config-service
+#        working-directory: ./config-service
 #        run: npm install
 #
-#      - name: Run linter in front-end
-#        working-directory: ./front-app
+#      - name: Run linter in config-service
+#        working-directory: ./config-service
 #        run: npm run lint
 
   test:
@@ -40,19 +40,23 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies for front-end
-        working-directory: ./front-app
+      - name: Install dependencies for config-service
+        working-directory: ./config-service
         run: npm install
 
-      - name: Run tests in front-end
-        working-directory: ./front-app
-        run: npm run jest
+      - name: Generate Prisma Client for config-service
+        working-directory: ./config-service
+        run: npx prisma generate
+
+      - name: Run tests in config-service
+        working-directory: ./config-service
+        run: npm run test
 
   build-and-push:
     if: github.ref == 'refs/heads/main' || github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
-#    needs: [test]
-#    needs: [lint, test]
+#    needs: [ test ]
+#    needs: [ lint, test ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -66,9 +70,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker image for front-end
+      - name: Build and push Docker image for config-service
         uses: docker/build-push-action@v6
         with:
-          context: ./front-app
+          context: ./config-service
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-app
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/config-service
