@@ -8,9 +8,8 @@ describe('ConfigurationController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports:[PrismaService],
       controllers: [ConfigurationController],
-      providers: [ConfigurationService],
+      providers: [ConfigurationService,PrismaService],
     }).compile();
 
     controller = module.get<ConfigurationController>(ConfigurationController);
