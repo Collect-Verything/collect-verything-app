@@ -2,7 +2,7 @@ name: Facturation-Service CI
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main", "dev",'161-dockerize-app' ]
   pull_request:
     branches: [ "main", "dev" ]
 
