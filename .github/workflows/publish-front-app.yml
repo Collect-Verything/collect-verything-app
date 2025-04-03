@@ -2,9 +2,9 @@ name: Front-App CI
 
 on:
   push:
-    branches: [ "main", "dev",'161-dockerize-app' ]
+    branches: [ "main", "dev"]
   pull_request:
-    branches: [ "main", "dev",'161-dockerize-app' ]
+    branches: [ "main", "dev"]
 
 jobs:
 #  lint:

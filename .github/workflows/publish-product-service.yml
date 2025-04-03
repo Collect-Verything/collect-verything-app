@@ -2,9 +2,9 @@ name: Product-Service CI
 
 on:
   push:
-    branches: [ "main", "dev",'161-dockerize-app' ]
+    branches: [ "main", "dev"]
   pull_request:
-    branches: [ "main", "dev",'161-dockerize-app' ]
+    branches: [ "main", "dev"]
 
 jobs:
 #  lint:
@@ -28,7 +28,7 @@ jobs:
 #        run: npm run lint
 
   test:
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/161-dockerize-app' || github.event.pull_request.base.ref == '161-dockerize-app'
+    if: github.ref == 'refs/heads/dev' || github.event.pull_request.base.ref == 'dev'
     runs-on: ubuntu-latest
 #    needs: lint
     steps:
@@ -53,7 +53,7 @@ jobs:
         run: npm run test
 
   build-and-push:
-    if: github.ref == 'refs/heads/main' || github.event.pull_request.base.ref == 'main'
+    if: github.ref == 'refs/heads/dev' || github.event.pull_request.base.ref == 'dev'
     runs-on: ubuntu-latest
     needs: [ test ]
 #    needs: [ lint, test ]
