@@ -147,7 +147,7 @@ FACTURATION_PORT=3003
 FACTURATION_URL='stripe'
 
 CONFIG_PORT=3004
-CONFIG_URL='config'
+CONFIG_URL='subscription'
 ```
 
 The env points of each service include the url of the database of each service, with your personalized information
