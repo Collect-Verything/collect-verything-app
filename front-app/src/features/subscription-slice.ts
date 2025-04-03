@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getRecoverSubs, getUserListSolutionSub } from "../auth/config/request";
 import { Subscription } from "../auth/config/type";
 import { User } from "../common/types/user";
+import {CONFIG_SERVICE} from "../app/micro-services";
 
 /*
 * @fetchUserSubscriptions : Recuperation des user sub
@@ -25,14 +26,14 @@ const initialState: SubscriptionState = {
 };
 
 export const fetchUserSubscriptions = createAsyncThunk(
-    "subscription/fetchUserSubscriptions",
+    `${CONFIG_SERVICE.servicePath}/fetchUserSubscriptions`,
     async (userStripeId: Pick<User, "id_stripe">) => {
         return await getUserListSolutionSub(userStripeId);
     },
 );
 
 export const recoveryUserSubscriptions = createAsyncThunk(
-    "subscription/recoveryUserSubscriptions",
+    `${CONFIG_SERVICE.servicePath}/recoveryUserSubscriptions`,
     async (userStripeId: Pick<User, "id_stripe">) => {
         return await getRecoverSubs(userStripeId);
     },
