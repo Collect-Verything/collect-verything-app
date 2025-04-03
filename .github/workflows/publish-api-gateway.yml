@@ -44,8 +44,8 @@ jobs:
         working-directory: ./api-gateway
         run: npm install
 
-      - name: Run tests in auth-service
-        working-directory: ./auth-service
+      - name: Run tests in api-gateway
+        working-directory: ./api-gateway
         run: npm run test
 
   build-and-push:
