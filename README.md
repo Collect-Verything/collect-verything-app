@@ -195,6 +195,12 @@ If you all want to run it all at once via docker you can run the following comma
 docker compose up
 ```
 
+### Issue 
+No matching manifest for linux/arm64/v8 in the manifest list entries
+```
+docker pull --platform linux/amd64 cansefr/front-app:latest
+```
+
 ## Unit launch
 
 Previously we saw how to setup and launch the entire application, but you can do it individually. To do this you can look at the package.json file and consult the command available in each section, they are logically grouped by package as follows:
