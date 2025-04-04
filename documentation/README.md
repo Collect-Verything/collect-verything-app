@@ -33,9 +33,9 @@
 
 - Diagrams
   - Databases
-    - [Auth DB] [auth-database]
-  - 
-    - Database link
+    - [Authentication] [auth-database]
+  - Sequence Diagrams
+    - [Authentication] [auth-sequences]
 
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
@@ -54,4 +54,5 @@
 [docker]: docker/compose.md
 [creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md
+[auth-sequences]: diagrams/sequence-diagrams/authentication.md
 
