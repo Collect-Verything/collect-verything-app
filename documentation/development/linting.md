@@ -4,6 +4,7 @@
 # Linting
 
 Using [ESlint], [`typescript-eslint`][typescript-lint] and several plugins.
+Actually a basic config is set.
 
 
 [//]: # "--- Images and links section ---"
