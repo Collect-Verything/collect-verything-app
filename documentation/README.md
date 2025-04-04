@@ -39,9 +39,11 @@
   - Databases
     - [Authentication] [auth-database]
     - [Product] [product-database]
+    - [Facturation] [facturation-database]
   - Sequence Diagrams
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
+    - [Facturation] [facturation-sequences]
 
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
@@ -62,8 +64,10 @@
 [action-creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md
 [product-database]: diagrams/databases/product-db.md
+[facturation-database]: diagrams/databases/facturation-db.md
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
 [product-sequences]: diagrams/sequence-diagrams/product.md
+[facturation-sequences]: diagrams/sequence-diagrams/facturation.md
 
 [main-summary]: ../README.md
 
