@@ -159,6 +159,7 @@ Faire de meme pour la creation des nouveau micro services.
 ### Solution 1 : Supprimer la configuration de sous-module si non souhaitée
 
 Si vous ne voulez pas que `auth-service` soit un sous-module Git, vous devez supprimer le fichier `.git` à l'intérieur du dossier `auth-service` et l'ajouter comme un dossier normal dans votre dépôt principal.
+Le but ici est rendre maitre le root du project sur git.
 
 1. **Supprimez le dépôt Git interne** dans le dossier `auth-service` :
     ```
