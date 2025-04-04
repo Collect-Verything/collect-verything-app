@@ -19,7 +19,7 @@ It is possible that during the development phase of this project, the .env is le
 Here is the content of this file:
 
 ```.env
-DATABASE_URL="mysql://user:password@localhost:PORT/webshop-as"
+DATABASE_URL="mysql://user:password@localhostOrServiceName:PORT/webshop-as"
 ```
 We can distinguish that it contains the dialect, username, password, port and name of the database. It's up to you to modify it according to your interest
 
