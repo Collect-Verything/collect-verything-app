@@ -38,8 +38,10 @@
 - Diagrams
   - Databases
     - [Authentication] [auth-database]
+    - [Product] [product-database]
   - Sequence Diagrams
     - [Authentication] [auth-sequences]
+    - [Product] [product-sequences]
 
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
@@ -59,7 +61,9 @@
 [step-create-service]: development/create-service.md
 [action-creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md
+[product-database]: diagrams/databases/product-db.md
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
+[product-sequences]: diagrams/sequence-diagrams/product.md
 
 [main-summary]: ../README.md
 
