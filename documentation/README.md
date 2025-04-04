@@ -31,6 +31,12 @@
     - [Facturation] [facturation]
     - [Subscription] [subscription]
 
+- Diagrams
+  - Databases
+    - [Auth DB] [auth-database]
+  - 
+    - Database link
+
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
 [monorepo]: development/mono-repo.md
@@ -47,4 +53,5 @@
 [Seed]: database/seed.md
 [docker]: docker/compose.md
 [creation-service]: services/creation.md
+[auth-database]: diagrams/databases/auth-db.md
 
