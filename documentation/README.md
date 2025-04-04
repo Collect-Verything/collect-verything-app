@@ -6,6 +6,7 @@
 ## Summary
 
 - Development
+  - [Service creation][create-service]
   - [Linting][linting]
   - [Mono Repo][monorepo]
   - [Prettier][prettier]
@@ -46,6 +47,7 @@
 [dev-and-prod]: general/dev-and-prod.md
 [glossary]: general/glossary.md
 [env]: development/environment.md
+[create-service]: development/create-service.md
 [rules]: general/rules.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md
