@@ -1,3 +1,5 @@
+← [Retourner au sommaire] [summary]
+
 # Authentication workflows  
 
 ## Register 
@@ -72,3 +74,6 @@
     Api Gateway->>Front App : Response: Forgot Password
     User Mail-->>Front App : Request: Link password 
 ```
+
+
+[summary]: ../README.md

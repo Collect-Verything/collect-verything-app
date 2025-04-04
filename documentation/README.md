@@ -1,3 +1,6 @@
+← [Retourner au sommaire principal] [main-summary]
+
+
 # Documentation for Webshop-As
 
 ## Summary
@@ -55,4 +58,7 @@
 [creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
+
+[main-summary]: ../README.md
+
 

@@ -1,3 +1,6 @@
+← [Retourner au sommaire] [summary]
+
+
 NEED TO BE UPDATE DEPENDNG THE NEW PROJECT
 
 
@@ -38,3 +41,5 @@ npx prisma db seed
 This will make it possible to generate the base elements from the migration file present in the prisma directory, then generate the entities.
 
 Now launch the app and consult the database to see if the tables and entities are correctly generated. If errors are present, take courage.
+
+[summary]: ../README.md

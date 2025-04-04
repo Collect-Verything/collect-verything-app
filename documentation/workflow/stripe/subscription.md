@@ -1,3 +1,5 @@
+← [Retourner au sommaire] [summary]
+
 # Subscription : 
 ### Config Service
 
@@ -15,3 +17,6 @@ Le serveur interroge Stripe pour récupérer toutes les subscriptions liées à 
 Si des nouvelles subscriptions sont détectées, elles sont persistées dans notre base de données.
 Le serveur retourne les données au client, qui les affiche sous forme de tableau.
 L'utilisateur peut alors consulter ses solutions actives (en ligne) et celles désactivées (hors ligne) en fonction du statut de paiement ou d'un statut défini manuellement.
+
+
+[summary]: ../README.md

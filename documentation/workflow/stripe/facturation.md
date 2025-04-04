@@ -1,3 +1,6 @@
+← [Retourner au sommaire] [summary]
+
+
 # Workflow Produit Facturation
 
 
@@ -474,3 +477,4 @@ Voici à quoi ressemblent les objets d'événements traités au sein de l'applic
 [Documentation Carte]: https://docs.stripe.com/testing?locale=fr-FR
 [Event]: https://dashboard.stripe.com/test/workbench/events
 
+[summary]: ../README.md

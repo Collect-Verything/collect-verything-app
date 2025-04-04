@@ -1,3 +1,5 @@
+← [Retourner au sommaire] [summary]
+
 ## CI/CD Workflow Documentation
 ### Introduction
 Ce projet utilise GitHub Actions pour automatiser les processus de linting, tests, build et déploiement Docker des services front-app et auth-service dans le dépôt. Chaque service dispose de son propre workflow CI/CD pour garantir l'indépendance des pipelines et la séparation des responsabilités.
@@ -18,3 +20,5 @@ Build et Push Docker : Cette étape s'exécute uniquement sur la branche main lo
 Lint : Vérifie la qualité du code en utilisant npm run lint dans le répertoire ./front-app.
 Tests : Exécute les tests unitaires via npm run jest dans le répertoire ./front-app.
 Build et Push : Construit l'image Docker et la pousse sur Docker Hub sous le nom front-app.
+
+[summary]: ../README.md
