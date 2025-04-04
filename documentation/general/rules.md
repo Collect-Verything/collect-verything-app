@@ -2,9 +2,7 @@
 
 # Rules
 
-
 ### Jobbers
-
-Jobbers have only one role
+Jobbers can have only one role
 
 [summary]: ../README.md
