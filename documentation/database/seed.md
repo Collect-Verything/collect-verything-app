@@ -1,3 +1,6 @@
+← [Retourner au sommaire] [summary]
+
+
 NEED TO BE UPDATE DEPENDNG THE NEW PROJECT
 
 
@@ -16,7 +19,7 @@ It is possible that during the development phase of this project, the .env is le
 Here is the content of this file:
 
 ```.env
-DATABASE_URL="mysql://user:password@localhost:PORT/webshop-as"
+DATABASE_URL="mysql://user:password@localhostOrServiceName:PORT/webshop-as"
 ```
 We can distinguish that it contains the dialect, username, password, port and name of the database. It's up to you to modify it according to your interest
 
@@ -38,3 +41,5 @@ npx prisma db seed
 This will make it possible to generate the base elements from the migration file present in the prisma directory, then generate the entities.
 
 Now launch the app and consult the database to see if the tables and entities are correctly generated. If errors are present, take courage.
+
+[summary]: ../README.md

@@ -1,3 +1,5 @@
+← [Retourner au sommaire] [summary]
+
 ## Build image and run container:
 
 ### (old)Front application 
@@ -27,28 +29,36 @@ Delete old containers if already create and run this commande in root folder :
 docker compose up
 ```
 
-Check your local host on 3000 & 3001 
+Check your local host on 3000 & 3001
 
 
-# Error amd
+# Docker Hub
 
-lancer les container avec les flag suivant 
+Images of all app are available with
+
+```
+docker image pull cansefr/front-app
+docker image pull cansefr/api-gateway
+docker image pull cansefr/auth-service
+docker image pull cansefr/config-service
+docker image pull cansefr/facturation-service
+docker image pull cansefr/product-service
+```
+
+# Issue
+Actuellement depuis mon mac j'ai cette alerte
+
+```error
+no matching manifest for linux/arm64/v8 in the manifest list entries
+```
+
+J'arrive a pull avec ces commandes
+
 ```
 docker container run --platform linux/amd64 cansefr/front-app
 docker container run --platform linux/amd64 cansefr/auth-service
 ```
 
+Mais il faut fixer ce probleme ... (TODO) 
 
-# Pull & Run from Docker Hub
-
-```
-docker image pull cansefr/front-app
-docker image pull cansefr/auth-service
-
-// For linux and arm64 alert
-docker pull --platform linux/amd64 cansefr/front-app
-docker pull --platform linux/amd64 cansefr/auth-service
-
-docker run -p 3000:3000 cansefr/front-app
-docker run -p 3001:3001 cansefr/auth-service
-```
+[summary]: ../README.md

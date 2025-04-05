@@ -1,3 +1,6 @@
+← [Retourner au sommaire] [summary]
+
+
 # Creation d'un service
 
 Si l'on souhaite creer un service il est necessaire de :
@@ -111,13 +114,20 @@ npm run start:new_solution-dev
 npm run start:dev
 ```
 
+*Git*:
+Attention à bien supprimer le dossier .git du nouveau projet afin que le monorepo garde la main sur l'intégralité depuis la racine.
+
 
 *Docker* : 
 
 Copier-coller les fichiers suivant present dans un service deja existant puis les ajuster selon le service
 
-- .dockerignore
 - Dockerfile
+- docker-compose.yaml
+- .dockerignore
 - start.sh
 
 Puis ajouter au compose.yaml du root le nouveau service puis sa base de donnée, attention à dercerner un nouveau port pour la base de donnée.
+
+
+[summary]: ../README.md
