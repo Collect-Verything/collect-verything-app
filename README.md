@@ -201,6 +201,18 @@ No matching manifest for linux/arm64/v8 in the manifest list entries
 docker pull --platform linux/amd64 cansefr/front-app:latest
 ```
 
+## Just Run the App
+
+If you just want to download the Docker images and run the app without cloning the source code or using any development tools, you can do the following:
+
+### Pull images
+```zsh
+scripts/pull-images.sh
+
+# 💡 On Apple Silicon (M1/M2 or ARM64):
+scripts/pull-images.sh -arm64
+```
+
 ## Unit launch
 
 Previously we saw how to setup and launch the entire application, but you can do it individually. To do this you can look at the package.json file and consult the command available in each section, they are logically grouped by package as follows:

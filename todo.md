@@ -18,12 +18,14 @@ N'oubliez pas de changer la création des produits atonement avec une récurrenc
 A voire si la visibilité est vraiment pertinente ? Supprimer ...
 
 ### Api gateway
+POur le moment l'api gateway est un reverse proxy passe plat, il faut deplacer la logique aller retour du front dans l'api gate way
 
 ### Deploy produit client
 
 ### Heberger, docker
 
 ### Kubernetes
+Scaling sur l'api gateway
 
 ## Fix error terminal au lancement:
 
