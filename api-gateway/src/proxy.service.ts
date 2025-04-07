@@ -12,10 +12,9 @@ export class ProxyService {
 
     // FREE ROOT
     if (checkFreePath(req.url)) {
-      // const freePath = `http://${getDomain(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`;
 
       const res = await axios[req.method.toLowerCase()](
-        `http://auth-service:3001/auth/login`,
+        `http://${configEnv.DOMAIN_AUTH}:3001/auth/login`,
         req.body,
       );
       return res.data;
@@ -26,7 +25,7 @@ export class ProxyService {
 
       if (req.headers.authorization) {
         // CHECK TOKEN ON AUTH SERVICE
-        const urlCheckToken: string = `http://auth-service:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`;
+        const urlCheckToken: string = `http://${configEnv.DOMAIN_AUTH}:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`;
         console.log('>1 ____REQUETE AUTH CHECK EFFECTUE SUR ___');
         console.log(urlCheckToken);
         const responseCheckToken = await axios.post(
