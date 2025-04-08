@@ -1,14 +1,15 @@
+← [Retourner au sommaire] [summary]
+
+
 # Workflow Produit Facturation
-
-
 Lors du seed de l'application, un client ou un produit créé initialement n'est pas reconnu par Stripe. Pour garantir la cohérence des interactions commerciales, toutes les opérations effectuées sur l'application doivent être synchronisées avec Stripe.
 
 ## 1️⃣ Création d'un produit sur Stripe
 Pour initier un workflow commercial, Stripe doit connaître à la fois le produit et le client. Voici le processus à suivre :
 
-Se connecter en Super Admin sur l'application.
-Créer un service via l'interface de l'application.
-Lors de la création, une requête API est envoyée à Stripe pour créer le produit sur Stripe et dans notre propre base de données.
+- Se connecter en Super Admin sur l'application.
+- Créer un service/produit via l'interface produit admin. 
+- Lors de la création, une requête API est envoyée à Stripe pour créer le produit sur Stripe puis dans notre propre base de données.
 
 ## 2️⃣ Création et identification d’un client sur Stripe
 Un client nouvellement inscrit n'a pas encore d'user_stripe_id. Pour le vérifier, il suffit de consulter la base de données.
@@ -22,7 +23,7 @@ Le paiement s’effectue avec une carte de test fournie par Stripe.
 💳 Carte test recommandée : 4242 4242 4242 4242
 Les autres informations (date, CVC) peuvent être improvisées et validées. ( [Documentation Carte] [Documentation Carte])      
 
-
+(Consulter diagrame sequence): Mettre le lien ici quand documentaaion terminé
 
 ## 4️⃣ Traitement des événements Stripe et persistance des factures
 Lorsqu'un paiement est validé, Stripe génère des événements visibles sur Stripe Dashboard > Développeur > [Event] [Event] :    
@@ -37,12 +38,13 @@ Quand l'application sera en production, il sera possible de renseigner l'URL du 
 
 ## 5️⃣ Event object
 
-
-Les événements à copier dans Postman doivent être envoyés à l'URL suivante : http://localhost:3003/stripe/event/
+Les événements à copier dans Postman doivent être envoyés à l'URL suivante : 
+- http://localhost:3003/stripe/event/ : Pour une appli NON dockerisé
+- http://api-gateway:3003/stripe/event/ : Pour une appli dockerisé
 
 Voici à quoi ressemblent les objets d'événements traités au sein de l'application pour le moment :
 
-- Lors de l'achat d'un abonnement, l'événement invoice.payment_succeeded est généré.
+Lors de l'achat d'un service Stripe nous genere un evenement de type *invoice.payment_succeeded* que l'on peut voir ci dessous, c'est cette object qui doit etre envoyé via *POSTMAN*
 
 ```json
  {
@@ -474,3 +476,4 @@ Voici à quoi ressemblent les objets d'événements traités au sein de l'applic
 [Documentation Carte]: https://docs.stripe.com/testing?locale=fr-FR
 [Event]: https://dashboard.stripe.com/test/workbench/events
 
+[summary]: ../README.md

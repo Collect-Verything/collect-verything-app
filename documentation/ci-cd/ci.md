@@ -1,20 +1,32 @@
-## CI/CD Workflow Documentation
-### Introduction
-Ce projet utilise GitHub Actions pour automatiser les processus de linting, tests, build et déploiement Docker des services front-app et auth-service dans le dépôt. Chaque service dispose de son propre workflow CI/CD pour garantir l'indépendance des pipelines et la séparation des responsabilités.
+← [Retourner au sommaire] [summary]
 
-Les actions GitHub sont configurées pour fonctionner sur deux branches principales :
+# 🧪 CI – Intégration Continue
+Cette configuration présente dans .github/workflows permet d’assurer la qualité et la stabilité du code , via l'exécution automatique des tests unitaires et (optionnellement) d’un linter.
+Elle s’intègre directement dans le processus de développement pour alerter au plus tôt en cas de régression ou d’erreur.
+On peut constater qu'il y a un pattern de configuration repeté pour touts les services et app.
 
-*dev* : Dédiée aux processus de développement (linting et tests).
-*main* : Dédiée aux processus de production (build et déploiement sur Docker Hub).
+# 🔁 Déclencheurs
+### La CI s’exécute dans deux cas précis :
 
+- Lors d’un push sur les branches main ou dev
+- Lors d’une pull request vers main ou dev
 
-1. All.yml - All Workflow
-Le fichier *.yml contient les étapes CI/CD pour les applications . Il se déclenche sur les branches main et dev, selon les actions suivantes :
+👉 Cela permet de tester automatiquement toute modification, que ce soit en cours de développement (dev) ou lors d’une mise en production (main).
 
-### Linting et Tests : Ces étapes s'exécutent uniquement sur la branche dev lors d'un push ou d'une pull request.
-Build et Push Docker : Cette étape s'exécute uniquement sur la branche main lors d'un push ou d'une pull request, et elle construit et pousse l'image Docker de l'app sur Docker Hub.
+# ✅ Étapes actuellement actives
 
-### Détails des jobs :
-Lint : Vérifie la qualité du code en utilisant npm run lint dans le répertoire ./front-app.
-Tests : Exécute les tests unitaires via npm run jest dans le répertoire ./front-app.
-Build et Push : Construit l'image Docker et la pousse sur Docker Hub sous le nom front-app.
+- test : Test unitaire de chaque services et app
+
+✅ Elle constitue la base de vérification avant tout build ou déploiement futur.
+
+# ⚠️ Étape optionnelle : lint
+L'étape de linting est actuellement commentée dans le fichier.
+
+Elle permettrait de :
+- Vérifier la qualité du code selon les règles ESLint
+
+- Prévenir les erreurs de style ou de syntaxe
+
+➕ Amélioration prévue : réactiver cette étape et la rendre bloquante avant les tests et le build, afin de renforcer les contrôles qualité.
+
+[summary]: ../README.md

@@ -1,3 +1,6 @@
+← [Retourner au sommaire principal] [main-summary]
+
+
 # Documentation for Webshop-As
 
 ## Summary
@@ -17,7 +20,8 @@
   - [Seed][Seed]
 
 - Service :
-  - [Creation service][creation-service]
+  - [Step Service creation][step-create-service]
+  - [Action Creation service][action-creation-service]
 
 - Docker :
   - [Docker Compose][docker]
@@ -30,6 +34,17 @@
   - Stripe 
     - [Facturation] [facturation]
     - [Subscription] [subscription]
+ 
+- Diagrams
+  - Databases
+    - [Authentication] [auth-database]
+    - [Product] [product-database]
+    - [Facturation] [facturation-database]
+    - [Configuration] [config-database]
+  - Sequence Diagrams
+    - [Authentication] [auth-sequences]
+    - [Product] [product-sequences]
+    - [Facturation] [facturation-sequences]
 
 - Todo
   - [todo][todo]
@@ -51,4 +66,16 @@
 [docker]: docker/compose.md
 [creation-service]: services/creation.md
 [todo]: todo/todo.md
+[step-create-service]: development/create-service.md
+[action-creation-service]: services/creation.md
+[auth-database]: diagrams/databases/auth-db.md
+[product-database]: diagrams/databases/product-db.md
+[facturation-database]: diagrams/databases/facturation-db.md
+[config-database]: diagrams/databases/config-db.md
+[auth-sequences]: diagrams/sequence-diagrams/authentication.md
+[product-sequences]: diagrams/sequence-diagrams/product.md
+[facturation-sequences]: diagrams/sequence-diagrams/facturation.md
+
+[main-summary]: ../README.md
+
 

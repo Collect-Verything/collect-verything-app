@@ -1,3 +1,6 @@
+← [Retourner au sommaire] [summary]
+
+
 NEED TO BE UPDATE DEPENDNG THE NEW PROJECT
 
 
@@ -79,3 +82,8 @@ npx prisma db seed
 ```
 
 You can then visually check your tables to make a check.
+
+Then you need to think about modifying the classes in the front and in the targeted service
+
+
+[summary]: ../README.md
