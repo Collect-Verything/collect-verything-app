@@ -1,4 +1,4 @@
-const URL = process.env.REACT_APP_DOMAIN_URL;
+const URL = process.env.REACT_APP_DOMAIN;
 
 const getHeaders = () => {
     return {
