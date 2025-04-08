@@ -1,64 +1,47 @@
 ← [Retourner au sommaire] [summary]
 
-## Build image and run container:
+# Run:
 
-### (old)Front application 
-(checker historique commit pour l'ancienne config)
+Pour lancer l'application apres un git clone, effectuer la commande suivante :
 
-```
-cd front-app
-docker build . -t front-app
-docker run --name front-app -d -p 3000:3000 front-app
-```
-
-### Authentication service 
-
-```
-cd auth-service
-docker build . -t auth-service
-docker run --name auth-service -d -p 3001:3001 auth-service
-```
-
-
-## (new)Run all app
-
-
-Delete old containers if already create and run this commande in root folder :
-```
-// cd in choosing app
+```zsh
 docker compose up
 ```
+L'application étant un projet d'étude, tous les fichiers .env et de configuration spécifiques sont inclus dans le dépôt. Ainsi, lors du git clone, tous les fichiers nécessaires au lancement de l'application sont déjà présents.
 
-Check your local host on 3000 & 3001
 
+# Logs
 
-# Docker Hub
+Actuellement, lorsqu'on lance la commande docker compose up, tous les logs générés depuis le démarrage sont progressivement effacés du terminal. Cela peut être contraignant si l'on souhaite inspecter les erreurs survenues pendant le lancement des conteneurs.
 
-Images of all app are available with
+### 🛠️ Solution :
 
+Pour conserver tous les logs de lancement dans un fichier (et ainsi pouvoir les analyser plus facilement), il suffit d'exécuter la commande suivante :
+
+```zsh
+docker compose up 2>&1 | tee logs-start-container.txt            
 ```
-docker image pull cansefr/front-app
-docker image pull cansefr/api-gateway
-docker image pull cansefr/auth-service
-docker image pull cansefr/config-service
-docker image pull cansefr/facturation-service
-docker image pull cansefr/product-service
+
+### 📂 Cette commande va :
+
+- Rediriger la sortie standard (> logs.txt) et la sortie d’erreur (2>&1) vers le fichier logs.txt ;
+
+- Permettre de relire tous les logs du démarrage à tout moment, même après leur disparition dans le terminal.
+
+### 💡 Astuce :
+Tu peux également suivre les logs en direct dans un autre terminal avec :
+
+```zsh
+tail -f logs.txt
 ```
 
 # Issue
-Actuellement depuis mon mac j'ai cette alerte
 
-```error
-no matching manifest for linux/arm64/v8 in the manifest list entries
-```
-
-J'arrive a pull avec ces commandes
+## ARM64 Alert
 
 ```
-docker container run --platform linux/amd64 cansefr/front-app
-docker container run --platform linux/amd64 cansefr/auth-service
+docker pull --platform linux/amd64 cansefr/....
 ```
 
-Mais il faut fixer ce probleme ... (TODO) 
 
 [summary]: ../README.md

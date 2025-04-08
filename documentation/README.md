@@ -34,7 +34,7 @@
   - Stripe 
     - [Facturation] [facturation]
     - [Subscription] [subscription]
-
+ 
 - Diagrams
   - Databases
     - [Authentication] [auth-database]
@@ -45,6 +45,9 @@
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
     - [Facturation] [facturation-sequences]
+
+- Todo
+  - [todo][todo]
 
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
@@ -61,6 +64,8 @@
 [Prisma]: database/prisma.md
 [Seed]: database/seed.md
 [docker]: docker/compose.md
+[creation-service]: services/creation.md
+[todo]: todo/todo.md
 [step-create-service]: development/create-service.md
 [action-creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md

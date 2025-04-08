@@ -3,7 +3,7 @@ FROM node:20-alpine
 RUN apk add --no-cache netcat-openbsd
 RUN apk add --no-cache openssl
 
-WORKDIR /product-service
+WORKDIR /config-service
 
 COPY package.json ./
 
@@ -13,6 +13,6 @@ COPY . .
 
 RUN chmod +x ./start.sh
 
-EXPOSE 3002
+EXPOSE 3001
 
 CMD ["sh", "./start.sh"]

@@ -19,4 +19,4 @@ Le serveur retourne les données au client, qui les affiche sous forme de tablea
 L'utilisateur peut alors consulter ses solutions actives (en ligne) et celles désactivées (hors ligne) en fonction du statut de paiement ou d'un statut défini manuellement.
 
 
-[summary]: ../README.md
+[summary]: ../../README.md

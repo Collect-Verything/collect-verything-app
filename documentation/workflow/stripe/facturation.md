@@ -476,4 +476,4 @@ Lors de l'achat d'un service Stripe nous genere un evenement de type *invoice.pa
 [Documentation Carte]: https://docs.stripe.com/testing?locale=fr-FR
 [Event]: https://dashboard.stripe.com/test/workbench/events
 
-[summary]: ../README.md
+[summary]: ../../README.md

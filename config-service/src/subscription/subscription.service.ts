@@ -32,7 +32,6 @@ const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 export class SubscriptionService {
   constructor(
     private prisma: PrismaService,
-    private configService: ConfigurationService,
   ) {}
 
   async findAllByUserId(user_stripe_id: string) {

@@ -1,0 +1,274 @@
+
+mysql-product        | 2025-04-08T12:13:11.495927Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+mysql-facturation    | 2025-04-08T12:13:11.536677Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+mysql-auth           | 2025-04-08T12:13:11.609753Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+mysql-config         | 2025-04-08T12:13:11.669356Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+
+
+
+
+
+
+mysql-auth           | 2025-04-08T12:13:15.886516Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+mysql-product        | 2025-04-08T12:13:15.886902Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+mysql-facturation    | 2025-04-08T12:13:15.887258Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+mysql-config         | 2025-04-08T12:13:15.887255Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+
+
+front-app            | [1G[0K(node:25) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+front-app            | (Use `node --trace-deprecation ...` to show where the warning was created)
+front-app            | (node:25) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+
+
+
+
+config-service       | Environment variables loaded from .env
+config-service       | Error: To configure seeding in your project you need to add a "prisma.seed" property in your package.json with the command to execute it:
+config-service       | 
+config-service       | 1. Open the package.json of your project
+config-service       | 2. Add the following example to it:
+config-service       | ```
+config-service       | "prisma": {
+config-service       |   "seed": "ts-node prisma/seed.ts"
+config-service       | }
+config-service       | ```
+config-service       | If you are using ESM (ECMAScript modules):
+config-service       | ```
+config-service       | "prisma": {
+config-service       |   "seed": "node --loader ts-node/esm prisma/seed.ts"
+config-service       | }
+config-service       | ```
+config-service       | 
+config-service       | 3. Install the required dependencies by running:
+config-service       | npm i -D ts-node typescript @types/node
+config-service       | 
+config-service       | More information in our documentation:
+config-service       | https://pris.ly/d/seeding
+config-service       | 
+config-service       | > config-service@0.0.1 start:debug
+config-service       | > nest start --debug --watch
+
+
+
+LINTER FRONT
+
+front-app            | [2J[3J[HCompiled with warnings.[39m
+front-app            | [39m
+front-app            | [eslint] 
+front-app            | src/app/router/const.ts
+front-app            |   2:5:   'DASHBOARD' is defined but never used             [4mno-unused-vars
+front-app            |   3:5:   'ACCOUNT' is defined but never used               [4mno-unused-vars
+front-app            |   4:5:   'PRODUCTS' is defined but never used              [4mno-unused-vars
+front-app            |   5:5:   'FACTURATION' is defined but never used           [4mno-unused-vars
+front-app            |   6:5:   'GESTION_PERSON' is defined but never used        [4mno-unused-vars
+front-app            |   7:5:   'GESTION_CUSTOMER' is defined but never used      [4mno-unused-vars
+front-app            |   8:5:   'STATS' is defined but never used                 [4mno-unused-vars
+front-app            |   9:5:   'SUPPORT' is defined but never used               [4mno-unused-vars
+front-app            |   10:5:  'DOC' is defined but never used                   [4mno-unused-vars
+front-app            |   11:5:  'CONFIG' is defined but never used                [4mno-unused-vars
+front-app            |   12:5:  'LOGIN' is defined but never used                 [4mno-unused-vars
+front-app            |   13:5:  'REGISTER' is defined but never used              [4mno-unused-vars
+front-app            |   14:5:  'HOME' is defined but never used                  [4mno-unused-vars
+front-app            |   15:5:  'VITRINE' is defined but never used               [4mno-unused-vars
+front-app            |   16:5:  'CHECK_USER_STRIPE_ID' is defined but never used  [4mno-unused-vars
+front-app            |   17:5:  'PAYMENT_STATUS' is defined but never used        [4mno-unused-vars
+front-app            |   18:5:  'PAYMENT' is defined but never used               [4mno-unused-vars
+front-app            |   19:5:  'BOUTIQUE' is defined but never used              [4mno-unused-vars
+front-app            |   20:5:  'RESSOURCE' is defined but never used             [4mno-unused-vars
+front-app            |   21:5:  'BASKET' is defined but never used                [4mno-unused-vars
+front-app            |   22:5:  'ADMIN' is defined but never used                 [4mno-unused-vars
+front-app            |   23:5:  'DETAILS' is defined but never used               [4mno-unused-vars
+front-app            |   27:5:  'DASHBOARD' is defined but never used             [4mno-unused-vars
+front-app            |   28:5:  'ACCOUNT' is defined but never used               [4mno-unused-vars
+front-app            |   29:5:  'PRODUCTS' is defined but never used              [4mno-unused-vars
+front-app            |   30:5:  'FACTURATION' is defined but never used           [4mno-unused-vars
+front-app            |   31:5:  'GESTION_PERSON' is defined but never used        [4mno-unused-vars
+front-app            |   32:5:  'GESTION_CUSTOMER' is defined but never used      [4mno-unused-vars
+front-app            |   33:5:  'STATS' is defined but never used                 [4mno-unused-vars
+front-app            |   34:5:  'SUPPORT' is defined but never used               [4mno-unused-vars
+front-app            |   35:5:  'DOC' is defined but never used                   [4mno-unused-vars
+front-app            |   36:5:  'CONFIG_SERVICE' is defined but never used        [4mno-unused-vars
+front-app            |   37:5:  'LOGIN' is defined but never used                 [4mno-unused-vars
+front-app            |   38:5:  'REGISTER' is defined but never used              [4mno-unused-vars
+front-app            |   39:5:  'HOME' is defined but never used                  [4mno-unused-vars
+front-app            |   40:5:  'VITRINE' is defined but never used               [4mno-unused-vars
+front-app            |   41:5:  'BOUTIQUE' is defined but never used              [4mno-unused-vars
+front-app            |   42:5:  'RESSOURCE' is defined but never used             [4mno-unused-vars
+front-app            |   43:5:  'Basket' is defined but never used                [4mno-unused-vars
+front-app            | 
+front-app            | src/auth/account/index.tsx
+front-app            |   28:40:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   62:41:  Forbidden non-null assertion              [4m@typescript-eslint/no-non-null-assertion
+front-app            | 
+front-app            | src/auth/admin/customer/index.tsx
+front-app            |   18:55:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/admin/job/index.tsx
+front-app            |   19:58:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/dialogs/config.tsx
+front-app            |   24:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/dialogs/sub-info.tsx
+front-app            |   29:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/index.tsx
+front-app            |   15:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   16:58:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/dashboard/index.tsx
+front-app            |   6:63:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/facturation/index.tsx
+front-app            |   23:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/common/const/product.ts
+front-app            |   2:5:  'SERVICE' is defined but never used  [4mno-unused-vars
+front-app            |   3:5:  'PRODUCT' is defined but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/common/const/user.ts
+front-app            |   2:5:  'USER' is defined but never used         [4mno-unused-vars
+front-app            |   3:5:  'SUPER_ADMIN' is defined but never used  [4mno-unused-vars
+front-app            |   4:5:  'INVOICE' is defined but never used      [4mno-unused-vars
+front-app            |   5:5:  'SUPPORT' is defined but never used      [4mno-unused-vars
+front-app            | 
+front-app            | src/common/utils/web/index.ts
+front-app            |   13:83:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   30:45:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   32:47:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/features/authentication-slice.ts
+front-app            |   35:61:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/shop/basket/paiement/index.tsx
+front-app            |   24:42:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/shop/boutique/const.ts
+front-app            |   2:5:  'UNIT' is defined but never used     [4mno-unused-vars
+front-app            |   3:5:  'MONTH' is defined but never used    [4mno-unused-vars
+front-app            |   4:5:  'YEAR' is defined but never used     [4mno-unused-vars
+front-app            |   8:5:  'SERVICE' is defined but never used  [4mno-unused-vars
+front-app            |   9:5:  'PRODUCT' is defined but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/shop/details-product-page/index.tsx
+front-app            |   14:26:  'setSearchParams' is assigned a value but never used  [4mno-unused-vars
+front-app            |   14:26:  'setSearchParams' is assigned a value but never used  [4m@typescript-eslint/no-unused-vars
+front-app            |   81:79:  Forbidden non-null assertion                          [4m@typescript-eslint/no-non-null-assertion
+front-app            | 
+front-app            | src/shop/register/index.tsx
+front-app            |   43:21:  'confirmPassword' is assigned a value but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/shop/stripe/embedded-checkout.tsx
+front-app            |   29:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   59:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | Search for the [4mkeywords[39m[24m to learn more about each warning.
+front-app            | To ignore, add [36m// eslint-disable-next-line[39m to the line before.
+front-app            | 
+front-app            | [WARNING[39m in [eslint]
+front-app            | src/app/router/const.ts
+front-app            |   2:5:   'DASHBOARD' is defined but never used             [4mno-unused-vars
+front-app            |   3:5:   'ACCOUNT' is defined but never used               [4mno-unused-vars
+front-app            |   4:5:   'PRODUCTS' is defined but never used              [4mno-unused-vars
+front-app            |   5:5:   'FACTURATION' is defined but never used           [4mno-unused-vars
+front-app            |   6:5:   'GESTION_PERSON' is defined but never used        [4mno-unused-vars
+front-app            |   7:5:   'GESTION_CUSTOMER' is defined but never used      [4mno-unused-vars
+front-app            |   8:5:   'STATS' is defined but never used                 [4mno-unused-vars
+front-app            |   9:5:   'SUPPORT' is defined but never used               [4mno-unused-vars
+front-app            |   10:5:  'DOC' is defined but never used                   [4mno-unused-vars
+front-app            |   11:5:  'CONFIG' is defined but never used                [4mno-unused-vars
+front-app            |   12:5:  'LOGIN' is defined but never used                 [4mno-unused-vars
+front-app            |   13:5:  'REGISTER' is defined but never used              [4mno-unused-vars
+front-app            |   14:5:  'HOME' is defined but never used                  [4mno-unused-vars
+front-app            |   15:5:  'VITRINE' is defined but never used               [4mno-unused-vars
+front-app            |   16:5:  'CHECK_USER_STRIPE_ID' is defined but never used  [4mno-unused-vars
+front-app            |   17:5:  'PAYMENT_STATUS' is defined but never used        [4mno-unused-vars
+front-app            |   18:5:  'PAYMENT' is defined but never used               [4mno-unused-vars
+front-app            |   19:5:  'BOUTIQUE' is defined but never used              [4mno-unused-vars
+front-app            |   20:5:  'RESSOURCE' is defined but never used             [4mno-unused-vars
+front-app            |   21:5:  'BASKET' is defined but never used                [4mno-unused-vars
+front-app            |   22:5:  'ADMIN' is defined but never used                 [4mno-unused-vars
+front-app            |   23:5:  'DETAILS' is defined but never used               [4mno-unused-vars
+front-app            |   27:5:  'DASHBOARD' is defined but never used             [4mno-unused-vars
+front-app            |   28:5:  'ACCOUNT' is defined but never used               [4mno-unused-vars
+front-app            |   29:5:  'PRODUCTS' is defined but never used              [4mno-unused-vars
+front-app            |   30:5:  'FACTURATION' is defined but never used           [4mno-unused-vars
+front-app            |   31:5:  'GESTION_PERSON' is defined but never used        [4mno-unused-vars
+front-app            |   32:5:  'GESTION_CUSTOMER' is defined but never used      [4mno-unused-vars
+front-app            |   33:5:  'STATS' is defined but never used                 [4mno-unused-vars
+front-app            |   34:5:  'SUPPORT' is defined but never used               [4mno-unused-vars
+front-app            |   35:5:  'DOC' is defined but never used                   [4mno-unused-vars
+front-app            |   36:5:  'CONFIG_SERVICE' is defined but never used        [4mno-unused-vars
+front-app            |   37:5:  'LOGIN' is defined but never used                 [4mno-unused-vars
+front-app            |   38:5:  'REGISTER' is defined but never used              [4mno-unused-vars
+front-app            |   39:5:  'HOME' is defined but never used                  [4mno-unused-vars
+front-app            |   40:5:  'VITRINE' is defined but never used               [4mno-unused-vars
+front-app            |   41:5:  'BOUTIQUE' is defined but never used              [4mno-unused-vars
+front-app            |   42:5:  'RESSOURCE' is defined but never used             [4mno-unused-vars
+front-app            |   43:5:  'Basket' is defined but never used                [4mno-unused-vars
+front-app            | 
+front-app            | src/auth/account/index.tsx
+front-app            |   28:40:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   62:41:  Forbidden non-null assertion              [4m@typescript-eslint/no-non-null-assertion
+front-app            | 
+front-app            | src/auth/admin/customer/index.tsx
+front-app            |   18:55:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/admin/job/index.tsx
+front-app            |   19:58:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/dialogs/config.tsx
+front-app            |   24:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/dialogs/sub-info.tsx
+front-app            |   29:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/config/index.tsx
+front-app            |   15:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   16:58:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/dashboard/index.tsx
+front-app            |   6:63:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/auth/facturation/index.tsx
+front-app            |   23:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/common/const/product.ts
+front-app            |   2:5:  'SERVICE' is defined but never used  [4mno-unused-vars
+front-app            |   3:5:  'PRODUCT' is defined but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/common/const/user.ts
+front-app            |   2:5:  'USER' is defined but never used         [4mno-unused-vars
+front-app            |   3:5:  'SUPER_ADMIN' is defined but never used  [4mno-unused-vars
+front-app            |   4:5:  'INVOICE' is defined but never used      [4mno-unused-vars
+front-app            |   5:5:  'SUPPORT' is defined but never used      [4mno-unused-vars
+front-app            | 
+front-app            | src/common/utils/web/index.ts
+front-app            |   13:83:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   30:45:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   32:47:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/features/authentication-slice.ts
+front-app            |   35:61:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/shop/basket/paiement/index.tsx
+front-app            |   24:42:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            | 
+front-app            | src/shop/boutique/const.ts
+front-app            |   2:5:  'UNIT' is defined but never used     [4mno-unused-vars
+front-app            |   3:5:  'MONTH' is defined but never used    [4mno-unused-vars
+front-app            |   4:5:  'YEAR' is defined but never used     [4mno-unused-vars
+front-app            |   8:5:  'SERVICE' is defined but never used  [4mno-unused-vars
+front-app            |   9:5:  'PRODUCT' is defined but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/shop/details-product-page/index.tsx
+front-app            |   14:26:  'setSearchParams' is assigned a value but never used  [4mno-unused-vars
+front-app            |   14:26:  'setSearchParams' is assigned a value but never used  [4m@typescript-eslint/no-unused-vars
+front-app            |   81:79:  Forbidden non-null assertion                          [4m@typescript-eslint/no-non-null-assertion
+front-app            | 
+front-app            | src/shop/register/index.tsx
+front-app            |   43:21:  'confirmPassword' is assigned a value but never used  [4mno-unused-vars
+front-app            | 
+front-app            | src/shop/stripe/embedded-checkout.tsx
+front-app            |   29:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any
+front-app            |   59:38:  Unexpected any. Specify a different type  [4m@typescript-eslint/no-explicit-any

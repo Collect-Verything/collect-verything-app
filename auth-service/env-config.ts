@@ -8,7 +8,7 @@ export const configEnv = {
 
   API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,
 
-  FRONT_PORT_CLIENT: process.env.FRONT_PORT,
+  FRONT_PORT: process.env.FRONT_PORT,
 
   AUTH_PORT: process.env.AUTH_PORT,
   AUTH_URL_AUTH: process.env.AUTH_URL_AUTH,

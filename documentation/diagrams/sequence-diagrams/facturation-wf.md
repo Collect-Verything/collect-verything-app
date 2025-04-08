@@ -93,4 +93,4 @@ Voici le déroulé...
 Comme précisé [ici][facturation-details], dans le titre Traitement des événements Stripe et persistance des factures, l'application n'étant pas encore en production, il est nécessaire, pour le moment, d'effectuer la persistance des factures via Postman afin de pouvoir consulter les factures.
 
 [facturation-details]: ../../workflow/stripe/facturation.md
-[summary]: ../README.md
+[summary]: ../../README.md

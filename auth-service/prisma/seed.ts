@@ -11,6 +11,7 @@ async function main() {
   const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
   const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
   const passwordInvoice = await bcrypt.hash('invoiceinvoice', roundsOfHashing);
+  const stripeUser = await bcrypt.hash('Password', roundsOfHashing);
 
   const roleUser = await prisma.role.upsert({
     where: { name: 'USER' },
@@ -98,6 +99,24 @@ async function main() {
     },
   });
 
+  const stripeUSer = await prisma.user.upsert({
+    where: { email: 'Dacia@gmail.com' },
+    update: { password: stripeUser },
+    create: {
+      id_stripe: 'cus_RmzpxFcuDJqenR',
+      firstname: 'Dacia',
+      lastname: 'Renault',
+      email: 'Dacia@gmail.com',
+      password: stripeUser,
+      birthDate: new Date('1997-02-17'),
+      gender: 'Monsieur',
+      phone: '1234567810',
+      role: {
+        connect: { id: roleUser.id },
+      },
+    },
+  });
+
   console.log({
     roleUser,
     roleSuperAdmin,
@@ -106,6 +125,7 @@ async function main() {
     userSuperAdmin,
     userSimple,
     userInvoice,
+    stripeUSer
   });
 }
 
