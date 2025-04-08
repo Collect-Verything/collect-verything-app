@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import axios from 'axios';
-import { checkFreePath } from '../common/tool';
+import {checkFreePath, returnFreePath} from '../common/tool';
 import { domainServiceByPath, portByPath } from '../common/const';
 import { configEnv } from '../env-config';
 
@@ -11,10 +11,10 @@ export class ProxyService {
     // STRIPE EVENT
 
     // FREE ROOT
+    // TODO : ⚠️ Upgrade logique for free path, for the moment only auth login and register is accepted
     if (checkFreePath(req.url)) {
-
       const res = await axios[req.method.toLowerCase()](
-        `http://${configEnv.DOMAIN_AUTH}:3001/auth/login`,
+        `http://${configEnv.DOMAIN_AUTH}:3001/auth/${returnFreePath(req.url)}`,
         req.body,
       );
       return res.data;
