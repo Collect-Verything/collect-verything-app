@@ -1,6 +1,3 @@
-## Next:
-
-- Dialog config une fois validé permet de deployer le site web
 
 #### Visibilité :
 
@@ -21,26 +18,18 @@ A voire si la visibilité est vraiment pertinente ? Supprimer ...
 POur le moment l'api gateway est un reverse proxy passe plat, il faut deplacer la logique aller retour du front dans l'api gate way
 
 ### Deploy produit client
+Deploiement automatique du site web du client, creer service deploy-service qui recoit un event rabbit mq certainement et qui deploi l'app ...
 
-### Heberger, docker
+### Heberger
+AWS EC2 ?
+
+### Docker
+Pull app on server and try to lunch it
 
 ### Kubernetes
 Scaling sur l'api gateway
 
-## Fix error terminal au lancement:
+### Fix log dockerization
 
-```
-Files successfully emitted, waiting for typecheck results...
-Issues checking in progress...
-[Nest] 4030  - 03/18/2025, 6:18:56 PM   ERROR [ExceptionsHandler] No such customer: 'undefined'
-Error: No such customer: 'undefined'
-    at generateV1Error (/Users/canse/Documents/M2I/Apps-Projet-M2I/collect-verything-app/config-service/node_modules/stripe/cjs/Error.js:11:20)
-    at res.toJSON.then.Error_js_1.StripeAPIError.message (/Users/canse/Documents/M2I/Apps-Projet-M2I/collect-verything-app/config-service/node_modules/stripe/cjs/RequestSender.js:108:62)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-No issues found.
-```
+check log file in root *todo-logs-to-fixed.txt*
 
-
-## Faire une distinction sur les .env localhost par rapport au nom de reseau docker 
-
-Actuellement tous les DOMAON sont en local host, mais avec docker certain domain seront remplacé par un reseau privé docker par exemple ou une adresse ip ...

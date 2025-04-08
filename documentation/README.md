@@ -31,6 +31,9 @@
     - [Facturation] [facturation]
     - [Subscription] [subscription]
 
+- Todo
+  - [todo][todo]
+
 [//]: # "--- Images and links section ---"
 [linting]: development/linting.md
 [monorepo]: development/mono-repo.md
@@ -47,4 +50,5 @@
 [Seed]: database/seed.md
 [docker]: docker/compose.md
 [creation-service]: services/creation.md
+[todo]: todo/todo.md
 
