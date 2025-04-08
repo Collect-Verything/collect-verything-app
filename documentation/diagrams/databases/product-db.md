@@ -37,4 +37,4 @@ Quand le prix d'un produit change, un nouvel ID produit lui est affilié. Cepend
 Ce champ définit simplement l'ID du produit, mais dans Stripe.
 
 
-[summary]: ../README.md
+[summary]: ../../README.md

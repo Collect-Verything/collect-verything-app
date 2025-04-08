@@ -74,4 +74,4 @@ L’application étant encore en cours de développement, les rôles actuellemen
 
 
 
-[summary]: ../README.md
+[summary]: ../../README.md
