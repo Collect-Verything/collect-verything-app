@@ -10,7 +10,7 @@ TODO :
 [ ] Dans le git dif retablif le fichier present /.idea/vsc.xml (laisser le git root en maitre)
 [ ] Supprimer les fichier de base generé par nestjs
 [ ] Generer les premiere ressource avec la commande
-[ ] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root.
+[ ] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root. (...)
 ----[ ] Installation
 ----[ ] Base de donnée :
 --------[ ] Generer schema
@@ -20,13 +20,13 @@ TODO :
 ----[ ] Ajout du nouveau port dans le .env du root et
 ----[ ] npm i dotenv dans le service concerné
 ----[ ] Creer fichier env-config.ts pour la recuperation des .env du root (suivre pattern present dans les autres service)
-[ ] Mettre a jour le document ReadeMe.md du root pour y ajouter la ligne concernant le nouveau service, suivre le pattern
-[ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant
+----[ ] Mettre à jour les .env front et root avec l'rl service et port du nouveau service
+[ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
 ----[ ] Dockerfile 
 ----[ ] compose.yaml
 ----[ ] start.sh
 [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier. (suivre le pattern)
-[ ] Une fois les classes, db et process en place, creer documentation, diagramme classe et sequence
+[ ] Mettre à jour les documentations : diagrammes de classes, de séquence, d’architecture, etc.
 ```
 
 
