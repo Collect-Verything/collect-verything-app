@@ -1,104 +1,177 @@
-version: '3.7'
+version: '3.8'
 
 services:
-
+  # 🌍 FRONT-END (Public) # Check previous config dockerfile
+#  front-app:
+#    build: ./front-app
+#    container_name: front-app
+#    ports:
+#      - "80:80"
+#    networks:
+#      - my_private_network
+#    env_file:
+#      - .env
   front-app:
-    container_name: front-app
     build: ./front-app
-    volumes:
-      - './:/app'
-      - '/app/node_modules'
+    container_name: front-app
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    volumes:
+      - ./front-app:/front-app
+      - /front-app/node_modules
     stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: npm start
+    tty: true
+    depends_on:
+      - api-gateway
 
+  # 🚀 API GATEWAY (Seul service exposé)
   api-gateway:
-    build:
-      context: api-gateway
-      dockerfile: Dockerfile
+    build: ./api-gateway
     container_name: api-gateway
     restart: always
     ports:
       - "2999:2999"
-
-  auth-service:
-    build:
-      context: auth-service
-      dockerfile: Dockerfile
-    container_name: auth-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-auth:3306/collect-verything-auth
-      - AUTH_PORT=${AUTH_PORT}
-    ports:
-      - "${AUTH_PORT}:${AUTH_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./api-gateway:/api-gateway
+      - /api-gateway/node_modules
     depends_on:
-      - mysql-auth
+      - auth-service
+      - product-service
+      - config-service
+      - facturation-service
 
+  # 🔒 AUTH SERVICE (Privé)
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./auth-service:/auth-service
+      - /auth-service/node_modules
+    depends_on:
+      mysql-auth:
+        condition: service_healthy
+
+  # 🗄️ BASE DE DONNÉES (MySQL AUTH)
   mysql-auth:
     image: mysql:8
+    restart: always
     container_name: mysql-auth
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-auth
+      MYSQL_DATABASE: auth-db
     ports:
       - "3307:3306"
     volumes:
       - mysql-auth-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
+  # 🔒 PRODUCT SERVICE (Privé)
   product-service:
-    build:
-      context: product-service
-      dockerfile: Dockerfile
+    build: ./product-service
     container_name: product-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-product:3306/collect-verything-product
-      - PRODUCT_PORT=${PRODUCT_PORT}
-    ports:
-      - "${PRODUCT_PORT}:${PRODUCT_PORT}"
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./product-service:/product-service
+      - /product-service/node_modules
     depends_on:
-      - mysql-product
+      mysql-product:
+        condition: service_healthy
 
+  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
   mysql-product:
     image: mysql:8
+    restart: always
     container_name: mysql-product
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-product
+      MYSQL_DATABASE: product-db
     ports:
       - "3308:3306"
     volumes:
-      - mysql-product-data:/var/lib/mysql
+      - mysql-prod-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
-  facturation-service:
-    build:
-      context: facturation-service
-      dockerfile: Dockerfile
-    container_name: facturation-service
-    environment:
-      - DATABASE_URL=mysql://root:password@mysql-facturation:3306/collect-verything-facturation
-      - FACTURATION_PORT=${FACTURATION_PORT}
-    ports:
-      - "${FACTURATION_PORT}:${FACTURATION_PORT}"
+  # 🔒 CONFIG SERVICE (Privé)
+  config-service:
+    build: ./config-service
+    container_name: config-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./config-service:/config-service
+      - /config-service/node_modules
     depends_on:
-      - mysql-facturation
+      mysql-config:
+        condition: service_healthy
 
-  mysql-facturation:
+  # 🗄️ BASE DE DONNÉES (MySQL CONFIG)
+  mysql-config:
     image: mysql:8
-    container_name: mysql-facturation
+    restart: always
+    container_name: mysql-config
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: collect-verything-facturation
+      MYSQL_DATABASE: config-db
     ports:
       - "3309:3306"
     volumes:
+      - mysql-config-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # 🔒 FACTURATION SERVICE (Privé)
+  facturation-service:
+    build: ./facturation-service
+    container_name: facturation-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./facturation-service:/facturation-service
+      - /facturation-service/node_modules
+    depends_on:
+      mysql-facturation:
+        condition: service_healthy
+
+  # 🗄️ BASE DE DONNÉES (MySQL FACTURATIO)
+  mysql-facturation:
+    image: mysql:8
+    restart: always
+    container_name: mysql-facturation
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: facturation-db
+    ports:
+      - "3310:3306"
+    volumes:
       - mysql-facturation-data:/var/lib/mysql
-
-
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   mysql-auth-data:
-  mysql-product-data:
+  mysql-prod-data:
+  mysql-config-data:
   mysql-facturation-data:

@@ -1,5 +1,5 @@
 # Utilise une image Node.js comme base
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Installer les outils nécessaires, comme nc
 RUN apk add --no-cache netcat-openbsd
@@ -10,7 +10,7 @@ WORKDIR /auth-service
 
 # Copie les fichiers package.json et package-lock.json
 COPY package.json ./
-COPY package-lock.json ./
+#COPY package-lock.json ./
 
 # Installe les dépendances de production
 RUN npm install
