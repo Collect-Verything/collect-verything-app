@@ -1,54 +1,42 @@
-## Build image and run container:
+# Run:
 
-### (old)Front application 
-(checker historique commit pour l'ancienne config)
+Pour lancer l'application apres un git clone, effectuer la commande suivante :
 
-```
-cd front-app
-docker build . -t front-app
-docker run --name front-app -d -p 3000:3000 front-app
-```
-
-### Authentication service 
-
-```
-cd auth-service
-docker build . -t auth-service
-docker run --name auth-service -d -p 3001:3001 auth-service
-```
-
-
-## (new)Run all app
-
-
-Delete old containers if already create and run this commande in root folder :
-```
-// cd in choosing app
+```zsh
 docker compose up
 ```
+L'application étant un projet d'étude, tous les fichiers .env et de configuration spécifiques sont inclus dans le dépôt. Ainsi, lors du git clone, tous les fichiers nécessaires au lancement de l'application sont déjà présents.
 
-Check your local host on 3000 & 3001 
 
+# Logs
 
-# Error amd
+Actuellement, lorsqu'on lance la commande docker compose up, tous les logs générés depuis le démarrage sont progressivement effacés du terminal. Cela peut être contraignant si l'on souhaite inspecter les erreurs survenues pendant le lancement des conteneurs.
 
-lancer les container avec les flag suivant 
+### 🛠️ Solution :
+
+Pour conserver tous les logs de lancement dans un fichier (et ainsi pouvoir les analyser plus facilement), il suffit d'exécuter la commande suivante :
+
+```zsh
+docker compose up 2>&1 | tee logs-start-container.txt            
 ```
-docker container run --platform linux/amd64 cansefr/front-app
-docker container run --platform linux/amd64 cansefr/auth-service
+
+### 📂 Cette commande va :
+
+- Rediriger la sortie standard (> logs.txt) et la sortie d’erreur (2>&1) vers le fichier logs.txt ;
+
+- Permettre de relire tous les logs du démarrage à tout moment, même après leur disparition dans le terminal.
+
+### 💡 Astuce :
+Tu peux également suivre les logs en direct dans un autre terminal avec :
+
+```zsh
+tail -f logs.txt
 ```
 
+# Issue
 
-# Pull & Run from Docker Hub
+## ARM64 Alert
 
 ```
-docker image pull cansefr/front-app
-docker image pull cansefr/auth-service
-
-// For linux and arm64 alert
-docker pull --platform linux/amd64 cansefr/front-app
-docker pull --platform linux/amd64 cansefr/auth-service
-
-docker run -p 3000:3000 cansefr/front-app
-docker run -p 3001:3001 cansefr/auth-service
+docker pull --platform linux/amd64 cansefr/....
 ```
