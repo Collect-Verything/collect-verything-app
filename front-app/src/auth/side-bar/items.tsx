@@ -133,27 +133,27 @@ export const InvoiceItemsDashboard: UserItemsDashboardType[] = [
 export const SupportItemsDashboard: UserItemsDashboardType[] = [
     {
         icon: <DashboardIcon />,
-        label: "Tableau de bord",
+        label: SECTION_NAME.DASHBOARD,
         url: URL_FRONT.DASHBOARD,
     },
     {
         icon: <PersonIcon />,
-        label: "Compte",
+        label: SECTION_NAME.ACCOUNT,
         url: URL_FRONT.ACCOUNT,
     },
     {
         icon: <SignalCellularAltIcon />,
-        label: "Statistique",
+        label: SECTION_NAME.STATS,
         url: URL_FRONT.STATS,
     },
     {
         icon: <SupportAgentIcon />,
-        label: "Service client",
+        label: SECTION_NAME.SUPPORT,
         url: URL_FRONT.SUPPORT,
     },
     {
         icon: <ImportContactsIcon />,
-        label: "Documentation",
+        label: SECTION_NAME.DOC,
         url: URL_FRONT.DOC,
     },
 ];

@@ -80,13 +80,13 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
-                            Création de l'abonnement :
+                            Création de l&apos;abonnement :
                         </Typography>
                         {new Date(row.current_period_start * 1000).toLocaleDateString("fr-FR")}
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
-                            Echéance de l'abonnement :
+                            Echéance de l&apos;abonnement :
                         </Typography>
                         {new Date(row.current_period_end * 1000).toLocaleDateString("fr-FR")}
                     </DialogContentText>
@@ -98,13 +98,13 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
                                 variant="outlined"
                                 color="warning"
                             >
-                                Desactiver l'abonement
+                                Desactiver l&apos;abonement
                             </Button>
                         </DialogContentText>
                     ) : (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="success">
-                                Réactiver l'abonement
+                                Réactiver l&apos;abonement
                             </Button>
                         </DialogContentText>
                     )}

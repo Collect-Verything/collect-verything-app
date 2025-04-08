@@ -220,7 +220,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                         <DialogContentText mt={4}>
                             <Typography>Votre site est configuré et actuellement en ligne</Typography>
                             <Button variant="outlined" color="warning">
-                                Cesser l'activité
+                                Cesser l&apos;activité
                             </Button>
                         </DialogContentText>
                     )}
