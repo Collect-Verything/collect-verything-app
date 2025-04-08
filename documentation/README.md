@@ -45,7 +45,8 @@
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
     - [Facturation] [facturation-sequences]
-
+  - Architecture
+    - [Application] [archi-app]
 - Todo
   - [todo][todo]
 
@@ -75,6 +76,7 @@
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
 [product-sequences]: diagrams/sequence-diagrams/product.md
 [facturation-sequences]: diagrams/sequence-diagrams/facturation.md
+[archi-app]: diagrams/architecture/application.md
 
 [main-summary]: ../README.md
 
