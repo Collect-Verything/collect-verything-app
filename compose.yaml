@@ -53,7 +53,8 @@ services:
       - ./auth-service:/auth-service
       - /auth-service/node_modules
     depends_on:
-      - mysql-auth
+      mysql-auth:
+        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL AUTH)
   mysql-auth:
@@ -67,7 +68,11 @@ services:
       - "3307:3306"
     volumes:
       - mysql-auth-data:/var/lib/mysql
-
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   # 🔒 PRODUCT SERVICE (Privé)
   product-service:
@@ -80,7 +85,8 @@ services:
       - ./product-service:/product-service
       - /product-service/node_modules
     depends_on:
-      - mysql-product
+      mysql-product:
+        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
   mysql-product:
@@ -94,6 +100,11 @@ services:
       - "3308:3306"
     volumes:
       - mysql-prod-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   # 🔒 CONFIG SERVICE (Privé)
   config-service:
@@ -106,7 +117,8 @@ services:
       - ./config-service:/config-service
       - /config-service/node_modules
     depends_on:
-      - mysql-config
+      mysql-config:
+        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL CONFIG)
   mysql-config:
@@ -120,6 +132,11 @@ services:
       - "3309:3306"
     volumes:
       - mysql-config-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   # 🔒 FACTURATION SERVICE (Privé)
   facturation-service:
@@ -132,7 +149,8 @@ services:
       - ./facturation-service:/facturation-service
       - /facturation-service/node_modules
     depends_on:
-      - mysql-facturation
+      mysql-facturation:
+        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL FACTURATIO)
   mysql-facturation:
@@ -146,8 +164,11 @@ services:
       - "3310:3306"
     volumes:
       - mysql-facturation-data:/var/lib/mysql
-
-# Creer facturation service , pour creer un produits, une fois le produi crée, acheter avec une user et test config service
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   mysql-auth-data:
