@@ -10,7 +10,7 @@ const getHeaders = () => {
 
 type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
-const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?: any) => {
+const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?: unknown) => {
     const response = await fetch(`http://${URL}:${portWithServicePath}`, {
         method: method,
         headers: getHeaders(),
@@ -27,9 +27,9 @@ const apiRequest = async (portWithServicePath: string, method: HttpMethod, data?
 
 export const apiGet = (path: string) => apiRequest(path, "GET");
 
-export const apiPost = (path: string, data: any) => apiRequest(path, "POST", data);
+export const apiPost = (path: string, data: unknown) => apiRequest(path, "POST", data);
 
-export const apiPatch = (path: string, data?: any) => apiRequest(path, "PATCH", data);
+export const apiPatch = (path: string, data?: unknown) => apiRequest(path, "PATCH", data);
 
 export const apiDelete = (path: string) => apiRequest(path, "DELETE");
 

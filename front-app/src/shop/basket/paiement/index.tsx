@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { URL_FRONT } from "../../../app/router/const";
 import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
+import {RootState} from "../../../features/store";
 
 interface PaiementCardProps {
     totalPrice: number;
@@ -21,7 +22,7 @@ const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const PaiementCard = (props: PaiementCardProps) => {
     const { totalPrice, listBasket } = props;
-    const { role } = useSelector((store: any) => store.authenticate);
+    const { role } = useSelector((store: RootState) => store.authenticate);
 
     const nav = useNavigate();
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);

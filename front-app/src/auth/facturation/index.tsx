@@ -9,6 +9,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsInvoices } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
+import { RootState } from "../../features/store";
+import { User } from "../../common/types/user";
 
 // TODO : Creer un recovery facturation comme pour les sub
 
@@ -20,7 +22,7 @@ import CircularProgress from "@mui/material/CircularProgress";
  * */
 
 export const Facturation = () => {
-    const user = useSelector((store: any) => store.authenticate);
+    const user = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
     const [invoices, setInvoices] = useState<InvoiceEntity[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -28,10 +30,10 @@ export const Facturation = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const stripeData = await getUserStripeID(user);
+                const stripeData = await getUserStripeID(user as User);
                 dispatch(updateStripeId(stripeData.id_stripe));
 
-                const fetchedInvoices = await getInvoices(user);
+                const fetchedInvoices = await getInvoices(user as User);
                 setInvoices(fetchedInvoices);
             } finally {
                 setIsLoading(false);

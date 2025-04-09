@@ -32,7 +32,7 @@ export const authenticateSlice = createSlice({
             state.role = undefined;
             localStorage.removeItem("token");
         },
-        updateStripeIdCustomer(state, action: PayloadAction<any>) {
+        updateStripeIdCustomer(state, action: PayloadAction<string>) {
             state.id_stripe = action.payload;
         },
     },

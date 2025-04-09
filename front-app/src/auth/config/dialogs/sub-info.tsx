@@ -16,6 +16,7 @@ import { SUBSCRIPTION_URL } from "../request";
 import { useSelector } from "react-redux";
 import { fetchUserSubscriptions } from "../../../features/subscription-slice";
 import { useAppDispatch } from "../../../features/authentication-slice";
+import { RootState } from "../../../features/store";
 
 // Pour le moment la reactivation n'est pas encore mis en place
 
@@ -26,12 +27,14 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    const user = useSelector((store: any) => store.authenticate);
+    const user = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
 
     const cancelSubRequest = (subIdStripe: string) => {
         apiPost(`${ConfigUrlWithPort}/${SUBSCRIPTION_URL}/${subIdStripe}`, {})
-            .then(() => dispatch(fetchUserSubscriptions(user.id_stripe)))
+            .then(() => {
+                dispatch(fetchUserSubscriptions(user.id_stripe!));
+            })
             .catch(console.error);
     };
 
@@ -80,13 +83,13 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
-                            Création de l'abonnement :
+                            Création de l&apos;abonnement :
                         </Typography>
                         {new Date(row.current_period_start * 1000).toLocaleDateString("fr-FR")}
                     </DialogContentText>
                     <DialogContentText>
                         <Typography color="secondary" mt={2}>
-                            Echéance de l'abonnement :
+                            Echéance de l&apos;abonnement :
                         </Typography>
                         {new Date(row.current_period_end * 1000).toLocaleDateString("fr-FR")}
                     </DialogContentText>
@@ -98,13 +101,13 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
                                 variant="outlined"
                                 color="warning"
                             >
-                                Desactiver l'abonement
+                                Desactiver l&apos;abonement
                             </Button>
                         </DialogContentText>
                     ) : (
                         <DialogContentText mt={4}>
                             <Button variant="outlined" color="success">
-                                Réactiver l'abonement
+                                Réactiver l&apos;abonement
                             </Button>
                         </DialogContentText>
                     )}

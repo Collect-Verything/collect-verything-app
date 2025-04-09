@@ -1,17 +1,67 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
+import { RootState } from "../../features/store";
+import Grid from "@mui/material/Grid2";
 
 export const AuthDashboard = () => {
-    const { role, firstname, lastname } = useSelector((store: any) => store.authenticate);
+    const { role, firstname, lastname } = useSelector((store: RootState) => store.authenticate);
 
     return (
-        <>
-            <Typography>
+        <Grid
+            container
+            direction="column"
+            margin="auto"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+            minHeight="100vh"
+        >
+            <Typography variant="h4" gutterBottom>
                 Bonjour {firstname} {lastname}
             </Typography>
-            <Typography>{role}</Typography>
-            <Typography>main dash board</Typography>;
-        </>
+            <Typography variant="subtitle1" color="text.secondary">
+                {"Rôle : " + role}
+            </Typography>
+
+            <Typography variant="h5" gutterBottom>
+                Tableau de bord principal
+            </Typography>
+
+            <Grid container spacing={4}>
+                <Grid>
+                    <Card className="shadow-lg rounded-2xl">
+                        <CardContent>
+                            <Typography variant="h6">Utilisateurs inscrits</Typography>
+                            <Typography variant="h4" color="primary">
+                                1,234
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid>
+                    <Card className="shadow-lg rounded-2xl">
+                        <CardContent>
+                            <Typography variant="h6">Transactions du jour</Typography>
+                            <Typography variant="h4" color="secondary">
+                                347
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid>
+                    <Card className="shadow-lg rounded-2xl">
+                        <CardContent>
+                            <Typography variant="h6">Support en attente</Typography>
+                            <Typography variant="h4" color="error">
+                                12
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 };

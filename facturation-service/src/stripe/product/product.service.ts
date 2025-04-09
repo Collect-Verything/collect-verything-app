@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { StripeProductEntity } from './product.entity';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
 @Injectable()

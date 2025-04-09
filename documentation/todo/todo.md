@@ -16,7 +16,8 @@ N'oubliez pas de changer la création des produits atonement avec une récurrenc
 A voire si la visibilité est vraiment pertinente ? Supprimer ...
 
 ### Api gateway
-POur le moment l'api gateway est un reverse proxy passe plat, il faut deplacer la logique aller retour du front dans l'api gate way
+- POur le moment l'api gateway est un reverse proxy passe plat, il faut deplacer la logique aller retour du front dans l'api gate way
+- Ameliorer la logique du free path, actuellement il accepte que auth/login et auth/register, il devra egalement accepter les evenenment stripe exterieur
 
 ### Deploy produit client
 Deploiement automatique du site web du client, creer service deploy-service qui recoit un event rabbit mq certainement et qui deploi l'app ...
@@ -34,4 +35,12 @@ Scaling sur l'api gateway
 
 check log file in root *todo-logs-to-fixed.txt*
 
+
+### Lint 
+
+Comprendre la problematique du lien suivant [issue_lint][issue_lint] 
+
+
+
 [summary]: ../README.md
+[issue_lint]: ../development/linting.md

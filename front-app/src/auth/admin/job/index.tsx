@@ -9,6 +9,7 @@ import { fetchJobbers } from "../../../features/user-job-slice";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import { RootState } from "../../../features/store";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
 //  TODO: Creation d'un user, role obligatoire
@@ -16,7 +17,7 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 export const Job = () => {
     const dispatch = useAppDispatch();
 
-    const { usersJobList, status } = useSelector((store: any) => store.userJob);
+    const { usersJobList, status } = useSelector((store: RootState) => store.userJob);
 
     const handleGetAllUserJobs = () => {
         dispatch(fetchJobbers());

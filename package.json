@@ -58,7 +58,10 @@
         "__START__": "",
     "start:prod": "npm run start:front & npm run start:auth-prod & npm run start:product-prod & npm run start:facturation-prod & npm run start:config-prod & npm run start:gateway-prod",
     "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:product-dev & npm run start:facturation-dev & npm run start:config-dev & npm run start:gateway-dev",
-    "start:dev-w": "start /b npm run start:front && start /b npm run start:auth-dev && start /b npm run start:product-dev && start /b npm run start:facturation-dev && start /b npm run start:config-dev && start /b npm run start:gateway-dev"
+    "start:dev-w": "start /b npm run start:front && start /b npm run start:auth-dev && start /b npm run start:product-dev && start /b npm run start:facturation-dev && start /b npm run start:config-dev && start /b npm run start:gateway-dev",
+
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'"
+
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
