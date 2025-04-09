@@ -27,14 +27,14 @@ const initialState: SubscriptionState = {
 
 export const fetchUserSubscriptions = createAsyncThunk(
     `${CONFIG_SERVICE.servicePath}/fetchUserSubscriptions`,
-    async (userStripeId: Pick<User, "id_stripe">) => {
+    async (userStripeId: string) => {
         return await getUserListSolutionSub(userStripeId);
     },
 );
 
 export const recoveryUserSubscriptions = createAsyncThunk(
     `${CONFIG_SERVICE.servicePath}/recoveryUserSubscriptions`,
-    async (userStripeId: Pick<User, "id_stripe">) => {
+    async (userStripeId: string) => {
         return await getRecoverSubs(userStripeId);
     },
 );
