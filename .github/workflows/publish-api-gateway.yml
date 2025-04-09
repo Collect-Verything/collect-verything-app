@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies for api-gateway
-        working-directory: ./api-gateway
+        working-directory: .
         run: npm install
 
       - name: Run linter in api-gateway

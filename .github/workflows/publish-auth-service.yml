@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies for auth-service
-        working-directory: ./auth-service
+        working-directory: .
         run: npm install
 
       - name: Run linter in auth-service
