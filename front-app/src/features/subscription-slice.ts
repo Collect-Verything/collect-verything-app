@@ -3,13 +3,12 @@ import { AppDispatch, RootState } from "./store";
 import { useDispatch } from "react-redux";
 import { getRecoverSubs, getUserListSolutionSub } from "../auth/config/request";
 import { Subscription } from "../auth/config/type";
-import { User } from "../common/types/user";
-import {CONFIG_SERVICE} from "../app/micro-services";
+import { CONFIG_SERVICE } from "../app/micro-services";
 
 /*
-* @fetchUserSubscriptions : Recuperation des user sub
-* @recoveryUserSubscriptions : Permet de recuperer les sub d'un user dans le cas ou la base des sub est vide, mais pas les config...
-* */
+ * @fetchUserSubscriptions : Recuperation des user sub
+ * @recoveryUserSubscriptions : Permet de recuperer les sub d'un user dans le cas ou la base des sub est vide, mais pas les config...
+ * */
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
