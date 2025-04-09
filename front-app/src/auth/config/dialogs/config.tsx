@@ -15,13 +15,14 @@ import { ConfigUrlWithPort } from "../../../app/micro-services";
 import Alert from "@mui/material/Alert";
 import { fetchUserSubscriptions } from "../../../features/subscription-slice";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../features/authentication-slice"; // Pour le moment la reactivation et l'annulation n'est pas effective
+import { useAppDispatch } from "../../../features/authentication-slice";
+import { RootState } from "../../../features/store";
 
 // Pour le moment la reactivation et l'annulation n'est pas effective
 
 export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const { buttonElement, rippleRef, row } = props;
-    const user = useSelector((store: any) => store.authenticate);
+    const user = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
 
     const [config, setConfig] = useState<Partial<Configuration>>();
@@ -41,7 +42,8 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
         try {
             await apiPost(`${ConfigUrlWithPort}/conf/${row.id}`, config);
             await apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${true}`);
-            await dispatch(fetchUserSubscriptions(user.id_stripe));
+
+            await dispatch(fetchUserSubscriptions(user.id_stripe!));
             handleClose();
         } catch (error) {
             if (error === "409") {
@@ -55,19 +57,21 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
     const handleDeleteConfig = async () => {
         await apiDelete(`${ConfigUrlWithPort}/conf/${row.configuration.id}`);
         await apiPatch(`${ConfigUrlWithPort}/sub/configure/${row.id}/${false}`);
-        dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error);
+
+        dispatch(fetchUserSubscriptions(user.id_stripe!)).catch(console.error);
         handleClose();
     };
 
     const handlePublish = async () => {
         await apiPatch(`${ConfigUrlWithPort}/sub/publish/${row.id}/${true}`);
-        dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error);
+
+        dispatch(fetchUserSubscriptions(user.id_stripe!)).catch(console.error);
         handleClose();
     };
 
     // const cancelSubRequest = (subIdStripe: string) => {
     //     apiPost(`${ConfigUrlWithPort}/${SUBSCRIPTION_URL}/${subIdStripe}`, {})
-    //         .then(() => dispatch(fetchUserSubscriptions(user.id_stripe)))
+    //         .then(() => dispatch(fetchUserSubscriptions(user.id_stripe!)))
     //         .catch(console.error);
     // };
 
