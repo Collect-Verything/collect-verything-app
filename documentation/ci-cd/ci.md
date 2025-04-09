@@ -29,4 +29,9 @@ Elle permettrait de :
 
 ➕ Amélioration prévue : réactiver cette étape et la rendre bloquante avant les tests et le build, afin de renforcer les contrôles qualité.
 
+# Issue
+
+Probleme lint concernant front-app consulter l'issue [ici]
+
+[ici]: ../development/linting.md
 [summary]: ../README.md

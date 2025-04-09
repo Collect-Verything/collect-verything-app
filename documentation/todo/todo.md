@@ -36,6 +36,11 @@ Scaling sur l'api gateway
 check log file in root *todo-logs-to-fixed.txt*
 
 
+### Lint 
+
+Comprendre la problematique du lien suivant [issue_lint][issue_lint] 
+
 
 
 [summary]: ../README.md
+[issue_lint]: ../development/linting.md
