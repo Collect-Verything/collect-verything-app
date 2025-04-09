@@ -5,6 +5,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class StripeEventService {
   constructor(private prisma: PrismaService) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkEvent(body: any) {
     if (body.object.object === 'invoice') {
       return await this.invoiceTreatment(body);
@@ -16,6 +17,7 @@ export class StripeEventService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async invoiceTreatment(invoice: any) {
     return this.prisma.facture.create({
       data: {
@@ -31,6 +33,7 @@ export class StripeEventService {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async paymentIntentTreatment(invoice: any) {
     return this.prisma.facture.create({
       data: {

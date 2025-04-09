@@ -9,6 +9,7 @@ const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
 @Injectable()
 export class StripeCheckoutService {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async createCheckoutSession(id_stripe: string, basket: any) {
     const listRaw = [];
 
