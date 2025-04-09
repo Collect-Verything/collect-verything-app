@@ -9,13 +9,14 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { columnsUser } from "../job/grid-definition";
 import { fetchUsers } from "../../../features/user-slice";
 import { CreateUserAndJob } from "../job/dialogs/create-user-job";
+import { RootState } from "../../../features/store";
 
 //  TODO: Creation d'un user, role obligatoire
 
 export const Customer = () => {
     const dispatch = useAppDispatch();
 
-    const { usersList, status } = useSelector((store: any) => store.user);
+    const { usersList, status } = useSelector((store: RootState) => store.user);
 
     const handleGetAllUsers = () => {
         dispatch(fetchUsers());
