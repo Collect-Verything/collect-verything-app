@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies for front-end
-        working-directory: ./front-app
+        working-directory: .
         run: npm install
 
       - name: Run linter in front-end
