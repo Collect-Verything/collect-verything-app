@@ -170,6 +170,20 @@ services:
       timeout: 3s
       retries: 5
 
+  # 📬 Mail SERVICE (Privé)
+  mail-service:
+    build: ./mail-service
+    container_name: mail-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./mail-service:/mail-service
+      - /mail-service/node_modules
+#    depends_on: dependre de rabbitmq
+#      mysql-facturation:
+#        condition: service_healthy
+
 volumes:
   mysql-auth-data:
   mysql-prod-data:
