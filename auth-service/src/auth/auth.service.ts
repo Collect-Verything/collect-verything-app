@@ -10,8 +10,6 @@ import * as bcrypt from 'bcryptjs';
 import { ROLENAME_ID } from './enum';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
-import {ClientProxy} from "@nestjs/microservices";
-import { Inject } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +17,6 @@ export class AuthService {
     private prisma: PrismaService,
     private usersService: UsersService,
     private jwtService: JwtService,
-    @Inject('MAIL_SERVICE') private client: ClientProxy
   ) {}
 
   async login(email: string, password: string): Promise<AuthEntity> {
@@ -68,17 +65,7 @@ export class AuthService {
   }
 
   async forgotPassword(mail: { email: string }) {
-    // const currentUser = await this.usersService.findOneByMail(mail.email);
-    // TODO : Fix response
-    // const res = await this.usersService.updateForgotPassword(currentUser.id);
-
-    const message = {
-      "pattern": "forgot-password",
-      "data": "test"
-    }
-
-    this.client.emit('forgot-password', message); // pattern + data
-
-    return { };
+    const currentUser = await this.usersService.findOneByMail(mail.email);
+    return await this.usersService.updateForgotPassword(currentUser.id);
   }
 }

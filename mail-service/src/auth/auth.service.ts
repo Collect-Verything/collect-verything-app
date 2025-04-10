@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common';
-
-// TODO : Get calue from env
-// TODO : Fix require if possible
+import * as nodemailer from "nodemailer"
 
 @Injectable()
 export class AuthService {
-  async sendMailWhenPasswordIsForget(email: string, password: string) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const nodemailer = require('nodemailer');
+  async sendForgotPassword(email: string, password: string) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -21,7 +17,7 @@ export class AuthService {
       to: email,
       subject: 'Collect & Verything password recovery',
       text:
-        'Please find bellow your new password. Update it in your account settings ' +
+        'Please find bellow your new password. Update it in your account settings : ' +
         password,
     });
   }

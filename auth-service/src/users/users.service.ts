@@ -1,12 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { generateRandomPassword } from '../utils';
-import {MessageBrokerService} from "../message-broker/auth";
-import {QUEUE_NAME} from "./const";
+import { ClientProxy } from '@nestjs/microservices';
 
 export const roundsOfHashing = 10;
 
@@ -20,7 +19,10 @@ export const roundsOfHashing = 10;
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService,private amqp: MessageBrokerService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject('MAIL_SERVICE') private client: ClientProxy,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
@@ -167,9 +169,19 @@ export class UsersService {
   async updateForgotPassword(id: number) {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
-    await this.amqp.sendMessage(newPasswordEncrypt,QUEUE_NAME.FORGOT_PASSWORD)
-    return { criptedPassword: newPasswordEncrypt, password: newPassword };
-    // return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
+
+    const message = {
+      pattern: 'forgot-password',
+      data: newPasswordEncrypt,
+    };
+
+    console.log('📤     Sent on queue : --[  forgot-password  ]--');
+
+    this.client.emit('forgot-password', message);
+    return this.prisma.user.update({
+      where: { id },
+      data: { password: newPasswordEncrypt },
+    });
   }
 
   remove(id: number) {

@@ -14,6 +14,6 @@ export class AuthController {
     @EventPattern('forgot-password')
     handleForgotPassword(@Payload() message: PatternBroker) {
         console.log('📥 Received on queue : --[ ', message.pattern, ' ]--');
-        this.authService.sendMailWhenPasswordIsForget("collectverythings@gmail.com",message.data)
+        this.authService.sendForgotPassword("collectverythings@gmail.com",message.data)
     }
 }

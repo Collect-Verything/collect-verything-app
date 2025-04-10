@@ -4,9 +4,8 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import {UsersModule} from "../users/users.module";
-import {JwtStrategy} from "./guards/authentication/jwt.strategy";
-import {ClientsModule, Transport} from "@nestjs/microservices";
+import { UsersModule } from '../users/users.module';
+import { JwtStrategy } from './guards/authentication/jwt.strategy';
 
 export const jwtSecret = 'CollectVerythingSecret';
 
@@ -19,17 +18,6 @@ export const jwtSecret = 'CollectVerythingSecret';
       signOptions: { expiresIn: '7d' },
     }),
     UsersModule,
-    ClientsModule.register([
-      {
-        name: 'MAIL_SERVICE',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://broker-service'], // adresse du container RabbitMQ
-          queue: 'forgot-password',
-          queueOptions: { durable: false },
-        },
-      },
-    ]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
