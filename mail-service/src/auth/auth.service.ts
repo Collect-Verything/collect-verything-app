@@ -1,27 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+
+// TODO : Get calue from env
+// TODO : Fix require if possible
 
 @Injectable()
 export class AuthService {
-  
   async sendMailWhenPasswordIsForget(email: string, password: string) {
-    const nodemailer = require("nodemailer");
-
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: "collectverything@gmail.com",
-        pass: "motdepasse1@",
+        user: 'collectverythings@gmail.com',
+        pass: 'Admin---Password---Shop',
       },
     });
 
     await transporter.sendMail({
-      from: 'collectverything@gmail.com',
+      from: 'collectverythings@gmail.com',
       to: email,
-      subject: "Collect&Verything password recovery",
-      text: "Please find bellow your new password. Update it in your account settings "+password,
+      subject: 'Collect & Verything password recovery',
+      text:
+        'Please find bellow your new password. Update it in your account settings ' +
+        password,
     });
-
   }
 }
