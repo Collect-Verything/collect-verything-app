@@ -66,8 +66,8 @@ export class AuthService {
 
   async forgotPassword(mail: { email: string }) {
     const currentUser = await this.usersService.findOneByMail(mail.email);
-    await this.usersService.updateForgotPassword(currentUser.id);
-    return { Res: mail };
+    // TODO : Fix response
+    const res = await this.usersService.updateForgotPassword(currentUser.id);
+    return { res };
   }
-
 }

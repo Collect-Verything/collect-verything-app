@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
-import {generateRandomPassword} from "../utils";
+import { generateRandomPassword } from '../utils';
 
 export const roundsOfHashing = 10;
 
@@ -135,7 +135,6 @@ export class UsersService {
       where: { id },
     });
 
-
     if (!user) {
       throw new BadRequestException('User not found');
     }
@@ -165,14 +164,15 @@ export class UsersService {
 
   async updateForgotPassword(id: number) {
     const newPassword = generateRandomPassword(10);
-    const newPasswordEncrypt = await bcrypt.hash(
-        newPassword,
-        roundsOfHashing,
-    );
-    return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
+    const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
+    console.log(id);
+    console.log(newPasswordEncrypt);
+    console.log(newPassword);
+    return { criptedPassword: newPasswordEncrypt, password: newPassword };
+    // return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
   }
 
-    remove(id: number) {
+  remove(id: number) {
     return this.prisma.user.delete({ where: { id } });
   }
 }
