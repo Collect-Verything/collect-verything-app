@@ -10,8 +10,14 @@ export class MessageBrokerService {
       const channel = await connection.createChannel();
 
       await channel.assertQueue(queueName, { durable: false });
-      channel.sendToQueue(queueName, Buffer.from(password));
-      console.log('[x] Sent on [ ', queueName, ' ] queue');
+
+      const message = {
+        "pattern": "forgot-password",
+        "data": password
+      }
+
+      channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)));
+      console.log('📤     Sent on queue : --[ ', queueName, ' ]--');
 
       setTimeout(() => {
         connection.close();

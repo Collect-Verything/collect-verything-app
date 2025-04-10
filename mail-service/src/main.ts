@@ -1,8 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {Transport} from "@nestjs/microservices";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.connectMicroservice({
+    transport: Transport.RMQ,
+    options: {
+      urls: ['amqp://broker-service'],
+      queue: 'forgot-password',
+      queueOptions: { durable: false },
+    },
+  });
+
+  await app.startAllMicroservices();
   // app.enableCors, mail service ne communique que par amqp
   await app.listen(3000);
 }
