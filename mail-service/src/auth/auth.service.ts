@@ -12,7 +12,7 @@ export class AuthService {
       service: 'gmail',
       auth: {
         user: 'collectverythings@gmail.com',
-        pass: 'Admin---Password---Shop',
+        pass: 'zcbq wkpq zfew edtd',
       },
     });
 
