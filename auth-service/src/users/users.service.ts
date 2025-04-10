@@ -5,6 +5,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { generateRandomPassword } from '../utils';
+import {MessageBrokerService} from "../message-broker/auth";
+import {QUEUE_NAME} from "./const";
 
 export const roundsOfHashing = 10;
 
@@ -18,7 +20,7 @@ export const roundsOfHashing = 10;
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService,private amqp: MessageBrokerService) {}
 
   async create(createUserDto: CreateUserDto) {
     const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
@@ -165,9 +167,7 @@ export class UsersService {
   async updateForgotPassword(id: number) {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
-    console.log(id);
-    console.log(newPasswordEncrypt);
-    console.log(newPassword);
+    await this.amqp.sendMessage(newPasswordEncrypt,QUEUE_NAME.FORGOT_PASSWORD)
     return { criptedPassword: newPasswordEncrypt, password: newPassword };
     // return this.prisma.user.update({where : {id},data:{password: newPasswordEncrypt}} );
   }

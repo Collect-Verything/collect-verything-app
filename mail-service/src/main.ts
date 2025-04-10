@@ -3,11 +3,10 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   // app.enableCors, mail service ne communique que par amqp
-
   await app.listen(3000);
 }
+
 bootstrap();
 /*
 TODO :
@@ -22,10 +21,6 @@ TODO :
 
 
 
-[ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
-----[ ] Dockerfile
-----[ ] compose.yaml
-----[ ] start.sh
 
 [ ] Creer les tests unitaires
 [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier. (suivre le pattern)
