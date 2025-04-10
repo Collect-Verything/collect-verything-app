@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid2";
 import { Button, TextField, Typography } from "@mui/material";
 import { ButtonRounded } from "../component/buttons";
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
@@ -30,12 +30,6 @@ export const LoginPage = () => {
                 console.error("Error during login:", error);
             });
     };
-
-    useEffect(() => {
-        console.log("------------")
-        console.log(process.env.NODE_ENV)
-        console.log("------------")
-    }, []);
 
     return (
         <Grid>
@@ -102,7 +96,7 @@ export const LoginPage = () => {
                     <ButtonRounded label="Login" handleFx={handleLogin} />
                 </Grid>
                 <Grid textAlign="center" mt={3}>
-                    <Link style={{ textDecoration: "none", color: "black" }} to="forgot-password">
+                    <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.FORGOT_PASSWORD}`}>
                         Mot de passe oublié ?
                     </Link>
                     <Grid margin="auto" mt="1vh" bgcolor="#9834" borderRadius="15px" padding={3}>
