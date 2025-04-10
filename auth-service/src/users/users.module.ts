@@ -15,7 +15,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.RMQ,
         options: {
           urls: ['amqp://broker-service'],
-          queue: 'forgot-password',
+          queue: 'mail-queue',
           queueOptions: { durable: false },
         },
       },

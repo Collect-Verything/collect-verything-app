@@ -172,10 +172,10 @@ export class UsersService {
 
     const message = {
       pattern: 'forgot-password',
-      data: newPasswordEncrypt,
+      data: newPassword,
     };
 
-    console.log('📤     Sent on queue : --[  forgot-password  ]--');
+    console.log('📤     Sent on queue : --[ ',message.pattern,' ]--');
 
     this.client.emit('forgot-password', message);
     return this.prisma.user.update({
