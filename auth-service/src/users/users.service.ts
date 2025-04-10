@@ -166,16 +166,16 @@ export class UsersService {
     });
   }
 
-  async updateForgotPassword(id: number) {
+  async updateForgotPassword(id: number,email: string) {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
 
     const message = {
-      pattern: 'forgot-password',
-      data: newPassword,
+      email,
+      password: newPassword,
     };
 
-    console.log('📤     Sent on queue : --[ ',message.pattern,' ]--');
+    console.log('📤     Sent on queue : --[ forgot-password ]--');
 
     this.client.emit('forgot-password', message);
     return this.prisma.user.update({
