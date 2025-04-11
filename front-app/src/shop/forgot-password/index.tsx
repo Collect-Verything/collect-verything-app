@@ -66,7 +66,7 @@ export const ForgotPasswordPage = () => {
                         value={email.email}
                     />
                 </Grid>
-                <Grid>
+                <Grid mt={3}>
                     <ButtonRounded label="Envoyer" handleFx={handleForgotPassword} />
                 </Grid>
             </Grid>
