@@ -171,22 +171,12 @@ export class UsersService {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
 
-    const message = {
-      email,
-      password: newPassword,
-    };
+    const message = { email, password: newPassword};
 
-    console.log(
-      '📤     Sent on queue : --[ ' +
-        configEnv.FORGOT_PASSWORD_PATTERN +
-        ' ]--',
-    );
+    console.log('📤     Sent on queue : --[ ' + configEnv.FORGOT_PASSWORD_PATTERN + ' ]--');
 
     this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
-    return this.prisma.user.update({
-      where: { id },
-      data: { password: newPasswordEncrypt },
-    });
+    return this.prisma.user.update({where: { id }, data: { password: newPasswordEncrypt },});
   }
 
   remove(id: number) {
