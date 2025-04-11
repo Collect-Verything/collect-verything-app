@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import axios from 'axios';
-import {checkFreePath, returnFreePath} from '../common/tool';
+import { checkFreePath, returnFreePath } from '../common/tool';
 import { domainServiceByPath, portByPath } from '../common/const';
 import { configEnv } from '../env-config';
 
@@ -46,7 +46,7 @@ export class ProxyService {
 
           console.log('4 ____URL REQUEST VERS SERVICE ___');
           console.log(
-              `http://${domainServiceByPath.get(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
+            `http://${domainServiceByPath.get(req.url.split('/')[1])}:${portByPath.get(req.url.split('/')[1])}/${req.url.substring(1)}`,
           );
 
           console.log(req.url);
