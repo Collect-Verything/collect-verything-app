@@ -10,14 +10,6 @@ import { configEnv } from '../../env-config';
 
 export const roundsOfHashing = 10;
 
-/*
- * Un user super admin ne peut que etre super admin
- * Un user de type USER ne peut que etre super USER
- * Un user de type Metier  peut avoir plusieur metiers
- *
- * Au moment de la creation d'un user, l'assignation d'un role st obligatoire, faire le necessaire dans le front
- * */
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -171,12 +163,19 @@ export class UsersService {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
 
-    const message = { email, password: newPassword};
+    const message = { email, password: newPassword };
 
-    console.log('📤     Sent on queue : --[ ' + configEnv.FORGOT_PASSWORD_PATTERN + ' ]--');
+    console.log(
+      '📤     Sent on queue : --[ ' +
+        configEnv.FORGOT_PASSWORD_PATTERN +
+        ' ]--',
+    );
 
     this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
-    return this.prisma.user.update({where: { id }, data: { password: newPasswordEncrypt },});
+    return this.prisma.user.update({
+      where: { id },
+      data: { password: newPasswordEncrypt },
+    });
   }
 
   remove(id: number) {
