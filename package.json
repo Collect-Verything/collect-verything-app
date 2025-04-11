@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:all": "npm run format:auth && npm run format:mail && npm run format:facturation && npm run format:api && npm run format:front && npm run format:config && npm run format:product",
+    "format:auth": "cd auth-service && npm run format",
+    "format:mail": "cd mail-service && npm run format",
+    "format:facturation": "cd facturation-service && npm run format",
+    "format:api": "cd api-gateway && npm run format",
+    "format:front": "cd front-app && npm run format",
+    "format:config": "cd config-service && npm run format",
+    "format:product": "cd product-service && npm run format"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
