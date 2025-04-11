@@ -1,15 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import * as nodemailer from "nodemailer"
-import {ForgotPassBrokeObject} from "./auth.controller";
-import {configEnv} from "../../env-config";
+import * as nodemailer from 'nodemailer';
+import { ForgotPassBrokeObject } from './auth.controller';
+import { configEnv } from '../../env-config';
 
 // TODO : Creer une belle page Html pour l'envoi du mail
 // TODO : Creer un lien avec un token de redirection vers le site web pour que le user generer lui meme un nouveau mot de passe
 
-
-
 // TODO : Recevoir le mail du user dans l'object recu en evenement, creer un interface, mail et password
-
 
 @Injectable()
 export class AuthService {
@@ -26,7 +23,8 @@ export class AuthService {
       from: process.env.EMAIL_MESSAGE_BROKER,
       // to: messageReceived.email, // Penser a retablir
       to: 'collectverythings@gmail.com',
-      subject: '🔐 Collect & Verything - Réinitialisation de votre mot de passe',
+      subject:
+        '🔐 Collect & Verything - Réinitialisation de votre mot de passe',
       text: `Bonjour,
 
 Voici votre nouveau mot de passe temporaire : ${messageReceived.password}

@@ -184,6 +184,10 @@ CONFIG_URL=subscription
 EMAIL_MESSAGE_BROKER=famille@sisi.la
 PASSWORD_MESSAGE_BROKER="yout_secret_pass"
 EMAIL_QUEUE=mail-queue
+EMAIL_SERVICE=gmail
+FORGOT_PASSWORD_PATTERN=forgot-password
+
+MESSAGE_BROKER_URL=broker-service
 ```
 
 - Auth: 
@@ -210,14 +214,14 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?sche
 
 ```bash
 docker compose up
+#If you need logs
+docker compose up 2>&1 | tee logs-compose-up.txt
 ```
-
 
 It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->

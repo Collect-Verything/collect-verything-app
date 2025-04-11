@@ -19,7 +19,7 @@ Actuellement, lorsqu'on lance la commande docker compose up, tous les logs gén�
 Pour conserver tous les logs de lancement dans un fichier (et ainsi pouvoir les analyser plus facilement), il suffit d'exécuter la commande suivante :
 
 ```zsh
-docker compose up 2>&1 | tee logs-start-container.txt            
+docker compose up 2>&1 | tee logs-compose-up.txt
 ```
 
 ### 📂 Cette commande va :
@@ -32,7 +32,7 @@ docker compose up 2>&1 | tee logs-start-container.txt
 Tu peux également suivre les logs en direct dans un autre terminal avec :
 
 ```zsh
-tail -f logs.txt
+tail -f /logs/compose-up.txt
 ```
 
 # Issue

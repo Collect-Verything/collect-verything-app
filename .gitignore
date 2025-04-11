@@ -4,6 +4,7 @@
 # Ignorer les fichiers de logs
 **/logs
 *.log
+logs-compose-up.txt
 npm-debug.log*
 
 # Ignorer les fichiers de build
