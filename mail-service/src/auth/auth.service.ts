@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from "nodemailer"
 import {ForgotPassBrokeObject} from "./auth.controller";
+import {configEnv} from "../../env-config";
 
 // TODO : Creer une belle page Html pour l'envoi du mail
 // TODO : Creer un lien avec un token de redirection vers le site web pour que le user generer lui meme un nouveau mot de passe
@@ -14,15 +15,15 @@ import {ForgotPassBrokeObject} from "./auth.controller";
 export class AuthService {
   async sendForgotPassword(messageReceived: ForgotPassBrokeObject) {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: configEnv.EMAIL_SERVICE,
       auth: {
-        user: 'collectverythings@gmail.com',
-        pass: 'zcbq wkpq zfew edtd',
+        user: configEnv.EMAIL_MESSAGE_BROKER,
+        pass: configEnv.PASSWORD_MESSAGE_BROKER,
       },
     });
 
     await transporter.sendMail({
-      from: 'collectverythings@gmail.com',
+      from: process.env.EMAIL_MESSAGE_BROKER,
       // to: messageReceived.email, // Penser a retablir
       to: 'collectverythings@gmail.com',
       subject: 'Collect & Verything password recovery',

@@ -6,6 +6,7 @@ import * as bcrypt from 'bcryptjs';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { generateRandomPassword } from '../utils';
 import { ClientProxy } from '@nestjs/microservices';
+import { configEnv } from '../../env-config';
 
 export const roundsOfHashing = 10;
 
@@ -166,7 +167,7 @@ export class UsersService {
     });
   }
 
-  async updateForgotPassword(id: number,email: string) {
+  async updateForgotPassword(id: number, email: string) {
     const newPassword = generateRandomPassword(10);
     const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
 
@@ -175,9 +176,13 @@ export class UsersService {
       password: newPassword,
     };
 
-    console.log('📤     Sent on queue : --[ forgot-password ]--');
+    console.log(
+      '📤     Sent on queue : --[ ' +
+        configEnv.FORGOT_PASSWORD_PATTERN +
+        ' ]--',
+    );
 
-    this.client.emit('forgot-password', message);
+    this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
     return this.prisma.user.update({
       where: { id },
       data: { password: newPasswordEncrypt },
