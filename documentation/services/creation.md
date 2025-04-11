@@ -61,6 +61,9 @@ Attention pour pouvoir executer ces commandes il est necessaire que dans le pack
     "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:new-service"
 ```
 
+## Docker 
+
+Mettre a jour le compose et creer le Dockerfile
 
 ## Creation de l'env du nouveau service :
 

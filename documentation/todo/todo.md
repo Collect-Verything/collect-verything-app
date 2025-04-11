@@ -31,10 +31,6 @@ Pull app on server and try to lunch it
 ### Kubernetes
 Scaling sur l'api gateway
 
-### Fix log dockerization
-
-check log file in root *todo-logs-to-fixed.txt*
-
 
 ### Lint 
 

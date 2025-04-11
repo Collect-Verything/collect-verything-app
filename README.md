@@ -184,6 +184,10 @@ CONFIG_URL=subscription
 EMAIL_MESSAGE_BROKER=famille@sisi.la
 PASSWORD_MESSAGE_BROKER="yout_secret_pass"
 EMAIL_QUEUE=mail-queue
+EMAIL_SERVICE=gmail
+FORGOT_PASSWORD_PATTERN=forgot-password
+
+MESSAGE_BROKER_URL=broker-service
 ```
 
 - Auth: 
@@ -210,6 +214,7 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?sche
 
 ```bash
 docker compose up
+docker compose up 2>&1 | tee logs-start-container.txt // get logs
 ```
 
 
