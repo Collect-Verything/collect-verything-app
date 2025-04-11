@@ -214,15 +214,14 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?sche
 
 ```bash
 docker compose up
-docker compose up 2>&1 | tee logs-start-container.txt // get logs
+#If you need logs
+docker compose up 2>&1 | tee logs-compose-up.txt
 ```
-
 
 It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTRIBUTING -->
