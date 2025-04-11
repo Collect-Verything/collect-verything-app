@@ -10,7 +10,7 @@ Si l'on souhaite creer un service il est necessaire de :
  npx @nestjs/cli new new-service
 ```
 
-## Creation des scripts pour la pour setup l'app en mode dev rapidement
+## Creation des scripts pour la pour setup l'app en mode dev rapidement [Deprecated]
 
 *Install* :
 
