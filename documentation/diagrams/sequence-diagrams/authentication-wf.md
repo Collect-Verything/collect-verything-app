@@ -8,10 +8,10 @@
 
 ```mermaid
     sequenceDiagram
-    box  Client
+    box Client
         participant Front App
     end
-    box  Door
+    box Door
         participant Api Gateway
     end
     box Private network
@@ -21,12 +21,12 @@
     box SMTP WWW
         participant USER MAIL
     end
-    Front App->>Api Gateway: Request: Register
-    Api Gateway->>Auth Service : Request: Create User
-    Auth Service-->>Mail Service : AMQP: Create User
-    Mail Service-->>USER MAIL : SMTP: Request
-    Auth Service->>Api Gateway : Response: Create User
-    Api Gateway->>Front App : Response: Register
+    Front App ->> Api Gateway: Request: Register
+    Api Gateway ->> Auth Service: Request: Create User
+    Auth Service -->> Mail Service: AMQP: Create User
+    Mail Service -->> USER MAIL: SMTP: Request
+    Auth Service ->> Api Gateway: Response: Create User
+    Api Gateway ->> Front App: Response: Register
 ```
 
 ## Login

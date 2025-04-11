@@ -153,24 +153,38 @@ CONFIG_URL=subscription
 Since React doesn't support .env files outside of its own folder, it's necessary to place an .env file directly in the root directory of the React application. Additionally, each environment variable must be prefixed with REACT_APP_ to be accessible in the code.
 
 ```dotenv
-REACT_APP_DOMAIN=localhost
-REACT_APP_FRONT_PORT=80
-REACT_APP_API_GATEWAY_PORT=2999
-REACT_APP_DOMAIN_AUTH=auth-service
-REACT_APP_AUTH_PORT=3001
-REACT_APP_AUTH_URL_AUTH=auth
-REACT_APP_AUTH_URL_ROLES=roles
-REACT_APP_AUTH_URL_USERS=users
-REACT_APP_DOMAIN_PRODUCT=product-service
-REACT_APP_PRODUCT_PORT=3002
-REACT_APP_PRODUCT_URL=product
-REACT_APP_FACTURATION_PORT=3003
-REACT_APP_FACTURATION_URL=stripe
-REACT_APP_CONFIG_PORT=3004
-REACT_APP_CONFIG_URL=subscription
-```
+RDOMAIN=localhost
 
-The env points of each service include the url of the database of each service, with your personalized information
+FRONT_PORT=3000
+
+API_GATEWAY_PORT=2999
+
+DOMAIN_AUTH=auth-service
+
+AUTH_PORT=3001
+AUTH_URL_AUTH=auth
+AUTH_URL_ROLES=roles
+AUTH_URL_USERS=users
+
+DOMAIN_PRODUCT=product-service
+
+PRODUCT_PORT=3002
+PRODUCT_URL=product
+
+DOMAIN_FACTURATION=facturation-service
+
+FACTURATION_PORT=3003
+FACTURATION_URL=stripe
+
+DOMAIN_CONFIG=config-service
+
+CONFIG_PORT=3004
+CONFIG_URL=subscription
+
+EMAIL_MESSAGE_BROKER=famille@sisi.la
+PASSWORD_MESSAGE_BROKER="yout_secret_pass"
+EMAIL_QUEUE=mail-queue
+```
 
 - Auth: 
 ```env

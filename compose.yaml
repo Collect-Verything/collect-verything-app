@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   # 🌍 FRONT-END (Public) # Check previous config dockerfile
-#  front-app:
-#    build: ./front-app
-#    container_name: front-app
-#    ports:
-#      - "80:80"
-#    networks:
-#      - my_private_network
-#    env_file:
-#      - .env
+  #  front-app:
+  #    build: ./front-app
+  #    container_name: front-app
+  #    ports:
+  #      - "80:80"
+  #    networks:
+  #      - my_private_network
+  #    env_file:
+  #      - .env
   front-app:
     build: ./front-app
     container_name: front-app
@@ -69,7 +69,7 @@ services:
     volumes:
       - mysql-auth-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -101,7 +101,7 @@ services:
     volumes:
       - mysql-prod-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -133,7 +133,7 @@ services:
     volumes:
       - mysql-config-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -165,10 +165,37 @@ services:
     volumes:
       - mysql-facturation-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
+
+  # 📬 Mail SERVICE (Privé)
+  mail-service:
+    build: ./mail-service
+    container_name: mail-service
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./mail-service:/mail-service
+      - /mail-service/node_modules
+  #    depends_on: dependre de rabbitmq
+  #      mysql-facturation:
+  #        condition: service_healthy
+
+  # 🐇 Message BROKER (Public)
+  broker-service:
+    image: rabbitmq:4.0-management
+    build: ./broker-service
+    container_name: broker-service
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5672:5672
+      - 15672:15672
+
 
 volumes:
   mysql-auth-data:

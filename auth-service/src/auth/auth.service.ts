@@ -6,14 +6,16 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { ROLENAME_ID } from './enum';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
+    private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
@@ -60,5 +62,10 @@ export class AuthService {
       },
       include: { role: true },
     });
+  }
+
+  async forgotPassword(mail: { email: string }) {
+    const currentUser = await this.usersService.findOneByMail(mail.email);
+    return await this.usersService.updateForgotPassword(currentUser.id,mail.email);
   }
 }

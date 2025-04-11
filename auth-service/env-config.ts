@@ -14,4 +14,8 @@ export const configEnv = {
   AUTH_URL_AUTH: process.env.AUTH_URL_AUTH,
   AUTH_URL_ROLES: process.env.AUTH_URL_ROLES,
   AUTH_URL_USERS: process.env.AUTH_URL_USERS,
+
+  FORGOT_PASSWORD_PATTERN: process.env.FORGOT_PASSWORD_PATTERN,
+  MESSAGE_BROKER_URL: process.env.MESSAGE_BROKER_URL,
+  EMAIL_QUEUE: process.env.EMAIL_QUEUE,
 };
