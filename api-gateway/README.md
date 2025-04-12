@@ -1,85 +1,102 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" />
+  </a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h2 align="center">API Gateway - Collect & Verything</h2>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  Gateway centralisée pour orchestrer la communication entre les différents microservices de l'application <strong>Collect & Verything</strong>.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Description
 
-## Project setup
+Ce service est une **API Gateway** développée avec **NestJS**. Elle agit comme point d’entrée unique pour toutes les requêtes clients, en s'occupant du routage vers les microservices appropriés, de la gestion de la sécurité (token, authentification) et de la logique métier globale.
 
-```bash
-$ npm install
-```
+## 🧠 Fonctionnalités principales
 
-## Compile and run the project
+- 🔁 Routage intelligent vers les services : auth, produit, facturation, etc.
+- 🔒 Vérification centralisée du JWT via le microservice d’authentification.
+- ✅ Prise en charge des routes publiques sans authentification.
+- ⚙️ Configuration via un fichier `config-env.ts` pour faciliter l'adaptation indépendante.
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+## ⚙️ Installation
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🧪 Lancement en local
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+# Démarrage standard
+npm run start
 
-## Support
+# Mode développement
+npm run start:dev
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🐳 Utilisation via Docker
 
-## Stay in touch
+```bash
+# Build de l'image
+docker build -t api-gateway .
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Lancement du container
+docker run -p 2999:2999 api-gateway
+```
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 🔧 Configuration
+
+Ce projet n’utilise **pas** de fichier `.env`, mais un fichier TypeScript de configuration :
+
+```
+src/env-config.ts
+```
+
+Vous pouvez y modifier les éléments suivants pour faire fonctionner ce service indépendamment :
+
+- `DOMAIN_AUTH`
+- `AUTH_PORT`
+- `PORT_BY_PATH`
+- `DOMAIN_BY_PATH`
+- etc.
+
+---
+
+## ✅ Tests
+
+```bash
+# Tests unitaires
+npm run test
+
+# Tests end-to-end
+npm run test:e2e
+
+# Couverture de test
+npm run test:cov
+```
+
+---
+
+## 📎 Liens utiles
+
+- [NestJS - Documentation Officielle](https://docs.nestjs.com)
+- [Docker - Créer une image personnalisée](https://docs.docker.com/engine/reference/commandline/build/)
+- [Axios - Client HTTP utilisé dans le routage](https://axios-http.com)
+
+---
+
+## 📝 License
+
+Ce projet est sous licence MIT.
+
