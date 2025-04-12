@@ -1,73 +1,134 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" />
+  </a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  <strong>Mail Service</strong> – Microservice de gestion des e-mails transactionnels de l’application <code>Collect & Verything</code>.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📬 Description
 
-## Installation
+Ce microservice reçoit des messages via RabbitMQ et envoie des e-mails à l’utilisateur.  
+Il est principalement utilisé pour la **réinitialisation de mot de passe**.
+
+### Fonctionnalités :
+- Réception d’un message `forgot-password` via RabbitMQ.
+- Envoi d’un e-mail contenant un **mot de passe temporaire** au format HTML.
+- Utilisation de `nodemailer` avec une boîte Gmail ou autre service compatible SMTP.
+
+---
+
+## ⚙️ Prérequis
+
+- RabbitMQ (broker configuré via `.env` ou `configEnv.ts`)
+- Adresse e-mail et mot de passe application (Gmail ou autre)
+- Environnement NestJS
+
+---
+
+## 🛠 Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Running the app
+---
+
+## 🚀 Démarrer le service
+
+### En développement :
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Test
+### En production :
+
+```bash
+npm run start:prod
+```
+
+### Avec Docker :
+
+```bash
+docker build -t mail-service .
+docker run -p 3003:3003 mail-service
+```
+
+> 💡 Le service écoute uniquement les messages RabbitMQ, aucun port HTTP n’est exposé par défaut.
+
+---
+
+## 📩 Envoi d’un mot de passe oublié
+
+Le service écoute l’événement suivant :
+
+```ts
+@EventPattern(configEnv.FORGOT_PASSWORD_PATTERN)
+```
+
+### Payload attendu :
+```ts
+{
+  email: string;
+  password: string;
+}
+```
+
+Un e-mail HTML personnalisé est envoyé à l’adresse spécifiée.
+
+---
+
+## 🛠 Configuration
+
+La configuration se fait via `env-config.ts` ou `.env` :
+
+```ts
+export const configEnv = {
+  EMAIL_SERVICE: 'gmail',
+  EMAIL_MESSAGE_BROKER: 'xxx@gmail.com',
+  PASSWORD_MESSAGE_BROKER: 'your-app-password',
+  FORGOT_PASSWORD_PATTERN: 'forgot-password',
+  MESSAGE_BROKER_URL: 'broker-service',
+  EMAIL_QUEUE: 'mail-queue',
+};
+```
+
+> 💡 Pour Gmail, activez l’authentification à deux facteurs et générez un mot de passe d’application.
+
+---
+
+## 🧪 Tests
 
 ```bash
 # unit tests
-$ npm run test
+npm run test
 
 # e2e tests
-$ npm run test:e2e
+npm run test:e2e
 
-# test coverage
-$ npm run test:cov
+# coverage
+npm run test:cov
 ```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## ✅ To Do
 
-## Stay in touch
+- [ ] Ajouter un lien avec token pour réinitialisation directe.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🧠 Astuce
 
-Nest is [MIT licensed](LICENSE).
+Pour tester en local sans RabbitMQ, vous pouvez directement appeler `sendForgotPassword()` depuis un contrôleur HTTP temporaire.
+
+---
+
+## 📝 License
+
+MIT
