@@ -1,85 +1,122 @@
+Voici une version **améliorée et personnalisée** du `README.md` pour ton **Product Service**, intégrée dans un environnement NestJS et Prisma :
+
+---
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://nestjs.com" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="NestJS Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p align="center"><strong>Product Service</strong> — Microservice de gestion des produits pour l'application <code>Collect & Verything</code></p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🧾 Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Ce microservice est responsable de la **gestion des produits** dans l'application :  
+il permet la création, modification, publication et suppression de produits.
 
-## Project setup
+Il communique avec une base de données MySQL via Prisma et peut être appelé par d'autres services (ex: facturation, front, etc.).
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+## 📦 Fonctionnalités principales
+
+- Création d’un produit (`create`)
+- Récupération de tous les produits (`findAll`)
+- Récupération des produits visibles (`findAllVisible`)
+- Récupération des produits non visibles (`findNonVisible`)
+- Mise à jour (`update`)
+- Décrémentation du stock sur plusieurs produits (`updateStock`)
+- Suppression (`remove`)
+
+---
+
+## ⚙️ Installation
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+---
+
+## 🚀 Lancement
 
 ```bash
-# unit tests
-$ npm run test
+# mode développement
+npm run start:dev
 
-# e2e tests
-$ npm run test:e2e
+# mode production
+npm run start:prod
 
-# test coverage
-$ npm run test:cov
+# format Prisma
+npx prisma generate
 ```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🐳 Avec Docker
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+docker build -t product-service .
+docker run -p 3005:3005 product-service
+```
 
-## Support
+> Ce service n'expose pas de routes HTTP publiques directement, il est consommé via l'API Gateway ou via d'autres services.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## 🛠️ Structure du projet
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- `ProductsService` : logique métier
+- `PrismaService` : accès à la base de données
+- `CreateProductDto`, `UpdateProductDto` : validation des données
+- `StockAndID[]` : type utilisé pour décrémenter le stock lors d'un achat
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## ✅ Exemple de payload pour updateStock
+
+```json
+[
+  { "id": 1, "quantity": 2 },
+  { "id": 5, "quantity": 1 }
+]
+```
+
+---
+
+## 🧪 Tests
+
+```bash
+npm run test
+npm run test:e2e
+npm run test:cov
+```
+
+---
+
+## 🔐 Configuration
+
+Le service utilise un fichier `.env` ou `env-config.ts` à la racine du projet pour définir les paramètres suivants :
+
+```env
+DATABASE_URL=mysql://user:password@mysql-product:3306/collect-verything
+```
+
+---
+
+## 📚 Ressources utiles
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Prisma Documentation](https://www.prisma.io/docs/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+## 📝 Licence
+
+Ce projet est sous licence MIT.
+
+---
+
+Souhaite-tu que je t’ajoute aussi une section Swagger ou les routes API exposées (si tu en as), ou le lien vers l’API Gateway ?
