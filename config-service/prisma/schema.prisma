@@ -7,14 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Def :
+/// Modèle représentant une souscription Stripe liée à un utilisateur.
+///
+/// - `active_stripe` : indique si la souscription est active selon Stripe.
+/// - `published` : l'utilisateur souhaite rendre son site public.
+/// - `configured` : indique si le site est configuré et prêt à être publié.
+///
+/// 🔐 Un site ne peut être publié (`published = true`) que s’il est aussi configuré (`configured = true`).
 
-// @active_stripe :  Permet de savoir d'apres stripe si la subscription est toujours active, payé
-// @published :  Permet de savoir si l'utilisateur souhaite cacher son site ou le rendre visible, il est initialement non publish car il doit forcement etre configurer pour etre publiable
-// @configured :  La configuration est la chose necessaire pour la publication d'un site web,
-
-// TODO : Mettre une table de configuration en lien avec une sub, une config appartient uniquement a une subscription
-//  Si un solution est configured alors configured pass a true et published est disponible tant que active_stripe est true ...
 
 model Subscription {
   id                   Int            @id @default(autoincrement())
