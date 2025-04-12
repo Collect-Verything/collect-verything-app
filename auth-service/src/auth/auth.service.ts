@@ -47,7 +47,6 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { roleId, ...userData } = createUserDto;
 
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);

@@ -6,12 +6,10 @@ export class RolesService {
   constructor(private prisma: PrismaService) {}
 
   findAll() {
-    // return this.prisma.role.findMany({include: {users: true}});
     return this.prisma.role.findMany();
   }
 
   findOne(id: number) {
-    // return this.prisma.role.findUnique({ where: { id }, include: {users: true} });
     return this.prisma.role.findUnique({ where: { id } });
   }
 }

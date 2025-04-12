@@ -1,13 +1,15 @@
-export const generateRandomPassword = (passwordLength) => {
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@+=-_()&';
-  const charactersLength = characters.length;
-  let result = '';
+/**
+ * Génère un mot de passe aléatoire sécurisé de la longueur spécifiée.
+ *
+ * @param passwordLength - La longueur souhaitée du mot de passe
+ * @returns Une chaîne de caractères représentant le mot de passe généré
+ */
+export const generateRandomPassword = (passwordLength: number): string => {
+  const CHARACTERS =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@+=-_()&';
 
-  for (let i = 0; i < passwordLength; i++) {
-    const randomIndex = Math.floor(Math.random() * charactersLength);
-    result += characters[randomIndex];
-  }
-
-  return result;
+  return Array.from({ length: passwordLength }, () => {
+    const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
+    return CHARACTERS[randomIndex];
+  }).join('');
 };

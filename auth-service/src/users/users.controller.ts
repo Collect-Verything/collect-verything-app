@@ -23,11 +23,6 @@ import { SuperAdminGuards } from '../auth/guards/super-admin';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 import { configEnv } from '../../env-config';
 
-/*
- * TODO: Creer un jwtAdminGuard qui permet à super admin seulement de modifier ou supprimer.
- * TODO: Penser a la supression d'un client, a son historique de facture, faut il vraiment le suprimer ou alors le rendre non visible, ou creer un role OFFLINE par exemple
- * */
-
 @Controller(configEnv.AUTH_URL_USERS)
 @ApiTags(configEnv.AUTH_URL_USERS)
 export class UsersController {
@@ -49,12 +44,8 @@ export class UsersController {
     return new UserEntity(await this.usersService.createJobber(createUserDto));
   }
 
-  /*
-   * Simple user only
-   * */
+  // Simple user only
   @Get()
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(JwtSuperGuard)
   @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity, isArray: true })
@@ -63,9 +54,6 @@ export class UsersController {
     return users.map((user) => new UserEntity(user));
   }
 
-  /*
-   * Simple jobber only
-   * */
   @Get('jobs')
   @UseGuards(SuperAdminGuards)
   @ApiOkResponse({ type: UserEntity, isArray: true })
@@ -75,8 +63,6 @@ export class UsersController {
   }
 
   @Get(':id')
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
   async findOne(@Param('id', ParseIntPipe) id: number) {
@@ -84,8 +70,6 @@ export class UsersController {
   }
 
   @Patch(':id')
-  // @UseGuards(JwtAuthGuard)
-  // @UseGuards(JwtSuperGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   async update(
@@ -94,8 +78,6 @@ export class UsersController {
   ) {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
-
-  // TODO : Creer la classe pour ApiCreatedResponse et comprendre le fonctionnement
 
   @Patch('stripe-user/:userId/:stripeId')
   @ApiCreatedResponse({ type: UserEntity })
@@ -119,7 +101,6 @@ export class UsersController {
     );
   }
 
-  // TODO : Rendre le guard polyvalent ?
   @Delete(':id')
   @UseGuards(SuperAdminGuards)
   @ApiBearerAuth()
