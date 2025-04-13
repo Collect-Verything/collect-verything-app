@@ -8,6 +8,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { DisplayMenuDependingJob } from "./items";
 import { useSelector } from "react-redux";
 import { checkToken, useAppDispatch } from "../../features/authentication-slice";
+import {RootState} from "../../features/store";
+import CircularProgress from "@mui/material/CircularProgress";
+import {ROLENAME} from "../../common/const/user";
 
 const GAP_MENU_ITEMS_USER = 5;
 
@@ -15,8 +18,7 @@ export const SideBar = () => {
     const [sideBar, setSideBar] = useState(true);
     const dispatch = useAppDispatch();
 
-    // eslint-disable-next-line
-    const { role } = useSelector((store: any) => store.authenticate);
+    const { role } = useSelector((store: RootState) => store.authenticate);
 
     const handleSideBar = () => {
         setSideBar(!sideBar);
@@ -25,6 +27,8 @@ export const SideBar = () => {
     useEffect(() => {
         dispatch(checkToken());
     }, []);
+
+    if(!role)return <CircularProgress />
 
     return (
         <Grid2
@@ -62,7 +66,7 @@ export const SideBar = () => {
                     ml={6}
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    <DisplayMenuDependingJob role={role} option="with-label" />
+                    <DisplayMenuDependingJob role={role as unknown as ROLENAME} option="with-label" />
                 </Grid2>
             ) : (
                 <Grid2
@@ -72,7 +76,7 @@ export const SideBar = () => {
                     alignItems="center"
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    <DisplayMenuDependingJob role={role} option="only-icon" />
+                    <DisplayMenuDependingJob role={role as unknown as ROLENAME} option="only-icon" />
                 </Grid2>
             )}
 

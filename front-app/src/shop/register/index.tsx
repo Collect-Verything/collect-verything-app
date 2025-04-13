@@ -39,7 +39,6 @@ export const RegisterPage = () => {
         }
 
         try {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { confirmPassword, ...cleanedRegisterForm } = registerForm;
             await registerRequest(cleanedRegisterForm);
             setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS);

@@ -1,6 +1,6 @@
 import {Request} from "express";
 import axios, {AxiosResponse} from "axios";
-import {domainServiceByPath, portByPath} from "../../common/const";
+import {domainServiceByPath, portByPath} from "./const";
 
 export const toolRequest = (
     request: Request,

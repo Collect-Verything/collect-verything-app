@@ -44,7 +44,6 @@ export const VitrinePage = () => {
             {products && (
                 <Grid container spacing={6} mt="5vh" pt={5}>
                     {products.map((product, index) => (
-                        // {[PRODUCT_FORMULA.STANDARD, PRODUCT_FORMULA.MEDIUM, PRODUCT_FORMULA.PREMIUM].map((formula, index) => (
                         <VitrineUnitProduct key={index} product={product} />
                     ))}
                 </Grid>

@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import axios from 'axios';
-import { checkFreePath, returnFreePath } from '../common/tool';
+import { checkFreePath, returnFreePath } from './common/tool';
 import { configEnv } from '../env-config';
-import { toolRequest } from './tools/requests';
+import { toolRequest } from './common/requests';
 
 // TODO : STRIPE EVENT
 // TODO : ⚠️ Upgrade logique for free path, for the moment only auth login and register is accepted

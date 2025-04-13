@@ -1,4 +1,4 @@
-import { configEnv } from '../env-config';
+import { configEnv } from '../../env-config';
 
 export const freePath = ['login', 'register', 'forgot-password'];
 
