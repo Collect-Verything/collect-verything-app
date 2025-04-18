@@ -13,6 +13,7 @@ import { RootState } from "../../features/store";
 import { User } from "../../common/types/user";
 
 // TODO : Creer un recovery facturation comme pour les sub
+// TODO : Fixer l'erreur quand liste facture est vide
 
 /*
  * Les composant facturation sont pour le moment commun à un user comme a un super admin ou metier concerné.

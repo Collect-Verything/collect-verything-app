@@ -37,6 +37,10 @@ Scaling sur l'api gateway
 Comprendre la problematique du lien suivant [issue_lint][issue_lint] 
 
 
+## Facturation
+Fixer l'erreur quand liste facture est vide dans facturation/index.tsx
+
+
 
 [summary]: ../README.md
 [issue_lint]: ../development/linting.md
