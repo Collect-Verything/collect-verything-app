@@ -48,7 +48,7 @@ services:
     container_name: auth-service
     restart: always
     env_file:
-      - .env
+      - ./auth-service/.env
     volumes:
       - ./auth-service:/auth-service
       - /auth-service/node_modules

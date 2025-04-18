@@ -21,10 +21,36 @@ Ce service gère l’**authentification**, la **création d’utilisateurs** et 
 
 ---
 
-## ⚙️ Configuration
 
-> Le service utilise un fichier `config-env.ts` comme fichier de configuration (remplaçant `.env`).  
-> Pour une utilisation indépendante, vous pouvez simplement modifier les valeurs dans ce fichier (ports, host DB, etc).
+## 🔧 Configuration
+
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
+
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```dotenv
+DATABASE_URL="mysql://root:password@mysql-auth:3306/auth_db?schema=public"
+
+DOMAIN=localhost
+
+API_GATEWAY_PORT=2999
+
+FRONT_PORT=3000
+
+AUTH_PORT=3001
+AUTH_URL_AUTH=auth
+AUTH_URL_ROLES=roles
+AUTH_URL_USERS=users
+
+FORGOT_PASSWORD_PATTERN=forgot-password
+MESSAGE_BROKER_URL=broker-service
+EMAIL_QUEUE=mail-queue
+```
 
 ---
 
@@ -58,7 +84,7 @@ docker run -p 3001:3001 auth-service
 
 ## 🛠️ Setup de la base de données
 
-### ➤ 1. Modifier la variable dans `config-env.ts`
+### ➤ 1. Modifier la variable dans `.env`
 
 ```ts
 DATABASE_URL = "mysql://user:password@localhost:3306/auth-db?schema=public"
