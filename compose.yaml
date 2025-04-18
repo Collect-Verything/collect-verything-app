@@ -144,7 +144,7 @@ services:
     container_name: facturation-service
     restart: always
     env_file:
-      - .env
+      - ./facturation-service/.env
     volumes:
       - ./facturation-service:/facturation-service
       - /facturation-service/node_modules

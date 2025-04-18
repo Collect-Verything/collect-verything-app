@@ -111,15 +111,28 @@ stripeCheckoutService.createCheckoutSession(customerId, basket);
 
 ## 🔐 Configuration
 
-Modifier les clés Stripe ou autres paramètres dans `env-config.ts`.
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
 
-```ts
-export const configEnv = {
-  STRIPE_API_KEY: 'sk_test_...',
-  DOMAIN_FACTURATION: 'localhost',
-  FACTURATION_PORT: 3005,
-  // ...
-};
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```env
+DATABASE_URL="mysql://root:password@mysql-facturation:3306/facturation-db?schema=public"
+
+DOMAIN=localhost
+
+FRONT_PORT=3000
+
+API_GATEWAY_PORT=2999
+
+FACTURATION_PORT=3003
+FACTURATION_URL=stripe
+
+STRIPE_API_KEY=sk_test_VfGNimRoo2iCC7QIRyKnY3sc
 ```
 
 ---
