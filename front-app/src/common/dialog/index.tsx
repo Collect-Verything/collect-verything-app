@@ -53,7 +53,7 @@ export const ScrollDialogChildText = ({ children, title }: ScrollDialogChildText
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">Conditions Générales d'Utilisation</DialogTitle>
+                <DialogTitle id="scroll-dialog-title">Conditions Générales d`&apos;Utilisation</DialogTitle>
                 <DialogContent dividers={scroll === "paper"}>
                     <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
                         {children()}

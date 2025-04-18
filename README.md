@@ -15,7 +15,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>📚 Table of Contents</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -51,62 +51,92 @@ As part of this project, my goal is to implement the essential functionalities o
 
 <!-- FEATURES -->
 
-## Features 
+## ✨ Features
 
-### Basic features:
+### 🛍️ Core Features
 
-- **Product catalog**: Clear display of products with detailed information.
+- **🗂️ Product Catalog**  
+  Navigation fluide et présentation claire des produits avec leurs détails complets, incluant prix, stock, statut de publication, et type (produit ou service).
 
-- **Shopping cart**: Easy addition, modification and deletion of products in the cart.
+- **🛒 Shopping Cart**  
+  Ajout, modification et suppression d’articles en temps réel dans un panier accessible à tout moment.
 
-- **Ordering process**: Simple and intuitive ordering steps.
+- **📦 Order Workflow**  
+  Processus de commande simple, fluide et intuitif, avec gestion dynamique du stock à chaque validation de commande.
 
-- **Secure payment options**: Integration of secure online payment methods: Visa & paypal with stripe.
+- **💳 Secure Payment Integration**  
+  Paiement en ligne sécurisé via Stripe, avec support des cartes bancaires (Visa, MasterCard) et mode abonnement pour les services.
 
-- **Order management system**: Order tracking, invoice, transaction history & PDF Export.
+- **📁 Order & Invoice Management**  
+  Historique des commandes avec génération de factures, téléchargement PDF et accès aux reçus via Stripe.
 
-- **User management**: Registration, connection, and management of user accounts.
+- **👤 User Management**  
+  Création de compte, authentification sécurisée JWT, rôles utilisateurs (admin, support, facture, etc.), et gestion des profils.
 
-- **Admin Filtering and Search**: Advanced search features and filters to help users find user quickly.
+- **🔍 Admin Dashboard**  
+  Tableau de bord avec filtres et recherches avancées pour trier les utilisateurs, produits ou commandes selon différents critères.
 
-- **Rating and Review System**: Allows customers to leave comments and ratings on products.
+- **📬 Email Notifications**  
+  Envoi automatique d'e-mails pour l'inscription, la réinitialisation du mot de passe, la confirmation de commande, et la facturation (via microservice RabbitMQ + Nodemailer).
 
-- **Notifications**: Email alerts or push notifications for order updates, promotions, etc.
+- **🌓 Light / Dark Mode**  
+  Interface utilisateur personnalisable selon les préférences visuelles de l'utilisateur.
 
-- **Multi-language Support**: English, Spanish, French, German, Mandarin, Japanese, Arabic, Portuguese, Russian, Hindi, Japanese.
-
-- **Light/Dark mode**: Customizing the UI.
-
-- **Mail Alert** : On registration, forgot password, news letter & invoice confirmation.
+- **📢 Mail Alerts & Newsletters**  
+  Système d’alerte par e-mail lors d’évènements importants et campagnes marketing (newsletter).
 
 
-### Little extras:
+### 🎁 Bonus Features:
 
-- **Loyalty Program**: Rewards for loyal customers.
+- **🔔 Smart Notifications**  
+  Système d’alertes par email et/ou notifications push pour informer les utilisateurs des mises à jour de commande, des offres promotionnelles ou des événements importants.
 
-- **Register/Login** : With Google.
+- **⭐ Reviews & Ratings (à venir)**  
+  Possibilité future de laisser des avis et des notes sur les produits pour améliorer l'expérience client.
 
-- **Personalized Recommendations**: Product suggestions based on purchase history.
+- **📝 Reviews & Ratings (à venir)**  
+  Possibilité pour les utilisateurs de laisser des avis textuels et des notes sur les produits achetés afin d’enrichir l’expérience communautaire.
 
-- **Social Media Integration**: Easy sharing of products on social media.
+- **🌍 Multilingual Support** *(prévu)*  
+  Interface traduite dans les langues les plus courantes : anglais, français, espagnol, allemand, mandarin, japonais, arabe, portugais, russe, hindi.
 
-- **Live**: Real-time chat support to answer customer questions, alert.
+- **🌗 Light/Dark Mode**  
+  Personnalisation complète de l’interface utilisateur selon les préférences visuelles : mode clair ou sombre.
 
-- **Flexible Shipping Options**: Choice of different shipping options and real-time tracking.
+- **🎯 Loyalty Program** *(prévu)*  
+  Programme de fidélité offrant des récompenses et réductions aux clients réguliers.
 
-- **FAQ Page**: Answers to frequently asked questions.
+- **🔐 Social Login** *(Google)*  
+  Connexion simplifiée via Google pour accélérer l'inscription et améliorer l’accessibilité.
 
-- **Affiliate Programs**: Allows users to earn commissions by recommending products.
+- **🧠 Personalized Recommendations** *(à venir)*  
+  Recommandations de produits dynamiques basées sur l’historique de navigation et d’achat.
 
-- **Flash sales and promotions**: Special offers and temporary discounts.
+- **📱 Social Media Integration**  
+  Partage facile de produits sur les réseaux sociaux, avec prévisualisation adaptée.
 
-- **Mobile application**: Mobile version of the site or dedicated application.
+- **💬 Live Chat Support** *(prévu)*  
+  Système de support client en temps réel intégré pour répondre rapidement aux questions des utilisateurs.
 
+- **🚚 Flexible Shipping Options**  
+  Choix multiples de livraison avec estimation du délai et suivi en temps réel (selon intégration future).
+
+- **❓ FAQ Page**  
+  Accès à une page de questions fréquentes pour accompagner les utilisateurs dans leur parcours d’achat.
+
+- **🤝 Affiliate Program** *(prévu)*  
+  Mise en place d’un système d’affiliation permettant aux utilisateurs de générer des revenus via des recommandations.
+
+- **⚡ Flash Sales & Promotions**  
+  Gestion des ventes flash, promotions ponctuelles et codes de réduction.
+
+- **📱 Mobile Optimization / App (en réflexion)**  
+  Expérience utilisateur optimisée pour mobile, avec possibilité future d’application mobile dédiée.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
-### Built With
+## 🛠 Built With
 
 * [![NestJs][NestJs]][Next-url]
 * [![Prisma][Prisma]][Prisma-url]
@@ -115,6 +145,7 @@ As part of this project, my goal is to implement the essential functionalities o
 * [![React][React.js]][React-url]
 * [![Npm][Npm]][Npm-url]
 * [![Mui][Mui]][Mui-url]
+* [![RabbitMQ][Rabbit-MQ]][RabbitMQ]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,52 +156,37 @@ As part of this project, my goal is to implement the essential functionalities o
 Since the application is a study project, all the specific .env and configuration files are included in the repository. Therefore, when you git clone it, all the files needed to launch the application are already present.
 
 But for your information here is the composition of the .env files needed for the project
-### Prerequisites
+
+### 📦 Prerequisites
+- Node.js (v20 recommended)
+- Docker
+- [Read The Fucking Documentation] [rtfm]
+
+### 📁 Installation
+
+```bash
+git clone https://github.com/Collect-Verything/collect-verything
+cd collect-verything
+npm install
+```
+
+### 🧪 Database `.env` Samples
 
 Before launching the applications, you must create the .env in the root then the .env in each service
 
 The .env in the root contains ports and url's of each service:
+
 ```dotenv
 DOMAIN=localhost
-FRONT_PORT=80
-API_GATEWAY_PORT=2999
-DOMAIN_AUTH=auth-service
-AUTH_PORT=3001
-AUTH_URL_AUTH=auth
-AUTH_URL_ROLES=roles
-AUTH_URL_USERS=users
-DOMAIN_PRODUCT=product-service
-PRODUCT_PORT=3002
-PRODUCT_URL=product
-DOMAIN_FACTURATION=facturation-service
-FACTURATION_PORT=3003
-FACTURATION_URL=stripe
-DOMAIN_CONFIG=config-service
-CONFIG_PORT=3004
-CONFIG_URL=subscription
+#etc...
 ```
 
 Since React doesn't support .env files outside of its own folder, it's necessary to place an .env file directly in the root directory of the React application. Additionally, each environment variable must be prefixed with REACT_APP_ to be accessible in the code.
 
 ```dotenv
 REACT_APP_DOMAIN=localhost
-REACT_APP_FRONT_PORT=80
-REACT_APP_API_GATEWAY_PORT=2999
-REACT_APP_DOMAIN_AUTH=auth-service
-REACT_APP_AUTH_PORT=3001
-REACT_APP_AUTH_URL_AUTH=auth
-REACT_APP_AUTH_URL_ROLES=roles
-REACT_APP_AUTH_URL_USERS=users
-REACT_APP_DOMAIN_PRODUCT=product-service
-REACT_APP_PRODUCT_PORT=3002
-REACT_APP_PRODUCT_URL=product
-REACT_APP_FACTURATION_PORT=3003
-REACT_APP_FACTURATION_URL=stripe
-REACT_APP_CONFIG_PORT=3004
-REACT_APP_CONFIG_URL=subscription
+#etc...
 ```
-
-The env points of each service include the url of the database of each service, with your personalized information
 
 - Auth: 
 ```env
@@ -192,12 +208,15 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?sch
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?schema=public"
 ```
 
-## Run App
+For the rest, you can read the documentation about the environment.[Here][rtfm]
+
+## ▶️ Usage
 
 ```bash
 docker compose up
+#If you need logs
+docker compose up 2>&1 | tee logs-compose-up.txt
 ```
-
 
 It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
 
@@ -205,42 +224,33 @@ It is therefore possible to launch a single service or to setup the basis of a s
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTRIBUTING -->
-## Contributing
+## 🤝 Contributing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Any contributions, bug reports, or feature requests are welcome. Feel free to fork and open a PR.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Fork the repo
+2. Create your branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- LICENSE -->
-## License
+## 📄 License
 
 Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
-## Contact
+## 📬 Contact
 
-Canse - Link: [Github](https://github.com/CanseFr)
+- Canse – [GitHub](https://github.com/CanseFr)
+- Baptiste – [GitHub](https://github.com/titoon57)
+- Thomas – [GitHub](https://github.com/ThomasStibling)
+- Ishak – [GitHub](https://github.com/Ishak-rav)
 
-Baptiste - Link: [Github](https://github.com/titoon57)
-
-Thomas - Link: [Github](https://github.com/ThomasStibling)
-
-Ishak - Link: [Github](https://github.com/Ishak-rav)
+---
+<p align="center">Made with ❤️ by the Collect & Verything team.</p>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -266,5 +276,8 @@ Ishak - Link: [Github](https://github.com/Ishak-rav)
 [Npm-url]: https://www.npmjs.com/
 [Mui]: https://img.shields.io/badge/Mui-000000?style=for-the-badge&logo=Mui&logoColor=3d4ee3
 [Mui-url]: https://www.npmjs.com/
+[Rabbit-MQ]: https://img.shields.io/badge/rabbitmq-000000?style=for-the-badge&logo=rabbitmq&logoColor=de7a16
+[RabbitMQ]: https://www.RabbitMQ.com/
 
 [Auth Read.Me]: auth-service/README.md
+[rtfm]: documentation/README.md

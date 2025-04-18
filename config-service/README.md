@@ -1,85 +1,154 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="NestJS Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  <strong>Config Service</strong> – Microservice de gestion des abonnements Stripe et de la configuration des sites web dans l'écosystème Collect & Verything.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Description
 
-## Project setup
+Ce microservice est dédié à la gestion des abonnements utilisateurs via **Stripe**, ainsi qu'à la **configuration des sites web** associés à chaque abonnement.
 
-```bash
-$ npm install
-```
+Il permet notamment de :
+- Récupérer et synchroniser les abonnements d’un utilisateur avec Stripe.
+- Mettre à jour ou désactiver les abonnements expirés.
+- Gérer la visibilité (`published`) et la configuration (`configured`) des sites web associés.
+- Créer et supprimer les configurations de site web liées à un abonnement.
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+## 🔧 Setup
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Installation des dépendances
+npm install
 ```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🚀 Lancer le service
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### En local :
+```bash
+npm run start:dev
+```
 
-## Support
+### En production :
+```bash
+npm run start:prod
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Avec Docker :
+```bash
+docker build -t config-service .
+docker run -p 3004:3004 config-service
+```
 
-## Stay in touch
+> Le port peut varier selon ta config.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 🔑 Configuration
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
+
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```dotenv
+DATABASE_URL="mysql://root:password@mysql-config:3306/config-db?schema=public"
+
+DOMAIN=localhost
+
+FRONT_PORT=3000
+
+CONFIG_PORT=3004
+CONFIG_URL=subscription
+
+STRIPE_API_KEY=sk_test_VfGNimRoo2iCC7QIRyKnY3sc
+```
+
+---
+
+## 🧠 Principales fonctionnalités
+
+### 🔁 Synchronisation des abonnements Stripe
+
+```ts
+await subscriptionService.findAllByUserId(user_stripe_id);
+```
+
+- Récupère les abonnements Stripe.
+- Met à jour les statuts en base (`active_stripe`).
+- Désactive ceux qui ont expiré.
+
+### 🧩 Configuration du site web
+
+```ts
+await configurationService.create(sub_id, createConfigurationDto);
+```
+
+- Création de la configuration (`url`, `brand_name`, `admin_email`, etc.).
+- L’abonnement doit d’abord être actif.
+
+### 🕹 Publication / configuration
+
+- `configured`: Indique si l’abonnement est prêt à être publié.
+- `published`: Indique si le site est visible publiquement.
+
+```ts
+await subscriptionService.configureSubById(sub_id, true);
+await subscriptionService.publishWebSite(sub_id, true);
+```
+
+---
+
+## 📦 Seed (facultatif)
+
+```bash
+npx prisma migrate dev --name "init"
+npx prisma db seed
+```
+
+---
+
+## ✅ Tests
+
+```bash
+# Unit
+npm run test
+
+# Coverage
+npm run test:cov
+```
+
+---
+
+## 📎 Notes techniques
+
+- Stripe est intégré via `stripe-node`.
+- Prisma est utilisé comme ORM pour la gestion des abonnements et configurations.
+- Les logs d'activité peuvent être enrichis dans les services selon les besoins.
+
+---
+
+## 🛟 Support & Contribution
+
+Pour contribuer à ce microservice, merci de :
+- Mettre à jour les commentaires JSDoc et fichiers Swagger si les routes changent.
+- Ajouter un test unitaire pour chaque méthode critique.
+- Valider manuellement l'impact des changements avec l'API Gateway.
+
+---
+
+## 📄 License
+
+Ce projet utilise la licence MIT.
+

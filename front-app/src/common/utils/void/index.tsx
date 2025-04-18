@@ -1,2 +1,1 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-export const noOp = () => {};
+export const noOp = () => {return null};

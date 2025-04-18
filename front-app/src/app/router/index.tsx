@@ -23,6 +23,7 @@ import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
 import StripeStatusPayement from "../../shop/stripe";
 import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
+import {ForgotPasswordPage} from "../../shop/forgot-password";
 
 export const router = createBrowserRouter([
     {
@@ -133,5 +134,8 @@ export const router = createBrowserRouter([
         path: URL_FRONT.REGISTER,
         element: <RegisterPage />,
     },
-    //     TODO : Forgot password
+    {
+        path: URL_FRONT.FORGOT_PASSWORD,
+        element: <ForgotPasswordPage />,
+    },
 ]);

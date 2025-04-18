@@ -66,7 +66,7 @@ const StripeStatusPayement = () => {
 
 
                 <Typography variant="h5">
-                    SI L'APPLICATION N'EST PAS EN PROD, PENSER A SIMULER L'EVENEMENT FACTURATION AVEC POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
+                    SI L`&apos;APPLICATION N`&apos;EST PAS EN PROD, PENSER A SIMULER L`&apos;EVENEMENT FACTURATION AVEC POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
                 </Typography>
             </Grid2>
             <Grid2>

@@ -10,6 +10,7 @@
   - [Mono Repo][monorepo]
   - [Prettier][prettier]
   - [Environment][env]
+  - [Environment Poke-Center][env-center]
  
 - Deployment:
   - [CI][ci]
@@ -45,7 +46,8 @@
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
     - [Facturation] [facturation-sequences]
-
+  - Architecture
+    - [Application] [archi-app]
 - Todo
   - [todo][todo]
 
@@ -55,6 +57,7 @@
 [dev-and-prod]: general/dev-and-prod.md
 [glossary]: general/glossary.md
 [env]: development/environment.md
+[env-center]: development/env-center.md
 [rules]: general/rules.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md
@@ -75,6 +78,7 @@
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
 [product-sequences]: diagrams/sequence-diagrams/product.md
 [facturation-sequences]: diagrams/sequence-diagrams/facturation.md
+[archi-app]: diagrams/architecture/application.md
 
 [main-summary]: ../README.md
 

@@ -1,12 +1,26 @@
 import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 const roundsOfHashing = 10;
 
-/*
- *  Les clients du seed ne possede pas d'id Stripe, il faut obligatoirement ce register pour possede un id stripe
- * */
+/**
+ * @file seed.ts
+ * @description
+ * Script de seed pour la base de données du microservice d’authentification.
+ *
+ * Ce script :
+ * - Crée les rôles de base : USER, SUPER_ADMIN, INVOICE, SUPPORT
+ * - Insère plusieurs utilisateurs avec des rôles différents
+ * - Utilise bcrypt pour hasher les mots de passe
+ * - Initialise un utilisateur ayant déjà un ID Stripe (via `id_stripe`)
+ *
+ * ⚠️ Tous les utilisateurs créés ici n'ont **pas de `id_stripe`** sauf `Dacia Renault`,
+ * pour illustrer un cas d'utilisateur déjà synchronisé avec Stripe.
+ *
+ * 📌 Ce script est exécuté manuellement via `npx prisma db seed`
+ */
+
 async function main() {
   const passwordSuperAdmin = await bcrypt.hash('adminadmin', roundsOfHashing);
   const passwordSimple = await bcrypt.hash('useruser', roundsOfHashing);
@@ -125,7 +139,7 @@ async function main() {
     userSuperAdmin,
     userSimple,
     userInvoice,
-    stripeUSer
+    stripeUSer,
   });
 }
 

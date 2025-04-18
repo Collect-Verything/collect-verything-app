@@ -1,26 +1,24 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { generateRandomPassword } from '../utils';
+import { ClientProxy } from '@nestjs/microservices';
+import { configEnv } from '../../env-config';
 
 export const roundsOfHashing = 10;
 
-/*
- * Un user super admin ne peut que etre super admin
- * Un user de type USER ne peut que etre super USER
- * Un user de type Metier  peut avoir plusieur metiers
- *
- * Au moment de la creation d'un user, l'assignation d'un role st obligatoire, faire le necessaire dans le front
- * */
-
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject('MAIL_SERVICE') private client: ClientProxy,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
+    const { roleId, ...userData } = createUserDto;
 
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
@@ -40,7 +38,7 @@ export class UsersService {
   }
 
   async createJobber(createUserDto: CreateUserDto) {
-    const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
+    const { roleId, ...userData } = createUserDto;
 
     // TODO : Envoyer un mail a ce nouveau user avec son nouveau mot de passe
     const hashedPassword = await bcrypt.hash('InitPassword', roundsOfHashing);
@@ -57,9 +55,7 @@ export class UsersService {
     });
   }
 
-  /*
-   * Simple user only
-   * */
+  // Simple user only
   findAll() {
     return this.prisma.user.findMany({
       where: { roleId: 1 },
@@ -67,9 +63,6 @@ export class UsersService {
     });
   }
 
-  /*
-   * Simple jobber only
-   * */
   findAllUserJob() {
     return this.prisma.user.findMany({
       where: {
@@ -85,6 +78,12 @@ export class UsersService {
     return this.prisma.user.findUnique({
       where: { id },
       include: { role: true },
+    });
+  }
+
+  findOneByMail(email: string) {
+    return this.prisma.user.findUnique({
+      where: { email },
     });
   }
 
@@ -152,6 +151,25 @@ export class UsersService {
         password: hashedPassword,
       },
       include: { role: true },
+    });
+  }
+
+  async updateForgotPassword(id: number, email: string) {
+    const newPassword = generateRandomPassword(10);
+    const newPasswordEncrypt = await bcrypt.hash(newPassword, roundsOfHashing);
+
+    const message = { email, password: newPassword };
+
+    console.log(
+      '📤     Sent on queue : --[ ' +
+        configEnv.FORGOT_PASSWORD_PATTERN +
+        ' ]--',
+    );
+
+    this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
+    return this.prisma.user.update({
+      where: { id },
+      data: { password: newPasswordEncrypt },
     });
   }
 

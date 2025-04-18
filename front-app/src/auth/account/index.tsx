@@ -15,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import { ChangePasswordType } from "./type";
 import Alert from "@mui/material/Alert";
+import { RootState } from "../../features/store";
 
 export const Account = () => {
     const [user, setUser] = useState<User>(initUser);
@@ -25,11 +26,11 @@ export const Account = () => {
     const [alertPassword, setAlertPassword] = useState<AlertType>({ type: undefined, text: "" });
     const [isModifyPassword, setIsModifyPassword] = useState(true);
 
-    const { id } = useSelector((store: any) => store.authenticate);
+    const { id } = useSelector((store: RootState) => store.authenticate);
 
     const handleCancelModifyUser = () => {
         setAlertUserForm({ type: undefined, text: "" });
-        getUserById(id).then(setUser);
+        getUserById(id!).then(setUser);
         setIsModifyUser(true);
     };
 
@@ -48,7 +49,7 @@ export const Account = () => {
                     text: "Erreur lors de la modification de votre profil",
                 }),
             );
-        await getUserById(id).then(setUser);
+        await getUserById(id!).then(setUser);
         setIsModifyUser(true);
     };
 
@@ -59,7 +60,7 @@ export const Account = () => {
         }
 
         if (modifyPasswordSet?.newPassword === modifyPasswordSet?.confirmPassword) {
-            patchModifyPasswordUser(id, modifyPasswordSet!)
+            patchModifyPasswordUser(id!, modifyPasswordSet!)
                 .then(() => {
                     setAlertPassword({ type: "success", text: "Mot de passe modifié avec succée" });
                     setIsModifyPassword(true);
@@ -75,7 +76,7 @@ export const Account = () => {
     };
 
     useEffect(() => {
-        getUserById(id).then(setUser);
+        getUserById(id!).then(setUser);
     }, []);
 
     return (

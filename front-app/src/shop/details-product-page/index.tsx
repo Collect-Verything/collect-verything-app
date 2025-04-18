@@ -11,7 +11,7 @@ import { SwitchPriceToBasket } from "../../common/utils/basket";
 import { getAllProducts } from "../vitrine/request";
 
 export const DetailsProductPage = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [product, setProduct] = useState<ProductEntity>();
     const nav = useNavigate();
     const idProduct = searchParams.get("id");

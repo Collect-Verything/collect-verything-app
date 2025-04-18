@@ -1,5 +1,8 @@
+import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
+import {RefObject} from "react";
+
 export interface DialogProps<T> {
-    buttonElement:any;
-    rippleRef: any;
+    buttonElement: RefObject<HTMLButtonElement>;
+    rippleRef: RefObject<TouchRippleActions>;
     row: T;
 }

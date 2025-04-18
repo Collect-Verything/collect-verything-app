@@ -1,9 +1,7 @@
-import {configEnv} from "../env-config";
+import { configEnv } from '../../env-config';
 
-// TODO : Import .env value
+export const freePath = ['login', 'register', 'forgot-password'];
 
-export const freePath = ['login', 'register'];
-// export const checkTokenPath = 'http://localhost:3001/auth/validate-token';
 export const portByPath = new Map<string, string>();
 portByPath.set(configEnv.AUTH_URL_AUTH, configEnv.AUTH_PORT);
 portByPath.set(configEnv.AUTH_URL_ROLES, configEnv.AUTH_PORT);
@@ -17,5 +15,5 @@ domainServiceByPath.set(configEnv.AUTH_URL_AUTH, configEnv.DOMAIN_AUTH);
 domainServiceByPath.set(configEnv.AUTH_URL_ROLES, configEnv.DOMAIN_AUTH);
 domainServiceByPath.set(configEnv.AUTH_URL_USERS, configEnv.DOMAIN_AUTH);
 domainServiceByPath.set(configEnv.PRODUCT_URL, configEnv.DOMAIN_PRODUCT);
-domainServiceByPath.set(configEnv.FACTURATION_URL, configEnv.DOMAIN_FACTURATION);
+domainServiceByPath.set(configEnv.FACTURATION_URL, configEnv.DOMAIN_FACTURATION,);
 domainServiceByPath.set(configEnv.CONFIG_URL, configEnv.DOMAIN_CONFIG);

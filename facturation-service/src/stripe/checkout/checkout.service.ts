@@ -1,14 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { configEnv } from '../../../env-config';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
-
-// TODO : Attention pour le moment nous pouvon seulement acheter des produits ou alors des service mais pas les deux en meme temp
-// TODO : Trouver le moyen d'acheter des produits et des service abonement en meme temp,
-// TODO : Recuperer facture en cas de paiement, ou alors associer l'envoie de facture au mail du client pour ne gerer que les facture abonement service dans l'app , avoire ...
+const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
 
 @Injectable()
 export class StripeCheckoutService {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async createCheckoutSession(id_stripe: string, basket: any) {
     const listRaw = [];
 
@@ -37,7 +35,6 @@ export class StripeCheckoutService {
       mode: productType === 'PRODUCT' ? 'payment' : 'subscription',
       ui_mode: 'embedded',
       return_url: 'http://localhost:3000/payment-status',
-      // 'http://localhost:3000/payment-status?session_id={CHECKOUT_SESSION_ID}',
     });
 
     return { clientSecret: session.client_secret };

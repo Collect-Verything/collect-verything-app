@@ -1,3 +1,5 @@
+// TODO : Centraliser les url avec les nom de section sous forme de record ou autre pour que les url et intitulé soit lié par paire
+
 export enum URL_FRONT {
     DASHBOARD = "",
     ACCOUNT = "account",
@@ -11,6 +13,7 @@ export enum URL_FRONT {
     CONFIG = "config",
     LOGIN = "Login",
     REGISTER = "Register",
+    // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
     HOME = "",
     VITRINE = "Vitrine",
     CHECK_USER_STRIPE_ID = "check-user-stripe-id",
@@ -21,6 +24,7 @@ export enum URL_FRONT {
     BASKET = "Basket",
     ADMIN = "Auth",
     DETAILS = "Details",
+    FORGOT_PASSWORD = "forgot-password",
 }
 
 export enum SECTION_NAME {
@@ -34,11 +38,11 @@ export enum SECTION_NAME {
     SUPPORT = "Service client",
     DOC = "Documentation",
     CONFIG_SERVICE = "Configuration du Service",
-    LOGIN = "Login",
-    REGISTER = "Register",
-    HOME = "",
+    // LOGIN = "Login",
+    // REGISTER = "Register",
+    // HOME = "",
     VITRINE = "Vitrine",
     BOUTIQUE = "Boutique",
     RESSOURCE = "Ressource",
-    Basket = "Basket",
+    // BASKET = "Basket",
 }

@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   # 🌍 FRONT-END (Public) # Check previous config dockerfile
-#  front-app:
-#    build: ./front-app
-#    container_name: front-app
-#    ports:
-#      - "80:80"
-#    networks:
-#      - my_private_network
-#    env_file:
-#      - .env
+  #  front-app:
+  #    build: ./front-app
+  #    container_name: front-app
+  #    ports:
+  #      - "80:80"
+  #    networks:
+  #      - my_private_network
+  #    env_file:
+  #      - .env
   front-app:
     build: ./front-app
     container_name: front-app
@@ -32,7 +32,7 @@ services:
     ports:
       - "2999:2999"
     env_file:
-      - .env
+      - ./api-gateway/.env
     volumes:
       - ./api-gateway:/api-gateway
       - /api-gateway/node_modules
@@ -48,7 +48,7 @@ services:
     container_name: auth-service
     restart: always
     env_file:
-      - .env
+      - ./auth-service/.env
     volumes:
       - ./auth-service:/auth-service
       - /auth-service/node_modules
@@ -69,7 +69,7 @@ services:
     volumes:
       - mysql-auth-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -80,7 +80,7 @@ services:
     container_name: product-service
     restart: always
     env_file:
-      - .env
+      - ./product-service/.env
     volumes:
       - ./product-service:/product-service
       - /product-service/node_modules
@@ -101,7 +101,7 @@ services:
     volumes:
       - mysql-prod-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -112,7 +112,7 @@ services:
     container_name: config-service
     restart: always
     env_file:
-      - .env
+      - ./config-service/.env
     volumes:
       - ./config-service:/config-service
       - /config-service/node_modules
@@ -133,7 +133,7 @@ services:
     volumes:
       - mysql-config-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -144,7 +144,7 @@ services:
     container_name: facturation-service
     restart: always
     env_file:
-      - .env
+      - ./facturation-service/.env
     volumes:
       - ./facturation-service:/facturation-service
       - /facturation-service/node_modules
@@ -165,10 +165,35 @@ services:
     volumes:
       - mysql-facturation-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword" ]
       interval: 5s
       timeout: 3s
       retries: 5
+
+  # 📬 Mail SERVICE (Privé)
+  mail-service:
+    build: ./mail-service
+    container_name: mail-service
+    restart: always
+    env_file:
+      - ./mail-service/.env
+    volumes:
+      - ./mail-service:/mail-service
+      - /mail-service/node_modules
+  #    depends_on: dependre de rabbitmq
+  #      mysql-facturation:
+  #        condition: service_healthy
+
+  # 🐇 Message BROKER (Public)
+  broker-service:
+    image: rabbitmq:4.0-management
+    build: ./broker-service
+    container_name: broker-service
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+
 
 volumes:
   mysql-auth-data:

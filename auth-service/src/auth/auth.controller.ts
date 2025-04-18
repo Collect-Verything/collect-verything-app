@@ -60,4 +60,9 @@ export class AuthController {
       res.status(HttpStatus.UNAUTHORIZED).send({ error: error.message });
     }
   }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body() mail: { email: string }) {
+    return this.authService.forgotPassword(mail);
+  }
 }

@@ -6,6 +6,18 @@ import { useDispatch } from "react-redux";
 import { loginRequest } from "../shop/login/request";
 import { User } from "../common/types/user";
 
+/**
+ * ==========================================================================
+ * Redux Slice - Authentification Utilisateur
+ * ==========================================================================
+ *
+ * Gère l'état d'authentification de l'utilisateur connecté via JWT :
+ * - Sauvegarde des informations utilisateur à partir du token
+ * - Récupération du token depuis le localStorage (persistance)
+ * - Déconnexion (reset de l'état + suppression du token)
+ * - Mise à jour dynamique de l'ID Stripe client
+ */
+
 const initialState: Partial<User> = {
     role: undefined,
     id: undefined,
@@ -32,7 +44,7 @@ export const authenticateSlice = createSlice({
             state.role = undefined;
             localStorage.removeItem("token");
         },
-        updateStripeIdCustomer(state, action: PayloadAction<any>) {
+        updateStripeIdCustomer(state, action: PayloadAction<string>) {
             state.id_stripe = action.payload;
         },
     },

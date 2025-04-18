@@ -4,6 +4,20 @@ import { useDispatch } from "react-redux";
 import { User } from "../common/types/user";
 import { createAUser, deleteAUser, getAllUsers, patchAUser } from "../auth/admin/customer/request";
 
+/**
+ * ==========================================================================
+ * Redux Slice - Users (Admin View)
+ * ==========================================================================
+ *
+ * Ce slice gère les utilisateurs clients accessibles depuis l'interface admin :
+ * - Récupération de la liste des utilisateurs
+ * - Création d’un utilisateur
+ * - Mise à jour d’un utilisateur
+ * - Suppression d’un utilisateur
+ *
+ * Chaque opération effectue un `refetch` de la liste après exécution.
+ */
+
 const initialState = {
     usersList: [] as User[],
     status: "idle", // idle | loading | succeeded | failed

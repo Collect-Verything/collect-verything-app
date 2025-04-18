@@ -13,7 +13,8 @@ import { setFromLocalStorage } from "../../common/utils/local-storage";
 import { FacturationUrlWithPort, UserUrlWithPort } from "../../app/micro-services";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateStripeId } from "../../features/authentication-slice";
-import { useAppDispatch } from "../../features/user-slice"; //
+import { useAppDispatch } from "../../features/user-slice";
+import { RootState } from "../../features/store"; //
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -26,7 +27,7 @@ const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 // Solution à explorer : persister l'état du `stripe_id` dans le localStorage ou sécuriser la logique côté backend pour éviter la création d'un nouvel utilisateur inutilement.
 
 export const CheckUserStripeIdForPayment = () => {
-    const user = useSelector((store: any) => store.authenticate);
+    const user = useSelector((store: RootState) => store.authenticate);
     const nav = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -56,7 +57,7 @@ export const CheckUserStripeIdForPayment = () => {
 export const PaymentPage = () => {
     const nav = useNavigate();
     const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
-    const user = useSelector((store: any) => store.authenticate);
+    const user = useSelector((store: RootState) => store.authenticate);
 
     useEffect(() => {
         setFromLocalStorage("basket", setListBasket);

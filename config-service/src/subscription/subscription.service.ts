@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { ConfigurationService } from '../configuration/configuration.service'; // eslint-disable-next-line @typescript-eslint/no-require-imports
+import * as process from 'node:process';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
-// TODO : Mettre clé stripe dans .env
 // TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
-// TODO : Une solution active peut être desactivé via une annulation guidée, passant le statut de la subscription a false et la visibilité a false.
 
 /**
  * Service de gestion des abonnements Stripe.
@@ -30,9 +28,7 @@ const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
 
 @Injectable()
 export class SubscriptionService {
-  constructor(
-    private prisma: PrismaService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async findAllByUserId(user_stripe_id: string) {
     const listSub = await stripe.subscriptions.list({
@@ -45,6 +41,7 @@ export class SubscriptionService {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async syncSubscriptions(user_stripe_id: string, stripeSubs: any[]) {
     const stripeSubIds = stripeSubs.map((sub) => sub.id);
 
@@ -59,6 +56,7 @@ export class SubscriptionService {
     });
 
     await Promise.all(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       stripeSubs.map(async (sub: any) => {
         await this.prisma.subscription.upsert({
           where: { sub_stripe_id: sub.id },
@@ -95,7 +93,7 @@ export class SubscriptionService {
     await this.syncSubscriptions(user_stripe_id, subscriptions.data);
   }
 
-  async configureSubById(sub_id: string, is_active:boolean) {
+  async configureSubById(sub_id: string, is_active: boolean) {
     return this.prisma.subscription.update({
       where: { id: Number(sub_id) },
       data: {
@@ -104,7 +102,7 @@ export class SubscriptionService {
     });
   }
 
-  async publishWebSite(sub_id: string, is_publish:boolean) {
+  async publishWebSite(sub_id: string, is_publish: boolean) {
     return this.prisma.subscription.update({
       where: { id: Number(sub_id) },
       data: {
@@ -112,5 +110,4 @@ export class SubscriptionService {
       },
     });
   }
-
 }

@@ -8,22 +8,23 @@ import { Button, Grid2, Typography } from "@mui/material";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { fetchUserSubscriptions, recoveryUserSubscriptions } from "../../features/subscription-slice";
 import Alert from "@mui/material/Alert";
+import { RootState } from "../../features/store";
 
 // Pour recuperer des config de solution client il faut suivre le workflox definit dans la doc conernant la facturation des service, une fois ceci fait un  ou des subscription sont disponible et consultable
 
 export const SubscriptionConfigDisplay = () => {
-    const user = useSelector((store: any) => store.authenticate);
-    const { listSub = [], status } = useSelector((store: any) => store.subscription);
+    const user = useSelector((store: RootState) => store.authenticate);
+    const { listSub = [], status } = useSelector((store: RootState) => store.subscription);
     const dispatch = useAppDispatch();
 
     const recoverSubs = async () => {
-        dispatch(recoveryUserSubscriptions(user.id_stripe))
+        dispatch(recoveryUserSubscriptions(user.id_stripe!))
             .catch(console.error)
-            .then(() => dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error));
+            .then(() => dispatch(fetchUserSubscriptions(user.id_stripe!)).catch(console.error));
     };
 
     useEffect(() => {
-        dispatch(fetchUserSubscriptions(user.id_stripe)).catch(console.error);
+        dispatch(fetchUserSubscriptions(user.id_stripe!)).catch(console.error);
     }, []);
 
     return (
