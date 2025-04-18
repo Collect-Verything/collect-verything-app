@@ -10,6 +10,7 @@
   - [Mono Repo][monorepo]
   - [Prettier][prettier]
   - [Environment][env]
+  - [Environment Poke-Center][env-center]
  
 - Deployment:
   - [CI][ci]
@@ -56,6 +57,7 @@
 [dev-and-prod]: general/dev-and-prod.md
 [glossary]: general/glossary.md
 [env]: development/environment.md
+[env-center]: development/env-center.md
 [rules]: general/rules.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
-import { configEnv } from '../env-config';
+import { checkEnvValue, configEnv } from '../env-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +13,9 @@ async function bootstrap() {
       queueOptions: { durable: false },
     },
   });
+
+  checkEnvValue()
+
   await app.startAllMicroservices();
 }
 

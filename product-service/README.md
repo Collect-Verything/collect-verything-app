@@ -97,10 +97,24 @@ npm run test:cov
 
 ## 🔐 Configuration
 
-Le service utilise un fichier `.env` ou `env-config.ts` à la racine du projet pour définir les paramètres suivants :
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
+
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
 
 ```env
-DATABASE_URL=mysql://user:password@mysql-product:3306/collect-verything
+DATABASE_URL="mysql://root:password@mysql-product:3306/product-db?schema=public"
+
+DOMAIN=localhost
+
+API_GATEWAY_PORT=2999
+
+PRODUCT_PORT=3002
+PRODUCT_URL=product
 ```
 
 ---

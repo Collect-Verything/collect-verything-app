@@ -37,6 +37,8 @@ Comprendre la problematique du lien suivant [issue_lint][issue_lint]
 ## Facturation
 Fixer l'erreur quand liste facture est vide dans facturation/index.tsx
 
+## Mail Service
+Modifier la methode qui envoit les mails de renouvellement de mot de passe, pour le moment elle envoit sur la boite mail du project
 
 
 [summary]: ../README.md

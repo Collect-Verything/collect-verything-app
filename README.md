@@ -160,6 +160,7 @@ But for your information here is the composition of the .env files needed for th
 ### 📦 Prerequisites
 - Node.js (v20 recommended)
 - Docker
+- [Read The Fucking Documentation] [rtfm]
 
 ### 📁 Installation
 
@@ -206,6 +207,8 @@ DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?sch
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?schema=public"
 ```
+
+For the rest, you can read the documentation about the environment.[Here][rtfm]
 
 ## ▶️ Usage
 
@@ -277,3 +280,4 @@ Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for
 [RabbitMQ]: https://www.RabbitMQ.com/
 
 [Auth Read.Me]: auth-service/README.md
+[rtfm]: documentation/README.md

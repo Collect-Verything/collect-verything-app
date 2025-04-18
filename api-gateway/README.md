@@ -57,19 +57,44 @@ docker run -p 2999:2999 api-gateway
 
 ## 🔧 Configuration
 
-Ce projet n’utilise **pas** de fichier `.env`, mais un fichier TypeScript de configuration :
-
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
 ```
 src/env-config.ts
 ```
 
-Vous pouvez y modifier les éléments suivants pour faire fonctionner ce service indépendamment :
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
 
-- `DOMAIN_AUTH`
-- `AUTH_PORT`
-- `PORT_BY_PATH`
-- `DOMAIN_BY_PATH`
-- etc.
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```dotenv
+DOMAIN=localhost
+
+FRONT_PORT=3000
+
+API_GATEWAY_PORT=2999
+
+DOMAIN_AUTH=auth-service
+
+AUTH_PORT=3001
+AUTH_URL_AUTH=auth
+AUTH_URL_ROLES=roles
+AUTH_URL_USERS=users
+
+DOMAIN_PRODUCT=product-service
+
+PRODUCT_PORT=3002
+PRODUCT_URL=product
+
+DOMAIN_FACTURATION=facturation-service
+
+FACTURATION_PORT=3003
+FACTURATION_URL=stripe
+
+DOMAIN_CONFIG=config-service
+
+CONFIG_PORT=3004
+CONFIG_URL=subscription
+```
 
 ---
 
