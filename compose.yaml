@@ -32,7 +32,7 @@ services:
     ports:
       - "2999:2999"
     env_file:
-      - .env
+      - ./api-gateway/.env
     volumes:
       - ./api-gateway:/api-gateway
       - /api-gateway/node_modules
