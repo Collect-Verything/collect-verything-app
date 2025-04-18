@@ -26,6 +26,29 @@ import { registerRequest } from "./request";
 
 // TODO : Les champs doivent etre vide a la validation du formulaire
 // TODO : Effectuer une redirection sur login apres avoir informé l'utilisateur que le register est confirmé
+/**
+ * Composant/formulaire d'inscription utilisateur.
+ *
+ * Ce composant utilise un objet `UserRegisterType` qui étend le type `User`
+ * pour inclure un champ supplémentaire `confirmPassword`, utilisé uniquement côté client
+ * pour vérifier que le mot de passe et la confirmation correspondent.
+ *
+ * Avant d'envoyer les données au backend, on extrait le champ `confirmPassword`
+ * à l’aide de la destructuration d’objet :
+ *
+ * ```ts
+ * const { confirmPassword, ...user } = registerUser;
+ * await axios.post<User>('/api/register', user);
+ * ```
+ *
+ * Cela permet de ne transmettre au backend que les champs attendus par le type `User`,
+ * évitant ainsi une erreur côté serveur liée à un champ non reconnu.
+ *
+ * Avantages :
+ * - Garde le type `RegisterUser` complet côté formulaire (validation UX)
+ * - N’envoie au backend que les données strictement nécessaires
+ * - Sépare clairement logique client / logique API
+ */
 
 export const RegisterPage = () => {
     const [registerForm, setRegisterForm] = React.useState<UserRegisterType>(initRegisterForm);
@@ -34,11 +57,10 @@ export const RegisterPage = () => {
     const handleRegister = async () => {
         const isValid = await checkRegisterForm(registerForm, setAlerts);
 
-        if (!isValid) {
-            return;
-        }
+        if (!isValid) return;
 
         try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { confirmPassword, ...cleanedRegisterForm } = registerForm;
             await registerRequest(cleanedRegisterForm);
             setAlerts(ALERT_MESSAGE_FIELD.REGISTER_SUCCESS);
