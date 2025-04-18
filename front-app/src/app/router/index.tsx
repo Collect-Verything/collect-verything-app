@@ -25,8 +25,6 @@ import StripeStatusPayement from "../../shop/stripe";
 import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
 import {ForgotPasswordPage} from "../../shop/forgot-password";
 
-// TODO : Create a product page getting id product and display all info of the product with possibility to add basket, boutique item product is finally clickable to give id product in url path
-
 export const router = createBrowserRouter([
     {
         path: "/",

@@ -5,10 +5,26 @@ import { getRecoverSubs, getUserListSolutionSub } from "../auth/config/request";
 import { Subscription } from "../auth/config/type";
 import { CONFIG_SERVICE } from "../app/micro-services";
 
-/*
- * @fetchUserSubscriptions : Recuperation des user sub
- * @recoveryUserSubscriptions : Permet de recuperer les sub d'un user dans le cas ou la base des sub est vide, mais pas les config...
- * */
+/**
+ * ==========================================================================
+ * Redux Slice - Subscription
+ * ==========================================================================
+ *
+ * Gère l'état lié aux abonnements utilisateurs (Stripe) côté front.
+ * Utilise Redux Toolkit pour structurer les appels asynchrones avec `createAsyncThunk`.
+ *
+ * Objectifs :
+ * - Récupérer les abonnements d’un utilisateur connecté
+ * - En cas d’incohérence ou de base vide, déclencher un mécanisme de récupération
+ *
+ * Méthodes exposées :
+ * - `fetchUserSubscriptions`       : Récupération classique des subscriptions via Stripe
+ * - `recoveryUserSubscriptions`    : Récupération dans le cas d’une désynchronisation
+ *
+ * Hook utilitaire :
+ * - `useAppDispatch` : hook typé pour dispatch Redux
+ */
+
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 

@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import * as process from 'node:process';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
-// TODO : Mettre clé stripe dans .env
 // TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
-// TODO : Une solution active peut être desactivé via une annulation guidée, passant le statut de la subscription a false et la visibilité a false.
 
 /**
  * Service de gestion des abonnements Stripe.

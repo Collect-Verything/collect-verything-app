@@ -11,8 +11,6 @@ import { fetchUsers } from "../../../features/user-slice";
 import { CreateUserAndJob } from "../job/dialogs/create-user-job";
 import { RootState } from "../../../features/store";
 
-//  TODO: Creation d'un user, role obligatoire
-
 export const Customer = () => {
     const dispatch = useAppDispatch();
 

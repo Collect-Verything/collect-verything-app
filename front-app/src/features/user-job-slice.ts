@@ -4,6 +4,22 @@ import { AppDispatch } from "./store";
 import { useDispatch } from "react-redux";
 import { User } from "../common/types/user";
 
+/**
+ * ==========================================================================
+ * Redux Slice - userJob
+ * ==========================================================================
+ *
+ * Ce slice est utilisé pour gérer la liste des "Jobbers" (utilisateurs avec des rôles spécifiques)
+ * dans l'interface administrateur.
+ *
+ * Objectifs :
+ * - Récupérer la liste des jobbers
+ * - Supprimer un jobber
+ * - Modifier un jobber
+ *
+ * Chaque action est suivie automatiquement par un `refetch` des données à jour.
+ */
+
 const initialState = {
     usersJobList: [] as User[],
     status: "idle", // idle | loading | succeeded | failed

@@ -45,6 +45,29 @@ export class AuthService {
       }),
     };
   }
+  /**
+   * Enregistre un nouvel utilisateur dans la base via Prisma.
+   *
+   * Le DTO `CreateUserDto` contient un champ `roleId` destiné à la logique côté client ou validation,
+   * mais qui ne doit pas être directement envoyé dans la requête Prisma.
+   *
+   * Pour s’assurer que Prisma accepte correctement l’objet `data`, on extrait `roleId` du DTO
+   * avec une destructuration :
+   *
+   * ```ts
+   * const { roleId, ...userData } = createUserDto;
+   * ```
+   *
+   * On utilise ensuite `userData` pour construire l'objet envoyé à `prisma.user.create`,
+   * en ajoutant manuellement :
+   * - le mot de passe haché (`bcrypt`)
+   * - l'association au rôle par ID via `connect`
+   *
+   * Cela permet :
+   * - d’isoler la logique Prisma de la structure du DTO
+   * - d’éviter d’envoyer des champs non attendus à Prisma
+   * - d’imposer un rôle fixe à l’enregistrement (ex. `ROLENAME_ID.USER`)
+   */
 
   async register(createUserDto: CreateUserDto) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

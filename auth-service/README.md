@@ -1,107 +1,129 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <img src="https://nestjs.com/img/logo-small.svg" width="100" alt="NestJS Logo" />
 </p>
- 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<h1 align="center">Auth Service – Collect & Verything</h1>
+
+<p align="center">Microservice d'authentification basé sur NestJS, utilisant Prisma et RabbitMQ pour la gestion sécurisée des utilisateurs et des rôles.</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@nestjs/core"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@nestjs/core"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="license" /></a>
+  <a href="https://circleci.com/gh/nestjs/nest"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+  <a href="https://discord.gg/G7Qnnhy"><img src="https://img.shields.io/badge/discord-join%20chat-blue.svg" alt="Discord" /></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📦 Description
 
-## Project setup
+Ce service gère l’**authentification**, la **création d’utilisateurs** et la **gestion des rôles**. Il est conçu pour être intégré dans une architecture microservices, mais peut également être utilisé **de manière autonome**.
 
-```bash
-$ npm install
-```
+---
 
-```bash
-# run service
-$ cd auth-service
-$ npm run start:dev
-```
+## ⚙️ Configuration
 
-## Compile and run the project has dev (crash actually)
+> Le service utilise un fichier `config-env.ts` comme fichier de configuration (remplaçant `.env`).  
+> Pour une utilisation indépendante, vous pouvez simplement modifier les valeurs dans ce fichier (ports, host DB, etc).
 
-```bash
-# development
-$ cd auth-service
-$ docker compose up
-```
+---
 
-# Edit .env with your user and password db access
-```.env
-DATABASE_URL="mysql://user:password@localhost:3306/collect-verything?schema=public"
-```
-# Create tables
-```bash
-$ npx prisma migrate dev --name "Setup auth db"
-```
-# Generate data from seed
-```bash
-$ npx prisma db seed
-```
-## Run Swagger
+## 🚀 Démarrage
+
+### ➤ 1. Installation des dépendances
 
 ```bash
-# unit tests
-localhost:3001/api
+npm install
 ```
 
-Login with data seed (email/password), get the token string and copy paste in the little padlock right top too the windows to have access on protected controllers
-
-## Run tests
+### ➤ 2. Lancer le service en local
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Resources
+### ➤ 3. Lancer avec Docker
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+# Build de l'image
+docker build -t auth-service .
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Lancement du conteneur
+docker run -p 3001:3001 auth-service
+```
 
-## Support
+> 📌 Par défaut, le port exposé est `3001`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## 🛠️ Setup de la base de données
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### ➤ 1. Modifier la variable dans `config-env.ts`
 
-## License
+```ts
+DATABASE_URL = "mysql://user:password@localhost:3306/auth-db?schema=public"
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### ➤ 2. Appliquer les migrations Prisma
+
+```bash
+npx prisma migrate dev --name "init"
+```
+
+### ➤ 3. Générer les données de test
+
+```bash
+npx prisma db seed
+```
+
+---
+
+## 🧪 Lancer les tests
+
+```bash
+# Tests unitaires
+npm run test
+
+# Tests end-to-end
+npm run test:e2e
+
+# Couverture de test
+npm run test:cov
+```
+
+---
+
+## 🔐 Swagger & Authentification
+
+> Swagger est disponible sur : [http://localhost:3001/api](http://localhost:3001/api)
+
+1. Se connecter avec un utilisateur seed (voir `prisma/seed.ts`)
+2. Récupérer le token JWT
+3. L’ajouter dans Swagger en cliquant sur l’**icône cadenas** (en haut à droite)
+
+---
+
+## 📁 Fonctionnalités incluses
+
+- Authentification par JWT
+- Gestion des rôles (`USER`, `SUPER_ADMIN`, `INVOICE`, `SUPPORT`)
+- Création d’utilisateurs
+- Protection des routes via `Guards`
+- Communication via RabbitMQ (`forgot-password`)
+- Swagger pour documentation automatique
+
+---
+
+## 📚 Ressources utiles
+
+- [Documentation officielle NestJS](https://docs.nestjs.com)
+- [Prisma ORM](https://www.prisma.io/docs)
+- [RabbitMQ Tutorial](https://www.rabbitmq.com/getstarted.html)
+- [Swagger NestJS](https://docs.nestjs.com/openapi/introduction)
+
+---
+
+## 📝 License
+
+Ce projet est sous licence MIT.
+

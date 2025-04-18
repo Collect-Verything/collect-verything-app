@@ -18,7 +18,7 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
+    const { roleId, ...userData } = createUserDto;
 
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
@@ -38,7 +38,7 @@ export class UsersService {
   }
 
   async createJobber(createUserDto: CreateUserDto) {
-    const { roleId, ...userData } = createUserDto; // `roleId` est utilisé au lieu de `roles`
+    const { roleId, ...userData } = createUserDto;
 
     // TODO : Envoyer un mail a ce nouveau user avec son nouveau mot de passe
     const hashedPassword = await bcrypt.hash('InitPassword', roundsOfHashing);
@@ -55,9 +55,7 @@ export class UsersService {
     });
   }
 
-  /*
-   * Simple user only
-   * */
+  // Simple user only
   findAll() {
     return this.prisma.user.findMany({
       where: { roleId: 1 },
@@ -65,9 +63,6 @@ export class UsersService {
     });
   }
 
-  /*
-   * Simple jobber only
-   * */
   findAllUserJob() {
     return this.prisma.user.findMany({
       where: {

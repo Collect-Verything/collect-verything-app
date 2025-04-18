@@ -12,4 +12,6 @@ export const configEnv = {
 
   FACTURATION_PORT: process.env.FACTURATION_PORT,
   FACTURATION_URL: process.env.FACTURATION_URL,
+
+  STRIPE_API_KEY: process.env.STRIPE_API_KEY,
 };

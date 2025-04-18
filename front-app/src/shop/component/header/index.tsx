@@ -9,10 +9,10 @@ import { useSelector } from "react-redux";
 import { Badge } from "../badge";
 import { checkToken, useAppDispatch } from "../../../features/authentication-slice";
 import { URL_FRONT } from "../../../app/router/const";
+import {RootState} from "../../../features/store";
 
 export const Header = () => {
-    // eslint-disable-next-line
-    const { role } = useSelector((store: any) => store.authenticate);
+    const { role } = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
