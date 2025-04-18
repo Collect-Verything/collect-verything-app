@@ -14,3 +14,21 @@ export const configEnv = {
   MESSAGE_BROKER_URL: process.env.MESSAGE_BROKER_URL,
   EMAIL_QUEUE: process.env.EMAIL_QUEUE,
 };
+
+export const checkEnvValue = () => {
+  console.log('✅ Checking env variables...');
+
+  const listUndefinedValue: string[] = [];
+
+  Object.keys(configEnv).forEach((key) => {
+    if (!configEnv[key as keyof typeof configEnv]) {
+      listUndefinedValue.push(key);
+    }
+  });
+
+  if (listUndefinedValue.length > 0) {
+    throw new Error(`🚨 Missing environment variables in AUTH SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`);
+  }
+
+  console.log('✅ All required env variables are defined.');
+};
