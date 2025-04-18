@@ -1,8 +1,3 @@
-import * as dotenv from 'dotenv';
-import * as path from 'path';
-
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-
 export const configEnv = {
   EMAIL_MESSAGE_BROKER: process.env.EMAIL_MESSAGE_BROKER,
   PASSWORD_MESSAGE_BROKER: process.env.PASSWORD_MESSAGE_BROKER,

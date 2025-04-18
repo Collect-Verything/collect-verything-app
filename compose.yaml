@@ -176,7 +176,7 @@ services:
     container_name: mail-service
     restart: always
     env_file:
-      - .env
+      - ./mail-service/.env
     volumes:
       - ./mail-service:/mail-service
       - /mail-service/node_modules

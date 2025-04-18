@@ -85,17 +85,23 @@ Un e-mail HTML personnalisé est envoyé à l’adresse spécifiée.
 
 ## 🛠 Configuration
 
-La configuration se fait via `env-config.ts` ou `.env` :
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
 
-```ts
-export const configEnv = {
-  EMAIL_SERVICE: 'gmail',
-  EMAIL_MESSAGE_BROKER: 'xxx@gmail.com',
-  PASSWORD_MESSAGE_BROKER: 'your-app-password',
-  FORGOT_PASSWORD_PATTERN: 'forgot-password',
-  MESSAGE_BROKER_URL: 'broker-service',
-  EMAIL_QUEUE: 'mail-queue',
-};
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```env
+EMAIL_MESSAGE_BROKER=collectverythings@gmail.com
+PASSWORD_MESSAGE_BROKER="zcbq wkpq zfew edtd"
+EMAIL_QUEUE=mail-queue
+EMAIL_SERVICE=gmail
+FORGOT_PASSWORD_PATTERN=forgot-password
+
+MESSAGE_BROKER_URL=broker-service
 ```
 
 > 💡 Pour Gmail, activez l’authentification à deux facteurs et générez un mot de passe d’application.
