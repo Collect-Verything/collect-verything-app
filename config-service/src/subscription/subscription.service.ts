@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import {configEnv} from "../../env-config";
+import * as process from 'node:process';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
 // TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
 
