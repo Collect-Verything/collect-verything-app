@@ -53,17 +53,26 @@ docker run -p 3004:3004 config-service
 
 ## 🔑 Configuration
 
-Toutes les variables sont à définir dans le fichier `env-config.ts` (ou `.env` selon ta structure).
+Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+```
+src/env-config.ts
+```
 
-Exemple :
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
 
-```ts
-export const configEnv = {
-  STRIPE_API_KEY: 'sk_test_xxxxxxxx',
-  DOMAIN_CONFIG: 'localhost',
-  CONFIG_PORT: 3004,
-  // ...
-};
+Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+
+```dotenv
+DATABASE_URL="mysql://root:password@mysql-config:3306/config-db?schema=public"
+
+DOMAIN=localhost
+
+FRONT_PORT=3000
+
+CONFIG_PORT=3004
+CONFIG_URL=subscription
+
+STRIPE_API_KEY=sk_test_VfGNimRoo2iCC7QIRyKnY3sc
 ```
 
 ---

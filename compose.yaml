@@ -112,7 +112,7 @@ services:
     container_name: config-service
     restart: always
     env_file:
-      - .env
+      - ./config-service/.env
     volumes:
       - ./config-service:/config-service
       - /config-service/node_modules
