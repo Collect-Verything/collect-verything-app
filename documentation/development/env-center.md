@@ -10,6 +10,7 @@ Cela évitera toute confusion ou oubli susceptible de hanter vos nuits de dével
 
 👉 Il permet également de garantir une **cohérence entre les services**, notamment lorsque plusieurs d’entre eux partagent les mêmes variables (ex. : ports, URLs, clés d’accès, etc.).
 
+👉 En cas de doute, le README de chaque service contient également la liste des variables d’environnement (key/value) nécessaires à son fonctionnement — à condition qu’il soit bien à jour, bien sûr... 👨🏻‍🎨
 ```dotenv
 DOMAIN=localhost
 
@@ -50,5 +51,43 @@ FORGOT_PASSWORD_PATTERN=forgot-password
 
 MESSAGE_BROKER_URL=broker-service
 ```
+
+# 🔭 Env Health Check
+
+Étant donné la multitude de variables d’environnement utilisées dans l’application, un contrôle automatique est effectué au démarrage de chaque service (dans le fichier `main.ts`).
+
+Ce check vérifie que toutes les variables définies dans `configEnv` sont bien présentes.  
+Le fichier `configEnv.ts` sert de **point de référence unique** : il indique clairement **les variables essentielles** au bon fonctionnement du service.
+
+Si l’une d’elles est manquante, une erreur explicite est levée, ce qui permet de l’identifier immédiatement dans les logs et d'éviter tout comportement inattendu en runtime.
+
+Ci-dessous, la méthode utilisée pour rendre ce diagnostic plus lisible et systématique :
+
+```ts
+export const configEnv = {
+  EMAIL_MESSAGE_BROKER: process.env.EMAIL_MESSAGE_BROKER,
+//...
+};
+
+export const checkEnvValue = () => {
+  console.log('✅ Checking env variables...');
+
+  const listUndefinedValue: string[] = [];
+
+  Object.keys(configEnv).forEach((key) => {
+    if (!configEnv[key as keyof typeof configEnv]) {
+      listUndefinedValue.push(key);
+    }
+  });
+
+  if (listUndefinedValue.length > 0) {
+    throw new Error(`🚨 Missing environment variables in MAIL SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`);
+  }
+
+  console.log('✅ All required env variables are defined.');
+};
+
+```
+
 
 [summary]: ../README.md
