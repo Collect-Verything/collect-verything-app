@@ -80,7 +80,7 @@ services:
     container_name: product-service
     restart: always
     env_file:
-      - .env
+      - ./product-service.env
     volumes:
       - ./product-service:/product-service
       - /product-service/node_modules
