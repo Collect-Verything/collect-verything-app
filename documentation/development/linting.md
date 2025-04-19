@@ -6,33 +6,101 @@
 Using [ESlint], [`typescript-eslint`][typescript-lint] and several plugins.
 Actually a basic config is set.
 
-## Issue
+# 📦 ESLint – Flat Config utilisée dans le Monorepo NestJS + React
 
-### 📌 Problème rencontré avec npm install dans le dossier front-app
-En travaillant dans notre monorepo, j’ai constaté un comportement inattendu concernant le linting dans l’application front-end (front-app).
+## 🧭 Objectif
 
-❗ Constat
-Lorsque j’exécute la commande suivante dans le dossier front-app :
+Ce projet utilise une configuration unique et moderne basée sur le **Flat Config (ESLint v9+)**, définie dans le fichier `eslint.config.mjs` à la racine.
 
-```zsh
-npm install
-npm run lint
+Cette configuration permet de :
+- Centraliser les règles ESLint pour l’ensemble du projet
+- Gérer facilement plusieurs environnements (NestJS et React)
+- Maintenir une cohérence sans multiplier les fichiers `.eslintrc.*`
+
+---
+
+## 📂 Structure de la configuration
+
+### 🧠 Partie globale – Backend (NestJS)
+
+Les règles générales s’appliquent à tous les fichiers TypeScript du backend.
+Elles sont conçues pour s’aligner sur les bonnes pratiques de NestJS :
+
+- Utilisation du parser TypeScript (`@typescript-eslint`)
+- Recommandations ESLint standards
+- Désactivation de règles inutiles (`no-inferrable-types`)
+- Avertissements pour `any`, `console`, etc.
+
+### 🎨 Override – Frontend React (`front-app/`)
+
+Une section spécifique est dédiée au dossier `front-app`, avec :
+
+- Support complet de React et des hooks
+- Activation de JSX
+- Détection automatique de la version React
+- Suppression des règles obsolètes (comme `prop-types` ou `react-in-jsx-scope`)
+
+Cela permet de garantir que les règles appliquées au front sont adaptées et isolées du backend.
+
+---
+
+## 📦 Suppression des fichiers `.eslintrc.*`
+
+La configuration actuelle repose exclusivement sur le fichier `eslint.config.mjs`.
+Les fichiers comme `.eslintrc.js`, `.eslintrc.json`, etc., ne sont donc plus utilisés.
+S’ils sont présents, ils peuvent entrer en conflit avec le Flat Config.
+
+Il est donc préférable de ne garder que `eslint.config.mjs` comme source de configuration ESLint.
+
+---
+
+## 🔍 Bonnes pratiques adoptées
+
+- Unification des règles dans un seul fichier à la racine
+- Utilisation des `files:` pour cibler précisément les contextes (backend vs frontend)
+- Éviter les conflits de configurations entre services
+- Structure claire et modulaire avec des `overrides` spécifiques
+
+---
+
+## ⚙️ Utilisation
+
+Pour analyser le code avec ESLint :
+
+- Projet complet :
+```bash
+npx eslint .
 ```
 
-Le linter ne parvient pas à s'exécuter correctement. L'erreur semble provenir d’un conflit ou d’un problème de versions dans les dépendances locales (notamment avec @typescript-eslint).
-
-#### ✅ Comportement attendu
-En revanche, si je supprime le dossier node_modules de front-app, puis que je lance :
-
-J'ai pu remarquer que l'orsque je faisais un npm install dans le dossier front-app et je lancais la commande npm run lint, le lint ne pouvais pas s'executer pour des raison de probleme de dpeendance, par contre si je supprime le node module j'ai cru comprend que npm allait chercher le node module parent, et la la commande s'execute.
-Remarque important car dans la CI l'execution des test effectué un npm install dans /front-app pour cela j'ai modifié le chemin d'installation comme ci dessous :
-
-```zsh
-npm run lint
+- Uniquement le front :
+```bash
+npx eslint front-app/
 ```
-Le linter fonctionne parfaitement. Cela s'explique par le fait que Node.js, lorsqu’il ne trouve pas un module localement, remonte l’arborescence des dossiers pour aller chercher les dépendances dans le node_modules du dossier parent — en l’occurrence, à la racine du monorepo.
 
-#### 🛠️ Adaptation dans la CI/CD
+- Uniquement un service backend :
+```bash
+npx eslint apps/product-service/
+```
+
+---
+
+## 📜 Dépendances nécessaires
+
+La configuration utilise les plugins suivants :
+```bash
+npm install --save-dev eslint @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks globals
+```
+
+---
+
+## ✅ En résumé
+
+Ce projet utilise le format Flat Config d’ESLint afin de simplifier et unifier les règles de linting.
+La configuration est partagée entre tous les services NestJS et une section spécifique est dédiée à l’application React.
+Cela permet une maintenance facilitée, une cohérence des règles et un usage plus moderne d’ESLint.
+
+
+# 🛠️ CI/CD
 
 Dans le pipeline CI/CD, le problème apparaissait également puisque l’étape de test faisait un npm install dans le dossier front-app, réintroduisant ainsi les mauvaises dépendances.
 
@@ -47,12 +115,6 @@ Pour contourner ce problème, j’ai modifié le workflow GitHub Actions comme s
         working-directory: ./front-app
         run: npm run lint
 ```
-#### 🎯 Résultat
-Les dépendances sont désormais installées à la racine du projet, ce qui évite les conflits.
-
-Le linter est exécuté dans le bon dossier (front-app) tout en utilisant les dépendances centralisées.
-
-TROUVER UNE PISTE D'AMELIORATION
 
 
 [//]: # "--- Images and links section ---"
