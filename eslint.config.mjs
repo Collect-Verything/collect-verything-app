@@ -8,7 +8,7 @@ export default [
   // 🧠 NestJS microservices backend (par défaut)
   {
     files: ['**/*.{ts,js}'],
-    ignores: ['**/node_modules/**'],
+    ignores: ['**/node_modules/**','./front-app/**'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -36,28 +36,40 @@ export default [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+        ecmaVersion: "latest",
+        sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
     plugins: {
       react: pluginReact,
-      '@typescript-eslint': tseslint.plugin,
+      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
       ...pluginJs.configs.recommended.rules,
       ...tseslint.configs.recommended[0].rules,
       ...pluginReact.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react/no-unescaped-entities': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      'no-unused-vars': 'off',
+
+      // TypeScript
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/explicit-function-return-type": "off",
+
+      // React
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+
+      // JS clean
+      "no-console": "warn",
+      "no-debugger": "error",
+      "no-unused-vars": "off",
     },
     settings: {
-      react: { version: 'detect' },
+      react: { version: "detect" },
     },
   },
 ];
