@@ -26,9 +26,7 @@ export class JwtSuperStrategy extends PassportStrategy(Strategy, 'super') {
     }
 
     if (hasSuperAdminRole !== 2) {
-      throw new UnauthorizedException(
-        'You do not have the required SUPER_ADMIN role',
-      );
+      throw new UnauthorizedException('You do not have the required SUPER_ADMIN role');
     }
 
     return user;

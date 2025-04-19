@@ -16,6 +16,7 @@ Ce microservice reçoit des messages via RabbitMQ et envoie des e-mails à l’u
 Il est principalement utilisé pour la **réinitialisation de mot de passe**.
 
 ### Fonctionnalités :
+
 - Réception d’un message `forgot-password` via RabbitMQ.
 - Envoi d’un e-mail contenant un **mot de passe temporaire** au format HTML.
 - Utilisation de `nodemailer` avec une boîte Gmail ou autre service compatible SMTP.
@@ -72,6 +73,7 @@ Le service écoute l’événement suivant :
 ```
 
 ### Payload attendu :
+
 ```ts
 {
   email: string;
@@ -86,6 +88,7 @@ Un e-mail HTML personnalisé est envoyé à l’adresse spécifiée.
 ## 🛠 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```

@@ -6,10 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ConfigurationService {
   constructor(private prisma: PrismaService) {}
 
-  create(
-    sub_stripe_id: string,
-    createConfigurationDto: CreateConfigurationDto,
-  ) {
+  create(sub_stripe_id: string, createConfigurationDto: CreateConfigurationDto) {
     return this.prisma.configuration.create({
       data: {
         ...createConfigurationDto,

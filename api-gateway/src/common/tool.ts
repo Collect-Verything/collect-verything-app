@@ -1,5 +1,5 @@
-import {freePath} from './const';
-import {configEnv} from '../../env-config';
+import { freePath } from './const';
+import { configEnv } from '../../env-config';
 
 /**
  * @function checkFreePath

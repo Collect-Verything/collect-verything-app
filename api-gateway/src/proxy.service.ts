@@ -39,7 +39,7 @@ export class ProxyService {
     if (checkFreePath(req.url)) {
       const res = await axios[req.method.toLowerCase()](
         `http://${configEnv.DOMAIN_AUTH}:3001/auth/${returnFreePath(req.url)}`,
-        req.body,
+        req.body
       );
       return res.data;
     } else {
@@ -47,7 +47,7 @@ export class ProxyService {
         const responseCheckToken = await axios.post(
           `http://${configEnv.DOMAIN_AUTH}:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`,
           {},
-          { headers: { Authorization: req.headers.authorization } },
+          { headers: { Authorization: req.headers.authorization } }
         );
         if (responseCheckToken.status === 200) {
           const response = await toolRequest(req);

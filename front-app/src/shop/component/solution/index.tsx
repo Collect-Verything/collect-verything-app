@@ -4,7 +4,7 @@ import React from "react";
 import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
 import { ProductEntity } from "../../boutique/type";
-import {URL_FRONT} from "../../../app/router/const";
+import { URL_FRONT } from "../../../app/router/const";
 
 export interface VitrineUnitProductProps {
     product: ProductEntity;

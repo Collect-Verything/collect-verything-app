@@ -5,7 +5,7 @@ Voici les étapes à respecter lors de la création d’un nouveau service au se
 
 ```md
 TODO :
-[ ] Generer un nouveau service avec la commande :  npx @nestjs/cli new new-service
+[ ] Generer un nouveau service avec la commande : npx @nestjs/cli new new-service
 [ ] Afficher les dossier caché dans le finder puis supprimer le dossier caché .git du nouveau service
 [ ] Dans le git dif retablir le fichier present /.idea/vsc.xml (laisser le git root en maitre)
 [ ] Supprimer les fichier de base generé par nestjs
@@ -23,13 +23,12 @@ TODO :
 ----[ ] Creer fichier env-config.ts pour la recuperation des .env du root (suivre pattern present dans les autres service)
 ----[ ] Mettre à jour les .env front et root avec l'rl service et port du nouveau service
 [ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
-----[ ] Dockerfile 
+----[ ] Dockerfile
 ----[ ] compose.yaml
 ----[ ] start.sh
-[ ] Creer les tests unitaires 
+[ ] Creer les tests unitaires
 [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier. (suivre le pattern)
 [ ] Mettre à jour les documentations : diagrammes de classes, de séquence, d’architecture, etc.
 ```
-
 
 [summary]: ../README.md

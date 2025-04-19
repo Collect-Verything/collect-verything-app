@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: "*",
+    origin: '*',
     // origin: [`http://${configEnv.DOMAIN}:${configEnv.DOMAIN}`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
@@ -15,7 +15,7 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
-  checkEnvValue()
+  checkEnvValue();
 
   await app.listen(configEnv.CONFIG_PORT);
 }

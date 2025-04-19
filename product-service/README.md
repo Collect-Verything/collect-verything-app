@@ -78,8 +78,14 @@ docker run -p 3005:3005 product-service
 
 ```json
 [
-  { "id": 1, "quantity": 2 },
-  { "id": 5, "quantity": 1 }
+  {
+    "id": 1,
+    "quantity": 2
+  },
+  {
+    "id": 5,
+    "quantity": 1
+  }
 ]
 ```
 
@@ -98,11 +104,13 @@ npm run test:cov
 ## 🔐 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```
 
-Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et
+des autres services si vous utilisez l’application de manière globale.
 
 Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
 

@@ -7,8 +7,8 @@ Pour lancer l'application apres un git clone, effectuer la commande suivante :
 ```zsh
 docker compose up
 ```
-L'application étant un projet d'étude, tous les fichiers .env et de configuration spécifiques sont inclus dans le dépôt. Ainsi, lors du git clone, tous les fichiers nécessaires au lancement de l'application sont déjà présents.
 
+L'application étant un projet d'étude, tous les fichiers .env et de configuration spécifiques sont inclus dans le dépôt. Ainsi, lors du git clone, tous les fichiers nécessaires au lancement de l'application sont déjà présents.
 
 # Logs
 
@@ -29,6 +29,7 @@ docker compose up 2>&1 | tee logs-compose-up.txt
 - Permettre de relire tous les logs du démarrage à tout moment, même après leur disparition dans le terminal.
 
 ### 💡 Astuce :
+
 Tu peux également suivre les logs en direct dans un autre terminal avec :
 
 ```zsh
@@ -42,6 +43,5 @@ tail -f /logs/compose-up.txt
 ```
 docker pull --platform linux/amd64 cansefr/....
 ```
-
 
 [summary]: ../README.md

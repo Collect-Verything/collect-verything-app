@@ -4,7 +4,7 @@
 
 ## Creation, modification & suppression
 
-- La création est effectuée par un utilisateur SUPER_ADMIN et, dans le futur, un super job de type PRODUCT sera également créé. 
+- La création est effectuée par un utilisateur SUPER_ADMIN et, dans le futur, un super job de type PRODUCT sera également créé.
 - L'API Gateway n'étant pas encore implémentée, pour le moment, c'est le front qui effectue les aller-retour entre les services.
 
 ```mermaid
@@ -31,7 +31,7 @@
     STRIPE ->> Facturation Service : Response: From Stripe
     Facturation Service ->> Api Gateway : Response: From service
     Api Gateway ->> Front App : Response: Created Product
-    
+
     Front App ->> Api Gateway : Request
     Api Gateway -->> Auth Service : Request : Check Token
     Auth Service -->> Api Gateway : Response : Valide Token
@@ -39,6 +39,5 @@
     Product Service ->> Api Gateway : Response: Create Product
     Api Gateway ->> Front App : Response: Create Product
 ```
-
 
 [summary]: ../../README.md

@@ -15,12 +15,12 @@ user: guest
 password: guest
 ```
 
-Si vous souhaitez personnaliser ces identifiants, il suffit de modifier le docker compose 
+Si vous souhaitez personnaliser ces identifiants, il suffit de modifier le docker compose
 
 ```yaml
-  environment:
-    RABBITMQ_DEFAULT_USER: admin
-    RABBITMQ_DEFAULT_PASS: supersecret
+environment:
+  RABBITMQ_DEFAULT_USER: admin
+  RABBITMQ_DEFAULT_PASS: supersecret
 ```
 
 [summary]: ../README.md

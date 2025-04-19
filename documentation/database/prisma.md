@@ -1,15 +1,13 @@
 ← [Retourner au sommaire] [summary]
 
-
 NEED TO BE UPDATE DEPENDNG THE NEW PROJECT
-
 
 ## Prisma
 
 If you wish to modify the database, such as a table for example or certain constraints on certain fields. Paying attention to the impact and edge effect that this could have, you must modify the following file
 
-
 ### **prisma/schema.prisma**
+
 ```prisma
 model Article {
   id          Int      @id @default(autoincrement())
@@ -18,8 +16,8 @@ model Article {
 }
 ```
 
-
 ### Migrate the database
+
 With the Prisma schema defined, you will run migrations to create the actual tables in the database. To generate and execute your first migration, run the following command in the terminal:
 
 ```shell
@@ -29,6 +27,7 @@ npx prisma migrate dev --name "NameModification"
 Check the generated migration file to get an idea about what Prisma Migrate is doing behind the scenes:
 
 ### prisma/migrations/20220528101323_init/migration.sql
+
 ```sql
 -- CreateTable
 CREATE TABLE "Article"
@@ -50,6 +49,7 @@ CREATE UNIQUE INDEX "Article_title_key" ON "Article"("title");
 Then you must modify the seed file accordingly
 
 ### prisma/seed.ts
+
 ```ts
 import { PrismaClient } from '@prisma/client';
 
@@ -84,6 +84,5 @@ npx prisma db seed
 You can then visually check your tables to make a check.
 
 Then you need to think about modifying the classes in the front and in the targeted service
-
 
 [summary]: ../README.md

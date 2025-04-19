@@ -1,6 +1,5 @@
 ← [Retourner au sommaire] [summary]
 
-
 # 🏥 Node Env Poke-Center
 
 Étant donné le nombre de services et de paires clé/valeur utilisées pour nos variables d’environnement, ce fichier a pour but de **recenser toutes les variables nécessaires au projet**.
@@ -11,6 +10,7 @@ Cela évitera toute confusion ou oubli susceptible de hanter vos nuits de dével
 👉 Il permet également de garantir une **cohérence entre les services**, notamment lorsque plusieurs d’entre eux partagent les mêmes variables (ex. : ports, URLs, clés d’accès, etc.).
 
 👉 En cas de doute, le README de chaque service contient également la liste des variables d’environnement (key/value) nécessaires à son fonctionnement — à condition qu’il soit bien à jour, bien sûr... 👨🏻‍🎨
+
 ```dotenv
 DOMAIN=localhost
 
@@ -66,7 +66,7 @@ Ci-dessous, la méthode utilisée pour rendre ce diagnostic plus lisible et syst
 ```ts
 export const configEnv = {
   EMAIL_MESSAGE_BROKER: process.env.EMAIL_MESSAGE_BROKER,
-//...
+  //...
 };
 
 export const checkEnvValue = () => {
@@ -81,13 +81,13 @@ export const checkEnvValue = () => {
   });
 
   if (listUndefinedValue.length > 0) {
-    throw new Error(`🚨 Missing environment variables in MAIL SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`);
+    throw new Error(
+      `🚨 Missing environment variables in MAIL SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`
+    );
   }
 
   console.log('✅ All required env variables are defined.');
 };
-
 ```
-
 
 [summary]: ../README.md

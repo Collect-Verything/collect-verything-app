@@ -10,7 +10,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
-  checkEnvValue()
+  checkEnvValue();
 
   await app.listen(configEnv.FACTURATION_PORT);
 }

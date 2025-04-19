@@ -29,7 +29,7 @@ export const configEnv = {
   FACTURATION_URL: process.env.FACTURATION_URL,
 
   // CONFIGURATION
-  DOMAIN_CONFIG:  process.env.DOMAIN_CONFIG,
+  DOMAIN_CONFIG: process.env.DOMAIN_CONFIG,
 
   CONFIG_PORT: process.env.CONFIG_PORT,
   CONFIG_URL: process.env.CONFIG_URL,
@@ -47,7 +47,9 @@ export const checkEnvValue = () => {
   });
 
   if (listUndefinedValue.length > 0) {
-    throw new Error(`🚨 Missing environment variables in API GATEWAY:\n→ ${listUndefinedValue.join('\n→ ')}`);
+    throw new Error(
+      `🚨 Missing environment variables in API GATEWAY:\n→ ${listUndefinedValue.join('\n→ ')}`
+    );
   }
 
   console.log('✅ All required env variables are defined.');

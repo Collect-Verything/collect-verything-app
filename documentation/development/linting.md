@@ -1,6 +1,5 @@
 ← [Retourner au sommaire] [summary]
 
-
 # Linting
 
 Using [ESlint], [`typescript-eslint`][typescript-lint] and several plugins.
@@ -13,6 +12,7 @@ Actually a basic config is set.
 Ce projet utilise une configuration unique et moderne basée sur le **Flat Config (ESLint v9+)**, définie dans le fichier `eslint.config.mjs` à la racine.
 
 Cette configuration permet de :
+
 - Centraliser les règles ESLint pour l’ensemble du projet
 - Gérer facilement plusieurs environnements (NestJS et React)
 - Maintenir une cohérence sans multiplier les fichiers `.eslintrc.*`
@@ -68,16 +68,19 @@ Il est donc préférable de ne garder que `eslint.config.mjs` comme source de co
 Pour analyser le code avec ESLint :
 
 - Projet complet :
+
 ```bash
 npx eslint .
 ```
 
 - Uniquement le front :
+
 ```bash
 npx eslint front-app/
 ```
 
 - Uniquement un service backend :
+
 ```bash
 npx eslint apps/product-service/
 ```
@@ -87,6 +90,7 @@ npx eslint apps/product-service/
 ## 📜 Dépendances nécessaires
 
 La configuration utilise les plugins suivants :
+
 ```bash
 npm install --save-dev eslint @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks globals
 ```
@@ -99,7 +103,6 @@ Ce projet utilise le format Flat Config d’ESLint afin de simplifier et unifier
 La configuration est partagée entre tous les services NestJS et une section spécifique est dédiée à l’application React.
 Cela permet une maintenance facilitée, une cohérence des règles et un usage plus moderne d’ESLint.
 
-
 # 🛠️ CI/CD
 
 Dans le pipeline CI/CD, le problème apparaissait également puisque l’étape de test faisait un npm install dans le dossier front-app, réintroduisant ainsi les mauvaises dépendances.
@@ -107,19 +110,16 @@ Dans le pipeline CI/CD, le problème apparaissait également puisque l’étape 
 Pour contourner ce problème, j’ai modifié le workflow GitHub Actions comme suit :
 
 ```yaml
-      - name: Install dependencies for front-end
-        working-directory: .
-        run: npm install
+- name: Install dependencies for front-end
+  working-directory: .
+  run: npm install
 
-      - name: Run linter in front-end
-        working-directory: ./front-app
-        run: npm run lint
+- name: Run linter in front-end
+  working-directory: ./front-app
+  run: npm run lint
 ```
 
-
-[//]: # "--- Images and links section ---"
+[//]: # '--- Images and links section ---'
 [eslint]: https://eslint.org/
 [typescript-lint]: https://typescript-eslint.io/
-
-
 [summary]: ../README.md

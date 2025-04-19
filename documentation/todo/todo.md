@@ -16,30 +16,37 @@ N'oubliez pas de changer la création des produits atonement avec une récurrenc
 A voire si la visibilité est vraiment pertinente ? Supprimer ...
 
 ### Api gateway
+
 - POur le moment l'api gateway est un reverse proxy passe plat, il faut deplacer la logique aller retour du front dans l'api gate way
 - Ameliorer la logique du free path, actuellement il accepte que auth/login et auth/register, il devra egalement accepter les evenenment stripe exterieur
 
 ### Deploy produit client
+
 Deploiement automatique du site web du client, creer service deploy-service qui recoit un event rabbit mq certainement et qui deploi l'app ...
 
 ### Heberger
+
 AWS EC2 ?
 
 ### Docker
+
 Pull app on server and try to lunch it
 
 ### Kubernetes
+
 Scaling sur l'api gateway
 
 ### Lint
+
 Comprendre la problematique du lien suivant [issue_lint][issue_lint]
 
 ## Facturation
+
 Fixer l'erreur quand liste facture est vide dans facturation/index.tsx
 
 ## Mail Service
-Modifier la methode qui envoit les mails de renouvellement de mot de passe, pour le moment elle envoit sur la boite mail du project
 
+Modifier la methode qui envoit les mails de renouvellement de mot de passe, pour le moment elle envoit sur la boite mail du project
 
 [summary]: ../README.md
 [issue_lint]: ../development/linting.md

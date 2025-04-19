@@ -1,8 +1,6 @@
 ← [Retourner au sommaire] [summary]
 
-
 NEED TO BE UPDATE DEPENDNG THE NEW PROJECT
-
 
 ## Generate
 
@@ -21,6 +19,7 @@ Here is the content of this file:
 ```.env
 DATABASE_URL="mysql://user:password@localhostOrServiceName:PORT/webshop-as"
 ```
+
 We can distinguish that it contains the dialect, username, password, port and name of the database. It's up to you to modify it according to your interest
 
 ## Schema
@@ -28,9 +27,10 @@ We can distinguish that it contains the dialect, username, password, port and na
 If this file is correctly registered, and the drivers and other elements necessary for the operation and reading of the base are present. You can therefore generate this database as well as the data set present in the prisma seed.ts directory with the following command.
 
 Command for base tables 👍
+
 ```sql
 create schema `webshop-as`;
-````
+```
 
 ```shell
 cd apps/api

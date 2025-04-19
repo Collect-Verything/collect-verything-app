@@ -58,6 +58,7 @@ docker run -p 2999:2999 api-gateway
 ## 🔧 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```
@@ -124,4 +125,3 @@ npm run test:cov
 ## 📝 License
 
 Ce projet est sous licence MIT.
-

@@ -54,7 +54,8 @@ export const ForgotPasswordPage = () => {
                         ✅ Votre mot de passe a bien été réinitialisé.
                     </Typography>
                     <Typography variant="h6" color="black" pb={3} align="center">
-                        <br />Consultez votre boîte mail pour le lien de réinitialisation.
+                        <br />
+                        Consultez votre boîte mail pour le lien de réinitialisation.
                     </Typography>
                 </Grid>
             ) : (

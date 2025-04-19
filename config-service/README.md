@@ -13,6 +13,7 @@
 Ce microservice est dédié à la gestion des abonnements utilisateurs via **Stripe**, ainsi qu'à la **configuration des sites web** associés à chaque abonnement.
 
 Il permet notamment de :
+
 - Récupérer et synchroniser les abonnements d’un utilisateur avec Stripe.
 - Mettre à jour ou désactiver les abonnements expirés.
 - Gérer la visibilité (`published`) et la configuration (`configured`) des sites web associés.
@@ -32,16 +33,19 @@ npm install
 ## 🚀 Lancer le service
 
 ### En local :
+
 ```bash
 npm run start:dev
 ```
 
 ### En production :
+
 ```bash
 npm run start:prod
 ```
 
 ### Avec Docker :
+
 ```bash
 docker build -t config-service .
 docker run -p 3004:3004 config-service
@@ -54,6 +58,7 @@ docker run -p 3004:3004 config-service
 ## 🔑 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```
@@ -142,6 +147,7 @@ npm run test:cov
 ## 🛟 Support & Contribution
 
 Pour contribuer à ce microservice, merci de :
+
 - Mettre à jour les commentaires JSDoc et fichiers Swagger si les routes changent.
 - Ajouter un test unitaire pour chaque méthode critique.
 - Valider manuellement l'impact des changements avec l'API Gateway.
@@ -151,4 +157,3 @@ Pour contribuer à ce microservice, merci de :
 ## 📄 License
 
 Ce projet utilise la licence MIT.
-

@@ -8,6 +8,7 @@ Chaque microservice dispose maintenant de son propre fichier `.env`, contenant *
 On utilise un fichier `configEnv.ts` pour centraliser l’accès aux variables d’environnement via `process.env`.
 
 ### 🔧 Chargement automatique
+
 Ne surcharge plus le chemin `.env` dans `dotenv.config()` :
 
 ```ts
@@ -44,7 +45,7 @@ Au démarrage, on vérifie explicitement les variables critiques :
 
 ```ts
 if (!configEnv.PRODUCT_PORT) {
-  throw new Error("❌ Missing PRODUCT_PORT in environment variables");
+  throw new Error('❌ Missing PRODUCT_PORT in environment variables');
 }
 ```
 
@@ -69,6 +70,7 @@ Cela permettait de :
 - simplifier la config de l'API Gateway.
 
 ### ❌ Inconvénients
+
 - Mauvaise isolation des services
 - Impossible de déployer un service indépendamment
 - Fragile en production (les chemins ne tiennent plus)
@@ -82,6 +84,7 @@ Lors du developpement un fichier .env etait présent à la racine du mono-repo p
 Chaque valeur des fichiers .env etait appelée au sein de chaque service via le fichier env-config.ts.
 
 L’exemple ci-dessous montre comment, dans le cadre d’un développement local, j’avais centralisé toutes les variables d’environnement dans un seul fichier.
+
 #### Dans le service
 
 Ici, on peut constater qu’il est possible de surcharger l’emplacement par défaut où l’application va chercher son fichier .env.
@@ -109,6 +112,7 @@ EMAIL_MESSAGE_BROKER=value
 ## ✅ Conclusion
 
 > La centralisation via `configEnv.ts` combinée à un `.env` local par service est aujourd’hui **la méthode retenue** :
+>
 > - plus claire
 > - plus robuste
 > - plus adaptée au déploiement multi-service

@@ -11,7 +11,7 @@ async function bootstrap() {
     // origin: [`http://${configEnv.DOMAIN}:${configEnv.FRONT_PORT}`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
-  checkEnvValue()
+  checkEnvValue();
   await app.listen(configEnv.API_GATEWAY_PORT);
 }
 

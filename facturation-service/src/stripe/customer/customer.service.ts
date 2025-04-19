@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { StripeUserEntity } from './customer.entity';
-import {configEnv} from "../../../env-config";
+import { configEnv } from '../../../env-config';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
@@ -10,7 +10,7 @@ export class StripeCustomerService {
   async create(cleanedRegisterForm: StripeUserEntity) {
     const actualClient = await stripe.customers.list();
     const clientAlreadyExist = actualClient.data.filter(
-      (client) => client.email === cleanedRegisterForm.email,
+      (client) => client.email === cleanedRegisterForm.email
     );
     if (clientAlreadyExist.length > 0) {
       return clientAlreadyExist[0];

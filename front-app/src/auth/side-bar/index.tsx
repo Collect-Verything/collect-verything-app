@@ -8,9 +8,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { DisplayMenuDependingJob } from "./items";
 import { useSelector } from "react-redux";
 import { checkToken, useAppDispatch } from "../../features/authentication-slice";
-import {RootState} from "../../features/store";
+import { RootState } from "../../features/store";
 import CircularProgress from "@mui/material/CircularProgress";
-import {ROLENAME} from "../../common/const/user";
+import { ROLENAME } from "../../common/const/user";
 
 const GAP_MENU_ITEMS_USER = 5;
 
@@ -28,7 +28,7 @@ export const SideBar = () => {
         dispatch(checkToken());
     }, []);
 
-    if(!role)return <CircularProgress />
+    if (!role) return <CircularProgress />;
 
     return (
         <Grid2

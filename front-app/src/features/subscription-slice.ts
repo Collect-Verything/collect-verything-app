@@ -25,7 +25,6 @@ import { CONFIG_SERVICE } from "../app/micro-services";
  * - `useAppDispatch` : hook typé pour dispatch Redux
  */
 
-
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 interface SubscriptionState {

@@ -27,7 +27,9 @@ export const checkEnvValue = () => {
   });
 
   if (listUndefinedValue.length > 0) {
-    throw new Error(`🚨 Missing environment variables in AUTH SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`);
+    throw new Error(
+      `🚨 Missing environment variables in AUTH SERVICE:\n→ ${listUndefinedValue.join('\n→ ')}`
+    );
   }
 
   console.log('✅ All required env variables are defined.');

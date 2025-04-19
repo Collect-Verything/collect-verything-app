@@ -14,11 +14,7 @@ export class AuthController {
 
   @EventPattern(configEnv.FORGOT_PASSWORD_PATTERN)
   handleForgotPassword(@Payload() messageReceived: ForgotPassBrokeObject) {
-    console.log(
-      '📥 Received on queue : --[ ',
-      configEnv.FORGOT_PASSWORD_PATTERN,
-      ' ]--',
-    );
+    console.log('📥 Received on queue : --[ ', configEnv.FORGOT_PASSWORD_PATTERN, ' ]--');
     this.authService.sendForgotPassword(messageReceived);
   }
 }

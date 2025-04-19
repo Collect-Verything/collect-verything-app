@@ -10,7 +10,7 @@ export class StripeCheckoutController {
   @Post('create/:id_stripe')
   async createCheckoutSession(
     @Param('id_stripe') id_stripe: string,
-    @Body() basket: StripeProductEntity[],
+    @Body() basket: StripeProductEntity[]
   ) {
     return this.stripeCheckoutService.createCheckoutSession(id_stripe, basket);
   }

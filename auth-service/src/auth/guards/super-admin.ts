@@ -10,9 +10,7 @@ export interface JwtPayloadWithRoles {
 
 @Injectable()
 export class SuperAdminGuards implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
     const authHeader: Request = request.headers.authorization;
 

@@ -23,8 +23,7 @@ export class AuthService {
       from: process.env.EMAIL_MESSAGE_BROKER,
       // to: messageReceived.email, // Penser a retablir
       to: 'collectverythings@gmail.com',
-      subject:
-        '🔐 Collect & Verything - Réinitialisation de votre mot de passe',
+      subject: '🔐 Collect & Verything - Réinitialisation de votre mot de passe',
       text: `Bonjour,
 
 Voici votre nouveau mot de passe temporaire : ${messageReceived.password}

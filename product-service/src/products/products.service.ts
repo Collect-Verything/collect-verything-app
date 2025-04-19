@@ -41,8 +41,8 @@ export class ProductsService {
         this.prisma.product.update({
           where: { id: item.id },
           data: { stock: { decrement: item.quantity } },
-        }),
-      ),
+        })
+      )
     );
   }
 
