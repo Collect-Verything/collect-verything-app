@@ -36,10 +36,6 @@ Pull app on server and try to lunch it
 
 Scaling sur l'api gateway
 
-### Lint
-
-Comprendre la problematique du lien suivant [issue_lint][issue_lint]
-
 ## Facturation
 
 Fixer l'erreur quand liste facture est vide dans facturation/index.tsx
