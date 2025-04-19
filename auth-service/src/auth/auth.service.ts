@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
@@ -16,7 +12,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private usersService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async login(email: string, password: string): Promise<AuthEntity> {
@@ -89,9 +85,6 @@ export class AuthService {
 
   async forgotPassword(mail: { email: string }) {
     const currentUser = await this.usersService.findOneByMail(mail.email);
-    return await this.usersService.updateForgotPassword(
-      currentUser.id,
-      mail.email,
-    );
+    return await this.usersService.updateForgotPassword(currentUser.id, mail.email);
   }
 }

@@ -1,41 +1,47 @@
 ← [Retourner au sommaire principal] [main-summary]
 
-
 # Documentation for Webshop-As
 
 ## Summary
 
 - Development
+
   - [Linting][linting]
   - [Mono Repo][monorepo]
   - [Prettier][prettier]
   - [Environment][env]
   - [Environment Poke-Center][env-center]
- 
+
 - Deployment:
+
   - [CI][ci]
   - [CD][cd]
 
 - Database:
+
   - [Prisma][Prisma]
   - [Seed][Seed]
 
 - Service :
+
   - [Step Service creation][step-create-service]
   - [Action Creation service][action-creation-service]
 
 - Docker :
+
   - [Docker Compose][docker]
 
 - General
+
   - [Glossary] [glossary]
   - [Rules] [rules]
 
 - Workflow
-  - Stripe 
+
+  - Stripe
     - [Facturation] [facturation]
     - [Subscription] [subscription]
- 
+
 - Diagrams
   - Databases
     - [Authentication] [auth-database]
@@ -51,7 +57,7 @@
 - Todo
   - [todo][todo]
 
-[//]: # "--- Images and links section ---"
+[//]: # '--- Images and links section ---'
 [linting]: development/linting.md
 [monorepo]: development/mono-repo.md
 [dev-and-prod]: general/dev-and-prod.md
@@ -79,7 +85,4 @@
 [product-sequences]: diagrams/sequence-diagrams/product.md
 [facturation-sequences]: diagrams/sequence-diagrams/facturation.md
 [archi-app]: diagrams/architecture/application.md
-
 [main-summary]: ../README.md
-
-

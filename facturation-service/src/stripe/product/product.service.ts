@@ -53,9 +53,7 @@ export class StripeProductService {
       return product;
     } catch (error) {
       console.error('Erreur lors de la mise à jour du produit :', error);
-      throw new Error(
-        'Une erreur est survenue lors de la mise à jour du produit.',
-      );
+      throw new Error('Une erreur est survenue lors de la mise à jour du produit.');
     }
   }
 }

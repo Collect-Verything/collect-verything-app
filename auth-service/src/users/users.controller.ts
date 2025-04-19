@@ -12,12 +12,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {
-  ApiBearerAuth,
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
 import { SuperAdminGuards } from '../auth/guards/super-admin';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
@@ -72,10 +67,7 @@ export class UsersController {
   @Patch(':id')
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
-  async update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
@@ -84,7 +76,7 @@ export class UsersController {
   @ApiBearerAuth()
   async updateStripeUserId(
     @Param('userId', ParseIntPipe) userId: number,
-    @Param('stripeId') stripeId: string,
+    @Param('stripeId') stripeId: string
   ) {
     return this.usersService.updateUserIdStripe(userId, stripeId);
   }
@@ -94,11 +86,9 @@ export class UsersController {
   @ApiCreatedResponse({ type: UserEntity })
   async updatePassword(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updatePasswordDto: UpdateUserPasswordDto,
+    @Body() updatePasswordDto: UpdateUserPasswordDto
   ) {
-    return new UserEntity(
-      await this.usersService.updatePassword(id, updatePasswordDto),
-    );
+    return new UserEntity(await this.usersService.updatePassword(id, updatePasswordDto));
   }
 
   @Delete(':id')

@@ -10,12 +10,9 @@ export class ConfigurationController {
   @Post(':sub_stripe_id')
   assignConfigToSub(
     @Param('sub_stripe_id') sub_stripe_id: string,
-    @Body() createConfigurationDto: CreateConfigurationDto,
+    @Body() createConfigurationDto: CreateConfigurationDto
   ) {
-    return this.configurationService.create(
-      sub_stripe_id,
-      createConfigurationDto,
-    );
+    return this.configurationService.create(sub_stripe_id, createConfigurationDto);
   }
 
   @Get()

@@ -21,10 +21,10 @@ Ce service gère l’**authentification**, la **création d’utilisateurs** et 
 
 ---
 
-
 ## 🔧 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```
@@ -87,7 +87,7 @@ docker run -p 3001:3001 auth-service
 ### ➤ 1. Modifier la variable dans `.env`
 
 ```ts
-DATABASE_URL = "mysql://user:password@localhost:3306/auth-db?schema=public"
+DATABASE_URL = 'mysql://user:password@localhost:3306/auth-db?schema=public';
 ```
 
 ### ➤ 2. Appliquer les migrations Prisma
@@ -152,4 +152,3 @@ npm run test:cov
 ## 📝 License
 
 Ce projet est sous licence MIT.
-

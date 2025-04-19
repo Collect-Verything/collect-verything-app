@@ -22,7 +22,7 @@ import { configEnv } from '../../env-config';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   @Post('login')

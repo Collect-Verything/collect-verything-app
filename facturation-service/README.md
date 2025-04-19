@@ -13,6 +13,7 @@
 ## 🧾 Description
 
 Ce service est en charge de toute la logique liée à **Stripe** :
+
 - Création et mise à jour des produits (abonnement ou vente).
 - Gestion des clients et des sessions de paiement.
 - Réception et traitement des événements Stripe (factures, paiements).
@@ -54,6 +55,7 @@ docker run -p 3005:3005 facturation-service
 ## 📁 Fonctionnalités principales
 
 ### ➕ Création de produit Stripe
+
 ```ts
 stripeProductService.createProduct(product);
 ```
@@ -62,6 +64,7 @@ stripeProductService.createProduct(product);
 - Gestion automatique du `default_price`.
 
 ### 🔄 Mise à jour des produits
+
 ```ts
 stripeProductService.updateProduct(product);
 ```
@@ -70,6 +73,7 @@ stripeProductService.updateProduct(product);
 - Création d'un nouveau prix si nécessaire.
 
 ### ❌ Suppression d’un produit
+
 ```ts
 stripeProductService.deleteProduct(stripeId);
 ```
@@ -79,9 +83,11 @@ stripeProductService.deleteProduct(stripeId);
 ### 📑 Factures
 
 #### Enregistrement automatique via les événements Stripe
+
 Les webhooks Stripe `invoice` et `payment_intent` sont interceptés puis stockés dans la base de données.
 
 #### Récupération des factures d’un utilisateur
+
 ```ts
 stripeInvoiceService.getUserInvoices(customerId);
 ```
@@ -91,6 +97,7 @@ stripeInvoiceService.getUserInvoices(customerId);
 ### 👤 Clients Stripe
 
 Création de clients Stripe si inexistant :
+
 ```ts
 stripeCustomerService.create(cleanedUserData);
 ```
@@ -100,6 +107,7 @@ stripeCustomerService.create(cleanedUserData);
 ### 💳 Paiement via Checkout
 
 Génération d’une session de paiement :
+
 ```ts
 stripeCheckoutService.createCheckoutSession(customerId, basket);
 ```
@@ -112,6 +120,7 @@ stripeCheckoutService.createCheckoutSession(customerId, basket);
 ## 🔐 Configuration
 
 Ce projet utilise un fichier configEnv pour centraliser toutes les variables issues du .env, afin de faciliter le débogage et la gestion des configurations.
+
 ```
 src/env-config.ts
 ```

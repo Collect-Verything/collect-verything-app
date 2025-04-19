@@ -14,7 +14,7 @@ async function bootstrap() {
     },
   });
 
-  checkEnvValue()
+  checkEnvValue();
 
   await app.startAllMicroservices();
 }

@@ -2,9 +2,9 @@ name: Config-Service CI
 
 on:
   push:
-    branches: [ "main", "dev"]
+    branches: ['main', 'dev']
   pull_request:
-    branches: [ "main", "dev"]
+    branches: ['main', 'dev']
 
 jobs:
   lint:
@@ -55,8 +55,8 @@ jobs:
   build-and-push:
     if: github.ref == 'refs/heads/main' || github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
-    needs: [ test ]
-#    needs: [ lint, test ]
+    needs: [test]
+    #    needs: [ lint, test ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

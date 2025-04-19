@@ -22,19 +22,13 @@ export class SubscriptionController {
   }
 
   @Patch('configure/:sub_id/:is_active')
-  configuredSubById(
-    @Param('sub_id') sub_id: string,
-    @Param('is_active') is_active: string,
-  ) {
+  configuredSubById(@Param('sub_id') sub_id: string, @Param('is_active') is_active: string) {
     const isActiveBoolean = is_active === 'true';
     return this.subscriptionService.configureSubById(sub_id, isActiveBoolean);
   }
 
   @Patch('publish/:sub_id/:is_publish')
-  publishWebSiteById(
-    @Param('sub_id') sub_id: string,
-    @Param('is_publish') is_publish: string,
-  ) {
+  publishWebSiteById(@Param('sub_id') sub_id: string, @Param('is_publish') is_publish: string) {
     const isPublishBoolean = is_publish === 'true';
     return this.subscriptionService.publishWebSite(sub_id, isPublishBoolean);
   }

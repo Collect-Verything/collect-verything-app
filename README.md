@@ -11,8 +11,6 @@
   </p>
 </div>
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>📚 Table of Contents</summary>
@@ -38,9 +36,8 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 This project was undertaken as a personal study and research. Please note that some components may not be aligned with best practices. I draw the attention of those considering using this project for commercial purposes to this consideration.
@@ -85,7 +82,6 @@ As part of this project, my goal is to implement the essential functionalities o
 - **📢 Mail Alerts & Newsletters**  
   Système d’alerte par e-mail lors d’évènements importants et campagnes marketing (newsletter).
 
-
 ### 🎁 Bonus Features:
 
 - **🔔 Smart Notifications**  
@@ -97,25 +93,25 @@ As part of this project, my goal is to implement the essential functionalities o
 - **📝 Reviews & Ratings (à venir)**  
   Possibilité pour les utilisateurs de laisser des avis textuels et des notes sur les produits achetés afin d’enrichir l’expérience communautaire.
 
-- **🌍 Multilingual Support** *(prévu)*  
+- **🌍 Multilingual Support** _(prévu)_  
   Interface traduite dans les langues les plus courantes : anglais, français, espagnol, allemand, mandarin, japonais, arabe, portugais, russe, hindi.
 
 - **🌗 Light/Dark Mode**  
   Personnalisation complète de l’interface utilisateur selon les préférences visuelles : mode clair ou sombre.
 
-- **🎯 Loyalty Program** *(prévu)*  
+- **🎯 Loyalty Program** _(prévu)_  
   Programme de fidélité offrant des récompenses et réductions aux clients réguliers.
 
-- **🔐 Social Login** *(Google)*  
+- **🔐 Social Login** _(Google)_  
   Connexion simplifiée via Google pour accélérer l'inscription et améliorer l’accessibilité.
 
-- **🧠 Personalized Recommendations** *(à venir)*  
+- **🧠 Personalized Recommendations** _(à venir)_  
   Recommandations de produits dynamiques basées sur l’historique de navigation et d’achat.
 
 - **📱 Social Media Integration**  
   Partage facile de produits sur les réseaux sociaux, avec prévisualisation adaptée.
 
-- **💬 Live Chat Support** *(prévu)*  
+- **💬 Live Chat Support** _(prévu)_  
   Système de support client en temps réel intégré pour répondre rapidement aux questions des utilisateurs.
 
 - **🚚 Flexible Shipping Options**  
@@ -124,7 +120,7 @@ As part of this project, my goal is to implement the essential functionalities o
 - **❓ FAQ Page**  
   Accès à une page de questions fréquentes pour accompagner les utilisateurs dans leur parcours d’achat.
 
-- **🤝 Affiliate Program** *(prévu)*  
+- **🤝 Affiliate Program** _(prévu)_  
   Mise en place d’un système d’affiliation permettant aux utilisateurs de générer des revenus via des recommandations.
 
 - **⚡ Flash Sales & Promotions**  
@@ -136,21 +132,22 @@ As part of this project, my goal is to implement the essential functionalities o
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
+
 ## 🛠 Built With
 
-* [![NestJs][NestJs]][Next-url]
-* [![Prisma][Prisma]][Prisma-url]
-* [![Docker][Docker]][Docker-url]
-* [![MySql][MySql]][MySql-url]
-* [![React][React.js]][React-url]
-* [![Npm][Npm]][Npm-url]
-* [![Mui][Mui]][Mui-url]
-* [![RabbitMQ][Rabbit-MQ]][RabbitMQ]
+- [![NestJs][NestJs]][Next-url]
+- [![Prisma][Prisma]][Prisma-url]
+- [![Docker][Docker]][Docker-url]
+- [![MySql][MySql]][MySql-url]
+- [![React][React.js]][React-url]
+- [![Npm][Npm]][Npm-url]
+- [![Mui][Mui]][Mui-url]
+- [![RabbitMQ][Rabbit-MQ]][RabbitMQ]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 Since the application is a study project, all the specific .env and configuration files are included in the repository. Therefore, when you git clone it, all the files needed to launch the application are already present.
@@ -158,6 +155,7 @@ Since the application is a study project, all the specific .env and configuratio
 But for your information here is the composition of the .env files needed for the project
 
 ### 📦 Prerequisites
+
 - Node.js (v20 recommended)
 - Docker
 - [Read The Fucking Documentation] [rtfm]
@@ -181,29 +179,33 @@ DOMAIN=localhost
 #etc...
 ```
 
-Since React doesn't support .env files outside of its own folder, it's necessary to place an .env file directly in the root directory of the React application. Additionally, each environment variable must be prefixed with REACT_APP_ to be accessible in the code.
+Since React doesn't support .env files outside of its own folder, it's necessary to place an .env file directly in the root directory of the React application. Additionally, each environment variable must be prefixed with REACT*APP* to be accessible in the code.
 
 ```dotenv
 REACT_APP_DOMAIN=localhost
 #etc...
 ```
 
-- Auth: 
+- Auth:
+
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-auth?schema=public"
 ```
 
 - Facturation:
+
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-facture?schema=public"
 ```
 
 - Product:
+
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?schema=public"
 ```
 
 - Config:
+
 ```env
 DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?schema=public"
 ```
@@ -220,11 +222,10 @@ docker compose up 2>&1 | tee logs-compose-up.txt
 
 It is therefore possible to launch a single service or to setup the basis of a single service by referring to the existing script
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- CONTRIBUTING -->
+
 ## 🤝 Contributing
 
 Any contributions, bug reports, or feature requests are welcome. Feel free to fork and open a PR.
@@ -236,12 +237,13 @@ Any contributions, bug reports, or feature requests are welcome. Feel free to fo
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## 📄 License
 
 Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for more information.
 
-
 <!-- CONTACT -->
+
 ## 📬 Contact
 
 - Canse – [GitHub](https://github.com/CanseFr)
@@ -250,14 +252,14 @@ Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for
 - Ishak – [GitHub](https://github.com/Ishak-rav)
 
 ---
-<p align="center">Made with ❤️ by the Collect & Verything team.</p>
 
+<p align="center">Made with ❤️ by the Collect & Verything team.</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [NestJs]: https://img.shields.io/badge/nestJs-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=61DAFB
@@ -265,6 +267,7 @@ Distributed under the Creative Commons Legal Code License. See `LICENSE.txt` for
 [Vite]: https://img.shields.io/badge/Vite-000000?style=for-the-badge&logo=vite&logoColor=e6d92e
 [Vite-url]: https://vitejs.dev/
 [Turbo]: https://img.shields.io/badge/Turbo-000000?style=for-the-badge&logo=turbo&logoColor=d93dc7
+
 [Turbo-url]: [https://vitejs.dev/](https://turbo.build/)https://turbo.build/
 [Prisma]: https://img.shields.io/badge/Prisma-000000?style=for-the-badge&logo=prisma&logoColor=8052ab
 [Prisma-url]: https://www.prisma.io/

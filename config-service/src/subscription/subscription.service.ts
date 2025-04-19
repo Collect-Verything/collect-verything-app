@@ -73,7 +73,7 @@ export class SubscriptionService {
             current_period_end: sub.current_period_end,
           },
         });
-      }),
+      })
     );
   }
 

@@ -1,8 +1,8 @@
 ← [Retourner au sommaire] [summary]
 
-# Authentication workflows  
+# Authentication workflows
 
-## Register 
+## Register
 
 (Branche en cours de developpement au niveau de l'implementation AMQP: mette a jour quand terminé)
 
@@ -30,6 +30,7 @@
 ```
 
 ## Login
+
 ```mermaid
     sequenceDiagram
     box  Client
@@ -69,11 +70,10 @@
     Front App->>Api Gateway: Request: Forgot Password
     Api Gateway->>Auth Service : Request: Generate Password
     Auth Service-->>Mail Service : AMQP: Generate link
-    Mail Service-->>User Mail : SMTP: Request 
+    Mail Service-->>User Mail : SMTP: Request
     Auth Service->>Api Gateway : Response: Generate Password
     Api Gateway->>Front App : Response: Forgot Password
-    User Mail-->>Front App : Request: Link password 
+    User Mail-->>Front App : Request: Link password
 ```
-
 
 [summary]: ../../README.md

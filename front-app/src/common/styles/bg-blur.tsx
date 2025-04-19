@@ -5,8 +5,8 @@ interface BackgroundBlurPngProps {
     blur?: string;
     rotate?: string;
 }
-export const BackgroundBlurPng = ({ url,blur="1.5",rotate= "0" }: BackgroundBlurPngProps) => {
-    return(
+export const BackgroundBlurPng = ({ url, blur = "1.5", rotate = "0" }: BackgroundBlurPngProps) => {
+    return (
         <Grid
             sx={{
                 backgroundImage: `url(${process.env.PUBLIC_URL}/${url})`,
@@ -19,8 +19,8 @@ export const BackgroundBlurPng = ({ url,blur="1.5",rotate= "0" }: BackgroundBlur
                 left: 0,
                 filter: `blur(${blur}rem)`,
                 zIndex: -1,
-                transform: `rotate(${rotate}deg)`
+                transform: `rotate(${rotate}deg)`,
             }}
         ></Grid>
-    )
-}
+    );
+};

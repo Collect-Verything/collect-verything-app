@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Grid2, Typography } from "@mui/material";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
-import {URL_FRONT} from "../../app/router/const";
+import { URL_FRONT } from "../../app/router/const";
 
 // const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 //
@@ -64,9 +64,9 @@ const StripeStatusPayement = () => {
                     Paiement effectué avec succès <DoneOutlineIcon color="success" />
                 </Typography>
 
-
                 <Typography variant="h5">
-                    SI L`&apos;APPLICATION N`&apos;EST PAS EN PROD, PENSER A SIMULER L`&apos;EVENEMENT FACTURATION AVEC POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
+                    SI L`&apos;APPLICATION N`&apos;EST PAS EN PROD, PENSER A SIMULER L`&apos;EVENEMENT FACTURATION AVEC
+                    POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
                 </Typography>
             </Grid2>
             <Grid2>

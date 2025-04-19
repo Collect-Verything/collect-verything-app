@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { URL_FRONT } from "../../../app/router/const";
 import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
-import {RootState} from "../../../features/store";
+import { RootState } from "../../../features/store";
 
 interface PaiementCardProps {
     totalPrice: number;

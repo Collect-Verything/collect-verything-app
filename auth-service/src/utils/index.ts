@@ -5,8 +5,7 @@
  * @returns Une chaîne de caractères représentant le mot de passe généré
  */
 export const generateRandomPassword = (passwordLength: number): string => {
-  const CHARACTERS =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@+=-_()&';
+  const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@+=-_()&';
 
   return Array.from({ length: passwordLength }, () => {
     const randomIndex = Math.floor(Math.random() * CHARACTERS.length);

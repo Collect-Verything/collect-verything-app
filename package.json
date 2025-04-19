@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint .",
     "format:all": "npm run format:auth && npm run format:mail && npm run format:facturation && npm run format:api && npm run format:front && npm run format:config && npm run format:product",
     "format:auth": "cd auth-service && npm run format",
     "format:mail": "cd mail-service && npm run format",
@@ -14,10 +14,12 @@
     "format:product": "cd product-service && npm run format"
   },
   "devDependencies": {
-    "@eslint/js": "^9.10.0",
-    "eslint": "^9.10.0",
-    "eslint-plugin-react": "^7.36.1",
-    "globals": "^15.9.0",
-    "typescript-eslint": "^8.6.0"
+    "@eslint/js": "^9.25.0",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.30.1"
   }
 }

@@ -1,18 +1,18 @@
 ← [Retourner au sommaire] [summary]
 
-
 # Creation d'un service
 
 Si l'on souhaite creer un service il est necessaire de :
 
 ## Creer un service dans le root du mono repo
+
 ```bash
  npx @nestjs/cli new new-service
 ```
 
 ## Creation des scripts pour la pour setup l'app en mode dev rapidement [Deprecated]
 
-*Install* :
+_Install_ :
 
 ```json
       "__INSTALL__":"", # Permet un reperage plus facile par section
@@ -21,10 +21,11 @@ Si l'on souhaite creer un service il est necessaire de :
     "install:auth": "cd auth-service && npm install",
     "install:new-service": "cd new-service && npm install", # Ajout du script installation depuis le root
 
-    "install:all": "npm run install:front & npm run install:auth & npm run install:new-service", # Ajout script install all 
+    "install:all": "npm run install:front & npm run install:auth & npm run install:new-service", # Ajout script install all
 ```
 
-*Run start* : 
+_Run start_ :
+
 ```json
         "__NEW SERVICE__": "",
 
@@ -33,27 +34,30 @@ Si l'on souhaite creer un service il est necessaire de :
 
 ```
 
-*Database* : 
+_Database_ :
+
 ```json
     "generate:auth": "cd auth-service && npx prisma migrate dev --name \"Setup auth db\"",
     "seed:auth": "cd auth-service && npx prisma db seed",
     "db:auth": "npm run generate:auth && npm run seed:auth",
-    
+
     "generate:new-service": "cd new-service && npx prisma migrate dev --name \"Setup new-service db\"", # Ajout script de migration si existant puis ...
-    "seed:new-service": "cd new-service && npx prisma db seed", # $*$ Ajout commande seed du service 
+    "seed:new-service": "cd new-service && npx prisma db seed", # $*$ Ajout commande seed du service
     "db:new-service": "npm run generate:new-service && npm run seed:new-service", # Script de la generation du service
 
     "db:all": "npm run db:auth & npm run db:new-service",  # Ajout du run global du serice crée
 ```
 
 Attention pour pouvoir executer ces commandes il est necessaire que dans le package.json du nouveau service generé les commandes suivante soit crée pour les scripts possedant une $*$ :
+
 ```json
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   }
 ```
 
-*Start all*
+_Start all_
+
 ```json
         "__START__": "",
 
@@ -61,7 +65,7 @@ Attention pour pouvoir executer ces commandes il est necessaire que dans le pack
     "start:dev": "npm run start:front & npm run start:auth-dev & npm run start:new-service"
 ```
 
-## Docker 
+## Docker
 
 Mettre a jour le compose et creer le Dockerfile
 
@@ -71,21 +75,24 @@ Dans le fichier .env à la racine du monorepo il faut assigner un port au nouvea
 
 ```env
 AUTH_PORT=3001
-NEW_SERVICE_PORT=666  Trouver un port disponible et logique 
+NEW_SERVICE_PORT=666  Trouver un port disponible et logique
 ```
 
 Nous devons ensuite assigner ce nouveau port a notre nouveau service qui possede un port par defaut, pour cela il faut creer le fichier suivant à la racine du dossier de notre nouveau service :
+
 ```bash
 cd new-service
 touch env-config.ts
 ```
 
 Installer la dependance dotenv:
+
 ```bash
 npm i dotenv
 ```
 
-Puis saisir le code suivant : 
+Puis saisir le code suivant :
+
 ```ts
 import * as dotenv from 'dotenv';
 import * as path from 'path';
@@ -97,7 +104,8 @@ export const configEnv = {
 };
 ```
 
-Maintenant que nous avons crée un object comportant le port que l'on souhaite, il suffit simplement de l'ajouter dans le main de notre nouveau service  :
+Maintenant que nous avons crée un object comportant le port que l'on souhaite, il suffit simplement de l'ajouter dans le main de notre nouveau service :
+
 ```bash
 #new-service/src/main.ts
 
@@ -113,15 +121,14 @@ Maintenant on peut lancer toute les app ou le service souhaité via nos script d
 
 ```bash
 npm run start:new_solution-dev
-# ou alors 
+# ou alors
 npm run start:dev
 ```
 
-*Git*:
+_Git_:
 Attention à bien supprimer le dossier .git du nouveau projet afin que le monorepo garde la main sur l'intégralité depuis la racine.
 
-
-*Docker* : 
+_Docker_ :
 
 Copier-coller les fichiers suivant present dans un service deja existant puis les ajuster selon le service
 
@@ -131,6 +138,5 @@ Copier-coller les fichiers suivant present dans un service deja existant puis le
 - start.sh
 
 Puis ajouter au compose.yaml du root le nouveau service puis sa base de donnée, attention à dercerner un nouveau port pour la base de donnée.
-
 
 [summary]: ../README.md

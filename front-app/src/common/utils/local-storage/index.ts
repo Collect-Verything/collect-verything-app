@@ -1,16 +1,13 @@
-import {Dispatch, SetStateAction} from "react";
+import { Dispatch, SetStateAction } from "react";
 
-export function setFromLocalStorage<T>(
-    key: string,
-    objectSetter: Dispatch<SetStateAction<T>>
-): void {
+export function setFromLocalStorage<T>(key: string, objectSetter: Dispatch<SetStateAction<T>>): void {
     try {
         const objectFromStorage = localStorage.getItem(key);
 
         if (objectFromStorage) {
             const parsedObject = JSON.parse(objectFromStorage) as T;
 
-            if (parsedObject && typeof parsedObject === 'object') {
+            if (parsedObject && typeof parsedObject === "object") {
                 objectSetter(parsedObject);
             } else {
                 console.warn(`La valeur pour la clé "${key}" n'est pas un objet valide.`);

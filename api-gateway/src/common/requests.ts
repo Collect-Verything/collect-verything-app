@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { domainServiceByPath, portByPath } from './const';
 
 export const toolRequest = (
-  request: Request,
+  request: Request
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<AxiosResponse<any, any>> => {
   return axios({

@@ -1,6 +1,5 @@
 ← [Retourner au sommaire] [summary]
 
-
 # Configuration Database
 
 Le service de configuration est d'abord représenté par une souscription, puis une souscription peut ensuite être configurée.
@@ -32,6 +31,5 @@ classDiagram
 
 
 ```
-
 
 [summary]: ../../README.md

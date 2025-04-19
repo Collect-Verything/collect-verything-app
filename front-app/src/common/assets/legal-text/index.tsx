@@ -9,10 +9,11 @@ export const GeneralConditionsOfUse = () => {
                     1. Introduction
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Bienvenue sur [Nom du site] (ci-après &ldquo;le Site&ldquo;). Les présentes Conditions Générales d&apos;Utilisation
-                    (CGU) régissent l&apos;accès et l&apos;utilisation du Site ainsi que les services proposés par [Nom de
-                    l&apos;entreprise] (ci-après &ldquo;nous&ldquo;, &ldquo;notre&ldquo; ou &ldquo;nos&ldquo;). En utilisant le Site, vous acceptez les présentes
-                    CGU dans leur intégralité. Si vous n&apos;acceptez pas ces termes, veuillez ne pas utiliser notre Site.
+                    Bienvenue sur [Nom du site] (ci-après &ldquo;le Site&ldquo;). Les présentes Conditions Générales
+                    d&apos;Utilisation (CGU) régissent l&apos;accès et l&apos;utilisation du Site ainsi que les services
+                    proposés par [Nom de l&apos;entreprise] (ci-après &ldquo;nous&ldquo;, &ldquo;notre&ldquo; ou
+                    &ldquo;nos&ldquo;). En utilisant le Site, vous acceptez les présentes CGU dans leur intégralité. Si
+                    vous n&apos;acceptez pas ces termes, veuillez ne pas utiliser notre Site.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -29,9 +30,10 @@ export const GeneralConditionsOfUse = () => {
                     3. Accès au Site
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    L&apos;accès au Site est gratuit. Toutefois, l&apos;utilisation de certains services peut être conditionnée à
-                    la création d&apos;un compte utilisateur et/ou à des paiements. Nous nous réservons le droit de modifier,
-                    suspendre ou interrompre l&apos;accès au Site, en tout ou en partie, à tout moment et sans préavis.
+                    L&apos;accès au Site est gratuit. Toutefois, l&apos;utilisation de certains services peut être
+                    conditionnée à la création d&apos;un compte utilisateur et/ou à des paiements. Nous nous réservons
+                    le droit de modifier, suspendre ou interrompre l&apos;accès au Site, en tout ou en partie, à tout
+                    moment et sans préavis.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -58,18 +60,19 @@ export const GeneralConditionsOfUse = () => {
                     6. Paiement
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Le paiement des achats effectués sur le Site s&apos;effectue via les moyens de paiement proposés lors de
-                    la commande. Vous vous engagez à utiliser uniquement des moyens de paiement légaux et à jour.
+                    Le paiement des achats effectués sur le Site s&apos;effectue via les moyens de paiement proposés
+                    lors de la commande. Vous vous engagez à utiliser uniquement des moyens de paiement légaux et à
+                    jour.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
                     7. Droit de Rétractation
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Conformément à la législation en vigueur, vous disposez d&apos;un droit de rétractation de [indiquez la
-                    période légale, par exemple 14 jours] à compter de la réception de votre commande. Pour exercer ce
-                    droit, vous devez nous notifier par [précisez la méthode, par exemple e-mail, formulaire en ligne]
-                    votre décision de vous rétracter. Les frais de retour sont à votre charge, sauf en cas de
+                    Conformément à la législation en vigueur, vous disposez d&apos;un droit de rétractation de [indiquez
+                    la période légale, par exemple 14 jours] à compter de la réception de votre commande. Pour exercer
+                    ce droit, vous devez nous notifier par [précisez la méthode, par exemple e-mail, formulaire en
+                    ligne] votre décision de vous rétracter. Les frais de retour sont à votre charge, sauf en cas de
                     non-conformité des produits.
                 </Typography>
 
@@ -87,9 +90,9 @@ export const GeneralConditionsOfUse = () => {
                 </Typography>
                 <Typography variant="body1" paragraph>
                     Nous attachons une grande importance à la protection de vos données personnelles. Vos données sont
-                    collectées et traitées conformément à notre [Politique de Confidentialité]. Vous disposez d&apos;un droit
-                    d&apos;accès, de rectification et de suppression de vos données personnelles que vous pouvez exercer en
-                    nous contactant à [adresse e-mail ou formulaire de contact].
+                    collectées et traitées conformément à notre [Politique de Confidentialité]. Vous disposez d&apos;un
+                    droit d&apos;accès, de rectification et de suppression de vos données personnelles que vous pouvez
+                    exercer en nous contactant à [adresse e-mail ou formulaire de contact].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -98,8 +101,8 @@ export const GeneralConditionsOfUse = () => {
                 <Typography variant="body1" paragraph>
                     Nous nous efforçons de garantir que le Site est accessible en permanence et que les informations
                     disponibles sont exactes et à jour. Toutefois, nous ne pouvons garantir l&apos;absence de bugs ou
-                    d&apos;erreurs, ni une disponibilité continue du Site. Nous ne serons pas tenus responsables des dommages
-                    indirects, pertes de données ou pertes financières découlant de l&apos;utilisation du Site.
+                    d&apos;erreurs, ni une disponibilité continue du Site. Nous ne serons pas tenus responsables des
+                    dommages indirects, pertes de données ou pertes financières découlant de l&apos;utilisation du Site.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -116,8 +119,8 @@ export const GeneralConditionsOfUse = () => {
                 </Typography>
                 <Typography variant="body1" paragraph>
                     Les présentes CGU sont régies par le droit [indiquez le pays, par exemple français]. Tout litige
-                    relatif à l&apos;interprétation ou à l&apos;exécution des présentes sera de la compétence exclusive des
-                    tribunaux [précisez la juridiction compétente].
+                    relatif à l&apos;interprétation ou à l&apos;exécution des présentes sera de la compétence exclusive
+                    des tribunaux [précisez la juridiction compétente].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -170,9 +173,10 @@ export const PrivacyPolicy = () => {
                     3. Partage des Informations
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Nous ne vendons, n&apos;échangeons, ni ne louons vos informations personnelles à des tiers. Nous pouvons
-                    partager vos informations avec des partenaires de confiance pour traiter vos commandes ou vous
-                    fournir certains services, sous réserve qu&apos;ils acceptent de garder ces informations confidentielles.
+                    Nous ne vendons, n&apos;échangeons, ni ne louons vos informations personnelles à des tiers. Nous
+                    pouvons partager vos informations avec des partenaires de confiance pour traiter vos commandes ou
+                    vous fournir certains services, sous réserve qu&apos;ils acceptent de garder ces informations
+                    confidentielles.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -180,9 +184,9 @@ export const PrivacyPolicy = () => {
                 </Typography>
                 <Typography variant="body1" paragraph>
                     Nous mettons en œuvre diverses mesures de sécurité pour protéger vos informations personnelles.
-                    Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n&apos;est totalement
-                    sécurisée. Par conséquent, bien que nous nous efforcions de protéger vos informations personnelles,
-                    nous ne pouvons garantir leur sécurité absolue.
+                    Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n&apos;est
+                    totalement sécurisée. Par conséquent, bien que nous nous efforcions de protéger vos informations
+                    personnelles, nous ne pouvons garantir leur sécurité absolue.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -191,8 +195,9 @@ export const PrivacyPolicy = () => {
                 <Typography variant="body1" paragraph>
                     Notre site utilise des cookies pour améliorer votre expérience en ligne. Un cookie est un fichier
                     texte placé sur votre appareil pour collecter des informations standard sur l&apos;internaute et des
-                    informations sur le comportement du visiteur. Vous pouvez configurer votre navigateur pour qu&apos;il
-                    n&apos;accepte pas les cookies, mais cela pourrait limiter certaines fonctionnalités de notre site.
+                    informations sur le comportement du visiteur. Vous pouvez configurer votre navigateur pour
+                    qu&apos;il n&apos;accepte pas les cookies, mais cela pourrait limiter certaines fonctionnalités de
+                    notre site.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -234,17 +239,17 @@ export const LegalNotices = () => {
             <Box mt={4}>
                 <Typography variant="body1" paragraph>
                     Conformément aux dispositions des articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la
-                    Confiance dans l&apos;économie numérique, dite L.C.E.N., il est porté à la connaissance des utilisateurs
-                    et visiteurs du site [Nom du site] les présentes mentions légales.
+                    Confiance dans l&apos;économie numérique, dite L.C.E.N., il est porté à la connaissance des
+                    utilisateurs et visiteurs du site [Nom du site] les présentes mentions légales.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
                     1. Éditeur du Site
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Le site [Nom du site] est édité par [Nom de l&apos;entreprise], société [forme juridique] au capital de
-                    [montant du capital social], inscrite au Registre du Commerce et des Sociétés sous le numéro [numéro
-                    RCS], dont le siège social est situé à [adresse du siège social].
+                    Le site [Nom du site] est édité par [Nom de l&apos;entreprise], société [forme juridique] au capital
+                    de [montant du capital social], inscrite au Registre du Commerce et des Sociétés sous le numéro
+                    [numéro RCS], dont le siège social est situé à [adresse du siège social].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -277,24 +282,24 @@ export const LegalNotices = () => {
                     5. Responsabilité
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    [Nom de l&apos;entreprise] ne saurait être tenue pour responsable des erreurs rencontrées sur le site, de
-                    problèmes techniques, d&apos;interprétation des informations publiées et des conséquences de leur
-                    utilisation. L&apos;utilisateur reconnaît utiliser les informations présentes sur le site sous sa
-                    responsabilité exclusive.
+                    [Nom de l&apos;entreprise] ne saurait être tenue pour responsable des erreurs rencontrées sur le
+                    site, de problèmes techniques, d&apos;interprétation des informations publiées et des conséquences
+                    de leur utilisation. L&apos;utilisateur reconnaît utiliser les informations présentes sur le site
+                    sous sa responsabilité exclusive.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
                     6. Liens Hypertextes
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Le site [Nom du site] peut contenir des liens hypertextes vers d&apos;autres sites présents sur le réseau
-                    Internet. Les liens vers ces autres ressources vous font quitter le site [Nom du site]. Il est
-                    possible de créer un lien vers la page de présentation de ce site sans autorisation expresse de [Nom
-                    de l&apos;entreprise]. Aucune autorisation ou demande d&apos;information préalable ne peut être exigée par
-                    l&apos;éditeur à l&apos;égard d&apos;un site qui souhaite établir un lien vers le site de l&apos;éditeur. Toutefois, ce
-                    site doit être affiché dans une nouvelle fenêtre du navigateur. Cependant, [Nom de l&apos;entreprise] se
-                    réserve le droit de demander la suppression d&apos;un lien qu&apos;elle estime non conforme à l&apos;objet du site
-                    [Nom du site].
+                    Le site [Nom du site] peut contenir des liens hypertextes vers d&apos;autres sites présents sur le
+                    réseau Internet. Les liens vers ces autres ressources vous font quitter le site [Nom du site]. Il
+                    est possible de créer un lien vers la page de présentation de ce site sans autorisation expresse de
+                    [Nom de l&apos;entreprise]. Aucune autorisation ou demande d&apos;information préalable ne peut être
+                    exigée par l&apos;éditeur à l&apos;égard d&apos;un site qui souhaite établir un lien vers le site de
+                    l&apos;éditeur. Toutefois, ce site doit être affiché dans une nouvelle fenêtre du navigateur.
+                    Cependant, [Nom de l&apos;entreprise] se réserve le droit de demander la suppression d&apos;un lien
+                    qu&apos;elle estime non conforme à l&apos;objet du site [Nom du site].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -302,9 +307,9 @@ export const LegalNotices = () => {
                 </Typography>
                 <Typography variant="body1" paragraph>
                     Les données personnelles collectées sur le site sont destinées à l&apos;usage exclusif de [Nom de
-                    l&apos;entreprise]. Elles ne feront l&apos;objet d&apos;aucune cession à des tiers. Vous disposez d&apos;un droit
-                    d&apos;accès, de rectification et de suppression de vos données personnelles que vous pouvez exercer en
-                    nous contactant à [adresse e-mail ou formulaire de contact].
+                    l&apos;entreprise]. Elles ne feront l&apos;objet d&apos;aucune cession à des tiers. Vous disposez
+                    d&apos;un droit d&apos;accès, de rectification et de suppression de vos données personnelles que
+                    vous pouvez exercer en nous contactant à [adresse e-mail ou formulaire de contact].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -313,17 +318,18 @@ export const LegalNotices = () => {
                 <Typography variant="body1" paragraph>
                     Le présent site et ses mentions légales sont soumis au droit [indiquer le pays, par exemple
                     français]. En cas de litige, et après une tentative de recherche de solution amiable, compétence
-                    expresse est attribuée aux tribunaux compétents du ressort du siège social de [Nom de l&apos;entreprise].
+                    expresse est attribuée aux tribunaux compétents du ressort du siège social de [Nom de
+                    l&apos;entreprise].
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
                     9. Contact
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Pour toute question ou demande d&apos;information concernant le site, ou tout signalement de contenu ou
-                    d&apos;activités illicites, l&apos;utilisateur peut contacter l&apos;éditeur à l&apos;adresse e-mail suivante : [adresse
-                    e-mail], ou adresser un courrier recommandé avec accusé de réception à [Nom de l&apos;entreprise], à
-                    l&apos;adresse suivante : [adresse postale].
+                    Pour toute question ou demande d&apos;information concernant le site, ou tout signalement de contenu
+                    ou d&apos;activités illicites, l&apos;utilisateur peut contacter l&apos;éditeur à l&apos;adresse
+                    e-mail suivante : [adresse e-mail], ou adresser un courrier recommandé avec accusé de réception à
+                    [Nom de l&apos;entreprise], à l&apos;adresse suivante : [adresse postale].
                 </Typography>
             </Box>
         </Container>
@@ -335,9 +341,9 @@ export const PrivacyManagement = () => {
         <Container maxWidth="md">
             <Box mt={4}>
                 <Typography variant="body1" paragraph>
-                    Chez [Nom de l&apos;entreprise], la confidentialité de vos données personnelles est une priorité. Cette
-                    section détaille la manière dont nous gérons, protégeons et utilisons vos données personnelles,
-                    conformément aux réglementations en vigueur.
+                    Chez [Nom de l&apos;entreprise], la confidentialité de vos données personnelles est une priorité.
+                    Cette section détaille la manière dont nous gérons, protégeons et utilisons vos données
+                    personnelles, conformément aux réglementations en vigueur.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>
@@ -390,20 +396,20 @@ export const PrivacyManagement = () => {
                 </Typography>
                 <Typography variant="body1" component="ul" gutterBottom>
                     <li>
-                        Le droit d&apos;accès : Vous pouvez demander à accéder aux données personnelles que nous détenons à
-                        votre sujet.
+                        Le droit d&apos;accès : Vous pouvez demander à accéder aux données personnelles que nous
+                        détenons à votre sujet.
                     </li>
                     <li>
                         Le droit de rectification : Vous pouvez demander la correction de vos données personnelles si
                         elles sont incorrectes ou incomplètes.
                     </li>
                     <li>
-                        Le droit à l&apos;effacement : Vous pouvez demander la suppression de vos données personnelles sous
-                        certaines conditions.
+                        Le droit à l&apos;effacement : Vous pouvez demander la suppression de vos données personnelles
+                        sous certaines conditions.
                     </li>
                     <li>
-                        Le droit d&apos;opposition : Vous pouvez vous opposer au traitement de vos données personnelles pour
-                        des motifs légitimes.
+                        Le droit d&apos;opposition : Vous pouvez vous opposer au traitement de vos données personnelles
+                        pour des motifs légitimes.
                     </li>
                     <li>
                         Le droit à la portabilité : Vous pouvez demander à recevoir vos données personnelles dans un
@@ -420,8 +426,8 @@ export const PrivacyManagement = () => {
                 <Typography variant="body1" paragraph>
                     Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos
                     données personnelles contre tout accès non autorisé, divulgation, altération ou destruction.
-                    Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n&apos;est totalement
-                    sécurisée.
+                    Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n&apos;est
+                    totalement sécurisée.
                 </Typography>
 
                 <Typography variant="h5" gutterBottom mt={4}>

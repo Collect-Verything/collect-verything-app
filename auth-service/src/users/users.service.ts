@@ -14,16 +14,13 @@ export const roundsOfHashing = 10;
 export class UsersService {
   constructor(
     private prisma: PrismaService,
-    @Inject('MAIL_SERVICE') private client: ClientProxy,
+    @Inject('MAIL_SERVICE') private client: ClientProxy
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     const { roleId, ...userData } = createUserDto;
 
-    const hashedPassword = await bcrypt.hash(
-      createUserDto.password,
-      roundsOfHashing,
-    );
+    const hashedPassword = await bcrypt.hash(createUserDto.password, roundsOfHashing);
 
     return this.prisma.user.create({
       data: {
@@ -91,10 +88,7 @@ export class UsersService {
     const { roleId, ...userData } = updateUserDto;
 
     if (updateUserDto.password) {
-      userData.password = await bcrypt.hash(
-        updateUserDto.password,
-        roundsOfHashing,
-      );
+      userData.password = await bcrypt.hash(updateUserDto.password, roundsOfHashing);
     }
 
     return this.prisma.user.update({
@@ -131,19 +125,13 @@ export class UsersService {
       throw new BadRequestException('User not found');
     }
 
-    const isPasswordValid = await bcrypt.compare(
-      updatePasswordDto.oldPassword,
-      user.password,
-    );
+    const isPasswordValid = await bcrypt.compare(updatePasswordDto.oldPassword, user.password);
 
     if (!isPasswordValid) {
       throw new BadRequestException('Invalid old password');
     }
 
-    const hashedPassword = await bcrypt.hash(
-      updatePasswordDto.newPassword,
-      roundsOfHashing,
-    );
+    const hashedPassword = await bcrypt.hash(updatePasswordDto.newPassword, roundsOfHashing);
 
     return this.prisma.user.update({
       where: { id },
@@ -160,11 +148,7 @@ export class UsersService {
 
     const message = { email, password: newPassword };
 
-    console.log(
-      '📤     Sent on queue : --[ ' +
-        configEnv.FORGOT_PASSWORD_PATTERN +
-        ' ]--',
-    );
+    console.log('📤     Sent on queue : --[ ' + configEnv.FORGOT_PASSWORD_PATTERN + ' ]--');
 
     this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
     return this.prisma.user.update({
