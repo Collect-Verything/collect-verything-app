@@ -66,7 +66,7 @@ export const PaymentPage = () => {
     const fetchClientSecret = useCallback(async () => {
         const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${user.id_stripe}`, listBasket);
         return data.clientSecret;
-    }, [listBasket]);
+    }, [listBasket, user.id_stripe]);
 
     const options = { fetchClientSecret };
     if (listBasket.length === 0 || !user.id_stripe) return null;
