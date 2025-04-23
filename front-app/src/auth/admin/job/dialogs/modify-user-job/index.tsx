@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -26,7 +26,7 @@ import { patchById } from "../../../../../features/user-job-slice";
 import { useAppDispatch } from "../../../../../features/authentication-slice";
 import { patchUserById } from "../../../../../features/user-slice";
 
-// TODO : La personne qui consulte la modification des user job ne peut pas modifier son role
+// TODO : La personne qui consulte la modification des user job ne peut pas modifier son role.
 
 export const ModifyUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -34,8 +34,8 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    const [open, setOpen] = React.useState(false);
-    const [user, setUser] = React.useState<User>(defaultUser);
+    const [open, setOpen] = useState(false);
+    const [user, setUser] = useState<User>(defaultUser);
 
     const dispatch = useAppDispatch();
 
@@ -54,7 +54,7 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
     };
 
     const handleModify = () => {
-        if (location.pathname.includes("customer")) {
+        if (window.location.pathname.includes("customer")) {
             dispatch(patchUserById(user)).then(handleClose);
         }
         dispatch(patchById(user)).then(handleClose);
