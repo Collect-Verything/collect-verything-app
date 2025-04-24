@@ -26,7 +26,7 @@ import { patchById } from "../../../../../features/user-job-slice";
 import { useAppDispatch } from "../../../../../features/authentication-slice";
 import { patchUserById } from "../../../../../features/user-slice";
 
-// TODO : La personne qui consulte la modification des user job ne peut pas modifier son role.
+// TODO : La personne qui consulte la modification des user job ne peut pas modifier son role.....
 
 export const ModifyUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
