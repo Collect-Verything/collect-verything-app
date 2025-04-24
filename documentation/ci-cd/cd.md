@@ -23,4 +23,43 @@ Dépend de l'étape test : elle ne sera exécutée que si les tests de l’étap
 - ⚠️ Ne dépend pas de l’étape lint, celle-ci étant commentée pour le moment.
 - ➕ Il s’agit d’un point d’amélioration futur pour renforcer la qualité du code.
 
+
+## 🔀 Fusionner `dev` dans `main` (Merge Strategy)
+
+Lorsque l'on fusionne la branche `dev` dans `main`, il est important de comprendre comment GitHub Actions réagit aux événements Git.
+
+---
+
+### 💡 Condition utilisée dans le workflow CI/CD
+
+Dans notre workflow GitHub Actions, on utilise cette condition pour déclencher le job de `build-and-push` :
+
+```yaml
+build-and-push:
+  if: |
+    (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+    (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main')
+```
+
+---
+
+### 📌 Explication
+
+Cette condition couvre deux cas :
+
+- ✅ Lorsqu’un **push direct** est effectué sur `main` (ex: après un `git merge dev && git push origin main`).
+- ✅ Lorsqu’une **pull request** est ouverte vers `main`.
+
+---
+
+### ⚠️ Pourquoi ce choix ?
+
+Dans notre processus actuel :
+
+- Nous fusionnons souvent `dev` vers `main` **sans passer par une pull request**.
+- Aucune **issue** ou PR n’est créée lors du merge : nous effectuons un merge direct localement puis un push.
+
+D’où la nécessité de capturer les événements `push` sur `main` pour s'assurer que le job de build est bien exécuté.
+
+
 [summary]: ../README.md
