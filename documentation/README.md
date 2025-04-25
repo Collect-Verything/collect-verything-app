@@ -35,7 +35,10 @@
 
   - [Glossary] [glossary]
   - [Rules] [rules]
+
+- Git
   - [Git Workflow] [git-wf]
+  - [Git merging] [git-m]
 
 - Workflow
 
@@ -66,7 +69,8 @@
 [env]: development/environment.md
 [env-center]: development/env-center.md
 [rules]: general/rules.md
-[git-wf]: general/git-workflow.md
+[git-wf]: git/workflow.md
+[git-m]: git/merging.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md
 [prettier]: development/prettier.md.md
