@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { updateStripeId } from "../../features/authentication-slice";
 import { useAppDispatch } from "../../features/user-slice";
-import { Grid2, Typography } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import { InvoiceEntity } from "./type";
 import { getInvoices, getUserStripeID } from "./request";
 import Box from "@mui/material/Box";
@@ -11,9 +11,9 @@ import { columnsInvoices } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
 import { RootState } from "../../features/store";
 import { User } from "../../common/types/user";
+import { NoBills } from "./components";
 
 // TODO : Creer un recovery facturation comme pour les sub
-// TODO : Fixer l'erreur quand liste facture est vide
 
 /*
  * Les composant facturation sont pour le moment commun à un user comme a un super admin ou metier concerné.
@@ -23,48 +23,70 @@ import { User } from "../../common/types/user";
  * */
 
 export const Facturation = () => {
-    const user = useSelector((store: RootState) => store.authenticate);
+    const user = useSelector((state: RootState) => state.authenticate) as User | null;
     const dispatch = useAppDispatch();
+
     const [invoices, setInvoices] = useState<InvoiceEntity[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchInvoices = useCallback(
+        async (signal: AbortSignal) => {
+            if (!user) return;
+
+            setIsLoading(true);
+
+            try {
+                const { id_stripe } = await getUserStripeID(user);
+                if (!id_stripe) return;
+
+                dispatch(updateStripeId(id_stripe));
+
+                const list = await getInvoices(user);
+                if (!signal.aborted) setInvoices(list);
+            } catch (err) {
+                if (!(err instanceof DOMException && err.name === "AbortError")) {
+                    console.error("Facturation error:", (err as Error).message);
+                }
+            } finally {
+                !signal.aborted && setIsLoading(false);
+            }
+        },
+        [user, dispatch],
+    );
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const stripeData = await getUserStripeID(user as User);
-                dispatch(updateStripeId(stripeData.id_stripe));
+        const ac = new AbortController();
+        fetchInvoices(ac.signal);
+        return () => ac.abort();
+    }, [fetchInvoices]);
 
-                const fetchedInvoices = await getInvoices(user as User);
-                setInvoices(fetchedInvoices);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    if (isLoading) {
+        return (
+            <Grid2
+                container
+                direction="column"
+                margin="auto"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                minHeight="100vh"
+            >
+                <CircularProgress color="secondary" />
+            </Grid2>
+        );
+    }
 
-        fetchData();
-    }, []);
+    if (!user?.id_stripe || invoices.length === 0) return <NoBills />;
 
     return (
-        <Box sx={{ height: 700, width: "80%" }} mt={10} padding={5} margin="auto" marginTop={2}>
-            {isLoading ? (
-                <Grid2 textAlign="center" spacing={2} mt={10}>
-                    <CircularProgress color="secondary" />
-                </Grid2>
-            ) : !user.id_stripe || invoices.length === 0 ? (
-                <Grid2 textAlign="center" spacing={2} mt={10}>
-                    <Typography>Vous ne possédez aucune facture pour le moment.</Typography>
-                </Grid2>
-            ) : (
-                <DataGrid
-                    rows={invoices}
-                    columns={columnsInvoices}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } },
-                    }}
-                    pageSizeOptions={[5]}
-                    disableRowSelectionOnClick
-                />
-            )}
+        <Box sx={{ height: 700, width: "80%", mt: 2, p: 5, mx: "auto" }}>
+            <DataGrid<InvoiceEntity>
+                rows={invoices}
+                columns={columnsInvoices}
+                initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
+                pageSizeOptions={[5, 10, 25]}
+                disableRowSelectionOnClick
+            />
         </Box>
     );
 };

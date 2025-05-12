@@ -36,10 +36,6 @@ Pull app on server and try to lunch it
 
 Scaling sur l'api gateway
 
-## Facturation
-
-Fixer l'erreur quand liste facture est vide dans facturation/index.tsx
-
 ## Mail Service
 
 Modifier la methode qui envoit les mails de renouvellement de mot de passe, pour le moment elle envoit sur la boite mail du project
