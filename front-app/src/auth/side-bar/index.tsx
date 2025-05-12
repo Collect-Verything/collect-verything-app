@@ -33,6 +33,7 @@ export const SideBar = () => {
     return (
         <Grid2
             width={sideBar ? "20vw" : "5vw"}
+            maxWidth={sideBar ? "300px" : "90px"}
             height="100vh"
             sx={{
                 backgroundColor: PRIMARY_COLOR,
