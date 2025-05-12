@@ -24,6 +24,7 @@ import { DetailsProductPage } from "../../shop/details-product-page";
 import StripeStatusPayement from "../../shop/stripe";
 import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
 import { ForgotPasswordPage } from "../../shop/forgot-password";
+import Error404Page from "../../shop/not-found";
 
 export const router = createBrowserRouter([
     {
@@ -70,12 +71,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "*",
-        element: (
-            <div>
-                <h1>Error 404</h1>
-                <Link to="/">Go Home</Link>
-            </div>
-        ),
+        element: <Error404Page />,
     },
     //  TODO : Implementer un USER Guard
     {
