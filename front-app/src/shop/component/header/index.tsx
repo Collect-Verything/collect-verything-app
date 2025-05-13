@@ -11,16 +11,15 @@ import { checkToken, useAppDispatch } from "../../../features/authentication-sli
 import { URL_FRONT } from "../../../app/router/const";
 import { RootState } from "../../../features/store";
 import Badge from "@mui/material/Badge";
-import { countBasketItems, getBasketCount } from "../../../features/basket-slice";
+import { getBasket } from "../../../features/basket-slice";
 
 export const Header = () => {
     const { role } = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
-    const count = useSelector(getBasketCount);
+    const { count } = useSelector(getBasket);
 
     useEffect(() => {
         dispatch(checkToken());
-        dispatch(countBasketItems());
     }, []);
 
     return (

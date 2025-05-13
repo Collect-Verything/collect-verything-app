@@ -19,22 +19,13 @@ import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
 import { useAppDispatch } from "../../features/authentication-slice";
-import { deleteAllBasketItems, deleteBasketItem, initBasketItems, getBasketList } from "../../features/basket-slice";
+import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
 import { useSelector } from "react-redux";
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useAppDispatch();
-    const list = useSelector(getBasketList);
-
-    const handleDeleteProduct = (index: number) => {
-        const updatedBasket = list.filter((_, i) => i !== index);
-        dispatch(deleteBasketItem(updatedBasket));
-    };
-
-    useEffect(() => {
-        dispatch(initBasketItems());
-    }, []);
+    const { list } = useSelector(getBasket);
 
     useEffect(() => {
         const newTotal = list.reduce((acc, prod) => {
@@ -140,7 +131,11 @@ export const Basket = () => {
                                                                                 : sanitizePrice(item.product.price)}
                                                                         </MDBTypography>
                                                                     </div>
-                                                                    <Button onClick={() => handleDeleteProduct(index)}>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            dispatch(deleteBasketItem(index))
+                                                                        }
+                                                                    >
                                                                         <DeleteOutlineIcon
                                                                             sx={{ color: `${PRIMARY_DARKER_COLOR}` }}
                                                                         />
