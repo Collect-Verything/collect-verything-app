@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-export const Badge = () => {
+export const UserBadge = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 

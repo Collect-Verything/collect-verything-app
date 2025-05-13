@@ -1,23 +1,35 @@
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
-import { Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Button, IconButton, Typography } from "@mui/material";
 import { ButtonRounded } from "../buttons";
 import { websitePageItems, WebsitePageItemsProps } from "./list";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
-import { Badge } from "../badge";
+import { UserBadge } from "../badge";
 import { checkToken, useAppDispatch } from "../../../features/authentication-slice";
 import { URL_FRONT } from "../../../app/router/const";
 import { RootState } from "../../../features/store";
+import Badge from "@mui/material/Badge";
 
 export const Header = () => {
     const { role } = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
+    const [basketCount, setBasketCount] = useState(0);
 
     useEffect(() => {
+        setBasketCount(countBasketItems);
         dispatch(checkToken());
     }, []);
+
+    const countBasketItems = () => {
+        let count = 0;
+        const items: string | null = localStorage.getItem("basket");
+        if (items != null) {
+            JSON.parse(items).forEach(() => count++);
+        }
+        return count;
+    };
 
     return (
         <Grid container justifyContent="space-between" alignItems="center">
@@ -34,16 +46,20 @@ export const Header = () => {
             <Grid container spacing={10} pl={10}>
                 {websitePageItems.map((item: WebsitePageItemsProps, index) => (
                     <Link key={index} style={{ textDecoration: "none", color: "black" }} to={item.link}>
-                        {item.label}
+                        <Typography pt={1}>{item.label}</Typography>
                     </Link>
                 ))}
                 <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.BASKET}`}>
-                    <ShoppingCartIcon color="secondary" />
+                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                        <Badge badgeContent={basketCount} color="error">
+                            <ShoppingCartIcon color="secondary" />
+                        </Badge>
+                    </IconButton>
                 </Link>
             </Grid>
             <Grid container pr={3} spacing={2} alignItems="center">
                 {role ? (
-                    <Badge />
+                    <UserBadge />
                 ) : (
                     <>
                         <Grid>
