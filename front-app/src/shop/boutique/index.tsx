@@ -26,12 +26,12 @@ export const BoutiquePage = () => {
     return (
         <Grid
             container
-            mt={2}
-            display="flex"
-            flexDirection="column"
-            alignContent="center"
-            justifyContent="space-around"
-            spacing={3}
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+            spacing={2}
+            sx={{ width: "70%", margin: "0 auto" }}
         >
             {services && services.length > 0 && <CardProductService products={services} />}
             {products && products.length > 0 && <CardProductService products={products} />}

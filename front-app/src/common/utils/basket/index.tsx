@@ -56,20 +56,22 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
                     <Switch checked={checked} onChange={handleChange} inputProps={{ "aria-label": "controlled" }} />
                 </Grid>
             ) : (
-                <>
+                <Grid pt={4}>
                     <Typography>{p.price} €</Typography>
                     {p.stock !== 0 && (
-                        <TextField
-                            id="standard-basic"
-                            label="Quantité"
-                            variant="standard"
-                            type="number"
-                            value={quantity}
-                            InputProps={{ inputProps: { min: 1, max: p.stock } }}
-                            onChange={(e) => setQuantity(Number(e.target.value))}
-                        />
+                        <Grid pb={3}>
+                            <TextField
+                                id="standard-basic"
+                                label="Quantité"
+                                variant="standard"
+                                type="number"
+                                value={quantity}
+                                InputProps={{ inputProps: { min: 1, max: p.stock } }}
+                                onChange={(e) => setQuantity(Number(e.target.value))}
+                            />
+                        </Grid>
                     )}
-                </>
+                </Grid>
             )}
             <Grid>
                 {p.stock === 0 && p.type === PRODUCT_TYPE.PRODUCT ? (
