@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, IconButton, Typography } from "@mui/material";
 import { ButtonRounded } from "../buttons";
 import { websitePageItems, WebsitePageItemsProps } from "./list";
@@ -11,25 +11,17 @@ import { checkToken, useAppDispatch } from "../../../features/authentication-sli
 import { URL_FRONT } from "../../../app/router/const";
 import { RootState } from "../../../features/store";
 import Badge from "@mui/material/Badge";
+import { countBasketItems, getBasketCount } from "../../../features/basket-slice";
 
 export const Header = () => {
     const { role } = useSelector((store: RootState) => store.authenticate);
     const dispatch = useAppDispatch();
-    const [basketCount, setBasketCount] = useState(0);
+    const count = useSelector(getBasketCount);
 
     useEffect(() => {
-        setBasketCount(countBasketItems);
         dispatch(checkToken());
+        dispatch(countBasketItems());
     }, []);
-
-    const countBasketItems = () => {
-        let count = 0;
-        const items: string | null = localStorage.getItem("basket");
-        if (items != null) {
-            JSON.parse(items).forEach(() => count++);
-        }
-        return count;
-    };
 
     return (
         <Grid container justifyContent="space-between" alignItems="center">
@@ -51,7 +43,7 @@ export const Header = () => {
                 ))}
                 <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.BASKET}`}>
                     <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={basketCount} color="error">
+                        <Badge badgeContent={count} color="error">
                             <ShoppingCartIcon color="secondary" />
                         </Badge>
                     </IconButton>

@@ -10,7 +10,6 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import { ListBasketType } from "../boutique/type";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import { Button, Typography } from "@mui/material";
@@ -19,35 +18,32 @@ import { ButtonRounded } from "../component/buttons";
 import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
-import { setFromLocalStorage } from "../../common/utils/local-storage";
+import { useAppDispatch } from "../../features/authentication-slice";
+import { deleteAllBasketItems, deleteBasketItem, initBasketItems, getBasketList } from "../../features/basket-slice";
+import { useSelector } from "react-redux";
 
 export const Basket = () => {
-    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
-
-    const handleClearAll = () => {
-        setListBasket([]);
-        localStorage.removeItem("basket");
-    };
+    const dispatch = useAppDispatch();
+    const list = useSelector(getBasketList);
 
     const handleDeleteProduct = (index: number) => {
-        const updatedBasket = listBasket.filter((_, i) => i !== index);
-        setListBasket(updatedBasket);
-        localStorage.setItem("basket", JSON.stringify(updatedBasket));
+        const updatedBasket = list.filter((_, i) => i !== index);
+        dispatch(deleteBasketItem(updatedBasket));
     };
 
     useEffect(() => {
-        setFromLocalStorage("basket", setListBasket);
+        dispatch(initBasketItems());
     }, []);
 
     useEffect(() => {
-        const newTotal = listBasket.reduce((acc, prod) => {
+        const newTotal = list.reduce((acc, prod) => {
             const productPrice =
                 prod.paidFrequency === PAID_FREQUENCY.YEAR ? mounthToAnnual(prod.product.price) : prod.product.price;
             return acc + productPrice;
         }, 0);
         setTotalPrice(newTotal);
-    }, [listBasket]);
+    }, [list]);
 
     if (!totalPrice)
         return (
@@ -73,14 +69,14 @@ export const Basket = () => {
                                                     <MDBIcon /> Panier
                                                 </MDBTypography>
                                             </Grid>
-                                            {listBasket.length > 0 && (
+                                            {list.length > 0 && (
                                                 <Grid>
                                                     <div>
                                                         <p>
                                                             <ButtonRounded
                                                                 bgColor={PRIMARY_DARKER_COLOR}
                                                                 label="Vider le panier"
-                                                                handleFx={handleClearAll}
+                                                                handleFx={() => dispatch(deleteAllBasketItems())}
                                                             />
                                                         </p>
                                                     </div>
@@ -90,18 +86,18 @@ export const Basket = () => {
 
                                         <hr />
 
-                                        {listBasket.length === 0 ? (
+                                        {list.length === 0 ? (
                                             <div className="d-flex justify-content-between align-items-center mb-4">
                                                 <div>
                                                     <p className="mb-0">
-                                                        Vous possedez actuellement {listBasket.length} article(s) dans
-                                                        votre panier.
+                                                        Vous possedez actuellement {list.length} article(s) dans votre
+                                                        panier.
                                                     </p>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div style={{ maxHeight: "450px", overflowY: "auto" }}>
-                                                {listBasket.map((item, index) => (
+                                                {list.map((item, index) => (
                                                     <MDBCard className="mb-3" key={index}>
                                                         <MDBCardBody>
                                                             <div className="d-flex justify-content-between">
@@ -157,7 +153,7 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-                                    <PaiementCard totalPrice={totalPrice} listBasket={listBasket} />
+                                    <PaiementCard totalPrice={totalPrice} listBasket={list} />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>

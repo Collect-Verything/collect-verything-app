@@ -9,7 +9,7 @@ interface ButtonRoundedProps {
     mb?: number;
     bgColor?: string;
     txtColor?: string;
-    handleFx?: () => void;
+    handleFx?: any;
 }
 
 export const ButtonRounded = ({
