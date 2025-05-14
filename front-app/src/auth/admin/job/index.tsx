@@ -8,8 +8,11 @@ import { useAppDispatch } from "../../../features/authentication-slice";
 import { fetchJobbers } from "../../../features/user-job-slice";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { RootState } from "../../../features/store";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
+import { Typography } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import { CenteredGrid } from "../../../common/components/grid-centered";
 
 //  TODO: Faire en sorte que l'utilisateur connecté ne puisse pas se supprimer, le mettre en surbrillance dans la data row
 //  TODO: Creation d'un user, role obligatoire
@@ -29,28 +32,42 @@ export const Job = () => {
 
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
-            <Grid container justifyContent="flex-end" padding={5}>
-                <CreateUserAndJob isUser={false} handleGetAll={handleGetAllUserJobs} />
-            </Grid>
             {status === "loading" ? (
-                // TODO : Center au milieu de la page
-                <CircularProgress color="secondary" />
+                <CenteredGrid>
+                    <CircularProgress color="secondary" />
+                </CenteredGrid>
             ) : status === "failed" ? (
-                <PriorityHighIcon color="error" />
+                <CenteredGrid>
+                    <Alert color="error">
+                        <Typography>Impossible de charger les données</Typography>
+                    </Alert>
+                </CenteredGrid>
             ) : (
-                <DataGrid
-                    rows={usersJobList || []}
-                    columns={columnsUser}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 10,
+                <>
+                    <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>
+                        <Grid>
+                            <Typography variant="h4" component="div">
+                                <Diversity2Icon fontSize="large" /> Gestion du personnel
+                            </Typography>
+                        </Grid>
+                        <Grid>
+                            <CreateUserAndJob isUser={false} handleGetAll={handleGetAllUserJobs} />
+                        </Grid>
+                    </Grid>
+                    <DataGrid
+                        rows={usersJobList || []}
+                        columns={columnsUser}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 10,
+                                },
                             },
-                        },
-                    }}
-                    pageSizeOptions={[5]}
-                    disableRowSelectionOnClick
-                />
+                        }}
+                        pageSizeOptions={[5]}
+                        disableRowSelectionOnClick
+                    />
+                </>
             )}
         </Box>
     );

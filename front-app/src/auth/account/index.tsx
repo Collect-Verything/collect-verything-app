@@ -82,6 +82,9 @@ export const Account = () => {
 
     return (
         <Grid spacing={2} margin="auto">
+            <Grid textAlign="center" mt={2}>
+                <ManageAccountsIcon fontSize="large" />
+            </Grid>
             <Grid display="flex" flexDirection="column" sx={{ gap: 2 }}>
                 <Typography pt={5} variant="h4" component="div">
                     Information personnel

@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import ArticleIcon from "@mui/icons-material/Article";
+import { CenteredGrid } from "../../common/components/grid-centered";
 /*
  * Les composant documentation sont pour le moment commun à un user comme a un super admin ou metier concerné.
  * If user get all documentation
@@ -9,15 +10,7 @@ import ArticleIcon from "@mui/icons-material/Article";
  * */
 export const Documentation = () => {
     return (
-        <Grid2
-            container
-            direction="column"
-            margin="auto"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            minHeight="100vh"
-        >
+        <CenteredGrid>
             <Paper
                 elevation={3}
                 sx={{
@@ -36,6 +29,6 @@ export const Documentation = () => {
                     Aucune documentation pour l’instant
                 </Typography>
             </Paper>
-        </Grid2>
+        </CenteredGrid>
     );
 };

@@ -1,18 +1,11 @@
 import React from "react";
-import { Box, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import { CenteredGrid } from "../../common/components/grid-centered";
 
 export const Support = () => {
     return (
-        <Grid2
-            container
-            direction="column"
-            margin="auto"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            minHeight="100vh"
-        >
+        <CenteredGrid>
             <Paper
                 elevation={3}
                 sx={{
@@ -31,6 +24,6 @@ export const Support = () => {
                     Pas de support pour le moment
                 </Typography>
             </Paper>
-        </Grid2>
+        </CenteredGrid>
     );
 };

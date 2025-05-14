@@ -3,20 +3,13 @@ import { useSelector } from "react-redux";
 import { Card, CardContent, Typography } from "@mui/material";
 import { RootState } from "../../features/store";
 import Grid from "@mui/material/Grid2";
+import { CenteredGrid } from "../../common/components/grid-centered";
 
 export const AuthDashboard = () => {
     const { role, firstname, lastname } = useSelector((store: RootState) => store.authenticate);
 
     return (
-        <Grid
-            container
-            direction="column"
-            margin="auto"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            minHeight="100vh"
-        >
+        <CenteredGrid>
             <Typography variant="h4" gutterBottom>
                 Bonjour {firstname} {lastname}
             </Typography>
@@ -62,6 +55,6 @@ export const AuthDashboard = () => {
                     </Card>
                 </Grid>
             </Grid>
-        </Grid>
+        </CenteredGrid>
     );
 };

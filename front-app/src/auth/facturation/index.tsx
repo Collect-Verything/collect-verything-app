@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { updateStripeId } from "../../features/authentication-slice";
 import { useAppDispatch } from "../../features/user-slice";
-import { Grid2 } from "@mui/material";
+import { Typography } from "@mui/material";
 import { InvoiceEntity } from "./type";
 import { getInvoices, getUserStripeID } from "./request";
 import Box from "@mui/material/Box";
@@ -12,6 +12,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { RootState } from "../../features/store";
 import { User } from "../../common/types/user";
 import { NoBills } from "./components";
+import Grid from "@mui/material/Grid2";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import { CenteredGrid } from "../../common/components/grid-centered";
 
 // TODO : Creer un recovery facturation comme pour les sub
 
@@ -62,17 +65,9 @@ export const Facturation = () => {
 
     if (isLoading) {
         return (
-            <Grid2
-                container
-                direction="column"
-                margin="auto"
-                justifyContent="center"
-                alignItems="center"
-                textAlign="center"
-                minHeight="100vh"
-            >
+            <CenteredGrid>
                 <CircularProgress color="secondary" />
-            </Grid2>
+            </CenteredGrid>
         );
     }
 
@@ -80,6 +75,13 @@ export const Facturation = () => {
 
     return (
         <Box sx={{ height: 700, width: "80%", mt: 2, p: 5, mx: "auto" }}>
+            <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>
+                <Grid>
+                    <Typography variant="h4" component="div">
+                        <ReceiptIcon fontSize="large" /> Facturation
+                    </Typography>
+                </Grid>
+            </Grid>
             <DataGrid<InvoiceEntity>
                 rows={invoices}
                 columns={columnsInvoices}

@@ -8,6 +8,9 @@ import { columnsProduct } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
 import { CreateProduct } from "./dialogs/create-product";
 import { findAllProducts } from "./request";
+import { Typography } from "@mui/material";
+import CategoryIcon from "@mui/icons-material/Category";
+import { CenteredGrid } from "../../common/components/grid-centered";
 
 export const ProductsPage = () => {
     const [products, setProducts] = useState<ProductEntity[]>();
@@ -18,15 +21,22 @@ export const ProductsPage = () => {
 
     if (!products)
         return (
-            <Box sx={{ display: "flex" }}>
+            <CenteredGrid>
                 <CircularProgress />
-            </Box>
+            </CenteredGrid>
         );
 
     return (
         <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
-            <Grid container justifyContent="flex-end" padding={5}>
-                <CreateProduct handleGetAll={getAllProducts} />
+            <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>
+                <Grid>
+                    <Typography variant="h4" component="div">
+                        <CategoryIcon fontSize="large" /> Gestion produits
+                    </Typography>
+                </Grid>
+                <Grid>
+                    <CreateProduct handleGetAll={getAllProducts} />
+                </Grid>
             </Grid>
 
             <DataGrid

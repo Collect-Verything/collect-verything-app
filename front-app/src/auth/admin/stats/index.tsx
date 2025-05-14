@@ -1,18 +1,11 @@
 import React from "react";
-import { Box, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import { CenteredGrid } from "../../../common/components/grid-centered";
 
 export const Stats = () => {
     return (
-        <Grid2
-            container
-            direction="column"
-            margin="auto"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            minHeight="100vh"
-        >
+        <CenteredGrid>
             <Paper
                 elevation={3}
                 sx={{
@@ -30,6 +23,6 @@ export const Stats = () => {
                     Pas de statistique pour le moment
                 </Typography>
             </Paper>
-        </Grid2>
+        </CenteredGrid>
     );
 };
