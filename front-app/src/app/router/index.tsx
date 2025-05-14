@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "../../shop/home";
 import { VitrinePage } from "../../shop/vitrine";
 import { BoutiquePage } from "../../shop/boutique";
@@ -21,10 +21,10 @@ import { Stats } from "../../auth/admin/stats";
 import { ProductsPage } from "../../auth/products";
 import { URL_FRONT } from "./const";
 import { DetailsProductPage } from "../../shop/details-product-page";
-import StripeStatusPayement from "../../shop/stripe";
 import { CheckUserStripeIdForPayment, PaymentPage } from "../../shop/stripe/embedded-checkout";
 import { ForgotPasswordPage } from "../../shop/forgot-password";
 import Error404Page from "../../shop/not-found";
+import { StripeStatusPayement } from "../../shop/stripe";
 
 export const router = createBrowserRouter([
     {

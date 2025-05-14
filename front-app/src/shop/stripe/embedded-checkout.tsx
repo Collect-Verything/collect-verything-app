@@ -1,5 +1,4 @@
-import { ListBasketType } from "../boutique/type"; // import React, { useCallback, useEffect, useState } from "react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPatch, apiPost } from "../../common/utils/web";
@@ -9,12 +8,12 @@ import Grid from "@mui/material/Grid2";
 import { Button, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { URL_FRONT } from "../../app/router/const";
-import { setFromLocalStorage } from "../../common/utils/local-storage";
 import { FacturationUrlWithPort, UserUrlWithPort } from "../../app/micro-services";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateStripeId } from "../../features/authentication-slice";
 import { useAppDispatch } from "../../features/user-slice";
-import { RootState } from "../../features/store"; //
+import { RootState } from "../../features/store";
+import { getBasket } from "../../features/basket-slice"; //
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -56,12 +55,8 @@ export const CheckUserStripeIdForPayment = () => {
 
 export const PaymentPage = () => {
     const nav = useNavigate();
-    const [listBasket, setListBasket] = useState<ListBasketType[]>([]);
     const user = useSelector((store: RootState) => store.authenticate);
-
-    useEffect(() => {
-        setFromLocalStorage("basket", setListBasket);
-    }, []);
+    const { list: listBasket } = useSelector(getBasket);
 
     const fetchClientSecret = useCallback(async () => {
         const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${user.id_stripe}`, listBasket);

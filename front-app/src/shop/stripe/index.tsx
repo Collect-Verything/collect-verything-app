@@ -1,7 +1,65 @@
-import React from "react";
-import { Button, Grid2, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { Button, Grid2, Paper, Typography } from "@mui/material";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { URL_FRONT } from "../../app/router/const";
+import { useAppDispatch } from "../../features/authentication-slice";
+import { deleteAllBasketItems } from "../../features/basket-slice";
+import Alert from "@mui/material/Alert";
+
+export const StripeStatusPayement = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(deleteAllBasketItems());
+    }, []);
+
+    return (
+        <Grid2
+            container
+            direction="column"
+            margin="auto"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+            minHeight="60vh"
+        >
+            <Paper
+                elevation={3}
+                sx={{
+                    px: 6,
+                    py: 8,
+                    maxWidth: 420,
+                    textAlign: "center",
+                    borderRadius: 4,
+                }}
+            >
+                <Typography variant="h5" mb="10px">
+                    Paiement effectué avec succès <DoneOutlineIcon color="success" />
+                </Typography>
+
+                <Button
+                    variant="contained"
+                    href={`/auth/${URL_FRONT.FACTURATION}`}
+                    sx={{
+                        marginTop: "5px",
+                        padding: "5px 23px",
+                        borderRadius: "20px",
+                        textTransform: "none",
+                        "&:hover": {
+                            bgcolor: "darkgray",
+                        },
+                    }}
+                >
+                    Consulter vos factures
+                </Button>
+            </Paper>
+            <Alert color="warning" sx={{ marginTop: "20px" }}>
+                Si l&apos;application n&apos;est pas en prod, penser a simuler l&apos;evenement facturation avec POSTMAN
+                pour consulter cette facture, checker la documentation
+            </Alert>
+        </Grid2>
+    );
+};
 
 // const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 //
@@ -42,51 +100,4 @@ import { URL_FRONT } from "../../app/router/const";
 //     }, [stripe]);
 //
 //     return message;
-// };
-
-const StripeStatusPayement = () => {
-    return (
-        // <Elements stripe={stripePromise}>
-        //     <Page />
-        // </Elements>
-
-        <Grid2
-            height="50vh"
-            display="flex"
-            flexDirection="column"
-            flexWrap="nowrap"
-            alignContent="center"
-            justifyContent="center"
-            alignItems="center"
-        >
-            <Grid2>
-                <Typography variant="h5">
-                    Paiement effectué avec succès <DoneOutlineIcon color="success" />
-                </Typography>
-
-                <Typography variant="h5">
-                    SI L`&apos;APPLICATION N`&apos;EST PAS EN PROD, PENSER A SIMULER L`&apos;EVENEMENT FACTURATION AVEC
-                    POSTMAN POUR POUVOIR CONSULTER CETTE FACTURE
-                </Typography>
-            </Grid2>
-            <Grid2>
-                <Button href={`/auth/${URL_FRONT.FACTURATION}`}>
-                    <Typography color="secondary">Consulter vos factures</Typography>
-                </Button>
-            </Grid2>
-        </Grid2>
-    );
-};
-
-export default StripeStatusPayement;
-
-// const Page = () => {
-//     const statusMessage = PaymentStatus();
-//
-//     return (
-//         <div>
-//             <h2>Payment Status</h2>
-//             {statusMessage ? <p>{statusMessage}</p> : <p>Loading...</p>}
-//         </div>
-//     );
 // };
