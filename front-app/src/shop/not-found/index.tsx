@@ -37,12 +37,12 @@ export default function Error404Page() {
                     404
                 </Typography>
                 <Typography color="white" variant="h6" gutterBottom>
-                    T'essaies de me niquer ?
+                    T&apos;essaies de me niquer ?
                 </Typography>
 
                 <Button>
                     <Link to="/" className="flex items-center gap-2">
-                        <UndoIcon /> Retour à l'accueil
+                        <UndoIcon /> Retour à l&apos;accueil
                     </Link>
                 </Button>
             </Paper>

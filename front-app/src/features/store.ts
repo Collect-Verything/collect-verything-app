@@ -3,6 +3,7 @@ import authenticateReducer from "./authentication-slice";
 import userJobSlice from "./user-job-slice";
 import userSlice from "./user-slice";
 import subscriptionSlice from "./subscription-slice";
+import basketSlice from "./basket-slice";
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         userJob: userJobSlice,
         user: userSlice,
         subscription: subscriptionSlice,
+        basket: basketSlice,
     },
 });
 

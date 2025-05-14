@@ -6,13 +6,8 @@ import { PAID_FREQUENCY, TYPE_PRODUCT } from "../../../shop/boutique/const";
 import Grid from "@mui/material/Grid2";
 import { mounthToAnnual } from "../pricing";
 import { PRODUCT_TYPE } from "../../const/product";
-
-const handleSetStorage = (product: ProductEntity, paidFrequency: PAID_FREQUENCY, quantity: number) => {
-    const existingBasket = JSON.parse(localStorage.getItem("basket") || "[]");
-    const newItems = Array.from({ length: quantity }, () => ({ product, paidFrequency }));
-    const updatedBasket = [...existingBasket, ...newItems];
-    localStorage.setItem("basket", JSON.stringify(updatedBasket));
-};
+import { addBasketItems } from "../../../features/basket-slice";
+import { useAppDispatch } from "../../../features/authentication-slice";
 
 interface SwitchRoundedWithPriceProps {
     price: number;
@@ -26,10 +21,11 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
     const [checked, setChecked] = React.useState(true);
     const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         setPaidFrequency(paidFrequency);
-    }, []);
+    }, [paidFrequency]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
@@ -80,10 +76,13 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
                     <Button
                         sx={{ color: "black" }}
                         onClick={() =>
-                            handleSetStorage(
-                                p,
-                                products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
-                                quantity,
+                            dispatch(
+                                addBasketItems({
+                                    product: p,
+                                    paidFrequency:
+                                        products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
+                                    quantity,
+                                }),
                             )
                         }
                     >
