@@ -1,6 +1,7 @@
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import { Grid2, Box, Button, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { URL_FRONT } from "../../app/router/const";
 
 export const NoBills = () => {
     const nav = useNavigate();
@@ -37,7 +38,12 @@ export const NoBills = () => {
                     Dès que vous effectuerez un achat, vos factures apparaîtront ici.
                 </Typography>
 
-                <Button variant="contained" color="secondary" disableElevation onClick={() => nav("/catalogue")}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    disableElevation
+                    onClick={() => nav(`/${URL_FRONT.VITRINE}`)}
+                >
                     Découvrir les offres
                 </Button>
             </Paper>
