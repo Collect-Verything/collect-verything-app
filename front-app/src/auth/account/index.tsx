@@ -16,6 +16,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import { ChangePasswordType } from "./type";
 import Alert from "@mui/material/Alert";
 import { RootState } from "../../features/store";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 export const Account = () => {
     const [user, setUser] = useState<User>(initUser);
@@ -82,7 +83,7 @@ export const Account = () => {
     return (
         <Grid spacing={2} margin="auto">
             <Grid display="flex" flexDirection="column" sx={{ gap: 2 }}>
-                <Typography variant="h4" component="div">
+                <Typography pt={5} variant="h4" component="div">
                     Information personnel
                 </Typography>
                 {alertUserForm.type && <Alert severity={alertUserForm.type}>{alertUserForm.text}</Alert>}
