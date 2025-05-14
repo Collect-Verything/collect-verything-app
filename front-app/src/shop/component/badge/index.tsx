@@ -4,7 +4,7 @@ import React from "react";
 import { logout, useAppDispatch } from "../../../features/authentication-slice";
 import { useNavigate } from "react-router-dom";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Dashboard", "Logout"];
 
 export const UserBadge = () => {
     const dispatch = useAppDispatch();
@@ -24,10 +24,7 @@ export const UserBadge = () => {
             navigate("/auth");
         }
         if (arg === "Profile") {
-            navigate("/auth");
-        }
-        if (arg === "Account") {
-            navigate("/auth");
+            navigate("/auth/account");
         }
         setAnchorElUser(null);
     };
@@ -57,7 +54,9 @@ export const UserBadge = () => {
             >
                 {settings.map((setting) => (
                     <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-                        <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
+                        <Typography sx={{ textAlign: "center" }} color={setting === "Logout" ? "red" : ""}>
+                            {setting}
+                        </Typography>
                     </MenuItem>
                 ))}
             </Menu>
