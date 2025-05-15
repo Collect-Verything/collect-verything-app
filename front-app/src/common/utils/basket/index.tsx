@@ -2,12 +2,12 @@ import { ProductEntity } from "../../../shop/boutique/type";
 import React, { useEffect, useState } from "react";
 import { Button, Switch, TextField, Typography } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { PAID_FREQUENCY } from "../../../shop/boutique/const";
 import Grid from "@mui/material/Grid2";
 import { mounthToAnnual } from "../pricing";
 import { PRODUCT_TYPE } from "../../const/product";
 import { addBasketItems } from "../../../features/basket-slice";
 import { useAppDispatch } from "../../../features/authentication-slice";
+import { PAYMENT_FREQUENCY } from "../../const/payment-frequency";
 
 interface SwitchRoundedWithPriceProps {
     price: number;
@@ -19,7 +19,7 @@ interface SwitchRoundedWithPriceProps {
 
 export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: SwitchRoundedWithPriceProps) => {
     const [checked, setChecked] = React.useState(true);
-    const [paidFrequency, setPaidFrequency] = useState<PAID_FREQUENCY>(PAID_FREQUENCY.YEAR);
+    const [paidFrequency, setPaidFrequency] = useState<PAYMENT_FREQUENCY>(PAYMENT_FREQUENCY.YEAR);
     const [quantity, setQuantity] = useState(1);
     const dispatch = useAppDispatch();
 
@@ -29,10 +29,10 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
-        if (paidFrequency === PAID_FREQUENCY.YEAR) {
-            setPaidFrequency(PAID_FREQUENCY.MONTH);
+        if (paidFrequency === PAYMENT_FREQUENCY.YEAR) {
+            setPaidFrequency(PAYMENT_FREQUENCY.MONTH);
         } else {
-            setPaidFrequency(PAID_FREQUENCY.YEAR);
+            setPaidFrequency(PAYMENT_FREQUENCY.YEAR);
         }
     };
 
@@ -80,7 +80,9 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
                                 addBasketItems({
                                     product: p,
                                     paidFrequency:
-                                        products[0].type === PRODUCT_TYPE.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
+                                        products[0].type === PRODUCT_TYPE.SERVICE
+                                            ? paidFrequency
+                                            : PAYMENT_FREQUENCY.UNIT,
                                     quantity,
                                 }),
                             )

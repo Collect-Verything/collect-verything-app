@@ -1,4 +1,4 @@
-export enum PAID_FREQUENCY {
+export enum PAYMENT_FREQUENCY {
     UNIT = "Unit",
     MONTH = "Mensuel",
     YEAR = "Annuel",

@@ -1,4 +1,4 @@
-import { PAID_FREQUENCY } from "./const";
+import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
 
 export interface ProductEntity {
     id: number;
@@ -19,6 +19,6 @@ export interface ProductEntity {
 
 export interface ListBasketType {
     product: ProductEntity;
-    paidFrequency: PAID_FREQUENCY;
+    paidFrequency: PAYMENT_FREQUENCY;
     quantity: number;
 }

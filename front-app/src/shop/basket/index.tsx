@@ -15,12 +15,12 @@ import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import { Button, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
-import { PAID_FREQUENCY } from "../boutique/const";
 import Grid from "@mui/material/Grid2";
 import { PaiementCard } from "./paiement";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
 import { useSelector } from "react-redux";
+import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -30,7 +30,7 @@ export const Basket = () => {
     useEffect(() => {
         const newTotal = list.reduce((acc, prod) => {
             const productPrice =
-                prod.paidFrequency === PAID_FREQUENCY.YEAR ? mounthToAnnual(prod.product.price) : prod.product.price;
+                prod.paidFrequency === PAYMENT_FREQUENCY.YEAR ? mounthToAnnual(prod.product.price) : prod.product.price;
             return acc + productPrice;
         }, 0);
         setTotalPrice(newTotal);
@@ -122,7 +122,8 @@ export const Basket = () => {
                                                                     </div>
                                                                     <div style={{ width: "100px" }}>
                                                                         <MDBTypography tag="h5" className="mb-0">
-                                                                            {item.paidFrequency === PAID_FREQUENCY.YEAR
+                                                                            {item.paidFrequency ===
+                                                                            PAYMENT_FREQUENCY.YEAR
                                                                                 ? sanitizePrice(
                                                                                       mounthToAnnual(
                                                                                           item.product.price,
