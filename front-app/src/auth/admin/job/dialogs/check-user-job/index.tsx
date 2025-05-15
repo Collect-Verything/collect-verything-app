@@ -15,6 +15,17 @@ import { DialogProps } from "../../../../../common/types/dialogs";
 export const CheckUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
+    const details = [
+        { label: "ID :", value: row.id },
+        { label: "Stripe ID :", value: row.id_stripe },
+        { label: "Role :", value: row.role.name },
+        { label: "Genre :", value: row.gender },
+        { label: "Nom et Prénom :", value: `${row.lastname} ${row.firstname}` },
+        { label: "Date de naissance :", value: String(row.birthDate).split("T")[0] },
+        { label: "Email :", value: row.email },
+        { label: "Téléphone :", value: row.phone },
+    ];
+
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -52,54 +63,14 @@ export const CheckUserJob = (props: DialogProps<User>) => {
             >
                 <DialogTitle id="responsive-dialog-title">Information de l&apos;utilisateur</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            ID :
-                        </Typography>
-                        {row.id}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Stripe ID :
-                        </Typography>
-                        {row.id_stripe}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Role :
-                        </Typography>
-                        {row.role.name}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Genre :
-                        </Typography>
-                        {row.gender}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Nom et Prenom :
-                        </Typography>
-                        {row.lastname} {row.firstname}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Date de naissance :
-                        </Typography>
-                        {String(row.birthDate).split("T")[0]}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Email :
-                        </Typography>
-                        {row.email}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Telephone :
-                        </Typography>
-                        {row.phone}
-                    </DialogContentText>
+                    {details.map(({ label, value }) => (
+                        <DialogContentText key={label}>
+                            <Typography color="secondary" mt={2}>
+                                {label}
+                            </Typography>
+                            {value}
+                        </DialogContentText>
+                    ))}
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="secondary">
