@@ -1,28 +1,20 @@
 import React from "react";
-import { Box, Paper, Typography } from "@mui/material";
-import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
-import { CenteredGrid } from "../../../common/components/grid-centered";
+import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import { StatsGender } from "./gender";
 
 export const Stats = () => {
     return (
-        <CenteredGrid>
-            <Paper
-                elevation={3}
-                sx={{
-                    px: 6,
-                    py: 8,
-                    maxWidth: 420,
-                    textAlign: "center",
-                    borderRadius: 4,
-                }}
-            >
-                <Box display="flex" justifyContent="center" mb={2}>
-                    <SignalCellularAltIcon sx={{ fontSize: 56, color: "text.secondary" }} />
-                </Box>
-                <Typography variant="h6" gutterBottom>
-                    Pas de statistique pour le moment
-                </Typography>
-            </Paper>
-        </CenteredGrid>
+        <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
+            <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>
+                <Grid>
+                    <Typography variant="h4" component="div">
+                        <BarChartIcon fontSize="large" /> Statistiques
+                    </Typography>
+                </Grid>
+            </Grid>
+            <StatsGender />
+        </Box>
     );
 };
