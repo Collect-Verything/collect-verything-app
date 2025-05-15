@@ -1,5 +1,6 @@
 import { User } from "../../../../../common/types/user";
 import { Dispatch, SetStateAction } from "react";
+import { ROLE_NAME } from "../../../../../app/router/const";
 
 export const onChangeUser = (param: keyof User, setUser: Dispatch<SetStateAction<User>>, value: string) => {
     setUser((old) => {
@@ -12,9 +13,9 @@ export const onChangeUser = (param: keyof User, setUser: Dispatch<SetStateAction
 };
 
 const getRoleId = (role: string) => {
-    if (role === "USER") return 1;
-    if (role === "SUPER_ADMIN") return 2;
-    if (role === "INVOICE") return 3;
-    if (role === "SUPPORT") return 4;
+    if (role === ROLE_NAME.USER) return 1;
+    if (role === ROLE_NAME.SUPER_ADMIN) return 2;
+    if (role === ROLE_NAME.INVOICE) return 3;
+    if (role === ROLE_NAME.SUPPORT) return 4;
     return 0;
 };
