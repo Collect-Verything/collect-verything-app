@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import { logout, useAppDispatch } from "../../../features/authentication-slice";
 import { useNavigate } from "react-router-dom";
-import { URL_FRONT } from "../../../app/router/const";
+import { PATH_NAME } from "../../../common/const/path";
 
 const settings = ["Profile", "Dashboard", "Logout"];
 
@@ -22,10 +22,10 @@ export const UserBadge = () => {
             dispatch(logout());
         }
         if (arg === "Dashboard") {
-            navigate(`/${URL_FRONT.ADMIN}`);
+            navigate(`/${PATH_NAME.ADMIN}`);
         }
         if (arg === "Profile") {
-            navigate(`/${URL_FRONT.ADMIN}/${URL_FRONT.ACCOUNT}`);
+            navigate(`/${PATH_NAME.ADMIN}/${PATH_NAME.ACCOUNT}`);
         }
         setAnchorElUser(null);
     };

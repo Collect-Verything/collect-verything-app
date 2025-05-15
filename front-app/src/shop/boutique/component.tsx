@@ -5,8 +5,8 @@ import React from "react";
 import { ProductEntity } from "./type";
 import { TYPE_PRODUCT } from "./const";
 import { useNavigate } from "react-router-dom";
-import { URL_FRONT } from "../../app/router/const";
 import { SwitchPriceToBasket } from "../../common/utils/basket";
+import { PATH_NAME } from "../../common/const/path";
 
 interface CardProductServiceProps {
     products: ProductEntity[];
@@ -94,5 +94,5 @@ export const ButtonProductCard = (props: ButtonProductCardProps) => {
     const { children, idProduct } = props;
     const nav = useNavigate();
 
-    return <Grid onClick={() => nav(`/${URL_FRONT.DETAILS}?id=${idProduct}`)}>{children}</Grid>;
+    return <Grid onClick={() => nav(`/${PATH_NAME.DETAILS}?id=${idProduct}`)}>{children}</Grid>;
 };

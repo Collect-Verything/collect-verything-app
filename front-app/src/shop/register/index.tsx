@@ -8,7 +8,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import "./style.css";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
-import { URL_FRONT } from "../../app/router/const";
 import {
     ALERT_MESSAGE_FIELD,
     AlertRegisterType,
@@ -24,6 +23,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Alert from "@mui/material/Alert";
 import { registerRequest } from "./request";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import { PATH_NAME } from "../../common/const/path";
 
 // TODO : Les champs doivent etre vide a la validation du formulaire
 // TODO : Effectuer une redirection sur login apres avoir informé l'utilisateur que le register est confirmé
@@ -70,7 +70,7 @@ export const RegisterPage = () => {
             await registerRequest(cleanedRegisterForm).then(() => setDisplaySuccess(true));
             setRegisterForm(initRegisterForm);
             setTimeout(() => {
-                nav(`/${URL_FRONT.LOGIN}`);
+                nav(`/${PATH_NAME.LOGIN}`);
             }, 2000);
         } catch {
             setAlerts(ALERT_MESSAGE_FIELD.REGISTER_FAILED);
@@ -85,7 +85,7 @@ export const RegisterPage = () => {
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
                 </Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.LOGIN}`}>
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.LOGIN}`}>
                     <ButtonRounded label="Login" />
                 </Link>
             </Grid>

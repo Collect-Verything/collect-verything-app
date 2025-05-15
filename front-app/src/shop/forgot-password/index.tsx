@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
-import { URL_FRONT } from "../../app/router/const";
 import { TextField, Typography } from "@mui/material";
 import { forgotPasswordRequest } from "./request";
 import Alert from "@mui/material/Alert";
+import { PATH_NAME } from "../../common/const/path";
 
 export interface ForgotPassword {
     email: string;
@@ -34,7 +34,7 @@ export const ForgotPasswordPage = () => {
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
                 </Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.LOGIN}`}>
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.LOGIN}`}>
                     <ButtonRounded label="Login" />
                 </Link>
             </Grid>

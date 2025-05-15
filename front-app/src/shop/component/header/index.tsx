@@ -8,10 +8,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSelector } from "react-redux";
 import { UserBadge } from "../badge";
 import { checkToken, useAppDispatch } from "../../../features/authentication-slice";
-import { URL_FRONT } from "../../../app/router/const";
 import { RootState } from "../../../features/store";
 import Badge from "@mui/material/Badge";
 import { getBasket } from "../../../features/basket-slice";
+import { PATH_NAME } from "../../../common/const/path";
 
 export const Header = () => {
     const { role } = useSelector((store: RootState) => store.authenticate);
@@ -40,7 +40,7 @@ export const Header = () => {
                         <Typography pt={1}>{item.label}</Typography>
                     </Link>
                 ))}
-                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.BASKET}`}>
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.BASKET}`}>
                     <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                         <Badge badgeContent={count} color="error">
                             <ShoppingCartIcon color="secondary" />
@@ -54,12 +54,12 @@ export const Header = () => {
                 ) : (
                     <>
                         <Grid>
-                            <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.LOGIN}`}>
+                            <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.LOGIN}`}>
                                 Se connecter
                             </Link>
                         </Grid>
                         <Grid>
-                            <Button sx={{ textTransform: "none" }} href={`${URL_FRONT.REGISTER}`}>
+                            <Button sx={{ textTransform: "none" }} href={`${PATH_NAME.REGISTER}`}>
                                 <ButtonRounded label="Démarer un essai" />
                             </Button>
                         </Grid>

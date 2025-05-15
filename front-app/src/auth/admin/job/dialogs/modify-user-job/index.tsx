@@ -25,7 +25,7 @@ import { defaultUser } from "../const";
 import { patchById } from "../../../../../features/user-job-slice";
 import { useAppDispatch } from "../../../../../features/authentication-slice";
 import { patchUserById } from "../../../../../features/user-slice";
-import { URL_FRONT } from "../../../../../app/router/const";
+import { PATH_NAME } from "../../../../../common/const/path";
 
 // TODO : La personne qui consulte la modification des user job ne peut pas modifier son role.
 
@@ -55,7 +55,7 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
     };
 
     const handleModify = () => {
-        if (window.location.pathname.includes(`${URL_FRONT.GESTION_CUSTOMER}`)) {
+        if (window.location.pathname.includes(`${PATH_NAME.GESTION_CUSTOMER}`)) {
             dispatch(patchUserById(user)).then(handleClose);
         }
         dispatch(patchById(user)).then(handleClose);

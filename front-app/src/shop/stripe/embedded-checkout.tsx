@@ -7,13 +7,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import Grid from "@mui/material/Grid2";
 import { Button, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { URL_FRONT } from "../../app/router/const";
 import { FacturationUrlWithPort, UserUrlWithPort } from "../../app/micro-services";
 import CircularProgress from "@mui/material/CircularProgress";
 import { updateStripeId } from "../../features/authentication-slice";
 import { useAppDispatch } from "../../features/user-slice";
 import { RootState } from "../../features/store";
-import { getBasket } from "../../features/basket-slice"; //
+import { getBasket } from "../../features/basket-slice";
+import { PATH_NAME } from "../../common/const/path"; //
 
 const stripePromise = loadStripe("pk_test_6YIhM0UXA4RMmJKovWtLYyJb");
 
@@ -39,10 +39,10 @@ export const CheckUserStripeIdForPayment = () => {
 
     useEffect(() => {
         if (!user.id_stripe) {
-            fetchData().then(() => nav(`/${URL_FRONT.PAYMENT}`));
+            fetchData().then(() => nav(`/${PATH_NAME.PAYMENT}`));
         }
         if (user.id_stripe) {
-            nav(`/${URL_FRONT.PAYMENT}`);
+            nav(`/${PATH_NAME.PAYMENT}`);
         }
     }, []);
 
@@ -68,7 +68,7 @@ export const PaymentPage = () => {
 
     return (
         <Grid id="checkout">
-            <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${URL_FRONT.BASKET}`)}>
+            <Button sx={{ marginLeft: "50px", marginTop: "50px" }} onClick={() => nav(`/${PATH_NAME.BASKET}`)}>
                 <KeyboardBackspaceIcon color="secondary" />
                 <Typography color="black">Retour au panier</Typography>
             </Button>

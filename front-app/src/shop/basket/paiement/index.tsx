@@ -8,10 +8,10 @@ import { PRODUCT_TYPE } from "../../../common/const/product";
 import { updateStockById } from "./request";
 import { StockAndID } from "./type";
 import { useSelector } from "react-redux";
-import { URL_FRONT } from "../../../app/router/const";
 import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../features/store";
+import { PATH_NAME } from "../../../common/const/path";
 
 interface PaiementCardProps {
     totalPrice: number;
@@ -28,7 +28,7 @@ export const PaiementCard = (props: PaiementCardProps) => {
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
 
     const handlePaymentPageRedirect = () => {
-        nav(`/${URL_FRONT.CHECK_USER_STRIPE_ID}`);
+        nav(`/${PATH_NAME.CHECK_USER_STRIPE_ID}`);
 
         // TODO : Local Sotrage + Update sotck
         // Cette methode de mise a jour devrait etre fait à la confimartion de paiement suite a webhook strip ou alors à la confirmation dans le front
@@ -136,12 +136,12 @@ export const PaiementCard = (props: PaiementCardProps) => {
                         height="100%"
                     >
                         <Grid>
-                            <Button href={URL_FRONT.LOGIN} variant="contained">
+                            <Button href={PATH_NAME.LOGIN} variant="contained">
                                 Login
                             </Button>
                         </Grid>
                         <Grid paddingTop={5}>
-                            <Button href={URL_FRONT.REGISTER} variant="contained" color="primary">
+                            <Button href={PATH_NAME.REGISTER} variant="contained" color="primary">
                                 Register
                             </Button>
                         </Grid>

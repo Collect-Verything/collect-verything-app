@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Button, Grid2, Paper, Typography } from "@mui/material";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
-import { URL_FRONT } from "../../app/router/const";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { deleteAllBasketItems } from "../../features/basket-slice";
 import Alert from "@mui/material/Alert";
+import { PATH_NAME } from "../../common/const/path";
 
 export const StripeStatusPayement = () => {
     const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ export const StripeStatusPayement = () => {
 
                 <Button
                     variant="contained"
-                    href={`/auth/${URL_FRONT.FACTURATION}`}
+                    href={`/auth/${PATH_NAME.FACTURATION}`}
                     sx={{
                         marginTop: "5px",
                         padding: "5px 23px",

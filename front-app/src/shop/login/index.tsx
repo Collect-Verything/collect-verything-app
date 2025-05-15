@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BackgroundBlurPng } from "../../common/styles/bg-blur";
 import Alert from "@mui/material/Alert";
 import { login, useAppDispatch } from "../../features/authentication-slice";
-import { URL_FRONT } from "../../app/router/const";
+import { PATH_NAME } from "../../common/const/path";
 
 export interface LoginProps {
     email: string;
@@ -42,7 +42,7 @@ export const LoginPage = () => {
                 <Link style={{ textDecoration: "none", color: "black" }} to="/">
                     <ArrowBackIcon />
                 </Link>
-                <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.REGISTER}`}>
+                <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.REGISTER}`}>
                     <ButtonRounded label="Register" />
                 </Link>
             </Grid>
@@ -96,7 +96,7 @@ export const LoginPage = () => {
                     <ButtonRounded label="Login" handleFx={handleLogin} />
                 </Grid>
                 <Grid textAlign="center" mt={3}>
-                    <Link style={{ textDecoration: "none", color: "black" }} to={`/${URL_FRONT.FORGOT_PASSWORD}`}>
+                    <Link style={{ textDecoration: "none", color: "black" }} to={`/${PATH_NAME.FORGOT_PASSWORD}`}>
                         Mot de passe oublié ?
                     </Link>
                     <Grid margin="auto" mt="1vh" bgcolor="#9834" borderRadius="15px" padding={3}>

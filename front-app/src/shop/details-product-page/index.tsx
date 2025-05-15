@@ -6,9 +6,9 @@ import Grid from "@mui/material/Grid2";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button, CardMedia, Typography } from "@mui/material";
-import { URL_FRONT } from "../../app/router/const";
 import { SwitchPriceToBasket } from "../../common/utils/basket";
 import { getAllProducts } from "../vitrine/request";
+import { PATH_NAME } from "../../common/const/path";
 
 export const DetailsProductPage = () => {
     const [searchParams] = useSearchParams();
@@ -32,7 +32,7 @@ export const DetailsProductPage = () => {
     return (
         <>
             <Grid marginTop={5} marginLeft={5}>
-                <Button color="secondary" onClick={() => nav(`/${URL_FRONT.BOUTIQUE}`)}>
+                <Button color="secondary" onClick={() => nav(`/${PATH_NAME.BOUTIQUE}`)}>
                     <ArrowBackIcon />
                 </Button>
             </Grid>

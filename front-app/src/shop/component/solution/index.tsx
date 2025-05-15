@@ -4,7 +4,7 @@ import React from "react";
 import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
 import { ProductEntity } from "../../boutique/type";
-import { URL_FRONT } from "../../../app/router/const";
+import { PATH_NAME } from "../../../common/const/path";
 
 export interface VitrineUnitProductProps {
     product: ProductEntity;
@@ -14,7 +14,7 @@ export const VitrineUnitProduct: React.FC<VitrineUnitProductProps> = ({ product 
     const nav = useNavigate();
 
     const handleRedirectSolution = () => {
-        nav(`/${URL_FRONT.BOUTIQUE}`);
+        nav(`/${PATH_NAME.BOUTIQUE}`);
     };
 
     return (

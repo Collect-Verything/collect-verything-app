@@ -1,7 +1,7 @@
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import { Grid2, Box, Button, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { URL_FRONT } from "../../app/router/const";
+import { PATH_NAME } from "../../common/const/path";
 
 export const NoBills = () => {
     const nav = useNavigate();
@@ -42,7 +42,7 @@ export const NoBills = () => {
                     variant="contained"
                     color="secondary"
                     disableElevation
-                    onClick={() => nav(`/${URL_FRONT.VITRINE}`)}
+                    onClick={() => nav(`/${PATH_NAME.VITRINE}`)}
                 >
                     Découvrir les offres
                 </Button>
