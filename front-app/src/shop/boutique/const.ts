@@ -3,8 +3,3 @@ export enum PAID_FREQUENCY {
     MONTH = "Mensuel",
     YEAR = "Annuel",
 }
-
-export enum TYPE_PRODUCT {
-    SERVICE = "SERVICE",
-    PRODUCT = "PRODUCT",
-}

@@ -2,7 +2,7 @@ import { ProductEntity } from "../../../shop/boutique/type";
 import React, { useEffect, useState } from "react";
 import { Button, Switch, TextField, Typography } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { PAID_FREQUENCY, TYPE_PRODUCT } from "../../../shop/boutique/const";
+import { PAID_FREQUENCY } from "../../../shop/boutique/const";
 import Grid from "@mui/material/Grid2";
 import { mounthToAnnual } from "../pricing";
 import { PRODUCT_TYPE } from "../../const/product";
@@ -38,7 +38,7 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
 
     return (
         <Grid>
-            {p.type === TYPE_PRODUCT.SERVICE ? (
+            {p.type === PRODUCT_TYPE.SERVICE ? (
                 <Grid container alignItems="center" justifyContent="center" mb={mb} mt={mt}>
                     {checked ? (
                         <Typography textAlign="right" pt={1.7} pr={3} fontSize="0.8rem" variant="subtitle2">
@@ -80,7 +80,7 @@ export const SwitchPriceToBasket = ({ price, mt = 0, mb = 0, p, products }: Swit
                                 addBasketItems({
                                     product: p,
                                     paidFrequency:
-                                        products[0].type === TYPE_PRODUCT.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
+                                        products[0].type === PRODUCT_TYPE.SERVICE ? paidFrequency : PAID_FREQUENCY.UNIT,
                                     quantity,
                                 }),
                             )

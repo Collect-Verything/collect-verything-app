@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { ProductEntity } from "./type";
 import { CardProductService } from "./component";
 import { Typography } from "@mui/material";
-import { TYPE_PRODUCT } from "./const";
 import { getAllProducts } from "../vitrine/request";
+import { PRODUCT_TYPE } from "../../common/const/product";
 
 export const BoutiquePage = () => {
     const [listProducts, setListProducts] = useState<ProductEntity[]>();
@@ -18,8 +18,8 @@ export const BoutiquePage = () => {
 
     useEffect(() => {
         if (listProducts) {
-            setProducts(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.PRODUCT));
-            setService(listProducts.filter((p: ProductEntity) => p.type === TYPE_PRODUCT.SERVICE));
+            setProducts(listProducts.filter((p: ProductEntity) => p.type === PRODUCT_TYPE.PRODUCT));
+            setService(listProducts.filter((p: ProductEntity) => p.type === PRODUCT_TYPE.SERVICE));
         }
     }, [listProducts]);
 

@@ -3,10 +3,10 @@ import Grid from "@mui/material/Grid2";
 import { PRIMARY_COLOR } from "../../common/styles/theme";
 import React from "react";
 import { ProductEntity } from "./type";
-import { TYPE_PRODUCT } from "./const";
 import { useNavigate } from "react-router-dom";
 import { SwitchPriceToBasket } from "../../common/utils/basket";
 import { PATH_NAME } from "../../common/const/path";
+import { PRODUCT_TYPE } from "../../common/const/product";
 
 interface CardProductServiceProps {
     products: ProductEntity[];
@@ -21,7 +21,7 @@ export const CardProductService = (props: CardProductServiceProps) => {
         <Grid>
             <Grid margin="auto" textAlign="center" mb={3} mt={5}>
                 <Typography variant="h3">
-                    {products[0].type === TYPE_PRODUCT.SERVICE ? "Nos services" : "Nos Produits"}
+                    {products[0].type === PRODUCT_TYPE.SERVICE ? "Nos services" : "Nos Produits"}
                 </Typography>
             </Grid>
             <Grid container spacing={6} mt="5vh" pt={5}>
