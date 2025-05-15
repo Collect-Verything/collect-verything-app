@@ -19,11 +19,11 @@ export enum URL_FRONT {
     CHECK_USER_STRIPE_ID = "check-user-stripe-id",
     PAYMENT_STATUS = "payment-status",
     PAYMENT = "payment",
-    BOUTIQUE = "Boutique",
-    RESSOURCE = "Ressource",
-    BASKET = "Basket",
-    ADMIN = "Auth",
-    DETAILS = "Details",
+    BOUTIQUE = "boutique",
+    RESSOURCE = "ressource",
+    BASKET = "basket",
+    ADMIN = "auth",
+    DETAILS = "details",
     FORGOT_PASSWORD = "forgot-password",
 }
 
