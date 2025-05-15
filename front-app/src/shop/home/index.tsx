@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import { ButtonRounded } from "../component/buttons";
 import React from "react";

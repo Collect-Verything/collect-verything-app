@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPatch, apiPost } from "../../common/utils/web";
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { FacturationUrlWithPort, UserUrlWithPort } from "../../app/micro-services";

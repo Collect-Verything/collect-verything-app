@@ -1,5 +1,5 @@
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import { Grid2, Box, Button, Paper, Typography } from "@mui/material";
+import { Grid, Box, Button, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PATH_NAME } from "../../common/const/path";
 
@@ -7,7 +7,7 @@ export const NoBills = () => {
     const nav = useNavigate();
 
     return (
-        <Grid2
+        <Grid
             container
             direction="column"
             margin="auto"
@@ -47,6 +47,6 @@ export const NoBills = () => {
                     Découvrir les offres
                 </Button>
             </Paper>
-        </Grid2>
+        </Grid>
     );
 };

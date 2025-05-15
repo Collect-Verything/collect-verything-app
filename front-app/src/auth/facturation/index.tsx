@@ -12,7 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { RootState } from "../../features/store";
 import { User } from "../../common/types/user";
 import { NoBills } from "./components";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import { CenteredGrid } from "../../common/components/grid-centered";
 

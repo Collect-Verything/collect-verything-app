@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import UndoIcon from "@mui/icons-material/Undo";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
@@ -7,7 +7,7 @@ import { BackgroundBlurPng } from "../../common/styles/bg-blur";
 
 export default function Error404Page() {
     return (
-        <Grid2
+        <Grid
             container
             direction="column"
             margin="auto"
@@ -46,6 +46,6 @@ export default function Error404Page() {
                     </Link>
                 </Button>
             </Paper>
-        </Grid2>
+        </Grid>
     );
 }

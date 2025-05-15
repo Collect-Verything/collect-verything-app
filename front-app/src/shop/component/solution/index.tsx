@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { PRIMARY_COLOR, PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";

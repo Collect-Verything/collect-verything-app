@@ -3,7 +3,7 @@ import { Subscription } from "../type";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Button, Grid2, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -46,7 +46,7 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
         setOpen(false);
     };
     return (
-        <Grid2>
+        <Grid>
             <strong>
                 <Button
                     onClick={handleClickOpen}
@@ -118,6 +118,6 @@ export const InfoSubscriptionDialog = (props: DialogProps<Subscription>) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Grid2>
+        </Grid>
     );
 };

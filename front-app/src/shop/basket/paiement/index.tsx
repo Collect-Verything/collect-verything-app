@@ -2,7 +2,7 @@ import { MDBBtn, MDBCardBody, MDBCardImage, MDBCol, MDBIcon, MDBTypography } fro
 import { getHt, getTva, sanitizePrice } from "../../../common/utils/pricing";
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { ListBasketType } from "../../boutique/type";
 import { PRODUCT_TYPE } from "../../../common/const/product";
 import { updateStockById } from "./request";

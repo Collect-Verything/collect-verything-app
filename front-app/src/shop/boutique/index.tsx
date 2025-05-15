@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import React, { useEffect, useState } from "react";
 import { ProductEntity } from "./type";
 import { CardProductService } from "./component";

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Grid2 } from "@mui/material";
+import { Grid } from "@mui/material";
 import { PRIMARY_COLOR } from "../../common/styles/theme";
-import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -31,7 +30,7 @@ export const SideBar = () => {
     if (!role) return <CircularProgress />;
 
     return (
-        <Grid2
+        <Grid
             width={sideBar ? "20vw" : "5vw"}
             maxWidth={sideBar ? "300px" : "90px"}
             height="100vh"
@@ -59,7 +58,7 @@ export const SideBar = () => {
 
             {/*TODO: Upgrad l'apparition du text a l'ouverture fermeture de la side */}
             {sideBar ? (
-                <Grid2
+                <Grid
                     display="flex"
                     flexDirection="column"
                     justifyContent="center"
@@ -68,9 +67,9 @@ export const SideBar = () => {
                     gap={GAP_MENU_ITEMS_USER}
                 >
                     <DisplayMenuDependingJob role={role as unknown as ROLE_NAME} option="with-label" />
-                </Grid2>
+                </Grid>
             ) : (
-                <Grid2
+                <Grid
                     display="flex"
                     flexDirection="column"
                     justifyContent="center"
@@ -78,7 +77,7 @@ export const SideBar = () => {
                     gap={GAP_MENU_ITEMS_USER}
                 >
                     <DisplayMenuDependingJob role={role as unknown as ROLE_NAME} option="only-icon" />
-                </Grid2>
+                </Grid>
             )}
 
             {sideBar ? (
@@ -90,6 +89,6 @@ export const SideBar = () => {
                     <ArrowForwardIosIcon onClick={handleSideBar} />
                 </Grid>
             )}
-        </Grid2>
+        </Grid>
     );
 };

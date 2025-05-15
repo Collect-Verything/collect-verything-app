@@ -4,12 +4,11 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsConfig } from "./grid-definition";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Button, Grid2, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { fetchUserSubscriptions, recoveryUserSubscriptions } from "../../features/subscription-slice";
 import Alert from "@mui/material/Alert";
 import { RootState } from "../../features/store";
-import Grid from "@mui/material/Grid2";
 import TuneIcon from "@mui/icons-material/Tune";
 import { CenteredGrid } from "../../common/components/grid-centered";
 
@@ -42,7 +41,7 @@ export const SubscriptionConfigDisplay = () => {
                     <CircularProgress color="secondary" />
                 </CenteredGrid>
             ) : listSub.length === 0 ? (
-                <Grid2 textAlign="center" spacing={2} mt={10}>
+                <Grid textAlign="center" spacing={2} mt={10}>
                     <Typography>Vous ne possédez aucun abonnement ni configuration pour le moment.</Typography>
                     <Alert sx={{ marginTop: 3 }} severity="info">
                         <Typography>
@@ -54,7 +53,7 @@ export const SubscriptionConfigDisplay = () => {
                         </Button>
                         <Button color="secondary">Contacter le support</Button>
                     </Alert>
-                </Grid2>
+                </Grid>
             ) : (
                 <>
                     <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>

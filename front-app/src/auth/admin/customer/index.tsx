@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { useAppDispatch } from "../../../features/authentication-slice";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";

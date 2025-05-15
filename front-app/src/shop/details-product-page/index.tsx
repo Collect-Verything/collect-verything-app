@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ProductEntity } from "../boutique/type";
 import { getProductById } from "./request";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button, CardMedia, Typography } from "@mui/material";

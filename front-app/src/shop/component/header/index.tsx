@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Button, IconButton, Typography } from "@mui/material";

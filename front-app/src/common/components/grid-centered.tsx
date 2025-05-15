@@ -1,4 +1,4 @@
-import { Grid2 } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { ReactNode } from "react";
 
 interface CenteredGridProps {
@@ -6,7 +6,7 @@ interface CenteredGridProps {
 }
 export const CenteredGrid = ({ children }: CenteredGridProps) => {
     return (
-        <Grid2
+        <Grid
             container
             direction="column"
             margin="auto"
@@ -16,6 +16,6 @@ export const CenteredGrid = ({ children }: CenteredGridProps) => {
             minHeight="100vh"
         >
             {children}
-        </Grid2>
+        </Grid>
     );
 };

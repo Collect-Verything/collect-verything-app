@@ -15,7 +15,7 @@ import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
 import { Button, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { PaiementCard } from "./paiement";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";

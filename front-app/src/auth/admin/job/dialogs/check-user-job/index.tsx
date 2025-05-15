@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { Grid2, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { User } from "../../../../../common/types/user";
 import { DialogProps } from "../../../../../common/types/dialogs";
 
@@ -38,7 +38,7 @@ export const CheckUserJob = (props: DialogProps<User>) => {
         setOpen(false);
     };
     return (
-        <Grid2>
+        <Grid>
             <strong>
                 <Button
                     onClick={handleClickOpen}
@@ -78,6 +78,6 @@ export const CheckUserJob = (props: DialogProps<User>) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Grid2>
+        </Grid>
     );
 };
