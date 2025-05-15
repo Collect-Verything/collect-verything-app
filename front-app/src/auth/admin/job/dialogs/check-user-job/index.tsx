@@ -15,7 +15,7 @@ import { DialogProps } from "../../../../../common/types/dialogs";
 export const CheckUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
 
-    const details = [
+    const fields = [
         { label: "ID :", value: row.id },
         { label: "Stripe ID :", value: row.id_stripe },
         { label: "Role :", value: row.role.name },
@@ -63,7 +63,7 @@ export const CheckUserJob = (props: DialogProps<User>) => {
             >
                 <DialogTitle id="responsive-dialog-title">Information de l&apos;utilisateur</DialogTitle>
                 <DialogContent>
-                    {details.map(({ label, value }) => (
+                    {fields.map(({ label, value }) => (
                         <DialogContentText key={label}>
                             <Typography color="secondary" mt={2}>
                                 {label}

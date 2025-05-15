@@ -14,8 +14,25 @@ import DialogActions from "@mui/material/DialogActions";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
+// TODO : Afficher l'image
+
 export const CheckProduct = (props: DialogProps<ProductEntity>) => {
     const { buttonElement, rippleRef, row } = props;
+
+    const fields = [
+        { label: "ID :", value: row.id },
+        { label: "Image:", value: row.picture_path },
+        { label: "Nom :", value: row.name },
+        { label: "Titre :", value: row.title },
+        { label: "Description :", value: row.description },
+        { label: "Détails :", value: row.details },
+        { label: "Type :", value: row.type },
+        { label: "Stock :", value: row.stock },
+        { label: "Prix :", value: row.price },
+        { label: "Visible :", value: row.published ? <CheckIcon /> : <CloseIcon /> },
+        { label: "Date de création :", value: String(row.createdAt).split("T")[0] },
+        { label: "Derniere mise a jour :", value: String(row.updatedAt).split("T")[0] },
+    ];
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -55,80 +72,14 @@ export const CheckProduct = (props: DialogProps<ProductEntity>) => {
             >
                 <DialogTitle id="responsive-dialog-title">Information produit</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            ID :
-                        </Typography>
-                        {row.id}
-                    </DialogContentText>
-                    <DialogContentText>
-                        {/*TODO : Afficher l'image*/}
-                        <Typography color="secondary" mt={2}>
-                            Image :
-                        </Typography>
-                        {row.picture_path}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Nom :
-                        </Typography>
-                        {row.name}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Titre :
-                        </Typography>
-                        {row.title}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Description :
-                        </Typography>
-                        {row.description}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Détails :
-                        </Typography>
-                        {row.details}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Type :
-                        </Typography>
-                        {row.type}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Stock :
-                        </Typography>
-                        {row.stock}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Prix :
-                        </Typography>
-                        {row.price}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Visible :
-                        </Typography>
-                        {row.published ? <CheckIcon /> : <CloseIcon />}
-                    </DialogContentText>
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Date de création :
-                        </Typography>
-                        {String(row.createdAt).split("T")[0]}
-                    </DialogContentText>
-
-                    <DialogContentText>
-                        <Typography color="secondary" mt={2}>
-                            Derniere mise a jour :
-                        </Typography>
-                        {String(row.updatedAt).split("T")[0]}
-                    </DialogContentText>
+                    {fields.map(({ label, value }) => (
+                        <DialogContentText key={label}>
+                            <Typography color="secondary" mt={2}>
+                                {label}
+                            </Typography>
+                            {value}
+                        </DialogContentText>
+                    ))}
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="secondary">
