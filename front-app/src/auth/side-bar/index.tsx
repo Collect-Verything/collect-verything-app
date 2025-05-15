@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { checkToken, useAppDispatch } from "../../features/authentication-slice";
 import { RootState } from "../../features/store";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ROLENAME } from "../../common/const/user";
+import { ROLE_NAME } from "../../common/const/user";
 
 const GAP_MENU_ITEMS_USER = 5;
 
@@ -67,7 +67,7 @@ export const SideBar = () => {
                     ml={6}
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    <DisplayMenuDependingJob role={role as unknown as ROLENAME} option="with-label" />
+                    <DisplayMenuDependingJob role={role as unknown as ROLE_NAME} option="with-label" />
                 </Grid2>
             ) : (
                 <Grid2
@@ -77,7 +77,7 @@ export const SideBar = () => {
                     alignItems="center"
                     gap={GAP_MENU_ITEMS_USER}
                 >
-                    <DisplayMenuDependingJob role={role as unknown as ROLENAME} option="only-icon" />
+                    <DisplayMenuDependingJob role={role as unknown as ROLE_NAME} option="only-icon" />
                 </Grid2>
             )}
 

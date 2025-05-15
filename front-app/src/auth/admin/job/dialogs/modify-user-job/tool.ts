@@ -1,6 +1,6 @@
 import { User } from "../../../../../common/types/user";
 import { Dispatch, SetStateAction } from "react";
-import { ROLE_NAME } from "../../../../../app/router/const";
+import { ROLE_NAME } from "../../../../../common/const/user";
 
 export const onChangeUser = (param: keyof User, setUser: Dispatch<SetStateAction<User>>, value: string) => {
     setUser((old) => {

@@ -18,7 +18,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { ROLENAME } from "../../../../../common/const/user";
+import { ROLE_NAME } from "../../../../../common/const/user";
 import { fieldListUser } from "./const";
 import { onChangeUser } from "./tool";
 import { defaultUser } from "../const";
@@ -115,7 +115,7 @@ export const ModifyUserJob = (props: DialogProps<User>) => {
                                             onChangeUser("role", setUser, e.target.value as string);
                                         }}
                                     >
-                                        {Object.values(ROLENAME).map((item) => (
+                                        {Object.values(ROLE_NAME).map((item) => (
                                             <MenuItem key={item} value={item}>
                                                 {item}
                                             </MenuItem>
