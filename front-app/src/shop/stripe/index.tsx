@@ -39,7 +39,7 @@ export const StripeStatusPayement = () => {
 
                 <Button
                     variant="contained"
-                    href={`/auth/${PATH_NAME.FACTURATION}`}
+                    href={`/${PATH_NAME.ADMIN}/${PATH_NAME.FACTURATION}`}
                     sx={{
                         marginTop: "5px",
                         padding: "5px 23px",

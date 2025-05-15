@@ -101,6 +101,7 @@ export const LoginPage = () => {
                     </Link>
                     <Grid margin="auto" mt="1vh" bgcolor="#9834" borderRadius="15px" padding={3}>
                         {[
+                            ["Dacia@gmail.fr", "Password", "User Details"],
                             ["admin@admin.fr", "adminadmin", "SUPER_ADMIN"],
                             ["user@user.fr", "useruser", "USER"],
                             ["invoice@invoice.fr", "invoiceinvoice", "INVOICE"],
