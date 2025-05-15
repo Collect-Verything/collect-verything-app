@@ -14,6 +14,7 @@ import { deleteById } from "../../../../../features/user-job-slice";
 import { useLocation } from "react-router-dom";
 import { deleteUserById } from "../../../../../features/user-slice";
 import { User } from "../../../../../common/types/user";
+import { URL_FRONT } from "../../../../../app/router/const";
 
 export const DeleteUserJob = (props: DialogProps<User>) => {
     const { buttonElement, rippleRef, row } = props;
@@ -26,7 +27,7 @@ export const DeleteUserJob = (props: DialogProps<User>) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleDeleteUserJob = () => {
-        if (location.pathname.includes("customer")) {
+        if (location.pathname.includes(`${URL_FRONT.GESTION_CUSTOMER}`)) {
             dispatch(deleteUserById(String(row.id))).then(handleClose);
         }
         dispatch(deleteById(String(row.id))).then(handleClose);
