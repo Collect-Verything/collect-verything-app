@@ -21,11 +21,14 @@ import { useAppDispatch } from "../../features/authentication-slice";
 import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
 import { useSelector } from "react-redux";
 import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
+import { PRODUCT_TYPE } from "../../common/const/product";
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useAppDispatch();
     const { list } = useSelector(getBasket);
+
+    const [containProduct, setContainProduct] = useState(false);
 
     useEffect(() => {
         const newTotal = list.reduce((acc, prod) => {
@@ -34,6 +37,16 @@ export const Basket = () => {
             return acc + productPrice;
         }, 0);
         setTotalPrice(newTotal);
+    }, [list]);
+
+    useEffect(() => {
+        list.map((item) => {
+            if (item.product.type === PRODUCT_TYPE.PRODUCT) {
+                setContainProduct(true);
+            } else {
+                setContainProduct(false);
+            }
+        });
     }, [list]);
 
     if (!totalPrice)
@@ -149,13 +162,61 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-                                    <PaiementCard totalPrice={totalPrice} listBasket={list} />
+                                    <PaiementCard
+                                        // isPayable={isNotPayable}
+                                        // setdeliveryView={setdeliveryView}
+                                        containProduct={containProduct}
+                                        totalPrice={totalPrice}
+                                        listBasket={list}
+                                    />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+            {/*{deliveryView && (*/}
+            {/*    <MDBContainer className="py-5 h-100">*/}
+            {/*        <MDBRow className="justify-content-center align-items-center h-100">*/}
+            {/*            <MDBCol>*/}
+            {/*                <MDBCard>*/}
+            {/*                    <MDBCardBody className="p-4">*/}
+            {/*                        <MDBRow>*/}
+            {/*                            <MDBCol lg="7">*/}
+            {/*                                <Grid container justifyContent="space-between">*/}
+            {/*                                    <Grid>*/}
+            {/*                                        <MDBTypography tag="h5">*/}
+            {/*                                            <MDBIcon /> Votre livraison*/}
+            {/*                                        </MDBTypography>*/}
+            {/*                                    </Grid>*/}
+            {/*                                </Grid>*/}
+
+            {/*                                <div className="d-flex flex-row align-items-center">*/}
+            {/*                                    <div>Recuperer votre colis en :</div>*/}
+            {/*                                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">*/}
+            {/*                                        <InputLabel id="demo-select-small-label">Livraison</InputLabel>*/}
+            {/*                                        <Select*/}
+            {/*                                            value={deliveryType}*/}
+            {/*                                            label="Type Livraison"*/}
+            {/*                                            onChange={handleChange}*/}
+            {/*                                        >*/}
+            {/*                                            <MenuItem value={DELIVERY_TYPE.MAGASIN}>*/}
+            {/*                                                {DELIVERY_TYPE.MAGASIN}*/}
+            {/*                                            </MenuItem>*/}
+            {/*                                            <MenuItem value={DELIVERY_TYPE.POINT_RELAIS}>*/}
+            {/*                                                {DELIVERY_TYPE.POINT_RELAIS}*/}
+            {/*                                            </MenuItem>*/}
+            {/*                                        </Select>*/}
+            {/*                                    </FormControl>*/}
+            {/*                                </div>*/}
+            {/*                            </MDBCol>*/}
+            {/*                        </MDBRow>*/}
+            {/*                    </MDBCardBody>*/}
+            {/*                </MDBCard>*/}
+            {/*            </MDBCol>*/}
+            {/*        </MDBRow>*/}
+            {/*    </MDBContainer>*/}
+            {/*)}*/}
         </section>
     );
 };

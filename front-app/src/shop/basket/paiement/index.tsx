@@ -12,16 +12,18 @@ import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../features/store";
 import { PATH_NAME } from "../../../common/const/path";
+import RadioButtonUncheckedIcon from "@mui/icons-material/DeleteOutline";
 
 interface PaiementCardProps {
     totalPrice: number;
     listBasket: ListBasketType[];
+    containProduct: boolean;
 }
 
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const PaiementCard = (props: PaiementCardProps) => {
-    const { totalPrice, listBasket } = props;
+    const { totalPrice, listBasket, containProduct } = props;
     const { role } = useSelector((store: RootState) => store.authenticate);
 
     const nav = useNavigate();
@@ -124,6 +126,17 @@ export const PaiementCard = (props: PaiementCardProps) => {
                                 </span>
                             </div>
                         </MDBBtn>
+                        {containProduct && (
+                            <MDBBtn color="info" block size="lg" style={{ marginTop: "10px" }}>
+                                <div className="d-flex justify-content-between">
+                                    {/*onClick={() => setdeliveryView(true)}*/}
+                                    <span>
+                                        {/*<CheckCircleOutlineIcon/>*/}
+                                        <RadioButtonUncheckedIcon /> LIVRAISON
+                                    </span>
+                                </div>
+                            </MDBBtn>
+                        )}
                     </MDBCardBody>
                 )}
 
