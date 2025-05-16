@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../shop/vitrine/request";
 import { ProductEntity } from "../../shop/boutique/type";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsProduct } from "./grid-definition";

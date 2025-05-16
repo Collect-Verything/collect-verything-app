@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Grid2, Paper, Typography } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import { useAppDispatch } from "../../features/authentication-slice";
 import { deleteAllBasketItems } from "../../features/basket-slice";
@@ -14,7 +14,7 @@ export const StripeStatusPayement = () => {
     }, []);
 
     return (
-        <Grid2
+        <Grid
             container
             direction="column"
             margin="auto"
@@ -57,7 +57,7 @@ export const StripeStatusPayement = () => {
                 Si l&apos;application n&apos;est pas en prod, penser a simuler l&apos;evenement facturation avec POSTMAN
                 pour consulter cette facture, checker la documentation
             </Alert>
-        </Grid2>
+        </Grid>
     );
 };
 

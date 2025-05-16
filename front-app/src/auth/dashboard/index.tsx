@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Card, CardContent, Typography } from "@mui/material";
 import { RootState } from "../../features/store";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { CenteredGrid } from "../../common/components/grid-centered";
 
 export const AuthDashboard = () => {

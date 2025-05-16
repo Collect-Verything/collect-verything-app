@@ -40,5 +40,9 @@ Scaling sur l'api gateway
 
 Modifier la methode qui envoit les mails de renouvellement de mot de passe, pour le moment elle envoit sur la boite mail du project
 
+## Facturation service 
+Ajouter updated et created at à la table pour creer des stats sur les ventes
+
+
 [summary]: ../README.md
 [issue_lint]: ../development/linting.md

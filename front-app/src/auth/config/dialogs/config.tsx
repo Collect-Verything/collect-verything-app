@@ -3,7 +3,7 @@ import { Configuration, Subscription } from "../type";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Button, Grid2, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -91,7 +91,7 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
         setError(undefined);
     };
     return (
-        <Grid2>
+        <Grid>
             <strong>
                 <Button
                     onClick={handleClickOpen}
@@ -235,6 +235,6 @@ export const ConfigDialog = (props: DialogProps<Subscription>) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Grid2>
+        </Grid>
     );
 };

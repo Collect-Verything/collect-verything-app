@@ -2,7 +2,7 @@ import { ProductEntity } from "../../../shop/boutique/type";
 import React, { useEffect, useState } from "react";
 import { Button, Switch, TextField, Typography } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { mounthToAnnual } from "../pricing";
 import { PRODUCT_TYPE } from "../../const/product";
 import { addBasketItems } from "../../../features/basket-slice";

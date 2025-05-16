@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { Button, TextField, Typography } from "@mui/material";
 import { User } from "../../common/types/user";
 import { useSelector } from "react-redux";

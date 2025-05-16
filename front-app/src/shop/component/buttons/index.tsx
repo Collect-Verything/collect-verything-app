@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid2 } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { noOp } from "../../../common/utils/void";
 import { useNavigate } from "react-router-dom";
 
@@ -90,7 +90,7 @@ export const ButtonMenuDashboard = ({ children, url }: ButtonMenuDashboardProps)
     const navigate = useNavigate();
 
     return (
-        <Grid2
+        <Grid
             container
             spacing={2}
             onClick={() => navigate(`${url}`)}
@@ -102,6 +102,6 @@ export const ButtonMenuDashboard = ({ children, url }: ButtonMenuDashboardProps)
             }}
         >
             {children}
-        </Grid2>
+        </Grid>
     );
 };

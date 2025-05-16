@@ -3,7 +3,7 @@ import { ProductEntity } from "../../../../shop/boutique/type";
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Grid2, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import Dialog from "@mui/material/Dialog";
@@ -47,7 +47,7 @@ export const CheckProduct = (props: DialogProps<ProductEntity>) => {
     };
 
     return (
-        <Grid2>
+        <Grid>
             <strong>
                 <Button
                     onClick={handleClickOpen}
@@ -87,6 +87,6 @@ export const CheckProduct = (props: DialogProps<ProductEntity>) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Grid2>
+        </Grid>
     );
 };

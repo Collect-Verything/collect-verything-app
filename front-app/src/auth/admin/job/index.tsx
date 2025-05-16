@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsUser } from "./grid-definition";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { CreateUserAndJob } from "./dialogs/create-user-job";
 import { useAppDispatch } from "../../../features/authentication-slice";
 import { fetchJobbers } from "../../../features/user-job-slice";
