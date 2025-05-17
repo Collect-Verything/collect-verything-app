@@ -1,4 +1,5 @@
 import {
+    MDBBtn,
     MDBCard,
     MDBCardBody,
     MDBCardImage,
@@ -12,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Divider, InputLabel, SelectChangeEvent, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
 import Grid from "@mui/material/Grid";
@@ -22,6 +23,10 @@ import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../feature
 import { useSelector } from "react-redux";
 import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
 import { PRODUCT_TYPE } from "../../common/const/product";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import { DELIVERY_TYPE } from "../../common/const/delivery";
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -29,6 +34,20 @@ export const Basket = () => {
     const { list } = useSelector(getBasket);
 
     const [containProduct, setContainProduct] = useState(false);
+    const [deliveryConfigured, setDeliveryConfigured] = useState(false);
+    const [deliveryView, setDeliveryView] = useState(false);
+
+    const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPE.POINT_RELAIS);
+
+    const handleChangeDeliveryType = (event: SelectChangeEvent) => {
+        setDeliveryType(event.target.value as DELIVERY_TYPE);
+    };
+
+    const handleDelivery = () => {
+        setDeliveryConfigured(false);
+        const element = document.getElementById("basket");
+        element?.scrollIntoView({ behavior: "smooth" });
+    };
 
     useEffect(() => {
         const newTotal = list.reduce((acc, prod) => {
@@ -43,8 +62,14 @@ export const Basket = () => {
         list.map((item) => {
             if (item.product.type === PRODUCT_TYPE.PRODUCT) {
                 setContainProduct(true);
+                setDeliveryConfigured(true);
             } else {
                 setContainProduct(false);
+                setDeliveryConfigured(false);
+                setDeliveryView(false);
+            }
+            if (item.product.type !== PRODUCT_TYPE.PRODUCT) {
+                setDeliveryView(false);
             }
         });
     }, [list]);
@@ -59,7 +84,7 @@ export const Basket = () => {
         );
 
     return (
-        <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
+        <section className="h-100 h-custom" style={{ backgroundColor: "white" }} id="basket">
             <MDBContainer className="py-5 h-100">
                 <MDBRow className="justify-content-center align-items-center h-100">
                     <MDBCol>
@@ -163,8 +188,8 @@ export const Basket = () => {
                                         )}
                                     </MDBCol>
                                     <PaiementCard
-                                        // isPayable={isNotPayable}
-                                        // setdeliveryView={setdeliveryView}
+                                        setDeliveryView={setDeliveryView}
+                                        deliveryConfigured={deliveryConfigured}
                                         containProduct={containProduct}
                                         totalPrice={totalPrice}
                                         listBasket={list}
@@ -175,48 +200,135 @@ export const Basket = () => {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-            {/*{deliveryView && (*/}
-            {/*    <MDBContainer className="py-5 h-100">*/}
-            {/*        <MDBRow className="justify-content-center align-items-center h-100">*/}
-            {/*            <MDBCol>*/}
-            {/*                <MDBCard>*/}
-            {/*                    <MDBCardBody className="p-4">*/}
-            {/*                        <MDBRow>*/}
-            {/*                            <MDBCol lg="7">*/}
-            {/*                                <Grid container justifyContent="space-between">*/}
-            {/*                                    <Grid>*/}
-            {/*                                        <MDBTypography tag="h5">*/}
-            {/*                                            <MDBIcon /> Votre livraison*/}
-            {/*                                        </MDBTypography>*/}
-            {/*                                    </Grid>*/}
-            {/*                                </Grid>*/}
 
-            {/*                                <div className="d-flex flex-row align-items-center">*/}
-            {/*                                    <div>Recuperer votre colis en :</div>*/}
-            {/*                                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">*/}
-            {/*                                        <InputLabel id="demo-select-small-label">Livraison</InputLabel>*/}
-            {/*                                        <Select*/}
-            {/*                                            value={deliveryType}*/}
-            {/*                                            label="Type Livraison"*/}
-            {/*                                            onChange={handleChange}*/}
-            {/*                                        >*/}
-            {/*                                            <MenuItem value={DELIVERY_TYPE.MAGASIN}>*/}
-            {/*                                                {DELIVERY_TYPE.MAGASIN}*/}
-            {/*                                            </MenuItem>*/}
-            {/*                                            <MenuItem value={DELIVERY_TYPE.POINT_RELAIS}>*/}
-            {/*                                                {DELIVERY_TYPE.POINT_RELAIS}*/}
-            {/*                                            </MenuItem>*/}
-            {/*                                        </Select>*/}
-            {/*                                    </FormControl>*/}
-            {/*                                </div>*/}
-            {/*                            </MDBCol>*/}
-            {/*                        </MDBRow>*/}
-            {/*                    </MDBCardBody>*/}
-            {/*                </MDBCard>*/}
-            {/*            </MDBCol>*/}
-            {/*        </MDBRow>*/}
-            {/*    </MDBContainer>*/}
-            {/*)}*/}
+            {deliveryView && (
+                <MDBContainer className="py-5 h-100">
+                    <MDBRow className="justify-content-center align-items-center h-100">
+                        <MDBCol>
+                            <MDBCard>
+                                <MDBCardBody className="p-4">
+                                    <MDBRow>
+                                        <MDBCol lg="7">
+                                            <Grid container justifyContent="space-between">
+                                                <Grid>
+                                                    <MDBTypography tag="h5">
+                                                        <MDBIcon /> Votre livraison
+                                                    </MDBTypography>
+                                                </Grid>
+                                            </Grid>
+
+                                            <div className="d-flex flex-row align-items-center">
+                                                <div>Recuperer votre colis en :</div>
+                                                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                                    <InputLabel id="demo-select-small-label">Livraison</InputLabel>
+                                                    <Select
+                                                        value={deliveryType}
+                                                        label="Type Livraison"
+                                                        onChange={handleChangeDeliveryType}
+                                                    >
+                                                        <MenuItem value={DELIVERY_TYPE.MAGASIN}>
+                                                            {DELIVERY_TYPE.MAGASIN}
+                                                        </MenuItem>
+                                                        <MenuItem value={DELIVERY_TYPE.POINT_RELAIS}>
+                                                            {DELIVERY_TYPE.POINT_RELAIS}
+                                                        </MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </div>
+
+                                            <Grid>
+                                                {deliveryType === DELIVERY_TYPE.POINT_RELAIS ? (
+                                                    <>
+                                                        <MDBTypography tag="h5">
+                                                            <img
+                                                                width={500}
+                                                                src={`${process.env.PUBLIC_URL}/assets/illustrations/point-relais.png`}
+                                                                alt="Illustration"
+                                                            />
+                                                        </MDBTypography>
+                                                        <Divider />
+                                                        <MDBBtn color="dark" size="lg">
+                                                            <div
+                                                                className="d-flex justify-content-center"
+                                                                onClick={handleDelivery}
+                                                            >
+                                                                <span>
+                                                                    VALIDER
+                                                                    <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                                                                </span>
+                                                            </div>
+                                                        </MDBBtn>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Box mb={3}>
+                                                            <Typography variant="body1" gutterBottom>
+                                                                Vous pouvez venir récupérer votre colis d&apos;ici une
+                                                                heure, le temps que le traitement soit effectué.
+                                                            </Typography>
+                                                            <Typography variant="body1">
+                                                                Un mail contenant plus d&apos;informations va vous être
+                                                                envoyé.
+                                                            </Typography>
+                                                        </Box>
+
+                                                        <Divider />
+                                                        <MDBBtn color="dark" size="lg">
+                                                            <div
+                                                                className="d-flex justify-content-center"
+                                                                onClick={handleDelivery}
+                                                            >
+                                                                <span>
+                                                                    VALIDER
+                                                                    <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                                                                </span>
+                                                            </div>
+                                                        </MDBBtn>
+                                                        <Divider />
+
+                                                        <Box mt={3}>
+                                                            <Typography variant="h6" gutterBottom>
+                                                                Plage horaire de disponibilité de notre boutique :
+                                                            </Typography>
+                                                            <Box ml={2}>
+                                                                <Typography variant="body1">
+                                                                    Lundi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Mardi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Mercredi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Jeudi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Vendredi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Samedi : 10h - 17h
+                                                                </Typography>
+                                                                <Typography variant="body1">
+                                                                    Dimanche :{" "}
+                                                                    <span style={{ color: "red", fontWeight: "bold" }}>
+                                                                        Fermé
+                                                                    </span>
+                                                                </Typography>
+                                                            </Box>
+                                                        </Box>
+                                                    </>
+                                                )}
+                                            </Grid>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            )}
+            <Grid id="delivery"></Grid>
         </section>
     );
 };
