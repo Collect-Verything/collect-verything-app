@@ -1,5 +1,4 @@
 import {
-    MDBBtn,
     MDBCard,
     MDBCardBody,
     MDBCardImage,
@@ -13,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
-import { Box, Button, Divider, InputLabel, SelectChangeEvent, Typography } from "@mui/material";
+import { Button, InputLabel, SelectChangeEvent } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
 import Grid from "@mui/material/Grid";
@@ -27,6 +26,7 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import { DELIVERY_TYPE } from "../../common/const/delivery";
+import { DisplayCountItemBasket, NoItemBasket, PickUpMap, PickUpShop } from "./components";
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -74,14 +74,7 @@ export const Basket = () => {
         });
     }, [list]);
 
-    if (!totalPrice)
-        return (
-            <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: "50vh" }}>
-                <Typography variant="h3" color="textSecondary">
-                    Aucun article dans votre panier
-                </Typography>
-            </Grid>
-        );
+    if (!totalPrice) return <NoItemBasket />;
 
     return (
         <section className="h-100 h-custom" style={{ backgroundColor: "white" }} id="basket">
@@ -116,14 +109,7 @@ export const Basket = () => {
                                         <hr />
 
                                         {list.length === 0 ? (
-                                            <div className="d-flex justify-content-between align-items-center mb-4">
-                                                <div>
-                                                    <p className="mb-0">
-                                                        Vous possedez actuellement {list.length} article(s) dans votre
-                                                        panier.
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            <DisplayCountItemBasket list={list} />
                                         ) : (
                                             <div style={{ maxHeight: "450px", overflowY: "auto" }}>
                                                 {list.map((item, index) => (
@@ -238,86 +224,9 @@ export const Basket = () => {
 
                                             <Grid>
                                                 {deliveryType === DELIVERY_TYPE.POINT_RELAIS ? (
-                                                    <>
-                                                        <MDBTypography tag="h5">
-                                                            <img
-                                                                width={500}
-                                                                src={`${process.env.PUBLIC_URL}/assets/illustrations/point-relais.png`}
-                                                                alt="Illustration"
-                                                            />
-                                                        </MDBTypography>
-                                                        <Divider />
-                                                        <MDBBtn color="dark" size="lg">
-                                                            <div
-                                                                className="d-flex justify-content-center"
-                                                                onClick={handleDelivery}
-                                                            >
-                                                                <span>
-                                                                    VALIDER
-                                                                    <i className="fas fa-long-arrow-alt-right ms-2"></i>
-                                                                </span>
-                                                            </div>
-                                                        </MDBBtn>
-                                                    </>
+                                                    <PickUpMap handleDelivery={handleDelivery} />
                                                 ) : (
-                                                    <>
-                                                        <Box mb={3}>
-                                                            <Typography variant="body1" gutterBottom>
-                                                                Vous pouvez venir récupérer votre colis d&apos;ici une
-                                                                heure, le temps que le traitement soit effectué.
-                                                            </Typography>
-                                                            <Typography variant="body1">
-                                                                Un mail contenant plus d&apos;informations va vous être
-                                                                envoyé.
-                                                            </Typography>
-                                                        </Box>
-
-                                                        <Divider />
-                                                        <MDBBtn color="dark" size="lg">
-                                                            <div
-                                                                className="d-flex justify-content-center"
-                                                                onClick={handleDelivery}
-                                                            >
-                                                                <span>
-                                                                    VALIDER
-                                                                    <i className="fas fa-long-arrow-alt-right ms-2"></i>
-                                                                </span>
-                                                            </div>
-                                                        </MDBBtn>
-                                                        <Divider />
-
-                                                        <Box mt={3}>
-                                                            <Typography variant="h6" gutterBottom>
-                                                                Plage horaire de disponibilité de notre boutique :
-                                                            </Typography>
-                                                            <Box ml={2}>
-                                                                <Typography variant="body1">
-                                                                    Lundi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Mardi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Mercredi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Jeudi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Vendredi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Samedi : 10h - 17h
-                                                                </Typography>
-                                                                <Typography variant="body1">
-                                                                    Dimanche :{" "}
-                                                                    <span style={{ color: "red", fontWeight: "bold" }}>
-                                                                        Fermé
-                                                                    </span>
-                                                                </Typography>
-                                                            </Box>
-                                                        </Box>
-                                                    </>
+                                                    <PickUpShop handleDelivery={handleDelivery} />
                                                 )}
                                             </Grid>
                                         </MDBCol>
