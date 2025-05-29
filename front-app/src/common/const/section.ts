@@ -5,6 +5,7 @@ export enum SECTION_NAME {
     ACCOUNT = "Compte",
     PRODUCTS = "Produits",
     FACTURATION = "Facturation",
+    DELIVERY = "Livraison",
     GESTION_PERSON = "Gestion du personnel",
     GESTION_CUSTOMER = "Gestion client",
     STATS = "Statistique",

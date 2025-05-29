@@ -18,7 +18,7 @@ import { ButtonRounded } from "../component/buttons";
 import Grid from "@mui/material/Grid";
 import { PaiementCard } from "./paiement";
 import { useAppDispatch } from "../../features/authentication-slice";
-import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
+import { basketSlice, deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
 import { useSelector } from "react-redux";
 import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
 import { PRODUCT_TYPE } from "../../common/const/product";
@@ -41,6 +41,7 @@ export const Basket = () => {
 
     const handleChangeDeliveryType = (event: SelectChangeEvent) => {
         setDeliveryType(event.target.value as DELIVERY_TYPE);
+        dispatch(basketSlice.actions.defineDeliveryMode(event.target.value as DELIVERY_TYPE));
     };
 
     const handleDelivery = () => {

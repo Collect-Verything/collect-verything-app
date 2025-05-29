@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "./store";
 import { ListBasketType } from "../shop/boutique/type";
+import { DELIVERY_TYPE } from "../common/const/delivery";
 
 /**
  * ==========================================================================
@@ -39,9 +40,10 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 interface BasketState {
     count: number;
     list: ListBasketType[];
+    delivery: DELIVERY_TYPE;
 }
 
-const initialState: BasketState = { count: 0, list: [] };
+const initialState: BasketState = { count: 0, list: [], delivery: DELIVERY_TYPE.UNDEFINED };
 
 export const basketSlice = createSlice({
     name: "basket",
@@ -58,6 +60,9 @@ export const basketSlice = createSlice({
         addBasketItems: (state, action) => {
             state.list.push(action.payload);
             state.count++;
+        },
+        defineDeliveryMode: (state, action) => {
+            state.delivery = action.payload;
         },
     },
 });
