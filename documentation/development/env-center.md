@@ -50,6 +50,9 @@ EMAIL_SERVICE=gmail
 FORGOT_PASSWORD_PATTERN=forgot-password
 
 MESSAGE_BROKER_URL=broker-service
+
+DELIVERY_PORT=3005
+DELIVERY_URL=delivery
 ```
 
 # 🔭 Env Health Check

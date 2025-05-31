@@ -18,10 +18,11 @@ TODO :
 ----[ ] Run
 [ ] Mise a jour des root dans Api Gateway
 [ ] Configuration du fichier main du nouveau service
-----[ ] Ajout du nouveau port dans le .env du root et
+----[ ] Ajout du nouveau port dans le .env du root et le front
 ----[ ] npm i dotenv dans le service concerné
 ----[ ] Creer fichier env-config.ts pour la recuperation des .env du root (suivre pattern present dans les autres service)
-----[ ] Mettre à jour les .env front et root avec l'rl service et port du nouveau service
+----[ ] Mettre à jour les .env front et root avec l'url service et port du nouveau service
+----[ ] Mettre à jour la doc env poke center
 [ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
 ----[ ] Dockerfile
 ----[ ] compose.yaml
