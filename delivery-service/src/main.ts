@@ -33,13 +33,13 @@ bootstrap();
 //     [x] Mettre à jour les .env front et root avec l'url service et port du nouveau service
 //     [x] Creer fichier env-config.ts pour la recuperation des .env du root (suivre pattern present dans les autres service)
 //     [x] Configuration du fichier main du nouveau service
+//     [x] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
+//     [x] Dockerfile
+//     [x] compose.yaml
+//     [x] start.sh
 
 //     [ ] Mise a jour des root dans Api Gateway
 //     [ ] npm i dotenv dans le service concerné
-//     [ ] Mettre a jour les fichier en rapport avec Docker (suivre pattern existant)
-//     [ ] Dockerfile
-//     [ ] compose.yaml
-//     [ ] start.sh
-//     [ ] Creer les tests unitaires
+
 //     [ ] Mettre a jour les action github en rajoutant le nouveau service, donc un nouveau fichier. (suivre le pattern)
 //     [ ] Mettre à jour les documentations : diagrammes de classes, de séquence, d’architecture, etc.
