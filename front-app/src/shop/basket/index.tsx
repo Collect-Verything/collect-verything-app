@@ -28,6 +28,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { DELIVERY_TYPE } from "../../common/const/delivery";
 import { DisplayCountItemBasket, NoItemBasket, PickUpMap, PickUpShop } from "./components";
 
+// TODO : Bug panier, quand un service est en fin de liste, type livraison impossible meme quand produits present
+
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useAppDispatch();
@@ -41,7 +43,7 @@ export const Basket = () => {
 
     const handleChangeDeliveryType = (event: SelectChangeEvent) => {
         setDeliveryType(event.target.value as DELIVERY_TYPE);
-        dispatch(basketSlice.actions.defineDeliveryMode(event.target.value as DELIVERY_TYPE));
+        dispatch(basketSlice.actions.defineDeliveryMode(event.target.value));
     };
 
     const handleDelivery = () => {
@@ -64,6 +66,7 @@ export const Basket = () => {
             if (item.product.type === PRODUCT_TYPE.PRODUCT) {
                 setContainProduct(true);
                 setDeliveryConfigured(true);
+                dispatch(basketSlice.actions.defineDeliveryMode(DELIVERY_TYPE.POINT_RELAIS));
             } else {
                 setContainProduct(false);
                 setDeliveryConfigured(false);
