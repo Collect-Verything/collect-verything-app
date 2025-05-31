@@ -36,6 +36,17 @@ import { toolRequest } from './common/requests';
 @Injectable()
 export class ProxyService {
   async processRequest(req: Request) {
+    // STRIPE WEB HOOK EVENT'S
+
+    if (req.url === '/stripe/event') {
+      const res = await axios[req.method.toLowerCase()](
+        `http://facturation-service:3003/stripe/event`,
+        req.body
+      );
+      return res.status(200);
+    }
+
+    // REVERSE PROXY
     if (checkFreePath(req.url)) {
       const res = await axios[req.method.toLowerCase()](
         `http://${configEnv.DOMAIN_AUTH}:3001/auth/${returnFreePath(req.url)}`,

@@ -7,6 +7,9 @@ export class StripeEventService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkEvent(body: any) {
+    if (body.object.object === 'checkout.session') {
+      return await this.checkoutTreatment(body);
+    }
     if (body.object.object === 'invoice') {
       return await this.invoiceTreatment(body);
     }
@@ -15,6 +18,11 @@ export class StripeEventService {
     } else {
       console.log('Object recu non traité');
     }
+  }
+
+  async checkoutTreatment(checkout: any) {
+    let metadata = JSON.parse(checkout.object.metadata.data);
+    return 'call Rabbit MQ';
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
