@@ -1,3 +1,18 @@
+import { useEffect, useState } from "react";
+import { apiGet } from "../../../common/utils/web";
+import { DeliveryUrlWithPort } from "../../../app/micro-services";
+
 export const DelvieryPage = () => {
-    return <p>delivery page</p>;
+    const [ret, setRet] = useState<string>();
+
+    useEffect(() => {
+        apiGet(`${DeliveryUrlWithPort}`).then(setRet);
+    }, []);
+
+    return (
+        <>
+            <p>delivery page</p>
+            {ret && <p>{ret}</p>}
+        </>
+    );
 };
