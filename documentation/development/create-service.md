@@ -6,10 +6,10 @@ Voici les étapes à respecter lors de la création d’un nouveau service au se
 ```md
 TODO :
 [ ] Generer un nouveau service avec la commande : npx @nestjs/cli new new-service
-[ ] Afficher les dossier caché dans le finder puis supprimer le dossier caché .git du nouveau service
+[ ] Afficher les dossier caché dans le finder puis supprimer le dossier caché .git, .eslintrc.js & .prettierrc du nouveau service
 [ ] Dans le git dif retablir le fichier present /.idea/vsc.xml (laisser le git root en maitre)
-[ ] Supprimer les fichier de base generé par nestjs
-[ ] Generer les premiere ressource avec la commande
+[ ] Supprimer les fichier de base generé par nestjs 
+[ ] Generer les premiere ressource avec la commande 'nest g resource'
 [ ] Rajouter les script correspondant au besoin du nouveau service dans le package.json du root. (...)
 ----[ ] Installation
 ----[ ] Base de donnée :
