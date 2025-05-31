@@ -12,6 +12,10 @@ import { DELIVERY_TYPE } from "../common/const/delivery";
  * Gère l’état du **panier** directement dans le store Redux (plus de
  * persistance locale ni d’appels asynchrones).
  *
+ * initialState :
+ * Initialisé a Undefined, si le panier contient seulement des service, undefined permet de savoir que aucun
+ * type de livraison n'est requis, information passé dans le metadata du checkout STRIPE
+ *
  * Objectifs :
  * - Ajouter un ou plusieurs articles au panier
  * - Supprimer un article précis (par son index)
