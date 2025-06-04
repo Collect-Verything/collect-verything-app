@@ -10,6 +10,7 @@ import { StripeEventService } from './event/event.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { StripeInvoiceController } from './invoice/invoice.controller';
 import { StripeInvoiceService } from './invoice/invoice.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   controllers: [
@@ -26,6 +27,19 @@ import { StripeInvoiceService } from './invoice/invoice.service';
     StripeEventService,
     StripeInvoiceService,
   ],
-  imports: [PrismaModule],
+  imports: [
+    PrismaModule,
+    ClientsModule.register([
+      {
+        name: 'MAIL_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://broker-service`],
+          queue: 'delivery-queue',
+          queueOptions: { durable: false },
+        },
+      },
+    ]),
+  ],
 })
 export class StripeModule {}

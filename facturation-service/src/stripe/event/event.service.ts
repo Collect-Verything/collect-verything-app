@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class StripeEventService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject('MAIL_SERVICE') private client: ClientProxy
+  ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkEvent(body: any) {
@@ -24,8 +28,13 @@ export class StripeEventService {
     const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
 
     const { email, name } = checkout.object.customer_details;
-
+    // MAIL EVENT
     // Envoyer un evenement à mail service pour signaler a l'utilisateur qu'il peut venir chercher sa commande
+
+    const message = { owner, products, typeDelivery, email, name };
+    console.log('📤     Sent on queue : --[ DELIVERY ]--');
+    this.client.emit('delivery', message);
+
     // Envoyer un evenement à delivery service pour persisgter la livraison a effectuer au client:
     //      - SI POINT_RELAIS alors perisiter uniquement pour information metier, rien d'autre
     //      - SI MAGASIN alors mettre en place regle metier (...)
