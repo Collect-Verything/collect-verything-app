@@ -21,7 +21,24 @@ export class StripeEventService {
   }
 
   async checkoutTreatment(checkout: any) {
-    let metadata = JSON.parse(checkout.object.metadata.data);
+    const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
+
+    const { email, name } = checkout.object.customer_details;
+
+    // Envoyer un evenement à mail service pour signaler a l'utilisateur qu'il peut venir chercher sa commande
+    // Envoyer un evenement à delivery service pour persisgter la livraison a effectuer au client:
+    //      - SI POINT_RELAIS alors perisiter uniquement pour information metier, rien d'autre
+    //      - SI MAGASIN alors mettre en place regle metier (...)
+    //      - SI Undefinedalors service, donc pas de livraison, donc aucun perisstance
+
+    console.log(owner);
+    console.log(products);
+    console.log(typeDelivery);
+    console.log(email);
+    console.log(name);
+
+    // Envoyer un rabbit mq sur delivery puis mail pour perister la livraiosn en detail et signaler
+    //
     return 'call Rabbit MQ';
   }
 
