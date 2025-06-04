@@ -1,9 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import axios from 'axios';
-import { checkFreePath, returnFreePath } from './common/tool';
-import { configEnv } from '../env-config';
-import { toolRequest } from './common/requests';
+import { checkFreePath } from './common/tool';
+import { checkTokenRequest, processEventPath, processMainRequest } from './common/functions';
 
 // TODO : STRIPE EVENT
 // TODO : ⚠️ Upgrade logique for free path, for the moment only auth login and register is accepted
@@ -37,37 +35,20 @@ import { toolRequest } from './common/requests';
 export class ProxyService {
   async processRequest(req: Request) {
     // STRIPE WEB HOOK EVENT'S
-
     if (req.url === '/stripe/event') {
-      const res = await axios[req.method.toLowerCase()](
-        `http://facturation-service:3003/stripe/event`,
-        req.body
-      );
-      return res.status(200);
-    }
-
-    // REVERSE PROXY
-    if (checkFreePath(req.url)) {
-      const res = await axios[req.method.toLowerCase()](
-        `http://${configEnv.DOMAIN_AUTH}:3001/auth/${returnFreePath(req.url)}`,
-        req.body
-      );
-      return res.data;
+      return await processEventPath(req);
     } else {
-      if (req.headers.authorization) {
-        const responseCheckToken = await axios.post(
-          `http://${configEnv.DOMAIN_AUTH}:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`,
-          {},
-          { headers: { Authorization: req.headers.authorization } }
-        );
-        if (responseCheckToken.status === 200) {
-          const response = await toolRequest(req);
-          return response.data;
+      // REVERSE PROXY
+      if (checkFreePath(req.url)) {
+        // Check Token
+        return checkTokenRequest(req);
+      } else {
+        if (req.headers.authorization) {
+          // Process request
+          return processMainRequest(req);
         } else {
           throw new UnauthorizedException('Invalid token');
         }
-      } else {
-        throw new UnauthorizedException('Invalid token');
       }
     }
   }
