@@ -45,6 +45,7 @@
   - Stripe
     - [Facturation] [facturation]
     - [Subscription] [subscription]
+    - [Delivery] [delivery]
 
 - Diagrams
   - Databases
@@ -73,6 +74,7 @@
 [git-m]: git/merging.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md
+[delivery]: workflow/stripe/delivery.md
 [prettier]: development/prettier.md.md
 [ci]: ci-cd/ci.md
 [cd]: ci-cd/cd.md
