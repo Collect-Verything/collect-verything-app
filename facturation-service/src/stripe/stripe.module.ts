@@ -12,6 +12,8 @@ import { StripeInvoiceController } from './invoice/invoice.controller';
 import { StripeInvoiceService } from './invoice/invoice.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
+// TODO: .env or const urls and name broker service
+
 @Module({
   controllers: [
     StripeProductController,
@@ -35,7 +37,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.RMQ,
         options: {
           urls: [`amqp://broker-service`],
-          queue: 'delivery-queue',
+          queue: 'mail-queue',
           queueOptions: { durable: false },
         },
       },
