@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
-import { DeliveryBrokeObject } from './delivery.controller';
 import { configEnv } from '../../env-config';
+import { DeliveryBrokeObject } from './entities/delivery.entity';
 
 const transporter = nodemailer.createTransport({
   service: configEnv.EMAIL_SERVICE,
