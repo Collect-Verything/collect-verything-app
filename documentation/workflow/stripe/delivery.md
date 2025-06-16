@@ -112,7 +112,7 @@ Vous pouvez inspecter ces champs dans votre contrôleur pour valider que la simu
     "livemode": false,
     "locale": null,
     "metadata": { // Ici
-      "data": "{\"owner\":\"cus_RnTtXDu5wUoTLf\",\"products\":[{\"productName\":\"T shirt \",\"quantity\":3}],\"typeDelivery\":\"Point Relais\"}"
+      "data": "{\"owner\":\"cus_RnTtXDu5wUoTLf\",\"products\":[{\"productName\":\"T shirt \",\"quantity\":3}],\"typeDelivery\":\"Point_Relais\"}"
     },
     "mode": "payment",
     "payment_intent": "pi_3RUsf0K9Jv3tCgck0kq3PNJW",

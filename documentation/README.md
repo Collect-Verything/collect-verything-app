@@ -53,6 +53,7 @@
     - [Product] [product-database]
     - [Facturation] [facturation-database]
     - [Configuration] [config-database]
+    - [Delivery] [delivery-database]
   - Sequence Diagrams
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
@@ -89,6 +90,7 @@
 [product-database]: diagrams/databases/product-db.md
 [facturation-database]: diagrams/databases/facturation-db.md
 [config-database]: diagrams/databases/config-db.md
+[delivery-database]: diagrams/databases/delivery-db.md
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
 [product-sequences]: diagrams/sequence-diagrams/product.md
 [facturation-sequences]: diagrams/sequence-diagrams/facturation.md
