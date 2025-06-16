@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { checkEnvValue, configEnv } from '../env-config';
+import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,13 +12,23 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
+  app.connectMicroservice({
+    transport: Transport.RMQ,
+    options: {
+      urls: [`amqp://broker-service`],
+      queue: 'mail-queue',
+      queueOptions: { durable: false },
+    },
+  });
+
   // const { httpAdapter } = app.get(HttpAdapterHost);
   // app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   checkEnvValue();
-
+  await app.startAllMicroservices();
   await app.listen(configEnv.DELIVERY_PORT);
 }
+
 bootstrap();
 
 //

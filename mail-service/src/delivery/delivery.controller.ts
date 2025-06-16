@@ -7,9 +7,9 @@ import { DeliveryBrokeObject } from './entities/delivery.entity';
 export class DeliveryController {
   constructor(private readonly deliveryService: DeliveryService) {}
 
-  @EventPattern('delivery')
+  @EventPattern('mail-delivery')
   handledelivery(@Payload() messageReceived: DeliveryBrokeObject) {
-    console.log('📥 Received on queue : --[ DELIVERY ]--');
+    console.log('📥 Received on queue : --[ MAIL - DELIVERY ]--');
     this.deliveryService.sendDeliveryInformation(messageReceived);
   }
 }

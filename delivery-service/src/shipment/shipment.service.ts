@@ -8,6 +8,11 @@ export class ShipmentService {
     return 'This action adds a new shipment';
   }
 
+  persistDelivery(message: any) {
+    console.log(message);
+    console.log('🚚  Received on queue : --[ SERVICE - DELIVERY ]--');
+  }
+
   findAll() {
     return `This action returns all shipment`;
   }

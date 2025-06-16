@@ -25,11 +25,16 @@ export class StripeEventService {
   }
 
   async checkoutTreatment(checkout: any) {
-    const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
-    const { email, name } = checkout.object.customer_details;
-    const message = { owner, products, typeDelivery, email, name };
-    console.log('📤     Sent on queue : --[ DELIVERY ]--');
-    this.client.emit('delivery', message);
+    //  !!!  PENSER REACTIVER
+    // const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
+    // const { email, name } = checkout.object.customer_details;
+    // const message = { owner, products, typeDelivery, email, name };
+    // console.log('📤     Sent on queue : --[ MAIL - DELIVERY ]--');
+    // this.client.emit('mail-delivery', message);
+
+    console.log('🚚     Sent on queue : --[ SERVICE - DELIVERY ]--');
+    this.client.emit('service-delivery', 'message');
+
     return 'call Rabbit MQ';
   }
 

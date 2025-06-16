@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ShipmentService } from './shipment.service';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
 import { configEnv } from '../../env-config';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller(configEnv.DELIVERY_URL)
 export class ShipmentController {
@@ -11,6 +12,11 @@ export class ShipmentController {
   @Post()
   create(@Body() createShipmentDto: CreateShipmentDto) {
     return this.shipmentService.create(createShipmentDto);
+  }
+
+  @EventPattern('service-delivery')
+  handledelivery(@Payload() messageReceived: any) {
+    this.shipmentService.persistDelivery(messageReceived);
   }
 
   @Get()
