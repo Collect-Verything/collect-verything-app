@@ -18,7 +18,7 @@ export class DeliveryService {
       from: process.env.EMAIL_MESSAGE_BROKER,
       // to: messageReceived.email, // Penser a retablir
       to: 'collectverythings@gmail.com',
-      subject: `🚚 Collect & Verything - Information${deliveryInfo.typeDelivery === 'Magasin' || (deliveryInfo.typeDelivery === 'Point Relais' && ' Livraison')}`,
+      subject: `🚚 Collect & Verything - Information${deliveryInfo.typeDelivery === 'Magasin' || (deliveryInfo.typeDelivery === 'Point_Relais' && ' Livraison')}`,
       text: `Bonjour,
 
 Voici votre confirmation de commande.
@@ -31,7 +31,7 @@ L’équipe Collect & Verything`,
       <p>Votre commande est confirmé <strong>Collect & Verything</strong>.</p>
       
       ${deliveryInfo.typeDelivery === 'Magasin' && `<p>Voici les articles que vous pouvez retirer en magasin :</p>`}
-      ${deliveryInfo.typeDelivery === 'Point Relais' && `<p>Voici les articles que vous allez recevoir au point relais que vous avez selectionné :</p>`}
+      ${deliveryInfo.typeDelivery === 'Point_Relais' && `<p>Voici les articles que vous allez recevoir au point relais que vous avez selectionné :</p>`}
       ${deliveryInfo.typeDelivery === 'undefined' && `<p>Voici les articles de votre commande :</p>`}
                
       <ul style="background: #f2f2f2; padding: 10px; border-radius: 5px; font-size: 18px;">

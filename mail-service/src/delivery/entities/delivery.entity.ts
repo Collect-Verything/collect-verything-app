@@ -8,7 +8,7 @@ export interface ItemsDeliveryDeliveryBrokeObject {
 export interface DeliveryBrokeObject {
   owner: string;
   products: ItemsDeliveryDeliveryBrokeObject[];
-  typeDelivery: 'undefined' | 'Point Relais' | 'Magasin';
+  typeDelivery: 'undefined' | 'Point_Relais' | 'Magasin';
   email: string;
   name: string;
 }

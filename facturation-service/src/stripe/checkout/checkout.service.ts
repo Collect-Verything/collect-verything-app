@@ -73,5 +73,5 @@ interface DeliveryProduct {
 interface DeliveryObject {
   owner: string;
   products: DeliveryProduct[];
-  typeDelivery: 'Magasin' | 'Point Relais';
+  typeDelivery: 'Magasin' | 'Point_Relais';
 }
