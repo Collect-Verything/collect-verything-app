@@ -25,6 +25,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^10.4.19",
     "@nestjs/platform-express": "^10.0.0",
+    "@prisma/client": "^6.9.0",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.8",
     "dotenv": "^16.5.0",
@@ -71,5 +72,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

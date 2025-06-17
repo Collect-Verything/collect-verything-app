@@ -44,4 +44,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
 })
+
+// TODO : nom des queue etc ...
 export class StripeModule {}
