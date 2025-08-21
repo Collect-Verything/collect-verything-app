@@ -21,7 +21,6 @@ export class ShipmentController {
 
   @Get()
   findAll() {
-    console.log('CTRL DELIVERY');
     return this.shipmentService.findAll();
   }
 
