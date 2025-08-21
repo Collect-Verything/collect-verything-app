@@ -1,18 +1,43 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../../../common/utils/web";
 import { DeliveryUrlWithPort } from "../../../app/micro-services";
+import Grid from "@mui/material/Grid";
+import { Box, Typography } from "@mui/material";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import { DataGrid } from "@mui/x-data-grid";
+import { columnsDelivery, DeliveryType } from "./grid-definition";
 
-export const DelvieryPage = () => {
-    const [ret, setRet] = useState<string>();
+export const DeliveryPage = () => {
+    const [deliveryList, setDeliveryList] = useState<DeliveryType[]>();
 
     useEffect(() => {
-        apiGet(`${DeliveryUrlWithPort}`).then(setRet);
+        apiGet(`${DeliveryUrlWithPort}`).then(setDeliveryList);
     }, []);
 
+    if (!deliveryList) return <p>LOADING</p>;
+
     return (
-        <>
-            <p>delivery page</p>
-            {ret && <p>{ret}</p>}
-        </>
+        <Box sx={{ height: 700, width: "80%" }} padding={5} margin="auto" marginTop={2}>
+            <Grid container justifyContent="space-between" alignItems="center" pb={5} pr={2} pl={2}>
+                <Grid>
+                    <Typography variant="h4" component="div">
+                        <LocalShippingIcon fontSize="large" /> Gestion des colis
+                    </Typography>
+                </Grid>
+            </Grid>
+            <DataGrid
+                rows={deliveryList}
+                columns={columnsDelivery}
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 10,
+                        },
+                    },
+                }}
+                pageSizeOptions={[5]}
+                disableRowSelectionOnClick
+            />
+        </Box>
     );
 };

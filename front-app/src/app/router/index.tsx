@@ -25,7 +25,7 @@ import { ForgotPasswordPage } from "../../shop/forgot-password";
 import Error404Page from "../../shop/not-found";
 import { StripeStatusPayement } from "../../shop/stripe";
 import { PATH_NAME } from "../../common/const/path";
-import { DelvieryPage } from "../../auth/admin/delivery";
+import { DeliveryPage } from "../../auth/admin/delivery";
 
 export const router = createBrowserRouter([
     {
@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: PATH_NAME.DELIVERY,
-                element: <DelvieryPage />,
+                element: <DeliveryPage />,
             },
             {
                 path: PATH_NAME.CONFIG,
