@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { User } from "../../../common/types/user";
-import React, { useEffect, useState } from "react";
-import { Button, Dialog, Grid, Typography } from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import { Button, Dialog, Grid, Tooltip, Typography } from "@mui/material";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import { getUserById } from "../../account/request";
 import { useTheme } from "@mui/material/styles";
@@ -14,6 +14,10 @@ import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Stack } from "@mui/system";
+import { apiPatch } from "../../../common/utils/web";
+import { DeliveryUrlWithPort } from "../../../app/micro-services";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 export const columnsDelivery: GridColDef<any>[] = [
     { field: "id", headerName: "Id", width: 30 },
@@ -55,6 +59,7 @@ interface ProductDeliveryType {
     id: number;
     name: string;
     quantity: number;
+    delivered: number;
     createdAt: string;
     updatedAt: string;
 }
@@ -251,13 +256,10 @@ export const ManageDelivery = ({ props }: ManageDeliveryProps) => {
     );
 };
 
-// const statusColorMap: Record<ProductStatus, "error" | "warning" | "success"> = {
-//     Pending: "error",
-//     Partial: "warning",
-//     Done: "success",
-// };
-
 const getStatusColorMap = (status: any) => {
+    // Point relais
+    if (status.delivery_type === "Point_Relais") return "success";
+    // Click And Collect
     if (status.delivery_status === "Pending") return "error";
     if (status.delivery_status === "Partial") return "warning";
     return "success";
@@ -268,48 +270,126 @@ const StatusDelivery = (delivery_type: any) => {
     return <CircleIcon color={color} />;
 };
 
-// interface DeliveredProductProps {
-//     id: number;
-//     name: string;
-//     quantity: number;
-//     delivered: number;
-// }
-
 interface DeliveredProductProps {
     delivery: DeliveryType;
     product: ProductDeliveryType;
+    step?: number;
 }
 
 export const DeliveredProduct = (props: DeliveredProductProps) => {
-    // Si live point relais afficher
-    // Sinon tous produits livré, pas possible de modifié et afficher "Livré"`
-    // Sinon afficher la possibilité d'ajouter une produits livré puis save
+    const { product, delivery, step = 1 } = props;
 
-    const { product, delivery } = props;
+    const [targetDelivered, setTargetDelivered] = useState<number>(product?.delivered ?? 0);
+    const [btnStatus, setBtnStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
 
-    const [manualQuantity, setmanualQuantity] = useState<number>(0);
-    const [status, setStatus] = useState(false);
+    useEffect(() => {
+        setTargetDelivered(product?.delivered ?? 0);
+    }, [product?.id, product?.delivered, product?.quantity]);
 
-    // const [delivery, setDelivery] = useState<number>();
+    const clamp = (val: number) => Math.max(product.delivered, Math.min(product.quantity, val));
 
-    // useEffect(() => {
-    //     setQuantity(0);
-    // }, []);
+    const canEdit = useMemo(() => {
+        if (!product?.id) return false;
+        if (delivery.delivery_type === "Point_Relais") return false;
+        if (product.delivered >= product.quantity) return false; // tout livré
+        return true;
+    }, [product?.id, product?.delivered, product?.quantity, delivery.delivery_type]);
 
-    if (!product.id) return <CircularProgress color="secondary" />;
-    if (delivery.delivery_type === "Point_Relais") return <p>Livraison effeectué en point relais</p>;
+    const remaining = Math.max(0, product.quantity - product.delivered);
+    const addedNow = Math.max(0, targetDelivered - product.delivered);
+    const isComplete = targetDelivered === product.quantity;
+    const hasChange = targetDelivered !== product.delivered;
+
+    const inc = () => setTargetDelivered((prev) => clamp(prev + step));
+    const dec = () => setTargetDelivered((prev) => clamp(prev - step));
+    const setAll = () => setTargetDelivered(product.quantity);
+    const reset = () => setTargetDelivered(product.delivered);
+
+    const handleSave = async () => {
+        setBtnStatus("saving");
+        try {
+            const response = await apiPatch(`${DeliveryUrlWithPort}/${delivery.id}`, {
+                productId: product.id,
+                stockDelivered: targetDelivered,
+            });
+
+            if (response.success) {
+                setBtnStatus("success");
+            } else {
+                setBtnStatus("error");
+            }
+        } catch (error) {
+            console.error("Erreur lors de l'enregistrement :", error);
+            setBtnStatus("error");
+        }
+    };
+
+    if (!product?.id) return <CircularProgress color="secondary" />;
+    if (delivery.delivery_type === "Point_Relais") return <Typography>Livraison effectuée en point relais.</Typography>;
+    if (product.delivered >= product.quantity) return <Typography>Livré.</Typography>;
 
     return (
-        <Grid>
-            <Typography>Quantité livré : {manualQuantity} </Typography>
-            {product.quantity === manualQuantity ? (
-                <RadioButtonCheckedIcon color="success" />
-            ) : (
-                <RadioButtonUncheckedIcon color="error" />
-            )}
-            <Button onClick={() => setmanualQuantity(manualQuantity + 1)}>+1</Button>
-            <Button onClick={() => setmanualQuantity(manualQuantity - 1)}>-1</Button>
-            <Button onClick={() => setmanualQuantity(product.quantity)}>Rendu Total</Button>
+        <Grid container spacing={2} alignItems="center">
+            <Grid>
+                <Typography variant="h6">
+                    {product.name ?? "Produit"} — à livrer : {product.quantity}
+                </Typography>
+            </Grid>
+
+            <Grid>
+                {isComplete ? (
+                    <Tooltip title="Tout a été livré pour ce produit">
+                        <RadioButtonCheckedIcon color="success" />
+                    </Tooltip>
+                ) : (
+                    <Tooltip title="Il reste des quantités à livrer">
+                        <RadioButtonUncheckedIcon color="error" />
+                    </Tooltip>
+                )}
+            </Grid>
+
+            <Grid>
+                <Typography>
+                    Déjà livré (persisté) : <b>{product.delivered}</b>
+                </Typography>
+                <Typography>
+                    Restant à livrer : <b>{remaining}</b>
+                </Typography>
+                <Typography>
+                    Vous allez ajouter : <b>{addedNow}</b>
+                </Typography>
+                <Typography>
+                    Cible (après enregistrement) : <b>{targetDelivered}</b> / {product.quantity}
+                </Typography>
+            </Grid>
+
+            <Grid>
+                <Stack direction="row" spacing={1}>
+                    <Button
+                        variant="outlined"
+                        onClick={dec}
+                        disabled={!canEdit || targetDelivered <= product.delivered}
+                    >
+                        -{step}
+                    </Button>
+                    <Button variant="outlined" onClick={inc} disabled={!canEdit || targetDelivered >= product.quantity}>
+                        +{step}
+                    </Button>
+                    <Button variant="text" onClick={setAll} disabled={!canEdit || targetDelivered === product.quantity}>
+                        Rendu total
+                    </Button>
+                    <Button variant="text" onClick={reset} disabled={!canEdit || !hasChange}>
+                        Réinitialiser
+                    </Button>
+                    <Button
+                        variant="contained"
+                        disabled={btnStatus === "saving" || btnStatus === "success" || !canEdit || addedNow <= 0}
+                        onClick={handleSave}
+                    >
+                        {btnStatus === "success" ? <TaskAltIcon /> : `Enregistrer (+${addedNow})`}
+                    </Button>
+                </Stack>
+            </Grid>
         </Grid>
     );
 };

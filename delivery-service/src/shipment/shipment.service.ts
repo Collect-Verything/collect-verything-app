@@ -3,6 +3,8 @@ import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
+// TODO : Persister une livraison venant de rabbit mq et qui vient pour le moment de PostMan mais devrait etre trigger par un webhook
+
 @Injectable()
 export class ShipmentService {
   constructor(private prisma: PrismaService) {}
@@ -24,7 +26,7 @@ export class ShipmentService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} shipment`;
+    return this.prisma.delivery.findUnique({ where: { id }, include: { products: true } });
   }
 
   update(id: number, updateShipmentDto: UpdateShipmentDto) {

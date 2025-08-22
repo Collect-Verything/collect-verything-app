@@ -1,13 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ShipmentService } from './shipment.service';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
-import { UpdateShipmentDto } from './dto/update-shipment.dto';
 import { configEnv } from '../../env-config';
 import { EventPattern, Payload } from '@nestjs/microservices';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Controller(configEnv.DELIVERY_URL)
 export class ShipmentController {
-  constructor(private readonly shipmentService: ShipmentService) {}
+  constructor(
+    private readonly shipmentService: ShipmentService,
+    private prisma: PrismaService
+  ) {}
 
   @Post()
   create(@Body() createShipmentDto: CreateShipmentDto) {
@@ -30,8 +42,43 @@ export class ShipmentController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateShipmentDto: UpdateShipmentDto) {
-    return this.shipmentService.update(+id, updateShipmentDto);
+  async update(
+    @Param('id') deliveryId: string,
+    @Body() updateShipmentDto: { productId: number; stockDelivered: number }
+  ) {
+    const delivery = await this.shipmentService.findOne(+deliveryId);
+
+    const { productId, stockDelivered } = updateShipmentDto;
+
+    const productToUpdate = delivery.products.find((product) => product.id === productId);
+
+    if (!productToUpdate) {
+      throw new NotFoundException('Produit non trouvé dans cette livraison');
+    }
+
+    const newDelivered = productToUpdate.delivered + stockDelivered;
+
+    await this.prisma.product.update({
+      where: { id: productId },
+      data: { delivered: newDelivered },
+    });
+
+    const allProductsDelivered = delivery.products.every((product) => {
+      if (product.id === productId) {
+        return newDelivered >= product.quantity;
+      } else {
+        return product.delivered >= product.quantity;
+      }
+    });
+
+    if (allProductsDelivered) {
+      await this.prisma.delivery.update({
+        where: { id: +deliveryId },
+        data: { delivery_status: 'Done' },
+      });
+    }
+
+    return { success: true, message: 'Mise à jour effectuée' };
   }
 
   @Delete(':id')

@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { apiGet } from "../../../common/utils/web";
 import { DeliveryUrlWithPort } from "../../../app/micro-services";
 import Grid from "@mui/material/Grid";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsDelivery, DeliveryType } from "./grid-definition";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 export const DeliveryPage = () => {
     const [deliveryList, setDeliveryList] = useState<DeliveryType[]>();
@@ -25,19 +26,33 @@ export const DeliveryPage = () => {
                     </Typography>
                 </Grid>
             </Grid>
-            <DataGrid
-                rows={deliveryList}
-                columns={columnsDelivery}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 10,
-                        },
-                    },
-                }}
-                pageSizeOptions={[5]}
-                disableRowSelectionOnClick
-            />
+            <Grid>
+                <Grid mb={3}>
+                    <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={() => window.location.reload()}
+                        startIcon={<AutorenewIcon />}
+                    >
+                        Rafraîchir
+                    </Button>
+                </Grid>
+                <Grid>
+                    <DataGrid
+                        rows={deliveryList}
+                        columns={columnsDelivery}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 10,
+                                },
+                            },
+                        }}
+                        pageSizeOptions={[5]}
+                        disableRowSelectionOnClick
+                    />
+                </Grid>
+            </Grid>
         </Box>
     );
 };
