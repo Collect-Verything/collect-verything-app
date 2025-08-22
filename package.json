@@ -11,7 +11,7 @@
     "format:api": "cd api-gateway && npm run format",
     "format:front": "cd front-app && npm run format",
     "format:config": "cd config-service && npm run format",
-    "format:product": "cd product-service && npm run format"
+    "format:product": "cd product-service && npm run format",
     "format:delivery": "cd delivery-service && npm run format"
   },
   "devDependencies": {
