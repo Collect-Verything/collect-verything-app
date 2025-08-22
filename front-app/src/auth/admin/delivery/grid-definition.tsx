@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { User } from "../../../common/types/user";
 import React, { useEffect, useMemo, useState } from "react";
-import { Button, Dialog, Grid, Tooltip, Typography } from "@mui/material";
+import { Button, Dialog, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import { getUserById } from "../../account/request";
 import { useTheme } from "@mui/material/styles";
@@ -14,7 +14,7 @@ import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Stack } from "@mui/system";
+import { Box, Stack } from "@mui/system";
 import { apiPatch } from "../../../common/utils/web";
 import { DeliveryUrlWithPort } from "../../../app/micro-services";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
@@ -195,6 +195,65 @@ export const ManageDelivery = ({ props }: ManageDeliveryProps) => {
     const handleClose = () => setOpen(false);
 
     return (
+        // <Grid>
+        //     <Button
+        //         onClick={handleClickOpen}
+        //         ref={buttonElement}
+        //         touchRippleRef={rippleRef}
+        //         onKeyDown={(event: React.KeyboardEvent) => {
+        //             if (event.key === " ") {
+        //                 event.stopPropagation();
+        //             }
+        //         }}
+        //     >
+        //         Gestion
+        //     </Button>
+        //     <Dialog
+        //         fullScreen={fullScreen}
+        //         open={open}
+        //         sx={{ textAlign: "center" }}
+        //         onClose={handleClose}
+        //         aria-labelledby="responsive-dialog-title"
+        //     >
+        //         <DialogTitle id="responsive-dialog-title">Gestion de la livraison</DialogTitle>
+        //         <DialogContent>
+        //             <Typography>Date : {delivery?.createdAt.split("T")[0]}</Typography>
+        //         </DialogContent>
+        //
+        //         <DialogContent>
+        //             <Typography>Client {delivery?.user.name}</Typography>
+        //             <Typography>Email: {delivery?.user.email}</Typography>
+        //         </DialogContent>
+        //         <DialogContent>
+        //             <Typography>Le client doit recuperer les elements suivant :</Typography>
+        //         </DialogContent>
+        //
+        //         <DialogActions>
+        //             <Grid>
+        //                 {delivery?.products.map((product: ProductDeliveryType) => (
+        //                     <Grid key={product.id}>
+        //                         <Grid>
+        //                             <Typography>Produit : {product.name}</Typography>
+        //                         </Grid>
+        //                         <Grid>
+        //                             <Typography>Quantité attendu : {product.quantity}</Typography>
+        //                         </Grid>
+        //                         <Grid>
+        //                             <DeliveredProduct product={product} delivery={delivery} />
+        //                         </Grid>
+        //                     </Grid>
+        //                 ))}
+        //             </Grid>
+        //         </DialogActions>
+        //
+        //         <DialogActions>
+        //             <Button autoFocus onClick={handleClose} color="secondary">
+        //                 Fermer
+        //             </Button>
+        //         </DialogActions>
+        //     </Dialog>
+        // </Grid>
+
         <Grid>
             <Button
                 onClick={handleClickOpen}
@@ -205,9 +264,11 @@ export const ManageDelivery = ({ props }: ManageDeliveryProps) => {
                         event.stopPropagation();
                     }
                 }}
+                variant="outlined"
             >
                 Gestion
             </Button>
+
             <Dialog
                 fullScreen={fullScreen}
                 open={open}
@@ -215,36 +276,30 @@ export const ManageDelivery = ({ props }: ManageDeliveryProps) => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">Gestion de la livraison</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">
+                    <Typography variant="h5">Gestion de la livraison</Typography>
+                </DialogTitle>
+
                 <DialogContent>
                     <Typography>Date : {delivery?.createdAt.split("T")[0]}</Typography>
-                </DialogContent>
+                    <Typography mt={1}>Client : <b>{delivery?.user.name}</b></Typography>
+                    <Typography>Email : {delivery?.user.email}</Typography>
 
-                <DialogContent>
-                    <Typography>Client {delivery?.user.name}</Typography>
-                    <Typography>Email: {delivery?.user.email}</Typography>
+                    <Box mt={4}>
+                        <Typography variant="h6" gutterBottom>Éléments à livrer :</Typography>
+                        <Stack spacing={2}>
+                            {delivery?.products.map((product: ProductDeliveryType) => (
+                                <Paper key={product.id} elevation={2} sx={{ p: 2 }}>
+                                    <Typography variant="subtitle1">Produit : <b>{product.name}</b></Typography>
+                                    <Typography>Quantité attendue : <b>{product.quantity}</b></Typography>
+                                    <Box mt={1}>
+                                        <DeliveredProduct product={product} delivery={delivery} />
+                                    </Box>
+                                </Paper>
+                            ))}
+                        </Stack>
+                    </Box>
                 </DialogContent>
-                <DialogContent>
-                    <Typography>Le client doit recuperer les elements suivant :</Typography>
-                </DialogContent>
-
-                <DialogActions>
-                    <Grid>
-                        {delivery?.products.map((product: ProductDeliveryType) => (
-                            <Grid key={product.id}>
-                                <Grid>
-                                    <Typography>Produit : {product.name}</Typography>
-                                </Grid>
-                                <Grid>
-                                    <Typography>Quantité attendu : {product.quantity}</Typography>
-                                </Grid>
-                                <Grid>
-                                    <DeliveredProduct product={product} delivery={delivery} />
-                                </Grid>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </DialogActions>
 
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="secondary">
@@ -253,6 +308,7 @@ export const ManageDelivery = ({ props }: ManageDeliveryProps) => {
                 </DialogActions>
             </Dialog>
         </Grid>
+
     );
 };
 
@@ -329,67 +385,138 @@ export const DeliveredProduct = (props: DeliveredProductProps) => {
     if (product.delivered >= product.quantity) return <Typography>Livré.</Typography>;
 
     return (
-        <Grid container spacing={2} alignItems="center">
-            <Grid>
-                <Typography variant="h6">
-                    {product.name ?? "Produit"} — à livrer : {product.quantity}
-                </Typography>
-            </Grid>
+        // <Grid container spacing={2} alignItems="center">
+        //     <Grid>
+        //         <Typography variant="h6">
+        //             {product.name ?? "Produit"} — à livrer : {product.quantity}
+        //         </Typography>
+        //     </Grid>
+        //
+        //     <Grid>
+        //         {isComplete ? (
+        //             <Tooltip title="Tout a été livré pour ce produit">
+        //                 <RadioButtonCheckedIcon color="success" />
+        //             </Tooltip>
+        //         ) : (
+        //             <Tooltip title="Il reste des quantités à livrer">
+        //                 <RadioButtonUncheckedIcon color="error" />
+        //             </Tooltip>
+        //         )}
+        //     </Grid>
+        //
+        //     <Grid>
+        //         <Typography>
+        //             Déjà livré (persisté) : <b>{product.delivered}</b>
+        //         </Typography>
+        //         <Typography>
+        //             Restant à livrer : <b>{remaining}</b>
+        //         </Typography>
+        //         <Typography>
+        //             Vous allez ajouter : <b>{addedNow}</b>
+        //         </Typography>
+        //         <Typography>
+        //             Cible (après enregistrement) : <b>{targetDelivered}</b> / {product.quantity}
+        //         </Typography>
+        //     </Grid>
+        //
+        //     <Grid>
+        //         <Stack direction="row" spacing={1}>
+        //             <Button
+        //                 variant="outlined"
+        //                 onClick={dec}
+        //                 disabled={!canEdit || targetDelivered <= product.delivered}
+        //             >
+        //                 -{step}
+        //             </Button>
+        //             <Button variant="outlined" onClick={inc} disabled={!canEdit || targetDelivered >= product.quantity}>
+        //                 +{step}
+        //             </Button>
+        //             <Button variant="text" onClick={setAll} disabled={!canEdit || targetDelivered === product.quantity}>
+        //                 Rendu total
+        //             </Button>
+        //             <Button variant="text" onClick={reset} disabled={!canEdit || !hasChange}>
+        //                 Réinitialiser
+        //             </Button>
+        //             <Button
+        //                 variant="contained"
+        //                 disabled={btnStatus === "saving" || btnStatus === "success" || !canEdit || addedNow <= 0}
+        //                 onClick={handleSave}
+        //             >
+        //                 {btnStatus === "success" ? <TaskAltIcon /> : `Enregistrer (+${addedNow})`}
+        //             </Button>
+        //         </Stack>
+        //     </Grid>
+        // </Grid>
 
-            <Grid>
-                {isComplete ? (
-                    <Tooltip title="Tout a été livré pour ce produit">
-                        <RadioButtonCheckedIcon color="success" />
-                    </Tooltip>
-                ) : (
-                    <Tooltip title="Il reste des quantités à livrer">
-                        <RadioButtonUncheckedIcon color="error" />
-                    </Tooltip>
-                )}
-            </Grid>
+        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
+            <Grid container spacing={2} alignItems="center">
+                <Grid  display="flex" alignItems="center" gap={1}>
+                    {isComplete ? (
+                        <Tooltip title="Tout a été livré pour ce produit">
+                            <RadioButtonCheckedIcon color="success" />
+                        </Tooltip>
+                    ) : (
+                        <Tooltip title="Il reste des quantités à livrer">
+                            <RadioButtonUncheckedIcon color="error" />
+                        </Tooltip>
+                    )}
+                    <Typography variant="h6">
+                        {product.name ?? "Produit"} — à livrer : {product.quantity}
+                    </Typography>
+                </Grid>
 
-            <Grid>
-                <Typography>
-                    Déjà livré (persisté) : <b>{product.delivered}</b>
-                </Typography>
-                <Typography>
-                    Restant à livrer : <b>{remaining}</b>
-                </Typography>
-                <Typography>
-                    Vous allez ajouter : <b>{addedNow}</b>
-                </Typography>
-                <Typography>
-                    Cible (après enregistrement) : <b>{targetDelivered}</b> / {product.quantity}
-                </Typography>
-            </Grid>
+                <Grid >
+                    <Typography>
+                        Déjà livré (persisté) : <b>{product.delivered}</b>
+                    </Typography>
+                    <Typography>
+                        Restant à livrer : <b>{remaining}</b>
+                    </Typography>
+                    <Typography>
+                        Vous allez ajouter : <b>{addedNow}</b>
+                    </Typography>
+                    <Typography>
+                        Cible (après enregistrement) : <b>{targetDelivered}</b> / {product.quantity}
+                    </Typography>
+                </Grid>
 
-            <Grid>
-                <Stack direction="row" spacing={1}>
-                    <Button
-                        variant="outlined"
-                        onClick={dec}
-                        disabled={!canEdit || targetDelivered <= product.delivered}
-                    >
-                        -{step}
-                    </Button>
-                    <Button variant="outlined" onClick={inc} disabled={!canEdit || targetDelivered >= product.quantity}>
-                        +{step}
-                    </Button>
-                    <Button variant="text" onClick={setAll} disabled={!canEdit || targetDelivered === product.quantity}>
-                        Rendu total
-                    </Button>
-                    <Button variant="text" onClick={reset} disabled={!canEdit || !hasChange}>
-                        Réinitialiser
-                    </Button>
-                    <Button
-                        variant="contained"
-                        disabled={btnStatus === "saving" || btnStatus === "success" || !canEdit || addedNow <= 0}
-                        onClick={handleSave}
-                    >
-                        {btnStatus === "success" ? <TaskAltIcon /> : `Enregistrer (+${addedNow})`}
-                    </Button>
-                </Stack>
+                <Grid >
+                    <Stack direction="row" spacing={2} justifyContent="flex-start" flexWrap="wrap">
+                        <Button
+                            variant="outlined"
+                            onClick={dec}
+                            disabled={!canEdit || targetDelivered <= product.delivered}
+                        >
+                            -{step}
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            onClick={inc}
+                            disabled={!canEdit || targetDelivered >= product.quantity}
+                        >
+                            +{step}
+                        </Button>
+                        <Button
+                            variant="text"
+                            onClick={setAll}
+                            disabled={!canEdit || targetDelivered === product.quantity}
+                        >
+                            Rendu total
+                        </Button>
+                        <Button variant="text" onClick={reset} disabled={!canEdit || !hasChange}>
+                            Réinitialiser
+                        </Button>
+                        <Button
+                            variant="contained"
+                            disabled={btnStatus === "saving" || btnStatus === "success" || !canEdit || addedNow <= 0}
+                            onClick={handleSave}
+                            startIcon={btnStatus === "success" ? <TaskAltIcon /> : null}
+                        >
+                            {btnStatus === "success" ? "Enregistré" : `Enregistrer (+${addedNow})`}
+                        </Button>
+                    </Stack>
+                </Grid>
             </Grid>
-        </Grid>
+        </Paper>
     );
 };
