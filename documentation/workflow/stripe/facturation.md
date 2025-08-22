@@ -42,10 +42,9 @@ Quand l'application sera en production, il sera possible de renseigner l'URL du 
 
 ## 5️⃣ Event object
 
-Les événements à copier dans Postman doivent être envoyés à l'URL suivante :
+Les événements à copier dans Postman doivent être envoyés à l'URL suivante (POST) :
 
-- http://localhost:3003/stripe/event/ : Pour une appli NON dockerisé
-- http://api-gateway:3003/stripe/event/ : Pour une appli dockerisé
+- http://api-gateway:2999/stripe/event/ : Pour une appli dockerisé
 
 Voici à quoi ressemblent les objets d'événements traités au sein de l'application pour le moment :
 

@@ -10,6 +10,9 @@ import { StripeEventService } from './event/event.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { StripeInvoiceController } from './invoice/invoice.controller';
 import { StripeInvoiceService } from './invoice/invoice.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+
+// TODO: .env or const urls and name broker service
 
 @Module({
   controllers: [
@@ -26,6 +29,21 @@ import { StripeInvoiceService } from './invoice/invoice.service';
     StripeEventService,
     StripeInvoiceService,
   ],
-  imports: [PrismaModule],
+  imports: [
+    PrismaModule,
+    ClientsModule.register([
+      {
+        name: 'MAIL_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [`amqp://broker-service`],
+          queue: 'mail-queue',
+          queueOptions: { durable: false },
+        },
+      },
+    ]),
+  ],
 })
+
+// TODO : nom des queue etc ...
 export class StripeModule {}

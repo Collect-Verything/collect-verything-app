@@ -4,6 +4,7 @@ export enum PATH_NAME {
     PRODUCTS = "products",
     FACTURATION = "facturation",
     GESTION_PERSON = "job",
+    DELIVERY = "delivery",
     GESTION_CUSTOMER = "customer",
     STATS = "stats",
     SUPPORT = "support",

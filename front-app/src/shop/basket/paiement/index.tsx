@@ -12,20 +12,31 @@ import { PRIMARY_DARKER_COLOR } from "../../../common/styles/theme";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../features/store";
 import { PATH_NAME } from "../../../common/const/path";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 interface PaiementCardProps {
     totalPrice: number;
     listBasket: ListBasketType[];
+    containProduct: boolean;
+    deliveryConfigured: boolean;
+    setDeliveryView: (b: boolean) => void;
 }
 
 const backgroundColor = PRIMARY_DARKER_COLOR;
 
 export const PaiementCard = (props: PaiementCardProps) => {
-    const { totalPrice, listBasket } = props;
+    const { totalPrice, listBasket, containProduct, deliveryConfigured, setDeliveryView } = props;
     const { role } = useSelector((store: RootState) => store.authenticate);
 
     const nav = useNavigate();
     const [groupStockId, setGroupStockId] = useState<StockAndID[]>([]);
+
+    const handleDelivery = () => {
+        setDeliveryView(true);
+        const element = document.getElementById("delivery");
+        element?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const handlePaymentPageRedirect = () => {
         nav(`/${PATH_NAME.CHECK_USER_STRIPE_ID}`);
@@ -114,7 +125,7 @@ export const PaiementCard = (props: PaiementCardProps) => {
                             <p className="mb-2">0.00 €</p>
                         </div>
 
-                        <MDBBtn color="dark" block size="lg">
+                        <MDBBtn color="dark" block size="lg" disabled={deliveryConfigured}>
                             {/*TODO : Redirection sur la page stripe de paiement*/}
                             <div className="d-flex justify-content-between" onClick={handlePaymentPageRedirect}>
                                 <span>{sanitizePrice(totalPrice)}</span>
@@ -124,6 +135,16 @@ export const PaiementCard = (props: PaiementCardProps) => {
                                 </span>
                             </div>
                         </MDBBtn>
+                        {containProduct && (
+                            <MDBBtn color="info" block size="lg" style={{ marginTop: "10px" }}>
+                                <div className="d-flex justify-content-between" onClick={handleDelivery}>
+                                    <span>
+                                        {deliveryConfigured ? <RadioButtonUncheckedIcon /> : <CheckCircleOutlineIcon />}
+                                        &nbsp;&nbsp;LIVRAISON
+                                    </span>
+                                </div>
+                            </MDBBtn>
+                        )}
                     </MDBCardBody>
                 )}
 

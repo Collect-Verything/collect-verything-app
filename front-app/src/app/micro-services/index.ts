@@ -54,3 +54,10 @@ export const CONFIG_SERVICE: MicroServiceUrlPortType = {
     port: Number(process.env.REACT_APP_CONFIG_PORT),
 };
 export const ConfigUrlWithPort = `${process.env.REACT_APP_API_GATEWAY_PORT}/${CONFIG_SERVICE.servicePath}`;
+
+// DELIVERY SERVICE (livraison)
+export const DELIVERY_SERVICE: MicroServiceUrlPortType = {
+    servicePath: String(process.env.REACT_APP_DELIVERY_DOMAIN),
+    port: Number(process.env.REACT_APP_DELIVERY_PORT),
+};
+export const DeliveryUrlWithPort = `${process.env.REACT_APP_API_GATEWAY_PORT}/${DELIVERY_SERVICE.servicePath}`;

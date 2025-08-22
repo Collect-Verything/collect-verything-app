@@ -15,6 +15,7 @@ import { Typography } from "@mui/material";
 import CategoryIcon from "@mui/icons-material/Category";
 import { SECTION_NAME } from "../../common/const/section";
 import { PATH_NAME } from "../../common/const/path";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 export const UserItemsDashboard: UserItemsDashboardType[] = [
     {
@@ -73,6 +74,11 @@ export const SuperAdminItemsDashboard: UserItemsDashboardType[] = [
         url: PATH_NAME.FACTURATION,
     },
     {
+        icon: <LocalShippingIcon />,
+        label: SECTION_NAME.DELIVERY,
+        url: PATH_NAME.DELIVERY,
+    },
+    {
         icon: <Diversity2Icon />,
         label: SECTION_NAME.GESTION_PERSON,
         url: PATH_NAME.GESTION_PERSON,
@@ -118,6 +124,11 @@ export const InvoiceItemsDashboard: UserItemsDashboardType[] = [
         icon: <PointOfSaleIcon />,
         label: SECTION_NAME.FACTURATION,
         url: PATH_NAME.FACTURATION,
+    },
+    {
+        icon: <LocalShippingIcon />,
+        label: SECTION_NAME.DELIVERY,
+        url: PATH_NAME.DELIVERY,
     },
     {
         icon: <SignalCellularAltIcon />,

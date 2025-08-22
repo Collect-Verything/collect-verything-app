@@ -1,12 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class StripeEventService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject('MAIL_SERVICE') private client: ClientProxy
+  ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkEvent(body: any) {
+    if (body.object.object === 'checkout.session') {
+      return await this.checkoutTreatment(body);
+    }
     if (body.object.object === 'invoice') {
       return await this.invoiceTreatment(body);
     }
@@ -15,6 +22,20 @@ export class StripeEventService {
     } else {
       console.log('Object recu non traité');
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async checkoutTreatment(checkout: any) {
+    //TODO :  Creer une regle if service, pas d'evenement
+    //TODO :  Creer un UUID pour pouvoir distinguer chaque evenement par paire, envoyé et recus
+
+    const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
+    const { email, name } = checkout.object.customer_details;
+    const message = { owner, products, typeDelivery, email, name };
+    console.log('📤     Sent on queue : --[ MAIL - DELIVERY ]--');
+    this.client.emit('mail-delivery', message);
+
+    return 'call Rabbit MQ';
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

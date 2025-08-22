@@ -33,6 +33,12 @@ export const configEnv = {
 
   CONFIG_PORT: process.env.CONFIG_PORT,
   CONFIG_URL: process.env.CONFIG_URL,
+
+  // DELIVERY
+  DOMAIN_DELIVERY: process.env.DOMAIN_DELIVERY,
+
+  DELIVERY_PORT: process.env.DELIVERY_PORT,
+  DELIVERY_URL: process.env.DELIVERY_URL,
 };
 
 export const checkEnvValue = () => {

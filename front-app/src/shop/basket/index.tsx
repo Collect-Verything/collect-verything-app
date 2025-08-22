@@ -12,20 +12,45 @@ import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { mounthToAnnual, sanitizePrice } from "../../common/utils/pricing";
 import { PRIMARY_DARKER_COLOR } from "../../common/styles/theme";
-import { Button, Typography } from "@mui/material";
+import { Button, InputLabel, SelectChangeEvent } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { ButtonRounded } from "../component/buttons";
 import Grid from "@mui/material/Grid";
 import { PaiementCard } from "./paiement";
 import { useAppDispatch } from "../../features/authentication-slice";
-import { deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
+import { basketSlice, deleteAllBasketItems, deleteBasketItem, getBasket } from "../../features/basket-slice";
 import { useSelector } from "react-redux";
 import { PAYMENT_FREQUENCY } from "../../common/const/payment-frequency";
+import { PRODUCT_TYPE } from "../../common/const/product";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import { DELIVERY_TYPE } from "../../common/const/delivery";
+import { DisplayCountItemBasket, NoItemBasket, PickUpMap, PickUpShop } from "./components";
+
+// TODO : Bug panier, quand un service est en fin de liste, type livraison impossible meme quand produits present
 
 export const Basket = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const dispatch = useAppDispatch();
     const { list } = useSelector(getBasket);
+
+    const [containProduct, setContainProduct] = useState(false);
+    const [deliveryConfigured, setDeliveryConfigured] = useState(false);
+    const [deliveryView, setDeliveryView] = useState(false);
+
+    const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPE.POINT_RELAIS);
+
+    const handleChangeDeliveryType = (event: SelectChangeEvent) => {
+        setDeliveryType(event.target.value as DELIVERY_TYPE);
+        dispatch(basketSlice.actions.defineDeliveryMode(event.target.value));
+    };
+
+    const handleDelivery = () => {
+        setDeliveryConfigured(false);
+        const element = document.getElementById("basket");
+        element?.scrollIntoView({ behavior: "smooth" });
+    };
 
     useEffect(() => {
         const newTotal = list.reduce((acc, prod) => {
@@ -36,17 +61,27 @@ export const Basket = () => {
         setTotalPrice(newTotal);
     }, [list]);
 
-    if (!totalPrice)
-        return (
-            <Grid container direction="column" justifyContent="center" alignItems="center" style={{ height: "50vh" }}>
-                <Typography variant="h3" color="textSecondary">
-                    Aucun article dans votre panier
-                </Typography>
-            </Grid>
-        );
+    useEffect(() => {
+        list.map((item) => {
+            if (item.product.type === PRODUCT_TYPE.PRODUCT) {
+                setContainProduct(true);
+                setDeliveryConfigured(true);
+                dispatch(basketSlice.actions.defineDeliveryMode(DELIVERY_TYPE.POINT_RELAIS));
+            } else {
+                setContainProduct(false);
+                setDeliveryConfigured(false);
+                setDeliveryView(false);
+            }
+            if (item.product.type !== PRODUCT_TYPE.PRODUCT) {
+                setDeliveryView(false);
+            }
+        });
+    }, [list]);
+
+    if (!totalPrice) return <NoItemBasket />;
 
     return (
-        <section className="h-100 h-custom" style={{ backgroundColor: "white" }}>
+        <section className="h-100 h-custom" style={{ backgroundColor: "white" }} id="basket">
             <MDBContainer className="py-5 h-100">
                 <MDBRow className="justify-content-center align-items-center h-100">
                     <MDBCol>
@@ -78,14 +113,7 @@ export const Basket = () => {
                                         <hr />
 
                                         {list.length === 0 ? (
-                                            <div className="d-flex justify-content-between align-items-center mb-4">
-                                                <div>
-                                                    <p className="mb-0">
-                                                        Vous possedez actuellement {list.length} article(s) dans votre
-                                                        panier.
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            <DisplayCountItemBasket list={list} />
                                         ) : (
                                             <div style={{ maxHeight: "450px", overflowY: "auto" }}>
                                                 {list.map((item, index) => (
@@ -149,13 +177,71 @@ export const Basket = () => {
                                             </div>
                                         )}
                                     </MDBCol>
-                                    <PaiementCard totalPrice={totalPrice} listBasket={list} />
+                                    <PaiementCard
+                                        setDeliveryView={setDeliveryView}
+                                        deliveryConfigured={deliveryConfigured}
+                                        containProduct={containProduct}
+                                        totalPrice={totalPrice}
+                                        listBasket={list}
+                                    />
                                 </MDBRow>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+
+            {deliveryView && (
+                <MDBContainer className="py-5 h-100">
+                    <MDBRow className="justify-content-center align-items-center h-100">
+                        <MDBCol>
+                            <MDBCard>
+                                <MDBCardBody className="p-4">
+                                    <MDBRow>
+                                        <MDBCol lg="7">
+                                            <Grid container justifyContent="space-between">
+                                                <Grid>
+                                                    <MDBTypography tag="h5">
+                                                        <MDBIcon /> Votre livraison
+                                                    </MDBTypography>
+                                                </Grid>
+                                            </Grid>
+
+                                            <div className="d-flex flex-row align-items-center">
+                                                <div>Recuperer votre colis en :</div>
+                                                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                                    <InputLabel id="demo-select-small-label">Livraison</InputLabel>
+                                                    <Select
+                                                        value={deliveryType}
+                                                        label="Type Livraison"
+                                                        onChange={handleChangeDeliveryType}
+                                                    >
+                                                        <MenuItem value={DELIVERY_TYPE.MAGASIN}>
+                                                            {DELIVERY_TYPE.MAGASIN}
+                                                        </MenuItem>
+                                                        <MenuItem value={DELIVERY_TYPE.POINT_RELAIS}>
+                                                            {DELIVERY_TYPE.POINT_RELAIS}
+                                                        </MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </div>
+
+                                            <Grid>
+                                                {deliveryType === DELIVERY_TYPE.POINT_RELAIS ? (
+                                                    <PickUpMap handleDelivery={handleDelivery} />
+                                                ) : (
+                                                    <PickUpShop handleDelivery={handleDelivery} />
+                                                )}
+                                            </Grid>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            )}
+            <Grid id="delivery"></Grid>
         </section>
     );
 };

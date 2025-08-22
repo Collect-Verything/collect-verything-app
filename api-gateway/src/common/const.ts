@@ -9,6 +9,7 @@ portByPath.set(configEnv.AUTH_URL_USERS, configEnv.AUTH_PORT);
 portByPath.set(configEnv.PRODUCT_URL, configEnv.PRODUCT_PORT);
 portByPath.set(configEnv.FACTURATION_URL, configEnv.FACTURATION_PORT);
 portByPath.set(configEnv.CONFIG_URL, configEnv.CONFIG_PORT);
+portByPath.set(configEnv.DELIVERY_URL, configEnv.DELIVERY_PORT);
 
 export const domainServiceByPath = new Map<string, string>();
 domainServiceByPath.set(configEnv.AUTH_URL_AUTH, configEnv.DOMAIN_AUTH);
@@ -17,3 +18,4 @@ domainServiceByPath.set(configEnv.AUTH_URL_USERS, configEnv.DOMAIN_AUTH);
 domainServiceByPath.set(configEnv.PRODUCT_URL, configEnv.DOMAIN_PRODUCT);
 domainServiceByPath.set(configEnv.FACTURATION_URL, configEnv.DOMAIN_FACTURATION);
 domainServiceByPath.set(configEnv.CONFIG_URL, configEnv.DOMAIN_CONFIG);
+domainServiceByPath.set(configEnv.DELIVERY_URL, configEnv.DOMAIN_DELIVERY);

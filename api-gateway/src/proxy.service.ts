@@ -1,9 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import axios from 'axios';
-import { checkFreePath, returnFreePath } from './common/tool';
-import { configEnv } from '../env-config';
-import { toolRequest } from './common/requests';
+import { checkFreePath } from './common/tool';
+import { checkTokenRequest, processEventPath, processMainRequest } from './common/functions';
 
 // TODO : STRIPE EVENT
 // TODO : ⚠️ Upgrade logique for free path, for the moment only auth login and register is accepted
@@ -36,27 +34,21 @@ import { toolRequest } from './common/requests';
 @Injectable()
 export class ProxyService {
   async processRequest(req: Request) {
-    if (checkFreePath(req.url)) {
-      const res = await axios[req.method.toLowerCase()](
-        `http://${configEnv.DOMAIN_AUTH}:3001/auth/${returnFreePath(req.url)}`,
-        req.body
-      );
-      return res.data;
+    // STRIPE WEB HOOK EVENT'S
+    if (req.url === '/stripe/event') {
+      return await processEventPath(req);
     } else {
-      if (req.headers.authorization) {
-        const responseCheckToken = await axios.post(
-          `http://${configEnv.DOMAIN_AUTH}:${configEnv.AUTH_PORT}/${configEnv.AUTH_URL_AUTH}/validate-token`,
-          {},
-          { headers: { Authorization: req.headers.authorization } }
-        );
-        if (responseCheckToken.status === 200) {
-          const response = await toolRequest(req);
-          return response.data;
+      // REVERSE PROXY
+      if (checkFreePath(req.url)) {
+        // Check Token
+        return checkTokenRequest(req);
+      } else {
+        if (req.headers.authorization) {
+          // Process request
+          return processMainRequest(req);
         } else {
           throw new UnauthorizedException('Invalid token');
         }
-      } else {
-        throw new UnauthorizedException('Invalid token');
       }
     }
   }
