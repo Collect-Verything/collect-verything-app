@@ -56,10 +56,13 @@ export const CheckUserStripeIdForPayment = () => {
 export const PaymentPage = () => {
     const nav = useNavigate();
     const user = useSelector((store: RootState) => store.authenticate);
-    const { list: listBasket } = useSelector(getBasket);
+    const { list: listBasket, delivery } = useSelector(getBasket);
 
     const fetchClientSecret = useCallback(async () => {
-        const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${user.id_stripe}`, listBasket);
+        const data = await apiPost(`${FacturationUrlWithPort}/checkout/create/${user.id_stripe}`, {
+            listBasket,
+            delivery,
+        });
         return data.clientSecret;
     }, [listBasket, user.id_stripe]);
 

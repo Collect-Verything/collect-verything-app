@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import type { AppDispatch, RootState } from "./store";
 import { ListBasketType } from "../shop/boutique/type";
+import { DELIVERY_TYPE } from "../common/const/delivery";
 
 /**
  * ==========================================================================
@@ -10,6 +11,10 @@ import { ListBasketType } from "../shop/boutique/type";
  *
  * Gère l’état du **panier** directement dans le store Redux (plus de
  * persistance locale ni d’appels asynchrones).
+ *
+ * initialState :
+ * Initialisé a Undefined, si le panier contient seulement des service, undefined permet de savoir que aucun
+ * type de livraison n'est requis, information passé dans le metadata du checkout STRIPE
  *
  * Objectifs :
  * - Ajouter un ou plusieurs articles au panier
@@ -39,9 +44,10 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 interface BasketState {
     count: number;
     list: ListBasketType[];
+    delivery: DELIVERY_TYPE;
 }
 
-const initialState: BasketState = { count: 0, list: [] };
+const initialState: BasketState = { count: 0, list: [], delivery: DELIVERY_TYPE.UNDEFINED };
 
 export const basketSlice = createSlice({
     name: "basket",
@@ -58,6 +64,9 @@ export const basketSlice = createSlice({
         addBasketItems: (state, action) => {
             state.list.push(action.payload);
             state.count++;
+        },
+        defineDeliveryMode: (state, action) => {
+            state.delivery = action.payload;
         },
     },
 });

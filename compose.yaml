@@ -170,6 +170,38 @@ services:
       timeout: 3s
       retries: 5
 
+  # 🚚 DELIVERY SERVICE (Privé)
+  delivery-service:
+    build: ./delivery-service
+    container_name: delivery-service
+    restart: always
+    env_file:
+      - ./delivery-service/.env
+    volumes:
+      - ./delivery-service:/delivery-service
+      - /delivery-service/node_modules
+    depends_on:
+      mysql-delivery:
+        condition: service_healthy
+
+  # 🗄️ BASE DE DONNÉES (MySQL DELIVERY)
+  mysql-delivery:
+    image: mysql:8
+    restart: always
+    container_name: mysql-delivery
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: delivery-db
+    ports:
+      - '3311:3306'
+    volumes:
+      - mysql-delivery-data:/var/lib/mysql
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   # 📬 Mail SERVICE (Privé)
   mail-service:
     build: ./mail-service
@@ -199,3 +231,4 @@ volumes:
   mysql-prod-data:
   mysql-config-data:
   mysql-facturation-data:
+  mysql-delivery-data:

@@ -45,6 +45,7 @@
   - Stripe
     - [Facturation] [facturation]
     - [Subscription] [subscription]
+    - [Delivery] [delivery]
 
 - Diagrams
   - Databases
@@ -52,6 +53,7 @@
     - [Product] [product-database]
     - [Facturation] [facturation-database]
     - [Configuration] [config-database]
+    - [Delivery] [delivery-database]
   - Sequence Diagrams
     - [Authentication] [auth-sequences]
     - [Product] [product-sequences]
@@ -73,6 +75,7 @@
 [git-m]: git/merging.md
 [facturation]: workflow/stripe/facturation.md
 [subscription]: workflow/stripe/subscription.md
+[delivery]: workflow/stripe/delivery.md
 [prettier]: development/prettier.md.md
 [ci]: ci-cd/ci.md
 [cd]: ci-cd/cd.md
@@ -87,6 +90,7 @@
 [product-database]: diagrams/databases/product-db.md
 [facturation-database]: diagrams/databases/facturation-db.md
 [config-database]: diagrams/databases/config-db.md
+[delivery-database]: diagrams/databases/delivery-db.md
 [auth-sequences]: diagrams/sequence-diagrams/authentication.md
 [product-sequences]: diagrams/sequence-diagrams/product.md
 [facturation-sequences]: diagrams/sequence-diagrams/facturation.md
