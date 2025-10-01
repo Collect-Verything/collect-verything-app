@@ -1,4 +1,6 @@
-# “tests de sécurité”
+# Brouillon et check list => “tests de sécurité”
+
+### Objectif: Le candidat produit les tests de sécurité adaptés à l’application et documente les anomalies identifiées.
 
 1. **Tests automatisés** (unit/integration/e2e) qui prouvent que :
 
@@ -8,9 +10,7 @@
     * [x] Validation d’entrée : les payloads invalides sont rejetés (types, tailles, schémas).
     * [!] Rate limiting / bruteforce : l’API bloque au-delà d’un seuil.
     * [x] CORS correctement verrouillé (origines autorisées seulement).
-    * [ ] Headers de sécurité (sur Gateway) : `Content-Security-Policy`, `X-Frame-Options`, `Referrer-Policy`, etc.
-    * [ ] Téléversement de fichiers (si existant) : types/mime/tailles filtrés, noms normalisés.
-    * [ ] Secrets jamais exposés : endpoints sensibles protégés, pas de clés en clair retournées.
+    * [!] Headers de sécurité (sur Gateway) : `Content-Security-Policy`, `X-Frame-Options`, `Referrer-Policy`, etc.
 
 2. **Scans automatisés** (CI) :
 
@@ -87,6 +87,8 @@ Axe amelioration du reverse proxy ...
   run: npm audit --audit-level=high
 ```
 
+commenté pour le moment pour eviter la pollution des log mais utilisé de temps en temp pour fair eun check
+
 ### Secrets (Gitleaks)
 
 ```yaml
@@ -95,7 +97,11 @@ Axe amelioration du reverse proxy ...
     config-path: .gitleaks.toml
 ```
 
+Inclu dans les fonctionnalité de git directemetn sur toute les action donc pas necessaire a mettre dans le compose
+
 ### Docker (Trivy)
+
+! axe amelioration
 
 ```yaml
 - uses: aquasecurity/trivy-action@0.24.0
@@ -107,6 +113,7 @@ Axe amelioration du reverse proxy ...
 ```
 
 ### DAST (OWASP ZAP Baseline) sur l’API de dev
+! axe amelioration
 
 ```yaml
 - name: OWASP ZAP Baseline
@@ -116,30 +123,3 @@ Axe amelioration du reverse proxy ...
     rules_file_name: '.zap/rules.tsv' # pour ignorer du bruit si besoin
 ```
 
----
-
-# Modèle de doc “anomalies”
-
-Inclure un tableau comme celui-ci dans ta fiche/rapport :
-
-| ID      | Gravité | Zone              | Description                                          | Preuve                                          | Correction proposée                          | État     |
-| ------- | ------- | ----------------- | ---------------------------------------------------- | ----------------------------------------------- | -------------------------------------------- | -------- |
-| SEC-001 | Haute   | API `/orders/:id` | IDOR : un user peut lire l’order d’un autre via l’ID | Requête GET avec token user A sur order B → 200 | Ajouter vérif `order.userId === req.user.id` | Corrigé  |
-| SEC-002 | Moyenne | Gateway headers   | `Content-Security-Policy` absent                     | Réponse GET `/` sans CSP                        | Ajouter CSP minimale `default-src 'self'`    | À faire  |
-| SEC-003 | Haute   | Dépendances       | vuln. `lodash@4.17.19`                               | `npm audit` HIGH                                | `npm update lodash`                          | En cours |
-
----
-
-# Check-list rapide (à adapter à ton app)
-
-* [ ] Auth : 401/403 corrects (invalid, expired, role).
-* [ ] Autorisations fines (RBAC + propriété des ressources).
-* [ ] Validation schémas (DTO / Zod / class-validator).
-* [ ] CORS verrouillé sur tes domaines.
-* [ ] Rate limiting sur endpoints publics/auth.
-* [ ] Headers sécurité sur Gateway (`helmet`).
-* [ ] Secrets non exposés (logs/réponses).
-* [ ] `npm audit` / Snyk / Trivy / Gitleaks propres.
-* [ ] (Optionnel) DAST ZAP sans findings critiques.
-
-Si tu veux, dis-moi un endpoint sensible de ton API (ex: `/admin/users`, `/orders/:id`) et je te rédige les tests e2e NestJS exacts avec `supertest` + ton guard de rôles.
