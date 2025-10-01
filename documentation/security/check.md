@@ -7,7 +7,7 @@
     * [!] Pas d’accès horizontal (IDOR) : un user A ne peut pas lire les données de B en changeant un ID dans l’URL.
     * [x] Validation d’entrée : les payloads invalides sont rejetés (types, tailles, schémas).
     * [!] Rate limiting / bruteforce : l’API bloque au-delà d’un seuil.
-    * [ ] CORS correctement verrouillé (origines autorisées seulement).
+    * [x] CORS correctement verrouillé (origines autorisées seulement).
     * [ ] Headers de sécurité (sur Gateway) : `Content-Security-Policy`, `X-Frame-Options`, `Referrer-Policy`, etc.
     * [ ] Téléversement de fichiers (si existant) : types/mime/tailles filtrés, noms normalisés.
     * [ ] Secrets jamais exposés : endpoints sensibles protégés, pas de clés en clair retournées.
@@ -67,30 +67,14 @@ Axe amelioration du reverse proxy ...
 
 ### 7) CORS
 
-```ts
-it('CORS refuse une origin non autorisée', async () => {
-  const res = await request(app.getHttpServer())
-    .get('/public')
-    .set('Origin', 'https://evil.example.com');
-  expect(res.headers['access-control-allow-origin']).toBeUndefined();
-});
-```
+* **Objectif** : vérifier que la politique CORS est correctement appliquée (prévenir les requêtes cross-origin non autorisées).
+* **Scénarios testés** :
 
-## Front (React)
+    1. **Mode permissif** (`origin: '*'`) : toute `Origin` reçoit `Access-Control-Allow-Origin: *` + pré-requêtes `OPTIONS` exposent bien `GET/POST/PATCH/DELETE`.
+    2. **Mode restreint** (ex. reverse proxy) : l’`Origin` autorisée est écho-ée dans `Access-Control-Allow-Origin`, une `Origin` non autorisée **n’obtient aucun header CORS**.
+* **Résultat** : comportement conforme aux attentes dans les deux modes.
+* **Reco sécurité** : en prod, **privilégier une origin explicite** (liste blanche) et éviter `'*'`, surtout si des **credentials** (cookies/Authorization) sont utilisés.
 
-### 8) Pas de données sensibles en clair dans le DOM / logs
-
-* Vérifier que les pages n’affichent jamais le token, et que les erreurs sensibles sont neutralisées.
-* (Si possible) préférer `httpOnly` cookie côté API plutôt que `localStorage` pour le token. Si tu restes en `localStorage`, teste qu’il n’est jamais injecté dans le DOM.
-
-```tsx
-import { render, screen } from '@testing-library/react';
-test('le token n’apparait jamais dans le DOM', () => {
-  localStorage.setItem('token', 'abc.123.def');
-  render(<YourApp />);
-  expect(screen.queryByText(/abc\.123\.def/)).toBeNull();
-});
-```
 
 ---
 
