@@ -5,6 +5,7 @@
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
+        "@jest/globals": "^30.2.0",
         "@mui/icons-material": "^7.1.0",
         "@mui/material": "^7.1.0",
         "@mui/system": "^7.1.0",
@@ -60,6 +61,11 @@
         ]
     },
     "devDependencies": {
+        "@babel/core": "^7.28.4",
+        "@babel/preset-env": "^7.28.3",
+        "@babel/preset-react": "^7.27.1",
+        "@babel/preset-typescript": "^7.27.1",
+        "babel-jest": "^30.2.0",
         "globals": "^15.9.0",
         "jest": "^27.5.1"
     }
