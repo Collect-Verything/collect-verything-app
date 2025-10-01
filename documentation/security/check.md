@@ -4,9 +4,9 @@
 
     * [x] Authentification / JWT : on refuse les tokens invalides/expirés, on applique bien les rôles.
     * [x] Autorisations (RBAC) : un user sans rôle admin ne peut pas accéder aux routes admin (ni en lecture, ni en écriture).
-    * [ ] Pas d’accès horizontal (IDOR) : un user A ne peut pas lire les données de B en changeant un ID dans l’URL.
-    * [ ] Validation d’entrée : les payloads invalides sont rejetés (types, tailles, schémas).
-    * [ ] Rate limiting / bruteforce : l’API bloque au-delà d’un seuil.
+    * [!] Pas d’accès horizontal (IDOR) : un user A ne peut pas lire les données de B en changeant un ID dans l’URL.
+    * [x] Validation d’entrée : les payloads invalides sont rejetés (types, tailles, schémas).
+    * [!] Rate limiting / bruteforce : l’API bloque au-delà d’un seuil.
     * [ ] CORS correctement verrouillé (origines autorisées seulement).
     * [ ] Headers de sécurité (sur Gateway) : `Content-Security-Policy`, `X-Frame-Options`, `Referrer-Policy`, etc.
     * [ ] Téléversement de fichiers (si existant) : types/mime/tailles filtrés, noms normalisés.
@@ -45,41 +45,25 @@
 
 ### 4) IDOR (accès horizontal)
 
-```ts
-it('GET /orders/:id → 403 si l’order n’appartient pas au user', async () => {
-  const tokenA = await getUserJwt('userA');
-  const orderB = await createOrderFor('userB');
-  await request(app.getHttpServer())
-    .get(`/orders/${orderB.id}`)
-    .set('Authorization', `Bearer ${tokenA}`)
-    .expect(403);
-});
-```
+Axe d'amelioration a developper dans les methode de chaque service
 
 ### 5) Validation d’entrée
 
-```ts
-it('POST /items → 400 si payload invalide', async () => {
-  const admin = await getAdminJwt();
-  await request(app.getHttpServer())
-    .post('/items')
-    .set('Authorization', `Bearer ${admin}`)
-    .send({ price: 'abc' }) // invalide
-    .expect(400);
-});
-```
+**Objectif.** Rejeter tout payload invalide (types, tailles, schémas) avant la logique métier.
+
+**Couverture.**
+
+* **DTO (`CreateUserDto`)** : tests de règles (`@IsEmail`, `@MinLength`, `@IsDateString`, champs requis).
+* **Service** : Return bien ce qui est demandé.
+* **Contrôleur** (+ `ValidationPipe`) : payload invalide ⇒ **400**, service non appelé ; payload valide ⇒ **201**, service appelé avec un body whitelisté.
+* **E2E léger** : vérification par requêtes HTTP réelles avec guards overridés.
+
+**Résultat.** Les entrées invalides sont correctement **rejetées en 400**, seuls les payloads conformes atteignent le service.
+
 
 ### 6) Rate limiting
 
-*(si activé au Gateway)*
-
-```ts
-it('GET /public → 429 au-delà du quota', async () => {
-  const server = app.getHttpServer();
-  for (let i=0; i<50; i++) await request(server).get('/public');
-  await request(server).get('/public').expect(429);
-});
-```
+Axe amelioration du reverse proxy ...
 
 ### 7) CORS
 

@@ -4,6 +4,10 @@ import { UsersService } from './users.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { ClientProxy } from '@nestjs/microservices';
 
+import { CanActivate, INestApplication, ValidationPipe } from '@nestjs/common';
+import * as request from 'supertest';
+import { SuperAdminGuards } from '../auth/guards/super-admin';
+
 describe('UsersController', () => {
   let controller: UsersController;
 
@@ -30,10 +34,6 @@ describe('UsersController', () => {
     expect(controller).toBeDefined();
   });
 });
-
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { SuperAdminGuards } from '../auth/guards/super-admin';
 
 const mockJwtDecode = jest.fn();
 jest.mock('jwt-decode', () => ({
@@ -140,12 +140,80 @@ describe('JWT security – invalid/expired (e2e)', () => {
   });
 
   it('montre que les TOKENS EXPIRÉS passent aujourd’hui (anomalie)', async () => {
-    const past = Math.floor(Date.now() / 1000) - 3600; // exp il y a 1h
+    const past = Math.floor(Date.now() / 1000) - 3600;
     mockJwtDecode.mockReturnValueOnce({ id: 123, role: 'SUPER_ADMIN', exp: past });
 
     await request(app.getHttpServer())
       .get(url)
       .set('Authorization', 'Bearer expired.token')
       .expect(200);
+  });
+});
+
+describe('UsersController.create – validation', () => {
+  let app: INestApplication;
+
+  const usersServiceMock = {
+    create: jest.fn().mockResolvedValue({ id: 1, email: 'john@doe.com' }),
+  };
+
+  beforeAll(async () => {
+    const modBuilder = Test.createTestingModule({
+      controllers: [UsersController],
+      providers: [{ provide: UsersService, useValue: usersServiceMock }],
+    });
+
+    const mod = await modBuilder
+      .overrideGuard(SuperAdminGuards)
+      .useValue({ canActivate: () => true } as CanActivate)
+      .compile();
+
+    app = mod.createNestApplication();
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true })
+    );
+    await app.init();
+  });
+
+  afterAll(async () => {
+    if (app) await app.close();
+  });
+  beforeEach(() => jest.clearAllMocks());
+
+  const url = '/users';
+
+  it('400 si payload invalide (service non appelé)', async () => {
+    const bad = {
+      id_stripe: 'cus_1',
+      firstname: 'J',
+      lastname: 'Doe',
+      email: 'not-an-email',
+      password: '12345',
+      birthDate: 'not-a-date',
+      gender: '',
+      phone: '',
+      roleId: null,
+    };
+
+    await request(app.getHttpServer()).post(url).send(bad).expect(400);
+    expect(usersServiceMock.create).not.toHaveBeenCalled();
+  });
+
+  it('201 si payload valide (service appelé)', async () => {
+    const ok = {
+      id_stripe: 'cus_1',
+      firstname: 'John',
+      lastname: 'Doe',
+      email: 'john@doe.com',
+      password: 'secret123',
+      birthDate: '2000-01-01',
+      gender: 'M',
+      phone: '0600000000',
+      roleId: 2,
+    };
+
+    const res = await request(app.getHttpServer()).post(url).send(ok).expect(201);
+    expect(usersServiceMock.create).toHaveBeenCalledTimes(1);
+    expect(res.body).toEqual({ id: 1, email: 'john@doe.com' });
   });
 });
