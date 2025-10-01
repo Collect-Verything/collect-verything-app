@@ -1,4 +1,3 @@
-// front-app/src/tests/common/tools/jwt/jwt.test.ts
 import { describe, test, expect, beforeEach, afterEach, jest } from "@jest/globals";
 
 const mockJwtDecode = jest.fn();
