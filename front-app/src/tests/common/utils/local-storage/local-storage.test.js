@@ -69,6 +69,7 @@ describe("setFromLocalStorage", () => {
         expect(errorSpy).not.toHaveBeenCalled();
     });
 
+    // eslint-disable-next-line no-undef
     it("log un warn et n’appelle pas le setter pour la valeur JSON null", () => {
         const key = "nullval";
         const stored = "null";
