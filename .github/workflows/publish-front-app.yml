@@ -3,9 +3,12 @@ name: Front-App CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "front-app/**"
+      - ".github/workflows/publish-front-app.yml"
   pull_request:
     branches: ['main', 'dev']
-
+  workflow_dispatch: {}
 jobs:
   lint:
     if: github.ref == 'refs/heads/dev' || github.event.pull_request.base.ref == 'dev'
