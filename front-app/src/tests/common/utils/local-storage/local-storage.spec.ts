@@ -4,14 +4,15 @@ describe("setFromLocalStorage", () => {
     // eslint-disable-next-line no-undef
     let getItemSpy: jest.SpyInstance<string | null, [key: string]>;
     // eslint-disable-next-line no-undef
-    let warnSpy: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]]>;
+    let warnSpy: jest.SpyInstance<void, [message?: never, ...optionalParams: never[]]>;
     // eslint-disable-next-line no-undef
-    let errorSpy: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]]>;
+    let errorSpy: jest.SpyInstance<void, [message?: never, ...optionalParams: never[]]>;
     // eslint-disable-next-line no-undef
     beforeEach(() => {
         // eslint-disable-next-line no-undef
         getItemSpy = jest.spyOn(Storage.prototype, "getItem");
         // eslint-disable-next-line no-undef
+        // @ts-ignore
         warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
         // eslint-disable-next-line no-undef
         errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
