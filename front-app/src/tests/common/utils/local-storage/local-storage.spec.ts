@@ -1,9 +1,12 @@
 import { setFromLocalStorage } from "../../../../common/utils/local-storage";
 // eslint-disable-next-line no-undef
 describe("setFromLocalStorage", () => {
-    let getItemSpy;
-    let warnSpy;
-    let errorSpy;
+    // eslint-disable-next-line no-undef
+    let getItemSpy: jest.SpyInstance<string | null, [key: string]>;
+    // eslint-disable-next-line no-undef
+    let warnSpy: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]]>;
+    // eslint-disable-next-line no-undef
+    let errorSpy: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]]>;
     // eslint-disable-next-line no-undef
     beforeEach(() => {
         // eslint-disable-next-line no-undef
