@@ -13,7 +13,10 @@ describe("setFromLocalStorage", () => {
         getItemSpy = jest.spyOn(Storage.prototype, "getItem");
         // eslint-disable-next-line no-undef
         // @ts-ignore
+        // eslint-disable-next-line no-undef
         warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
+        // eslint-disable-next-line no-undef
+        // @ts-ignore
         // eslint-disable-next-line no-undef
         errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
     });
