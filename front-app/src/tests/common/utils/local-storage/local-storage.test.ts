@@ -1,4 +1,3 @@
-// front-app/src/tests/common/utils/setFromLocalStorage.test.js
 import { afterEach, beforeEach, describe, expect, jest, test } from "@jest/globals";
 import { setFromLocalStorage } from "../../../../common/utils/local-storage";
 
