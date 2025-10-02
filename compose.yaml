@@ -2,15 +2,6 @@ version: '3.8'
 
 services:
   # 🌍 FRONT-END (Public) # Check previous config dockerfile
-  #  front-app:
-  #    build: ./front-app
-  #    container_name: front-app
-  #    ports:
-  #      - "80:80"
-  #    networks:
-  #      - my_private_network
-  #    env_file:
-  #      - .env
   front-app:
     build: ./front-app
     container_name: front-app
@@ -180,9 +171,9 @@ services:
     volumes:
       - ./delivery-service:/delivery-service
       - /delivery-service/node_modules
-    depends_on:
-      mysql-delivery:
-        condition: service_healthy
+#    depends_on:
+#      mysql-delivery:
+#        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL DELIVERY)
   mysql-delivery:
@@ -196,11 +187,11 @@ services:
       - '3311:3306'
     volumes:
       - mysql-delivery-data:/var/lib/mysql
-    healthcheck:
-      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+#    healthcheck:
+#      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+#      interval: 5s
+#      timeout: 3s
+#      retries: 5
 
   # 📬 Mail SERVICE (Privé)
   mail-service:
