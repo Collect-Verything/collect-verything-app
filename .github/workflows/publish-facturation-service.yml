@@ -2,19 +2,23 @@ name: Facturation-Service CI
 
 on:
   push:
-    branches: ['main', 'dev']
+    branches: ['**']   # on écoute tous les pushes; on filtre dans les jobs
     paths:
       - 'facturation-service/**'
       - '.github/workflows/publish-facturation-service.yml'
   pull_request:
-    branches: ['main', 'dev']
+    branches: ['dev', 'main']
     paths:
       - 'facturation-service/**'
       - '.github/workflows/publish-facturation-service.yml'
 
 jobs:
   lint:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    # Push: toutes les branches SAUF main
+    # PR: seulement si la base est dev (feature -> dev)
+    if: >
+      (github.event_name == 'push' && github.ref != 'refs/heads/main') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'dev')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,7 +38,10 @@ jobs:
         run: npm run lint
 
   test:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    # mêmes conditions que lint
+    if: >
+      (github.event_name == 'push' && github.ref != 'refs/heads/main') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'dev')
     runs-on: ubuntu-latest
     needs: lint
     steps:
@@ -59,6 +66,7 @@ jobs:
         run: npm run test
 
   build-and-push:
+    # Build Docker UNIQUEMENT sur push vers main (merge dev -> main)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     # needs: [lint, test]  # décommente si tu veux forcer la validation préalable
