@@ -2,7 +2,7 @@ name: Api-Gateway CI
 
 on:
   push:
-    branches: ['**']   # on écoute tous les pushes, on filtrera dans les jobs
+    branches: ['**']
     paths:
       - 'api-gateway/**'
       - '.github/workflows/publish-api-gateway.yml'
@@ -14,8 +14,6 @@ on:
 
 jobs:
   lint:
-    # Push: toutes les branches SAUF main
-    # PR: seulement si la base est dev (feature -> dev)
     if: >
       (github.event_name == 'push' && github.ref != 'refs/heads/main') ||
       (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'dev')
@@ -61,10 +59,9 @@ jobs:
         run: npm run test
 
   build-and-push:
-    # Build Docker UNIQUEMENT quand on pousse sur main (merge dev -> main)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    # needs: [lint, test]  # décommente si tu veux forcer la validation préalable
+    # needs: [lint, test]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
