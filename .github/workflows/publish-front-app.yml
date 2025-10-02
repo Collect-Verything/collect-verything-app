@@ -29,9 +29,14 @@ jobs:
         with:
           node-version: 18
 
+      # NEW: installe les devDeps à la racine (eslint, @eslint/js, etc.)
+      - name: Install deps (root)
+        working-directory: .
+        run: npm ci
+
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm install
+        run: npm ci
 
       - name: Run linter (front-app)
         working-directory: ./front-app
@@ -52,9 +57,14 @@ jobs:
         with:
           node-version: 18
 
+      # NEW: installe aussi les deps à la racine
+      - name: Install deps (root)
+        working-directory: .
+        run: npm ci
+
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm install
+        run: npm ci
 
       - name: Run tests (front-app)
         working-directory: ./front-app
@@ -64,7 +74,7 @@ jobs:
     # Build Docker UNIQUEMENT sur push vers main (merge dev -> main)
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    # needs: [lint, test]  # décommente si tu veux forcer la validation préalable
+    # needs: [lint, test]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
