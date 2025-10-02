@@ -60,16 +60,45 @@ services:
     volumes:
       - mysql-auth-data:/var/lib/mysql
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
       interval: 5s
       timeout: 3s
       retries: 5
+
+  #
+  # BIG ISSUE : Need to study (doc issue product compose)
+  #
+
+  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
+  mysql-product:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql-product
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: product-db
+      # Pas besoin d'ouvrir root au réseau si on crée un user applicatif
+      # Si tu veux quand même autoriser root: décommente la ligne suivante
+      # MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-prod-data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+    healthcheck:
+      # 127.0.0.1 évite les subtilités de socket
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-ppassword" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
 
   # 🔒 PRODUCT SERVICE (Privé)
   product-service:
     build: ./product-service
     container_name: product-service
-    restart: always
+    restart: unless-stopped
+    working_dir: /product-service
     env_file:
       - ./product-service/.env
     volumes:
@@ -79,23 +108,9 @@ services:
       mysql-product:
         condition: service_healthy
 
-  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)
-  mysql-product:
-    image: mysql:8
-    restart: always
-    container_name: mysql-product
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: product-db
-    ports:
-      - '3308:3306'
-    volumes:
-      - mysql-prod-data:/var/lib/mysql
-    healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword']
-      interval: 5s
-      timeout: 3s
-      retries: 5
+  #
+  # BIG ISSUE : Need to study (doc issue product compose)
+  #
 
   # 🔒 CONFIG SERVICE (Privé)
   config-service:
@@ -124,7 +139,7 @@ services:
     volumes:
       - mysql-config-data:/var/lib/mysql
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -156,7 +171,7 @@ services:
     volumes:
       - mysql-facturation-data:/var/lib/mysql
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -171,9 +186,9 @@ services:
     volumes:
       - ./delivery-service:/delivery-service
       - /delivery-service/node_modules
-#    depends_on:
-#      mysql-delivery:
-#        condition: service_healthy
+  #    depends_on:
+  #      mysql-delivery:
+  #        condition: service_healthy
 
   # 🗄️ BASE DE DONNÉES (MySQL DELIVERY)
   mysql-delivery:
@@ -187,11 +202,11 @@ services:
       - '3311:3306'
     volumes:
       - mysql-delivery-data:/var/lib/mysql
-#    healthcheck:
-#      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-#      interval: 5s
-#      timeout: 3s
-#      retries: 5
+  #    healthcheck:
+  #      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+  #      interval: 5s
+  #      timeout: 3s
+  #      retries: 5
 
   # 📬 Mail SERVICE (Privé)
   mail-service:
