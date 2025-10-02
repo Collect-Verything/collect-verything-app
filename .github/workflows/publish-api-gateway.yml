@@ -30,7 +30,7 @@ jobs:
           node-version: 18
 
       - name: Install deps (api-gateway)
-        working-directory: ./api-gateway
+        working-directory: .
         run: npm ci
 
       - name: Run linter (api-gateway)

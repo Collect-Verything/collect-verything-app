@@ -2,7 +2,7 @@ name: Product-Service CI
 
 on:
   push:
-    branches: ['**']   # écoute tous les pushes; filtrage dans les jobs
+    branches: ['**']
     paths:
       - 'product-service/**'
       - '.github/workflows/publish-product-service.yml'
@@ -30,7 +30,7 @@ jobs:
           node-version: 18
 
       - name: Install deps (product-service)
-        working-directory: ./product-service
+        working-directory: .
         run: npm ci
 
       - name: Run linter (product-service)

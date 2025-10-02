@@ -30,7 +30,7 @@ jobs:
           node-version: 18
 
       - name: Install deps (config-service)
-        working-directory: ./config-service
+        working-directory: .
         run: npm ci
 
       - name: Run linter (config-service)
