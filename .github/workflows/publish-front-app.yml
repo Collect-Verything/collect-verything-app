@@ -2,7 +2,7 @@ name: Front-App CI
 
 on:
   push:
-    branches: ['**']   # écoute tous les pushes; filtrage dans les jobs
+    branches: ['**']
     paths:
       - 'front-app/**'
       - '.github/workflows/publish-front-app.yml'
@@ -31,14 +31,13 @@ jobs:
 
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm ci
+        run: npm install
 
       - name: Run linter (front-app)
         working-directory: .
         run: npm run lint
 
   test:
-    # mêmes conditions que lint
     if: >
       (github.event_name == 'push' && github.ref != 'refs/heads/main') ||
       (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'dev')
@@ -55,7 +54,7 @@ jobs:
 
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm ci
+        run: npm install
 
       - name: Run tests (front-app)
         working-directory: ./front-app
