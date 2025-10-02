@@ -3,7 +3,7 @@ import { describe, test, expect } from "@jest/globals";
 /**
  * Fichier: todo.test.ts
  * But : liste de 20 tests unitaires fictifs (placeholders) importants
- * pour un front React — sécurité, confidentialité, et comportements critiques.
+ * pour un front React — sécurité, confidentialité, et comportements critiques...
  * Creer la tache et remplacez les expect(3).toBe(3) par des assertions réelles et implémentez les mocks nécessaires.
  */
 
