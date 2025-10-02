@@ -31,7 +31,7 @@ jobs:
 
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm ci
+        run: npm install
 
       - name: Run linter (front-app)
         working-directory: ./front-app
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm ci
+        run: npm install
 
       - name: Run tests (front-app)
         working-directory: ./front-app
