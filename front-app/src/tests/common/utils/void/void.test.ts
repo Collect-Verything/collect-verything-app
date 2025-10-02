@@ -14,7 +14,7 @@ describe("noOp", () => {
         expect(() => noOp()).not.toThrow();
     });
 
-    test("peut être utilisé comme callback sans modifier le contexte", () => {
+    test("peut être utilisé comme callback sans modifier le contexte.", () => {
         const obj = { x: 1, fn: noOp };
         expect(obj.fn()).toBeNull();
     });
