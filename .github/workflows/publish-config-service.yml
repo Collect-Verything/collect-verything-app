@@ -3,8 +3,14 @@ name: Config-Service CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "config-service/**"
+      - ".github/workflows/publish-config-service.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "config-service/**"
+      - ".github/workflows/publish-config-service.yml"
 
 jobs:
   lint:

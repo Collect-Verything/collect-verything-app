@@ -3,8 +3,14 @@ name: Front-App CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "front-app/**"
+      - ".github/workflows/publish-front-app.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "front-app/**"
+      - ".github/workflows/publish-front-app.yml"
 
 jobs:
   lint:

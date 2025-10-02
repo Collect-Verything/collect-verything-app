@@ -3,8 +3,14 @@ name: Facturation-Service CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "facturation-service/**"
+      - ".github/workflows/publish-facturation-service.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "facturation-service/**"
+      - ".github/workflows/publish-facturation-service.yml"
 
 jobs:
   lint:

@@ -3,8 +3,14 @@ name: Api-Gateway CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "api-gateway/**"
+      - ".github/workflows/publish-api-gateway.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "api-gateway/**"
+      - ".github/workflows/publish-api-gateway.yml"
 
 jobs:
   lint:

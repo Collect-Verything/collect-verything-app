@@ -3,8 +3,14 @@ name: Mail-Service CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "mail-service/**"
+      - ".github/workflows/publish-mail-service.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "mail-service/**"
+      - ".github/workflows/publish-mail-service.yml"
 
 jobs:
   lint:

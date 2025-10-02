@@ -3,8 +3,14 @@ name: Product-Service CI
 on:
   push:
     branches: ['main', 'dev']
+    paths:
+      - "product-service/**"
+      - ".github/workflows/publish-product-service.yml"
   pull_request:
     branches: ['main', 'dev']
+    paths:
+      - "product-service/**"
+      - ".github/workflows/publish-product-service.yml"
 
 jobs:
   lint:
