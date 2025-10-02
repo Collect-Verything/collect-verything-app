@@ -4,63 +4,63 @@ on:
   push:
     branches: ['main', 'dev']
     paths:
-      - "front-app/**"
-      - ".github/workflows/publish-front-app.yml"
+      - 'front-app/**'
+      - '.github/workflows/publish-front-app.yml'
   pull_request:
     branches: ['main', 'dev']
     paths:
-      - "front-app/**"
-      - ".github/workflows/publish-front-app.yml"
+      - 'front-app/**'
+      - '.github/workflows/publish-front-app.yml'
 
 jobs:
   lint:
-    if: github.ref == 'refs/heads/dev' || github.event.pull_request.base.ref == 'dev' || github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies for front-end
-        working-directory: .
-        run: npm install
+      - name: Install deps (front-app)
+        working-directory: ./front-app
+        run: npm ci
 
-      - name: Run linter in front-end
+      - name: Run linter (front-app)
         working-directory: ./front-app
         run: npm run lint
 
   test:
-    if: github.ref == 'refs/heads/dev' || github.event.pull_request.base.ref == 'dev' || github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies for front-app
+      - name: Install deps (front-app)
         working-directory: ./front-app
-        run: npm install
+        run: npm ci
 
-      - name: Run tests in front-end
+      - name: Run tests (front-app)
         working-directory: ./front-app
         run: npm run jest
 
   build-and-push:
-    if: github.ref == 'refs/heads/main' || github.event.pull_request.base.ref == 'main' || github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    #    needs: [lint, test]
+    # needs: [lint, test]  # décommente si tu veux forcer la validation préalable
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -71,9 +71,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker image for front-app
+      - name: Build and push Docker image (front-app)
         uses: docker/build-push-action@v6
         with:
           context: ./front-app
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-app
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-app:latest
