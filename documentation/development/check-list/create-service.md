@@ -32,4 +32,4 @@ TODO :
 [ ] Mettre à jour les documentations : diagrammes de classes, de séquence, d’architecture, etc.
 ```
 
-[summary]: ../README.md
+[summary]: ../../../README.md

@@ -117,4 +117,4 @@ EMAIL_MESSAGE_BROKER=value
 > - plus robuste
 > - plus adaptée au déploiement multi-service
 
-[summary]: ../README.md
+[summary]: ../../../README.md

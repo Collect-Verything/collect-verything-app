@@ -1,18 +1,20 @@
-# Attendre que MySQL soit prêt
-until nc -z -v -w30 mysql-product 3306
-do
+#!/bin/sh
+set -e
+
+until nc -z -v -w30 mysql-product 3306; do
   echo "En attente de la base de données MySQL..."
   sleep 1
 done
+echo "La base de données MySQL est prête."
 
-echo "La base de données MySQL est prête, lancement de Prisma !"
-
-
-# Exécuter Prisma
+echo "Prisma generate…"
 npx prisma generate
-npx prisma migrate dev --name "Setup product db"
+
+echo "Prisma migrate deploy…"
+npx prisma migrate deploy
+
+echo "Prisma db seed…"
 npx prisma db seed
 
-# Démarrer l'application TODO : changer le script start pour lancement prod
+echo "Démarrage de l'application…"
 npm run start:debug
-

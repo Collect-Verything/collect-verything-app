@@ -128,7 +128,7 @@
    touch package.json
    ```
 
-2. **Ajouter des scripts pour démarrer les applications** :
+2.0 **Ajouter des scripts pour démarrer les applications** :
 
    Ouvrez le fichier `package.json` et ajoutez le contenu suivant :
 
@@ -148,7 +148,9 @@
    - `start-auth-service` : Lance le microservice NestJS.
    - `start` : Lance les deux en parallèle.
 
-Faire de meme pour la creation des nouveau micro services.
+2.1 **Ajouter service au docker compose** :
+
+
 
 ### Solution 1 : Supprimer la configuration de sous-module si non souhaitée
 
@@ -199,4 +201,4 @@ Il peu s'agir d'un token a ajouter dans notre git local, dans ce cas la creer le
 
 Penser egaement a generer un token pour l'identification de votre terminal.
 
-[summary]: ../README.md
+[summary]: ../../../README.md

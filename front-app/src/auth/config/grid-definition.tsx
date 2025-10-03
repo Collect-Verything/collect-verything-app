@@ -5,7 +5,8 @@ import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
 import { InfoSubscriptionDialog } from "./dialogs/sub-info";
-import { ConfigDialog } from "./dialogs/config";
+// import { ConfigDialog } from "./dialogs/config";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 
 export const columnsConfig: GridColDef<Subscription>[] = [
     {
@@ -99,13 +100,17 @@ export const CellActionSubscription = (props: GridRenderCellParams) => {
 };
 
 export const CellActionConfig = (props: GridRenderCellParams) => {
-    const { row } = props;
-    const buttonElement = React.useRef<HTMLButtonElement>(null);
-    const rippleRef = React.useRef<TouchRippleActions>(null);
+    // const { row } = props;
+    // const buttonElement = React.useRef<HTMLButtonElement>(null);
+    // const rippleRef = React.useRef<TouchRippleActions>(null);
 
     return (
         <Box display="flex">
-            <ConfigDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />
+            <Button href="http://82.165.44.233/">
+                <SettingsApplicationsIcon color="secondary" />
+            </Button>
+            {/*Fix For demo*/}
+            {/*<ConfigDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />*/}
         </Box>
     );
 };
