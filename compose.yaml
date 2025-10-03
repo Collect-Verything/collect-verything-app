@@ -225,7 +225,6 @@ services:
   # 🐇 Message BROKER (Public)
   broker-service:
     image: rabbitmq:4.0-management
-    build: ./broker-service
     container_name: broker-service
     restart: always
     ports:
