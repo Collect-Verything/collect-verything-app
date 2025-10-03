@@ -1,6 +1,8 @@
 export const configEnv = {
   DOMAIN: process.env.DOMAIN,
 
+  DATABASE_URL: process.env.DATABASE_URL,
+
   FRONT_PORT: process.env.FRONT_PORT,
 
   DELIVERY_PORT: process.env.DELIVERY_PORT,

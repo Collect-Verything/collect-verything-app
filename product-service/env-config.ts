@@ -1,4 +1,6 @@
 export const configEnv = {
+  DATABASE_URL: process.env.DATABASE_URL,
+
   DOMAIN: process.env.DOMAIN,
 
   API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,
