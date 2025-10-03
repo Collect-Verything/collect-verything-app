@@ -64,12 +64,12 @@
   - [todo][todo]
 
 [//]: # '--- Images and links section ---'
-[linting]: development/linting.md
-[monorepo]: development/mono-repo.md
+[linting]: development/good-practice/linting.mdice/linting.md
+[monorepo]: development/good-practice/mono-repo.mde/mono-repo.md
 [dev-and-prod]: general/dev-and-prod.md
 [glossary]: general/glossary.md
-[env]: development/environment.md
-[env-center]: development/env-center.md
+[env]: development/update/environment.mdment.md
+[env-center]: development/env/env-center.mdr.md
 [rules]: general/rules.md
 [git-wf]: git/workflow.md
 [git-m]: git/merging.md
@@ -84,7 +84,7 @@
 [docker]: docker/compose.md
 [creation-service]: services/creation.md
 [todo]: todo/todo.md
-[step-create-service]: development/create-service.md
+[step-create-service]: development/check-list/create-service.md-service.md
 [action-creation-service]: services/creation.md
 [auth-database]: diagrams/databases/auth-db.md
 [product-database]: diagrams/databases/product-db.md

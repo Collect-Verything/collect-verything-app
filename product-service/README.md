@@ -1,7 +1,3 @@
-Voici une version **améliorée et personnalisée** du `README.md` pour ton **Product Service**, intégrée dans un environnement NestJS et Prisma :
-
----
-
 <p align="center">
   <a href="https://nestjs.com" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="NestJS Logo" /></a>
 </p>
