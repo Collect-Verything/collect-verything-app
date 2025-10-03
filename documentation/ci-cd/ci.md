@@ -37,5 +37,5 @@ Elle permettrait de :
 
 Probleme lint concernant front-app consulter l'issue [ici]
 
-[ici]: ../development/linting.md
+[ici]: ../development/good-practice/linting.mdice/linting.md
 [summary]: ../README.md

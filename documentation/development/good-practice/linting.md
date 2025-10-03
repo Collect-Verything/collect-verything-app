@@ -122,4 +122,4 @@ Pour contourner ce problème, j’ai modifié le workflow GitHub Actions comme s
 [//]: # '--- Images and links section ---'
 [eslint]: https://eslint.org/
 [typescript-lint]: https://typescript-eslint.io/
-[summary]: ../README.md
+[summary]: ../../../README.md

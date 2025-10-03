@@ -45,4 +45,4 @@ Ajouter updated et created at à la table pour creer des stats sur les ventes
 
 
 [summary]: ../README.md
-[issue_lint]: ../development/linting.md
+[issue_lint]: ../development/good-practice/linting.mdice/linting.md

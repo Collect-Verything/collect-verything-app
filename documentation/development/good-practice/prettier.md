@@ -100,4 +100,4 @@ npm install --save-dev prettier
 ---
 
 [Prettier]: https://prettier.io/
-[summary]: ../README.md
+[summary]: ../../../README.md
