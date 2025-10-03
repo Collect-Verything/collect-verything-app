@@ -24,6 +24,15 @@ export class StripeEventService {
     }
   }
 
+  /**
+   * MAIL ALERT :
+   *
+   * checkout.session : Contient les information du panier validé, metadata de la facture.
+   * Confirmation commande retourné par stripe
+   * Action : Confirmation par mail à l'utilsateur avec info produit commandé
+   * Info : Pour le moment le mail est envoyé a collectverything@gmail.com
+   **/
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkoutTreatment(checkout: any) {
     //TODO :  Creer une regle if service, pas d'evenement
@@ -37,6 +46,15 @@ export class StripeEventService {
 
     return 'call Rabbit MQ';
   }
+
+  /**
+   * SERVICE :
+   *
+   * invoice : Invoice est une preuve de paiement d'une subscription, elle contient facture et montant payé autre information de facturation
+   * Confirmation paiement/subscription retourné par stripe
+   * Action : Une facture est crée, elle consultable dans l'espace de l'utilisateur
+   * Info : Evenement generé uniquement lors de l'achat d'un SERVICE
+   **/
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async invoiceTreatment(invoice: any) {
@@ -53,6 +71,15 @@ export class StripeEventService {
       },
     });
   }
+
+  /**
+   * PRODUIT :
+   *
+   * payment_intent : Payment intent est une preuve de paiement, elle contient facture et montant payé autre information de facturation
+   * Confirmation paiement retourné par stripe
+   * Action : Une facture est crée, elle consultable dans l'espace de l'utilisateur
+   * Info : Evenement generé uniquelment lors de l'achat d'un PRODUIT
+   **/
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async paymentIntentTreatment(invoice: any) {
