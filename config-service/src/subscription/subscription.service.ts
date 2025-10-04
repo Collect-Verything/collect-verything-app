@@ -4,6 +4,9 @@ import * as process from 'node:process';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const stripe = require('stripe')(process.env.STRIPE_API_KEY);
+const stripe = require('stripe')(
+  'sk_test_51SEAMVGWNF4aZ9vsUnjlaaMC0pu10eVlogq6C0y4w58y4hm9TL1yRwm9bA35D7qoQL7pCqNOkACxU7cD768gO0gd00VDz5ubzY'
+);
 
 // TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
 
