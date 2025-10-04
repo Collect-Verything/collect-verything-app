@@ -21,11 +21,14 @@ export const checkTokenRequest = async (req: Request) => {
 };
 
 export const processMainRequest = async (req: Request) => {
+  // Middleware Auth
   const responseCheckToken = await axios.post(
     `http://auth-service:3001/auth/validate-token`,
     {},
     { headers: { Authorization: req.headers.authorization } }
   );
+
+  // Redirect
   if (responseCheckToken.status === 200) {
     const response = await toolRequest(req);
     return response.data;
