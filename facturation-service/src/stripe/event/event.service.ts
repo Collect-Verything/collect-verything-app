@@ -2,12 +2,17 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { ClientProxy } from '@nestjs/microservices';
 
+/*
+ * Documentation des events dispo dans stripe/events.md
+ */
+
 @Injectable()
 export class StripeEventService {
   constructor(
     private prisma: PrismaService,
     @Inject('MAIL_SERVICE') private client: ClientProxy,
-    @Inject('CONFIG_SUB_CLIENT') private readonly configClient: ClientProxy
+    @Inject('CONFIG_SUB_CLIENT') private readonly configClient: ClientProxy,
+    @Inject('DELIVERY_PRODUCT') private readonly deliveryProduct: ClientProxy
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -113,6 +118,9 @@ export class StripeEventService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async paymentIntentTreatment(invoice: any) {
+    console.log('📤     Sent on queue : --[ DELIVERY - SUB ]--');
+    this.deliveryProduct.emit('delivery.create', invoice).subscribe();
+
     return this.prisma.facture.create({
       data: {
         id: invoice.object.id,

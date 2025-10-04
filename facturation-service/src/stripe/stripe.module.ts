@@ -48,6 +48,15 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           queueOptions: { durable: true },
         },
       },
+      {
+        name: 'DELIVERY_PRODUCT',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://broker-service'],
+          queue: 'delivery-queue',
+          queueOptions: { durable: true },
+        },
+      },
     ]),
   ],
 })
