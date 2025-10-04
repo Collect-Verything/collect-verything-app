@@ -41,6 +41,15 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           queueOptions: { durable: false },
         },
       },
+      {
+        name: 'CONFIG_SUB_CLIENT',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://broker-service'],
+          queue: 'config-sub-queue',
+          queueOptions: { durable: true },
+        },
+      },
     ]),
   ],
 })

@@ -6,7 +6,8 @@ import { ClientProxy } from '@nestjs/microservices';
 export class StripeEventService {
   constructor(
     private prisma: PrismaService,
-    @Inject('MAIL_SERVICE') private client: ClientProxy
+    @Inject('MAIL_SERVICE') private client: ClientProxy,
+    @Inject('CONFIG_SUB_CLIENT') private readonly configClient: ClientProxy
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,7 +45,7 @@ export class StripeEventService {
     console.log('📤     Sent on queue : --[ MAIL - DELIVERY ]--');
     this.client.emit('mail-delivery', message);
 
-    return 'call Rabbit MQ';
+    return 'Rabbit MQ called: Sending mail confirmation to client';
   }
 
   /**
@@ -58,6 +59,35 @@ export class StripeEventService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async invoiceTreatment(invoice: any) {
+    const user_stripe_id = invoice.object.customer;
+    const sub_stripe_id = invoice.object.subscription;
+    const active_stripe = true; // Fake for the moment, need to look at closer object or else ... peut etre initialisé a true au moment dela creatino a voire plus tard
+    const published = false;
+    const configured = false;
+    const current_period_end = invoice.object.period_start;
+    const current_period_start = invoice.object.period_end;
+    const url = 'noUrlForTheMoment';
+    const brand_name = 'noBrandNameForTheMoment';
+    const admin_email = invoice.object.customer_email;
+    const website_type = 'typefoufou';
+
+    const message = {
+      user_stripe_id,
+      sub_stripe_id,
+      active_stripe,
+      published,
+      configured,
+      current_period_end,
+      current_period_start,
+      url,
+      brand_name,
+      admin_email,
+      website_type,
+    };
+
+    console.log('📤     Sent on queue : --[ CONFIG - SUB ]--');
+    this.configClient.emit('config.sub.updated', message).subscribe();
+
     return this.prisma.facture.create({
       data: {
         id: invoice.object.id,
