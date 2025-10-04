@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { MessageEntity } from '../commmon/types';
+import { configEnv } from '../../env-config';
 
-const stripe = require('stripe')(
-  'sk_test_51SEAMVGWNF4aZ9vsUnjlaaMC0pu10eVlogq6C0y4w58y4hm9TL1yRwm9bA35D7qoQL7pCqNOkACxU7cD768gO0gd00VDz5ubzY'
-);
+const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
 
 // TODO :
 //  Une solution inactive peut être réactivée via une facturation guidée, la subscription du

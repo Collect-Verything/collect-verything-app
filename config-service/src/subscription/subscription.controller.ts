@@ -1,10 +1,9 @@
 import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
-import { configEnv } from '../../env-config';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { MessageEntity } from '../commmon/types';
 
-@Controller(`${configEnv.CONFIG_URL}/sub`)
+@Controller(`subscription/sub`)
 export class SubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
 

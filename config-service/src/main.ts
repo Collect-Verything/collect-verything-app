@@ -1,6 +1,6 @@
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { checkEnvValue, configEnv } from '../env-config';
+import { checkEnvValue } from '../env-config';
 import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
@@ -19,7 +19,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: '*',
-    // origin: [`http://${configEnv.DOMAIN}:${configEnv.DOMAIN}`],
+    // origin: [`http://api-gateway:2999`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
@@ -29,7 +29,7 @@ async function bootstrap() {
   checkEnvValue();
 
   await app.startAllMicroservices();
-  await app.listen(configEnv.CONFIG_PORT);
+  await app.listen(3004);
 }
 
 bootstrap();
