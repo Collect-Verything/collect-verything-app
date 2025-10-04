@@ -3,7 +3,6 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { PrismaModule } from '../prisma/prisma.module';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { configEnv } from '../../env-config';
 
 @Module({
   controllers: [UsersController],
@@ -15,8 +14,8 @@ import { configEnv } from '../../env-config';
         name: 'MAIL_SERVICE',
         transport: Transport.RMQ,
         options: {
-          urls: [`amqp://${configEnv.MESSAGE_BROKER_URL}`],
-          queue: configEnv.EMAIL_QUEUE,
+          urls: [`amqp://broker-service`],
+          queue: 'mail-queue',
           queueOptions: { durable: false },
         },
       },

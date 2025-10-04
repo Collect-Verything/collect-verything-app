@@ -8,7 +8,7 @@ import { generateRandomPassword } from '../utils';
 import { ClientProxy } from '@nestjs/microservices';
 import { configEnv } from '../../env-config';
 
-export const roundsOfHashing = 10;
+export const roundsOfHashing = configEnv.ROUND_OF_HASHING;
 
 @Injectable()
 export class UsersService {
@@ -148,9 +148,9 @@ export class UsersService {
 
     const message = { email, password: newPassword };
 
-    console.log('📤     Sent on queue : --[ ' + configEnv.FORGOT_PASSWORD_PATTERN + ' ]--');
+    console.log('📤     Sent on queue : --[ ' + 'forgot-password' + ' ]--');
 
-    this.client.emit(configEnv.FORGOT_PASSWORD_PATTERN, message);
+    this.client.emit('forgot-password', message);
     return this.prisma.user.update({
       where: { id },
       data: { password: newPasswordEncrypt },
