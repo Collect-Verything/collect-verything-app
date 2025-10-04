@@ -1,7 +1,8 @@
 export const configEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
-  ROUND_OF_HASHING: process.env.ROUND_OF_HASHING,
+  ROUND_OF_HASHING: 10,
+  // ROUND_OF_HASHING: process.env.ROUND_OF_HASHING,
 };
 
 export const checkEnvValue = () => {
