@@ -6,8 +6,8 @@ import { DeliveryBrokeObject } from './entities/delivery.entity';
 const transporter = nodemailer.createTransport({
   service: configEnv.EMAIL_SERVICE,
   auth: {
-    user: configEnv.EMAIL_MESSAGE_BROKER,
-    pass: configEnv.PASSWORD_MESSAGE_BROKER,
+    user: configEnv.EMAIL_SENDER,
+    pass: configEnv.EMAIL_PASSWORD,
   },
 });
 
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 export class DeliveryService {
   async sendDeliveryInformation(deliveryInfo: DeliveryBrokeObject) {
     await transporter.sendMail({
-      from: process.env.EMAIL_MESSAGE_BROKER,
+      from: process.env.EMAIL_SENDER,
       // to: messageReceived.email, // Penser a retablir
       to: 'collectverythings@gmail.com',
       subject: `🚚 Collect & Verything - Information${deliveryInfo.typeDelivery === 'Magasin' || (deliveryInfo.typeDelivery === 'Point_Relais' && ' Livraison')}`,

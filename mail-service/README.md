@@ -98,13 +98,9 @@ Voici les variables d’environnement nécessaires au bon fonctionnement du serv
 Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
 
 ```env
-EMAIL_MESSAGE_BROKER=collectverythings@gmail.com
-PASSWORD_MESSAGE_BROKER="zcbq wkpq zfew edtd"
-EMAIL_QUEUE=mail-queue
-EMAIL_SERVICE=gmail
-FORGOT_PASSWORD_PATTERN=forgot-password
-
-MESSAGE_BROKER_URL=broker-service
+EMAIL_SENDER=votreUser@provider.com
+EMAIL_PASSWORD="**** **** **** ****" //Mot de passe app 
+EMAIL_SERVICE=provider
 ```
 
 > 💡 Pour Gmail, activez l’authentification à deux facteurs et générez un mot de passe d’application.
@@ -128,7 +124,7 @@ npm run test:cov
 
 ## ✅ To Do
 
-- [ ] Ajouter un lien avec token pour réinitialisation directe.
+- [ ] Ajouter un lien avec token pour réinitialisation directe de mot de passe.
 
 ---
 
