@@ -14,7 +14,6 @@ import { freePath } from './const';
  * checkFreePath('/auth/profile'); // false
  */
 
-// TODO: Stripe Event in prod mode
 export const checkFreePath = (requestUrl: string): boolean => {
   if (requestUrl.split('/')[1] === `auth` && freePath.includes(requestUrl.split('/')[2]))
     return true;

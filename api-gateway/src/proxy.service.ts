@@ -3,9 +3,6 @@ import { Request } from 'express';
 import { checkFreePath } from './common/tool';
 import { checkTokenRequest, processEventPath, processMainRequest } from './common/functions';
 
-// TODO : STRIPE EVENT
-// TODO : ⚠️ Upgrade logique for free path, for the moment only auth login and register is accepted
-
 /**
  * @method processRequest
  * @description
@@ -15,7 +12,7 @@ import { checkTokenRequest, processEventPath, processMainRequest } from './commo
  * - Vérifie la présence et la validité du token via le service d'authentification
  * - En cas de succès, transmet la requête au microservice concerné
  *
- * 🔓 Si la route est libre (ex: login, register) :
+ * 🔓 Si la route est libre (ex: login, register, ...) :
  * - Appelle directement le service d’authentification sans vérification du token
  *
  * @param {Request} req - Requête HTTP entrante (provenant de l'utilisateur)
@@ -40,11 +37,11 @@ export class ProxyService {
     } else {
       // REVERSE PROXY
       if (checkFreePath(req.url)) {
-        // Check Token
+        // CHECK TOKEN : MIDDLEWARE AUTH
         return checkTokenRequest(req);
       } else {
         if (req.headers.authorization) {
-          // Process request
+          // PROCESS REQUEST
           return processMainRequest(req);
         } else {
           throw new UnauthorizedException('Invalid token');
