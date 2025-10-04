@@ -1,9 +1,8 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
 import { StripeCheckoutService } from './checkout.service';
 import { StripeProductEntity } from '../product/product.entity';
-import { configEnv } from '../../../env-config';
 
-@Controller(`${configEnv.FACTURATION_URL}/checkout`)
+@Controller(`stripe/checkout`)
 export class StripeCheckoutController {
   constructor(private readonly stripeCheckoutService: StripeCheckoutService) {}
 

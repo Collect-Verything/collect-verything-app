@@ -1,9 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { StripeCustomerService } from './customer.service';
 import { StripeUserEntity } from './customer.entity';
-import { configEnv } from '../../../env-config';
 
-@Controller(`${configEnv.FACTURATION_URL}/customer`)
+@Controller(`stripe/customer`)
 export class StripeCustomerController {
   constructor(private readonly stripeCustomerService: StripeCustomerService) {}
 

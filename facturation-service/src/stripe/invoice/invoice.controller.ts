@@ -1,8 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { StripeInvoiceService } from './invoice.service';
-import { configEnv } from '../../../env-config';
 
-@Controller(`${configEnv.FACTURATION_URL}/invoice`)
+@Controller(`stripe/invoice`)
 export class StripeInvoiceController {
   constructor(private readonly stripeEventService: StripeInvoiceService) {}
 
