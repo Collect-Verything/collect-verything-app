@@ -2,35 +2,22 @@ import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { configEnv } from '../../env-config';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { MessageEntity } from '../commmon/types';
 
 @Controller(`${configEnv.CONFIG_URL}/sub`)
 export class SubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
 
   @EventPattern('config.sub.updated')
-  async handleConfigUpdated(@Payload() data: any, @Ctx() ctx: RmqContext) {
+  async handleConfigUpdated(@Payload() data: MessageEntity, @Ctx() ctx: RmqContext) {
     const ch = ctx.getChannelRef();
     const msg = ctx.getMessage();
 
     try {
-      await this.subscriptionService.createWithConfiguration({
-        user_stripe_id: data.user_stripe_id,
-        sub_stripe_id: data.sub_stripe_id,
-        active_stripe: data.active_stripe,
-        published: data.published,
-        configured: data.configured,
-        current_period_end: data.current_period_end,
-        current_period_start: data.current_period_start,
-        url: data.url,
-        brand_name: data.brand_name,
-        admin_email: data.admin_email,
-        website_type: data.website_type,
-      });
-
+      await this.subscriptionService.createWithConfiguration(data);
       ch.ack(msg);
-    } catch (e: any) {
+    } catch (e) {
       console.log(e);
-      // throw e;
     }
   }
 
