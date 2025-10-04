@@ -5,10 +5,9 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { ProductEntity } from './entities/product.entity';
 import { StockAndID } from './entities/type';
-import { configEnv } from '../../env-config';
 
-@Controller(configEnv.PRODUCT_URL)
-@ApiTags(configEnv.PRODUCT_URL)
+@Controller('product')
+@ApiTags('product')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

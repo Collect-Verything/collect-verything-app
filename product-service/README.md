@@ -111,14 +111,7 @@ des autres services si vous utilisez l’application de manière globale.
 Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
 
 ```env
-DATABASE_URL="mysql://root:password@mysql-product:3306/product-db?schema=public"
-
-DOMAIN=localhost
-
-API_GATEWAY_PORT=2999
-
-PRODUCT_PORT=3002
-PRODUCT_URL=product
+DATABASE_URL="mysql://product:productpwd@mysql-product:3306/product-db"
 ```
 
 ---
