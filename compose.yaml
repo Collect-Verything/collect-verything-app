@@ -206,6 +206,7 @@ services:
         condition: service_healthy
     networks:
       - private_net
+      - public # ⚠️Upgrade => egress
 
   # 🚚 DELIVERY SERVICE (Privé)
   delivery-service:
@@ -238,6 +239,7 @@ services:
         condition: service_healthy
     networks:
       - private_net
+      - public # ⚠️Upgrade => egress
 
   # 🚀 API GATEWAY
   api-gateway:
