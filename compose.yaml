@@ -1,41 +1,133 @@
 version: '3.8'
 
-# TODO: Private network
-
 services:
-  # 🌍 FRONT-END (Public) # Check previous config dockerfile
-  front-app:
-    build: ./front-app
-    container_name: front-app
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./front-app:/front-app
-      - /front-app/node_modules
-    stdin_open: true
-    tty: true
-    depends_on:
-      - api-gateway
 
-  # 🚀 API GATEWAY (Seul service exposé)
-  api-gateway:
-    build: ./api-gateway
-    container_name: api-gateway
+  # 🐇 Message BROKER
+  broker-service:
+    image: rabbitmq:4.0-management
+    container_name: broker-service
+    restart: always
+
+    ports:
+      - '127.0.0.1:15672:15672' # UI admin en local uniquement
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - public
+      - private_net
+
+  # ------------------------------------------------------------
+  # ----------------------- 🗄️ DATABASES -----------------------
+  # ------------------------------------------------------------
+
+  # 🔒 AUTH DB (Privé)
+  mysql-auth:
+    image: mysql:8
+    container_name: mysql-auth
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: auth-db
+    volumes:
+      - mysql-auth-data:/var/lib/mysql
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - private_net
+
+  # 🎩 PRODUCT DB (Privé)
+  mysql-product:
+    image: mysql:8.0
+    container_name: mysql-product
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: product-db
+    volumes:
+      - mysql-prod-data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-ppassword" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - private_net
+
+  mysql-config:
+    image: mysql:8
+    container_name: mysql-config
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: config-db
+    volumes:
+      - mysql-config-data:/var/lib/mysql
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - private_net
+
+  # 💶 FACTURATION DB (Privé)
+  mysql-facturation:
+    image: mysql:8
+    container_name: mysql-facturation
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: facturation-db
+    volumes:
+      - mysql-facturation-data:/var/lib/mysql
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - private_net
+
+  # 🚚 DELIVERY DB (Privé)
+  mysql-delivery:
+    image: mysql:8
+    container_name: mysql-delivery
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: delivery-db
+    volumes:
+      - mysql-delivery-data:/var/lib/mysql
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - private_net
+
+  # 📊 Adminer — DB Observer
+  adminer:
+    image: adminer
+    container_name: adminer
     restart: always
     ports:
-      - '2999:2999'
-    env_file:
-      - ./api-gateway/.env
-    volumes:
-      - ./api-gateway:/api-gateway
-      - /api-gateway/node_modules
-    depends_on:
-      - auth-service
-      - product-service
-      - config-service
-      - facturation-service
+      - "127.0.0.1:8081:8080"
+    networks:
+      - private_net
 
-  # 🔒 AUTH SERVICE (Privé)
+  # ------------------------------------------------------------
+  # ----------------------- Services ---------------------------
+  # ------------------------------------------------------------
+
+  # 🔒 AUTH SERVICE (Privé) # Issue run container, cpy nodemodule , try to fix it later
   auth-service:
     build: ./auth-service
     container_name: auth-service
@@ -48,46 +140,10 @@ services:
     depends_on:
       mysql-auth:
         condition: service_healthy
+    networks:
+      - private_net
 
-  # 🗄️ BASE DE DONNÉES (MySQL AUTH)
-  mysql-auth:
-    image: mysql:8
-    restart: always
-    container_name: mysql-auth
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: auth-db
-    ports:
-      - '3307:3306'
-    volumes:
-      - mysql-auth-data:/var/lib/mysql
-    healthcheck:
-      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-
-  # 🗄️ BASE DE DONNÉES (MySQL PRODUCT)  # BIG ISSUE : Need to study (doc issue product compose)
-  mysql-product:
-    image: mysql:8.0
-    restart: always
-    container_name: mysql-product
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: product-db
-    ports:
-      - "3308:3306"
-    volumes:
-      - mysql-prod-data:/var/lib/mysql
-      - ./init:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-ppassword" ]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
-
-  # 🔒 PRODUCT SERVICE (Privé)
+  # 🎩 PRODUCT SERVICE (Privé)
   product-service:
     build: ./product-service
     container_name: product-service
@@ -101,8 +157,10 @@ services:
     depends_on:
       mysql-product:
         condition: service_healthy
+    networks:
+      - private_net
 
-  # 🔒 CONFIG SERVICE (Privé)
+  # 🛠️ CONFIG SERVICE (Privé)
   config-service:
     build: ./config-service
     container_name: config-service
@@ -115,26 +173,10 @@ services:
     depends_on:
       mysql-config:
         condition: service_healthy
+    networks:
+      - private_net
 
-  # 🗄️ BASE DE DONNÉES (MySQL CONFIG)
-  mysql-config:
-    image: mysql:8
-    restart: always
-    container_name: mysql-config
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: config-db
-    ports:
-      - '3309:3306'
-    volumes:
-      - mysql-config-data:/var/lib/mysql
-    healthcheck:
-      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-
-  # 🔒 FACTURATION SERVICE (Privé)
+  # 💶 FACTURATION SERVICE (Privé)
   facturation-service:
     build: ./facturation-service
     container_name: facturation-service
@@ -147,24 +189,8 @@ services:
     depends_on:
       mysql-facturation:
         condition: service_healthy
-
-  # 🗄️ BASE DE DONNÉES (MySQL FACTURATIO)
-  mysql-facturation:
-    image: mysql:8
-    restart: always
-    container_name: mysql-facturation
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: facturation-db
-    ports:
-      - '3310:3306'
-    volumes:
-      - mysql-facturation-data:/var/lib/mysql
-    healthcheck:
-      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+    networks:
+      - private_net
 
   # 🚚 DELIVERY SERVICE (Privé)
   delivery-service:
@@ -176,27 +202,11 @@ services:
     volumes:
       - ./delivery-service:/delivery-service
       - /delivery-service/node_modules
-  #    depends_on:
-  #      mysql-delivery:
-  #        condition: service_healthy
-
-  # 🗄️ BASE DE DONNÉES (MySQL DELIVERY)
-  mysql-delivery:
-    image: mysql:8
-    restart: always
-    container_name: mysql-delivery
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: delivery-db
-    ports:
-      - '3311:3306'
-    volumes:
-      - mysql-delivery-data:/var/lib/mysql
-  #    healthcheck:
-  #      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-ppassword' ]
-  #      interval: 5s
-  #      timeout: 3s
-  #      retries: 5
+    depends_on:
+      mysql-delivery:
+        condition: service_healthy
+    networks:
+      - private_net
 
   # 📬 Mail SERVICE (Privé)
   mail-service:
@@ -208,18 +218,57 @@ services:
     volumes:
       - ./mail-service:/mail-service
       - /mail-service/node_modules
-  #    depends_on: dependre de rabbitmq
-  #      mysql-facturation:
-  #        condition: service_healthy
+    depends_on:
+      broker-service:
+        condition: service_healthy
+    networks:
+      - private_net
 
-  # 🐇 Message BROKER (Public)
-  broker-service:
-    image: rabbitmq:4.0-management
-    container_name: broker-service
+  # 🚀 API GATEWAY
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
     restart: always
     ports:
-      - 5672:5672
-      - 15672:15672
+      - '2999:2999'
+    volumes:
+      - ./api-gateway:/api-gateway
+      - /api-gateway/node_modules
+    depends_on:
+      auth-service:
+        condition: service_started
+      product-service:
+        condition: service_started
+      config-service:
+        condition: service_started
+      facturation-service:
+        condition: service_started
+      delivery-service:
+        condition: service_started
+      mail-service:
+        condition: service_started
+      broker-service:
+        condition: service_healthy
+    networks:
+      - public
+      - private_net
+
+  # 🌍 FRONT-END
+  front-app:
+    build: ./front-app
+    container_name: front-app
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./front-app:/front-app
+      - /front-app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      api-gateway:
+        condition: service_started
+    networks:
+      - public
 
 volumes:
   mysql-auth-data:
@@ -227,3 +276,10 @@ volumes:
   mysql-config-data:
   mysql-facturation-data:
   mysql-delivery-data:
+
+networks:
+  public:
+    driver: bridge
+  private_net:
+    driver: bridge
+    internal: true
