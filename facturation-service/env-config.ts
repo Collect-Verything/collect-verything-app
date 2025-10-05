@@ -1,15 +1,5 @@
 export const configEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
-
-  DOMAIN: process.env.DOMAIN,
-
-  FRONT_PORT: process.env.FRONT_PORT,
-
-  API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,
-
-  FACTURATION_PORT: process.env.FACTURATION_PORT,
-  FACTURATION_URL: process.env.FACTURATION_URL,
-
   STRIPE_API_KEY: process.env.STRIPE_API_KEY,
 };
 

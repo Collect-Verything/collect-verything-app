@@ -1,10 +1,24 @@
 import { Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
-import { configEnv } from '../../env-config';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { MessageEntity } from '../commmon/types';
 
-@Controller(`${configEnv.CONFIG_URL}/sub`)
+@Controller(`subscription/sub`)
 export class SubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
+
+  @EventPattern('config.sub.updated')
+  async handleConfigUpdated(@Payload() data: MessageEntity, @Ctx() ctx: RmqContext) {
+    const ch = ctx.getChannelRef();
+    const msg = ctx.getMessage();
+
+    try {
+      await this.subscriptionService.createWithConfiguration(data);
+      ch.ack(msg);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   @Get('/recover/:user_stripe_id')
   recoverInactiveSubByUserId(@Param('user_stripe_id') user_stripe_id: string) {
@@ -13,6 +27,7 @@ export class SubscriptionController {
 
   @Get(':user_stripe_id')
   findAllByUserId(@Param('user_stripe_id') user_stripe_id: string) {
+    console.log(user_stripe_id);
     return this.subscriptionService.findAllByUserId(user_stripe_id);
   }
 

@@ -1,24 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import * as process from 'node:process';
+import { MessageEntity } from '../commmon/types';
+import { configEnv } from '../../env-config';
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')(process.env.STRIPE_API_KEY);
+const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
 
-// TODO : Une solution inactive peut être réactivée via une facturation guidée, la subscription du client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera toujours associé a la config originel et la visibilité sera intialisé a false et devra etre reactivable par le client
+// TODO :
+//  Une solution inactive peut être réactivée via une facturation guidée, la subscription du
+//  client sera donc remplacé et mise a jour avec les nouvelle info de la sub stripe, mais sera
+//  toujours associé a la config originel et la visibilité sera intialisé a false et devra etre
+//  reactivable par le client
 
 /**
  * Service de gestion des abonnements Stripe.
- *
- * Méthodes :
- * - `findAllByUserId(user_stripe_id: string)`:
- *   Récupère la liste des abonnements d'un utilisateur via Stripe,
- *   les synchronise avec la base de données et retourne la liste mise à jour.
- *
- * - `syncSubscriptions(user_stripe_id: string, stripeSubs: any[])`:
- *   - Compare les abonnements actifs fournis par Stripe avec ceux en base.
- *   - Désactive les abonnements qui ont expiré (non présents dans la réponse Stripe).
- *   - Ajoute les nouveaux abonnements et met à jour les existants.
  *
  * 🔍 **Gestion des abonnements expirés :**
  * Lorsqu'un abonnement arrive à échéance, il **disparaît** de la liste des abonnements
@@ -30,16 +24,29 @@ const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 export class SubscriptionService {
   constructor(private prisma: PrismaService) {}
 
+  /*
+   * - `findAllByUserId(user_stripe_id: string)`:⚠️ // retourne uniquement les sub pour le moment
+   * Récupère la liste des abonnements d'un utilisateur via Stripe,
+   * les synchronise avec la base de données et retourne la liste mise à jour.
+   */
+
   async findAllByUserId(user_stripe_id: string) {
-    const listSub = await stripe.subscriptions.list({
-      customer: user_stripe_id,
-    });
-    await this.syncSubscriptions(user_stripe_id, listSub.data);
+    // const listSub = await stripe.subscriptions.list({
+    //   customer: user_stripe_id,
+    // });
+    // await this.syncSubscriptions(user_stripe_id, listSub.data);
     return this.prisma.subscription.findMany({
       where: { user_stripe_id },
       include: { configuration: true },
     });
   }
+
+  /*
+   * - `syncSubscriptions(user_stripe_id: string, stripeSubs: any[])`:
+   * - Compare les abonnements actifs fournis par Stripe avec ceux en base.
+   * - Désactive les abonnements qui ont expiré (non présents dans la réponse Stripe).
+   * - Ajoute les nouveaux abonnements et met à jour les existants.
+   */
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async syncSubscriptions(user_stripe_id: string, stripeSubs: any[]) {
@@ -107,6 +114,32 @@ export class SubscriptionService {
       where: { id: Number(sub_id) },
       data: {
         published: Boolean(is_publish),
+      },
+    });
+  }
+
+  async createWithConfiguration(data: MessageEntity) {
+    return this.prisma.subscription.create({
+      data: {
+        user_stripe_id: data.user_stripe_id,
+        sub_stripe_id: data.sub_stripe_id,
+        active_stripe: data.active_stripe,
+        published: data.published,
+        configured: data.configured,
+        current_period_end: Number(data.current_period_end),
+        current_period_start: Number(data.current_period_start),
+        configuration: {
+          create: {
+            url: data.url,
+            brand_name: data.brand_name,
+            admin_email: data.admin_email,
+            website_type: data.website_type,
+          },
+        },
+      },
+      select: {
+        id: true,
+        configuration: { select: { id: true } },
       },
     });
   }

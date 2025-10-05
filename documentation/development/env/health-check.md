@@ -2,7 +2,7 @@
 
 # 🔭 Env Health Check
 
-Étant donné la multitude de variables d’environnement utilisées dans l’application, un contrôle automatique est effectué au démarrage de chaque service (dans le fichier `main.ts`).
+Un contrôle automatique est effectué au démarrage de chaque service (dans le fichier `main.ts`).
 
 Ce check vérifie que toutes les variables définies dans `configEnv` sont bien présentes.  
 Le fichier `configEnv.ts` sert de **point de référence unique** : il indique clairement **les variables essentielles** au bon fonctionnement du service.

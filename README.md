@@ -170,45 +170,7 @@ npm install
 
 ### 🧪 Database `.env` Samples
 
-Before launching the applications, you must create the .env in the root then the .env in each service
-
-The .env in the root contains ports and url's of each service:
-
-```dotenv
-DOMAIN=localhost
-#etc...
-```
-
-Since React doesn't support .env files outside of its own folder, it's necessary to place an .env file directly in the root directory of the React application. Additionally, each environment variable must be prefixed with REACT*APP* to be accessible in the code.
-
-```dotenv
-REACT_APP_DOMAIN=localhost
-#etc...
-```
-
-- Auth:
-
-```env
-DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-auth?schema=public"
-```
-
-- Facturation:
-
-```env
-DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-facture?schema=public"
-```
-
-- Product:
-
-```env
-DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-product?schema=public"
-```
-
-- Config:
-
-```env
-DATABASE_URL="mysql://user:password@localhost:3306/collect-verything-config?schema=public"
-```
+Before launching the applications, you must create the .env in the root then the .env in each service, you can read documentation of each service to know what is necessary in .env
 
 For the rest, you can read the documentation about the environment.[Here][rtfm]
 

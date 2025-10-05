@@ -1,18 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { checkEnvValue, configEnv } from '../env-config';
+import { checkEnvValue } from '../env-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: '*',
-    // origin: [`http://${configEnv.DOMAIN}:${configEnv.API_GATEWAY_PORT}`],
+    // origin: [`http://api-gateway:2999`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
   checkEnvValue();
 
-  await app.listen(configEnv.FACTURATION_PORT);
+  await app.listen(3003);
 }
 
 bootstrap();

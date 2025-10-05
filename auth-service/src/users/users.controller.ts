@@ -16,10 +16,9 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nest
 import { UserEntity } from './entities/user.entity';
 import { SuperAdminGuards } from '../auth/guards/super-admin';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
-import { configEnv } from '../../env-config';
 
-@Controller(configEnv.AUTH_URL_USERS)
-@ApiTags(configEnv.AUTH_URL_USERS)
+@Controller('users')
+@ApiTags('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

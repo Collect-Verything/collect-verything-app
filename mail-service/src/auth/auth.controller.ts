@@ -1,20 +1,15 @@
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { AuthService } from './auth.service';
-import { configEnv } from '../../env-config';
-
-export interface ForgotPassBrokeObject {
-  email: string;
-  password: string;
-}
+import { ForgotPassBrokeObject } from './entities/auth.entity';
 
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @EventPattern(configEnv.FORGOT_PASSWORD_PATTERN)
+  @EventPattern('forgot-password')
   handleForgotPassword(@Payload() messageReceived: ForgotPassBrokeObject) {
-    console.log('📥 Received on queue : --[ ', configEnv.FORGOT_PASSWORD_PATTERN, ' ]--');
+    console.log('📥 Received on queue : --[ Forgot-Password ]--');
     this.authService.sendForgotPassword(messageReceived);
   }
 }

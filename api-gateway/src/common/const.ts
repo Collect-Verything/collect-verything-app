@@ -1,21 +1,22 @@
-import { configEnv } from '../../env-config';
-
+// Path with no rules
 export const freePath = ['login', 'register', 'forgot-password'];
 
+//  Path Endpoint : Port service expose
 export const portByPath = new Map<string, string>();
-portByPath.set(configEnv.AUTH_URL_AUTH, configEnv.AUTH_PORT);
-portByPath.set(configEnv.AUTH_URL_ROLES, configEnv.AUTH_PORT);
-portByPath.set(configEnv.AUTH_URL_USERS, configEnv.AUTH_PORT);
-portByPath.set(configEnv.PRODUCT_URL, configEnv.PRODUCT_PORT);
-portByPath.set(configEnv.FACTURATION_URL, configEnv.FACTURATION_PORT);
-portByPath.set(configEnv.CONFIG_URL, configEnv.CONFIG_PORT);
-portByPath.set(configEnv.DELIVERY_URL, configEnv.DELIVERY_PORT);
+portByPath.set('auth', '3001');
+portByPath.set('roles', '3001');
+portByPath.set('users', '3001');
+portByPath.set('product', '3002');
+portByPath.set('stripe', '3003');
+portByPath.set('subscription', '3004');
+portByPath.set('delivery', '3005');
 
+//  Path Endpoint : Domain container name
 export const domainServiceByPath = new Map<string, string>();
-domainServiceByPath.set(configEnv.AUTH_URL_AUTH, configEnv.DOMAIN_AUTH);
-domainServiceByPath.set(configEnv.AUTH_URL_ROLES, configEnv.DOMAIN_AUTH);
-domainServiceByPath.set(configEnv.AUTH_URL_USERS, configEnv.DOMAIN_AUTH);
-domainServiceByPath.set(configEnv.PRODUCT_URL, configEnv.DOMAIN_PRODUCT);
-domainServiceByPath.set(configEnv.FACTURATION_URL, configEnv.DOMAIN_FACTURATION);
-domainServiceByPath.set(configEnv.CONFIG_URL, configEnv.DOMAIN_CONFIG);
-domainServiceByPath.set(configEnv.DELIVERY_URL, configEnv.DOMAIN_DELIVERY);
+domainServiceByPath.set('auth', 'auth-service');
+domainServiceByPath.set('roles', 'auth-service');
+domainServiceByPath.set('users', 'auth-service');
+domainServiceByPath.set('product', 'product-service');
+domainServiceByPath.set('stripe', 'facturation-service');
+domainServiceByPath.set('subscription', 'config-service');
+domainServiceByPath.set('delivery', 'delivery-service');
