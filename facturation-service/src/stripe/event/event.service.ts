@@ -35,20 +35,24 @@ export class StripeEventService {
    *
    * checkout.session : Contient les information du panier validé, metadata de la facture.
    * Confirmation commande retourné par stripe
-   * Action : Confirmation par mail à l'utilsateur avec info produit commandé
+   * Action : Confirmation par mail à l'utilsateur avec info produit commandé + Creation d'un livraison dans le service livraison
    * Info : Pour le moment le mail est envoyé a collectverything@gmail.com
    **/
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async checkoutTreatment(checkout: any) {
-    //TODO :  Creer une regle if service, pas d'evenement
-    //TODO :  Creer un UUID pour pouvoir distinguer chaque evenement par paire, envoyé et recus
-
     const { owner, products, typeDelivery } = JSON.parse(checkout.object.metadata.data);
     const { email, name } = checkout.object.customer_details;
     const message = { owner, products, typeDelivery, email, name };
     console.log('📤     Sent on queue : --[ MAIL - DELIVERY ]--');
     this.client.emit('mail-delivery', message);
+
+    if (typeDelivery !== 'undefined') {
+      console.log('📤     Sent on queue : --[ DELIVERY - SUB ]--');
+      this.deliveryProduct.emit('delivery.create', message).subscribe();
+    } else {
+      console.log("No delivery message send, it's a service");
+    }
 
     return 'Rabbit MQ called: Sending mail confirmation to client';
   }

@@ -113,16 +113,30 @@ services:
     networks:
       - private_net
 
-  # 📊 Adminer — DB Observer
-  adminer:
-    image: adminer
-    container_name: adminer
+  # 🖥️ UI MySQL (multi-serveurs)
+  phpmyadmin:
+    image: lscr.io/linuxserver/phpmyadmin:latest
+    container_name: phpmyadmin
     restart: always
+    depends_on:
+      - mysql-auth
+      - mysql-product
+      - mysql-config
+      - mysql-facturation
+      - mysql-delivery
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Paris"
+      PMA_HOSTS: "mysql-auth,mysql-product,mysql-config,mysql-facturation,mysql-delivery"
+      PMA_VERBOSES: "AUTH,PRODUCT,CONFIG,FACTURATION,DELIVERY"
+      PMA_USER: "root"
+      PMA_PASSWORD: "password"
     ports:
-      - "8081:8080"
+      - "8080:80"
     networks:
-      - public
       - private_net
+      - public
 
   # ------------------------------------------------------------
   # ----------------------- Services ---------------------------
@@ -192,6 +206,7 @@ services:
         condition: service_healthy
     networks:
       - private_net
+      - public # ⚠️Upgrade => egress
 
   # 🚚 DELIVERY SERVICE (Privé)
   delivery-service:
@@ -224,6 +239,7 @@ services:
         condition: service_healthy
     networks:
       - private_net
+      - public # ⚠️Upgrade => egress
 
   # 🚀 API GATEWAY
   api-gateway:
