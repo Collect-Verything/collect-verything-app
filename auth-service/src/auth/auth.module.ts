@@ -6,8 +6,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { UsersModule } from '../users/users.module';
 import { JwtStrategy } from './guards/authentication/jwt.strategy';
+import { configEnv } from '../../env-config';
 
-export const jwtSecret = 'CollectVerythingSecret';
+export const jwtSecret = configEnv.JWT_SECRET;
 
 @Module({
   imports: [

@@ -1,12 +1,5 @@
 export const configEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
-
-  DOMAIN: process.env.DOMAIN,
-
-  API_GATEWAY_PORT: process.env.API_GATEWAY_PORT,
-
-  PRODUCT_PORT: process.env.PRODUCT_PORT,
-  PRODUCT_URL: process.env.PRODUCT_URL,
 };
 
 export const checkEnvValue = () => {

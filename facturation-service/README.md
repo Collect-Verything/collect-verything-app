@@ -125,23 +125,11 @@ Ce projet utilise un fichier configEnv pour centraliser toutes les variables iss
 src/env-config.ts
 ```
 
-Voici les variables d’environnement nécessaires au bon fonctionnement du service. Vous pouvez modifier les ports selon vos besoins, mais veillez à rester cohérent avec les fichiers .env du frontend et des autres services si vous utilisez l’application de manière globale.
-
-Pour plus de simplicité, voici une configuration .env de base cohérente pour assurer le bon fonctionnement de l’ensemble des services.
+Voici les variables d’environnement nécessaires au bon fonctionnement du service. 
 
 ```env
 DATABASE_URL="mysql://root:password@mysql-facturation:3306/facturation-db?schema=public"
-
-DOMAIN=localhost
-
-FRONT_PORT=3000
-
-API_GATEWAY_PORT=2999
-
-FACTURATION_PORT=3003
-FACTURATION_URL=stripe
-
-STRIPE_API_KEY=sk_test_VfGNimRoo2iCC7QIRyKnY3sc
+STRIPE_API_KEY=sk_test_51SEAMVGWNF4aZ9vsUnjlaaMC0pu10eVlogq6C0y4w58y4hm9TL1yRwm9bA35D7qoQL7pCqNOkACxU7cD768gO0gd00VDz5ubzY
 ```
 
 ---

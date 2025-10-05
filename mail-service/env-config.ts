@@ -1,10 +1,7 @@
 export const configEnv = {
-  EMAIL_MESSAGE_BROKER: process.env.EMAIL_MESSAGE_BROKER,
-  PASSWORD_MESSAGE_BROKER: process.env.PASSWORD_MESSAGE_BROKER,
-  EMAIL_QUEUE: process.env.EMAIL_QUEUE,
+  EMAIL_SENDER: process.env.EMAIL_SENDER,
+  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   EMAIL_SERVICE: process.env.EMAIL_SERVICE,
-  FORGOT_PASSWORD_PATTERN: process.env.FORGOT_PASSWORD_PATTERN,
-  MESSAGE_BROKER_URL: process.env.MESSAGE_BROKER_URL,
 };
 
 export const checkEnvValue = () => {

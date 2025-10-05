@@ -1,34 +1,27 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Patch } from '@nestjs/common';
 import { ShipmentService } from './shipment.service';
-import { CreateShipmentDto } from './dto/create-shipment.dto';
-import { configEnv } from '../../env-config';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { PrismaService } from '../prisma/prisma.service';
 
-@Controller(configEnv.DELIVERY_URL)
+@Controller('delivery')
 export class ShipmentController {
   constructor(
     private readonly shipmentService: ShipmentService,
     private prisma: PrismaService
   ) {}
 
-  @Post()
-  create(@Body() createShipmentDto: CreateShipmentDto) {
-    return this.shipmentService.create(createShipmentDto);
-  }
+  @EventPattern('delivery.create')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async handledelivery(@Payload() messageReceived: any, @Ctx() ctx: RmqContext) {
+    const ch = ctx.getChannelRef();
+    const msg = ctx.getMessage();
 
-  @EventPattern('service-delivery')
-  handledelivery(@Payload() messageReceived: any) {
-    this.shipmentService.persistDelivery(messageReceived);
+    try {
+      await this.shipmentService.persistDelivery(messageReceived);
+      ch.ack(msg, false, true);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   @Get()
@@ -41,15 +34,14 @@ export class ShipmentController {
     return this.shipmentService.findOne(+id);
   }
 
+  // TODO : Refacto test code un service methode
   @Patch(':id')
   async update(
     @Param('id') deliveryId: string,
     @Body() updateShipmentDto: { productId: number; stockDelivered: number }
   ) {
     const delivery = await this.shipmentService.findOne(+deliveryId);
-
     const { productId, stockDelivered } = updateShipmentDto;
-
     const productToUpdate = delivery.products.find((product) => product.id === productId);
 
     if (!productToUpdate) {
@@ -57,7 +49,6 @@ export class ShipmentController {
     }
 
     const newDelivered = productToUpdate.delivered + stockDelivered;
-
     await this.prisma.product.update({
       where: { id: productId },
       data: { delivered: newDelivered },
@@ -79,10 +70,5 @@ export class ShipmentController {
     }
 
     return { success: true, message: 'Mise à jour effectuée' };
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.shipmentService.remove(+id);
   }
 }

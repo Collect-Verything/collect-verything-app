@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { StripeProductEntity } from './product.entity';
+import { configEnv } from '../../../env-config';
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const stripe = require('stripe')('sk_test_VfGNimRoo2iCC7QIRyKnY3sc');
+const stripe = require('stripe')(configEnv.STRIPE_API_KEY);
 
 @Injectable()
 export class StripeProductService {

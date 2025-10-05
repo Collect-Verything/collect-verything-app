@@ -1,6 +1,6 @@
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Subscription } from "./type";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { TouchRippleActions } from "@mui/material/ButtonBase/TouchRipple";
@@ -106,9 +106,11 @@ export const CellActionConfig = (props: GridRenderCellParams) => {
 
     return (
         <Box display="flex">
-            <Button href="http://82.165.44.233/">
-                <SettingsApplicationsIcon color="secondary" />
-            </Button>
+            <Grid>
+                <Button href="http://82.165.44.233/">
+                    <SettingsApplicationsIcon color="secondary" />
+                </Button>
+            </Grid>
             {/*Fix For demo*/}
             {/*<ConfigDialog row={row} buttonElement={buttonElement} rippleRef={rippleRef} />*/}
         </Box>

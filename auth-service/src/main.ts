@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
-import { checkEnvValue, configEnv } from '../env-config';
+import { checkEnvValue } from '../env-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: '*',
-    // origin: [`http://${configEnv.DOMAIN}:${configEnv.API_GATEWAY_PORT}`],
+    // origin: [`http://localhost:2999`],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
@@ -31,7 +31,7 @@ async function bootstrap() {
 
   checkEnvValue();
 
-  await app.listen(configEnv.AUTH_PORT);
+  await app.listen('3001');
 }
 
 bootstrap();
