@@ -26,6 +26,12 @@ flowchart LR
             product[Product Service]
             product-db[(Product Database)]
 
+            facturation[Facturation Service]
+            facturation-db[(Facturation Database)]
+
+            delivery[Delivery Service]
+            delivery-db[(Delivery Database)]
+
             mail[Mail Service]
             amqp{{RabbitMQ}}
         end
@@ -54,6 +60,12 @@ flowchart LR
     gate <--> product
     product <-.-> product-db
 
+    gate <--> facturation
+    facturation <-.-> facturation-db
+
+    gate <--> delivery
+    delivery <-.-> delivery-db
+
     auth -.- amqp
     amqp -.- mail
     mail <-.-> SMTP
@@ -62,6 +74,7 @@ flowchart LR
     Stripe <-.-> Bank
 ```
 
-- Chaque service communique avec l'API de Stripe. Pour des raisons de lisibilité, le réseau privé (Private Network) a été relié à l'API de Stripe, plutôt que de représenter une connexion individuelle depuis chaque service.
+- Le réseau privé (Private Network) a été relié à l'API de Stripe, plutôt que de représenter une connexion individuelle depuis chaque service.
+- Tous les autre service qui communique avec le message broker n'ont pas etait representé pour des question de lisibilité mais sont consultable dans workflow/stripe/events
 
 [summary]: ../../README.md

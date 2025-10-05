@@ -15,10 +15,10 @@ Bug : Lors de l'envoi d'un mail dans le cadre de l'achat d'un SERVICE/SUB, le ma
 Utilité: Payment intent est une preuve de paiement, elle contient facture et montant payé autre information de facturation uniqquement concernant les PRODUITS.
 POST MAN :http://localhost:2999/stripe/event
 
-### invoice = Facture - SERVICE 
+### invoice = Facture - SERVICE ❌
 Utilité: Payment intent est une preuve de paiement de type subscription, elle contient facture et montant payé autre information de facturation uniquement concernant les SERVICE/ABONEMENT/SUBSCRIPTION.
 POST MAN :http://localhost:2999/stripe/event
-
+Note: La persisitance de la sub/config n'est aps encor ene place, par contre l'event est bien recu dans le service config
 
 
 # Besoin
